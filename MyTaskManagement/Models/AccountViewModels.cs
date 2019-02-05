@@ -50,8 +50,8 @@ namespace MyTaskManagement.Models
     {
         [Required]
         [Display(Name = "Email")]
-        [EmailAddress]
-        public string Email { get; set; }
+        //[EmailAddress]
+        public string UserName { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
