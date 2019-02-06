@@ -7,6 +7,6 @@ namespace MyTaskManagement.Core.Domain
 {
     public enum     PriorityEnum
     {
-        High,Low
+       Very_High, High, Low ,Very_Low
     }
 }

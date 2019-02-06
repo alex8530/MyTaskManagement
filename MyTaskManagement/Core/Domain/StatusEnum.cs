@@ -7,6 +7,6 @@ namespace MyTaskManagement.Models
 {
     public enum StatusEnum
     {
-        Not_Start,Ended
+        Not_Start,Ended,InProgress
     }
 }
