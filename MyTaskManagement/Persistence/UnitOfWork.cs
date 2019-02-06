@@ -18,10 +18,13 @@ namespace MyTaskManagement.Persistence
             _context = context;
           
             ProjectRepositry= new ProjectRepository(_context);
+            TTaskRepositry = new TTaskRepository(_context);
         }
 
         public IProjectRepositry ProjectRepositry { get; private set; }
- 
+
+        public ITTaskRepositry TTaskRepositry { get; private set; }
+
 
         public int Complete()
         {

@@ -8,7 +8,7 @@ namespace MyTaskManagement.Core
 {
     public interface IUnitOfWork : IDisposable
     {
-        //ICourseRepository Courses { get; }
+        ITTaskRepositry  TTaskRepositry { get; }
         IProjectRepositry  ProjectRepositry { get; }
         int Complete();
     }
