@@ -180,6 +180,9 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Core\Domain\Financialstatus.cs" />
+    <Compile Include="Core\Domain\PriorityEnum.cs" />
+    <Compile Include="Core\Domain\TTask.cs" />
     <Compile Include="Core\IUnitOfWork.cs" />
     <Compile Include="Core\Repositories\IRepository.cs" />
     <Compile Include="Global.asax.cs">
@@ -197,13 +200,17 @@
     <Compile Include="Migrations\201902052352021_AddImageToUserr.Designer.cs">
       <DependentUpon>201902052352021_AddImageToUserr.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201902060038133_AddTTask_Project_Fini_Client_Tables_2s.cs" />
+    <Compile Include="Migrations\201902060038133_AddTTask_Project_Fini_Client_Tables_2s.Designer.cs">
+      <DependentUpon>201902060038133_AddTTask_Project_Fini_Client_Tables_2s.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Core\Domain\Client.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Core\Domain\Project.cs" />
-    <Compile Include="Models\StatusProjectEnum.cs" />
+    <Compile Include="Core\Domain\StatusEnum.cs" />
     <Compile Include="Persistence\Repositories\Repository.cs" />
     <Compile Include="Persistence\UnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -327,6 +334,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201902052352021_AddImageToUserr.resx">
       <DependentUpon>201902052352021_AddImageToUserr.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902060038133_AddTTask_Project_Fini_Client_Tables_2s.resx">
+      <DependentUpon>201902060038133_AddTTask_Project_Fini_Client_Tables_2s.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using MyTaskManagement.Core.Domain;
 
 namespace MyTaskManagement.Models
 {
@@ -23,8 +25,13 @@ namespace MyTaskManagement.Models
         [StringLength(255)]
         public string LastName { get; set; }
 
+        
 
-       
+        public ICollection<Project> Projects { get; set; }
+        public   ICollection<TTask> Tasks { get; set; }
+        public ICollection<Financialstatus> TaFinancialstatussks { get; set; }
+
+
         public Byte[] Image { get; set; }
 
 
@@ -43,6 +50,12 @@ namespace MyTaskManagement.Models
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
+
+        public DbSet<Project> Projects { get; set; }
+        public DbSet<TTask>  Tasks { get; set; }
+        public DbSet<Client> Clients { get; set; }
+        public DbSet<Financialstatus> Financialstatuses { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
 
         public static ApplicationDbContext Create()
         {

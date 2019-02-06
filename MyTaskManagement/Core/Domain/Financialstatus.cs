@@ -17,7 +17,7 @@ namespace MyTaskManagement.Core.Domain
         public int Bonus { get; set; }
         public string UserId { get; set; }
 
-        public virtual ApplicationUser User { get; set; }
-        public virtual TTask Task { get; set; }
+        public   ApplicationUser User { get; set; }
+        public   TTask Task { get; set; }
     }
 }

@@ -16,8 +16,9 @@ namespace MyTaskManagement.Models
         public  DateTime DeadTime { get; set; }
         public string Description { get; set; }
         public StatusEnum Status { get; set; }
-        public  ICollection<ApplicationUser> Users { get; set; }
-        public  ICollection<TTask> Tasks { get; set; }
+        public ICollection<ApplicationUser> Users { get; set; }
+        public ICollection<TTask> Tasks { get; set; }
         public  Client Client { get; set; }
+       
     }
 }

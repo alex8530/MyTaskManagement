@@ -16,7 +16,7 @@ namespace MyTaskManagement.Models
         public int WorkingHours { get; set; }
         public int OverTime { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
-        public Project  Project { get; set; }
+        public Project Project { get; set; }
 
     }
 }
