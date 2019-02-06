@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Security.AccessControl;
 using System.Web;
 using MyTaskManagement.Models;
 
@@ -18,6 +21,8 @@ namespace MyTaskManagement.Core.Domain
         public string UserId { get; set; }
 
         public   ApplicationUser User { get; set; }
-        public   TTask Task { get; set; }
+         
+        [Required]//this is because Financialstatus depend on Task
+        public TTask Task { get; set; }
     }
 }

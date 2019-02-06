@@ -3,7 +3,7 @@ namespace MyTaskManagement.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class AddTTask_Project_Fini_Client_Tables_2s : DbMigration
+    public partial class SomeChanges : DbMigration
     {
         public override void Up()
         {
@@ -61,7 +61,7 @@ namespace MyTaskManagement.Migrations
                 "dbo.Financialstatus",
                 c => new
                     {
-                        Id = c.Int(nullable: false, identity: true),
+                        Id = c.Int(nullable: false),
                         W_Hours = c.Int(nullable: false),
                         OTHours = c.Long(nullable: false),
                         Wh_Rate = c.Int(nullable: false),
@@ -69,13 +69,12 @@ namespace MyTaskManagement.Migrations
                         Total = c.Int(nullable: false),
                         Bonus = c.Int(nullable: false),
                         UserId = c.String(maxLength: 128),
-                        Task_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.TTasks", t => t.Task_Id)
+                .ForeignKey("dbo.TTasks", t => t.Id)
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId)
-                .Index(t => t.UserId)
-                .Index(t => t.Task_Id);
+                .Index(t => t.Id)
+                .Index(t => t.UserId);
             
             CreateTable(
                 "dbo.ApplicationUserProjects",
@@ -97,14 +96,14 @@ namespace MyTaskManagement.Migrations
             DropForeignKey("dbo.TTasks", "Project_Id", "dbo.Projects");
             DropForeignKey("dbo.TTasks", "ApplicationUser_Id", "dbo.AspNetUsers");
             DropForeignKey("dbo.Financialstatus", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.Financialstatus", "Task_Id", "dbo.TTasks");
+            DropForeignKey("dbo.Financialstatus", "Id", "dbo.TTasks");
             DropForeignKey("dbo.ApplicationUserProjects", "Project_Id", "dbo.Projects");
             DropForeignKey("dbo.ApplicationUserProjects", "ApplicationUser_Id", "dbo.AspNetUsers");
             DropForeignKey("dbo.Projects", "Client_Id", "dbo.Clients");
             DropIndex("dbo.ApplicationUserProjects", new[] { "Project_Id" });
             DropIndex("dbo.ApplicationUserProjects", new[] { "ApplicationUser_Id" });
-            DropIndex("dbo.Financialstatus", new[] { "Task_Id" });
             DropIndex("dbo.Financialstatus", new[] { "UserId" });
+            DropIndex("dbo.Financialstatus", new[] { "Id" });
             DropIndex("dbo.TTasks", new[] { "Project_Id" });
             DropIndex("dbo.TTasks", new[] { "ApplicationUser_Id" });
             DropIndex("dbo.Projects", new[] { "Client_Id" });

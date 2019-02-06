@@ -7,13 +7,13 @@ namespace MyTaskManagement.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class AddTTask_Project_Fini_Client_Tables_2s : IMigrationMetadata
+    public sealed partial class SomeChanges : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddTTask_Project_Fini_Client_Tables_2s));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(SomeChanges));
         
         string IMigrationMetadata.Id
         {
-            get { return "201902060038133_AddTTask_Project_Fini_Client_Tables_2s"; }
+            get { return "201902061259192_SomeChanges"; }
         }
         
         string IMigrationMetadata.Source

@@ -200,9 +200,9 @@
     <Compile Include="Migrations\201902052352021_AddImageToUserr.Designer.cs">
       <DependentUpon>201902052352021_AddImageToUserr.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201902060038133_AddTTask_Project_Fini_Client_Tables_2s.cs" />
-    <Compile Include="Migrations\201902060038133_AddTTask_Project_Fini_Client_Tables_2s.Designer.cs">
-      <DependentUpon>201902060038133_AddTTask_Project_Fini_Client_Tables_2s.cs</DependentUpon>
+    <Compile Include="Migrations\201902061259192_SomeChanges.cs" />
+    <Compile Include="Migrations\201902061259192_SomeChanges.Designer.cs">
+      <DependentUpon>201902061259192_SomeChanges.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -335,8 +335,8 @@
     <EmbeddedResource Include="Migrations\201902052352021_AddImageToUserr.resx">
       <DependentUpon>201902052352021_AddImageToUserr.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201902060038133_AddTTask_Project_Fini_Client_Tables_2s.resx">
-      <DependentUpon>201902060038133_AddTTask_Project_Fini_Client_Tables_2s.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201902061259192_SomeChanges.resx">
+      <DependentUpon>201902061259192_SomeChanges.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

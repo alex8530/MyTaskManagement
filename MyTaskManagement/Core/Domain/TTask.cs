@@ -18,5 +18,8 @@ namespace MyTaskManagement.Models
         public ApplicationUser ApplicationUser { get; set; }
         public Project Project { get; set; }
 
+
+        public Financialstatus    Financialstatus { get; set; }
+            
     }
-}
+}   
