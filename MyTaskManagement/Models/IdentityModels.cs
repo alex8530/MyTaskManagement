@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -21,6 +22,10 @@ namespace MyTaskManagement.Models
         [Required]
         [StringLength(255)]
         public string LastName { get; set; }
+
+
+       
+        public Byte[] Image { get; set; }
 
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)

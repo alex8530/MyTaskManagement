@@ -5,7 +5,8 @@ using System.Web;
 
 namespace MyTaskManagement.Models
 {
-    public class Project
+    public enum StatusEnum
     {
+        Not_Start,Ended
     }
 }

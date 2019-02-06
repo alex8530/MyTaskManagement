@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace MyTaskManagement.Models
+namespace MyTaskManagement.Core.Domain
 {
-    public enum StatusProjectEnum
+    public enum     PriorityEnum
     {
-        Not_Start,Ended
+        High,Low
     }
 }
