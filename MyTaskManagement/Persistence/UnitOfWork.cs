@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using MyTaskManagement.Core;
+using MyTaskManagement.Core.Repositories;
 using MyTaskManagement.Models;
+using MyTaskManagement.Persistence.Repositories;
 
 namespace MyTaskManagement.Persistence
 {
@@ -14,12 +16,12 @@ namespace MyTaskManagement.Persistence
         public UnitOfWork(ApplicationDbContext context)
         {
             _context = context;
-            //Courses = new CourseRepository(_context);
-            //Authors = new AuthorRepository(_context);
+          
+            ProjectRepositry= new ProjectRepository(_context);
         }
 
-        //public ICourseRepository Courses { get; private set; }
-        //public IAuthorRepository Authors { get; private set; }
+        public IProjectRepositry ProjectRepositry { get; private set; }
+ 
 
         public int Complete()
         {

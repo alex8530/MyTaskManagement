@@ -31,21 +31,13 @@ namespace MyTaskManagement.Persistence.Repositories
         public TEntity Get(int id)
         {
          
-            return Context.Set<TEntity>().Find(id);
+            return _entities.Find(id);
         }
 
         public IEnumerable<TEntity> GetAll()
         {
-            // Note that here I've repeated Context.Set<TEntity>() in every method and this is causing
-            // too much noise. I could get a reference to the DbSet returned from this method in the 
-            // constructor and store it in a private field like _entities. This way, the implementation
-            // of our methods would be cleaner:
-            // 
-            // _entities.ToList();
-            // _entities.Where();
-            // _entities.SingleOrDefault();
-           
-            //return Context.Set<TEntity>().ToList();
+  
+
             return _entities.ToList();
         }
 

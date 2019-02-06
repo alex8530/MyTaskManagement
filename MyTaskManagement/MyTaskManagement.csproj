@@ -184,7 +184,11 @@
     <Compile Include="Core\Domain\PriorityEnum.cs" />
     <Compile Include="Core\Domain\TTask.cs" />
     <Compile Include="Core\IUnitOfWork.cs" />
+    <Compile Include="Core\Repositories\ITTaskRepositry.cs" />
+    <Compile Include="Core\Repositories\IFinancialRepositry.cs" />
     <Compile Include="Core\Repositories\IRepository.cs" />
+    <Compile Include="Core\Repositories\IProjectRepositry.cs" />
+    <Compile Include="Core\Repositories\IUserRepositry.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -223,6 +227,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Core\Domain\Project.cs" />
     <Compile Include="Core\Domain\StatusEnum.cs" />
+    <Compile Include="Persistence\Repositories\ProjectRepository.cs" />
     <Compile Include="Persistence\Repositories\Repository.cs" />
     <Compile Include="Persistence\UnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
