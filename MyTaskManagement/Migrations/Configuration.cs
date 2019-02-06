@@ -24,18 +24,18 @@ namespace MyTaskManagement.Migrations
         {
             //Add Test User
             InitUsers(context);
-
+            context.SaveChanges();
 
             //Add Clients
-            var clientList =  new List<Client>
+            var clientList = new List<Client>
             {
                 new Client()
                 {
-                    Name = "Client 1" , 
+                    Name = "Client 1" ,
                     Email = "Client1@gmail.com",
                     Address = "Alnasser Street",
                     AdditionInformation = "I want many things",
-                   
+
                 },
                 new Client()
                 {
@@ -55,9 +55,9 @@ namespace MyTaskManagement.Migrations
                 }
 
             };
-            clientList.ForEach(c => context.Clients.AddOrUpdate(client => client.Id ,c));
-           
-            
+            clientList.ForEach(c => context.Clients.AddOrUpdate(client => client.Id, c));
+            context.SaveChanges();
+
             //Add projects
             var projects = new List<Project>
             {
@@ -68,6 +68,7 @@ namespace MyTaskManagement.Migrations
                     StartTime = DateTime.Now,
                     DeadTime = DateTime.Now.AddDays(20),
                     Status = StatusEnum.Not_Start,
+                    Description = "Description 0",
                     Client = clientList[0]
 
                 },
@@ -78,6 +79,8 @@ namespace MyTaskManagement.Migrations
                     StartTime = DateTime.Now,
                     DeadTime = DateTime.Now.AddDays(60),
                     Status = StatusEnum.InProgress,
+                    Description = "Description 1",
+
                     Client = clientList[0]
 
                 } ,
@@ -86,17 +89,211 @@ namespace MyTaskManagement.Migrations
                     Id = "Project2",
                     Name = "Movies ",
                     StartTime = DateTime.Now,
+                    Description = "Description 2",
+
                     DeadTime = DateTime.Now.AddDays(555),
                     Status = StatusEnum.Not_Start,
                     Client = clientList[2]
 
+                },
+                new Project()
+                {
+                    Id = "Project3",
+                    Name = "Movies ",
+                    StartTime = DateTime.Now,
+                    Description = "Description 3",
+
+                    DeadTime = DateTime.Now.AddDays(555),
+                    Status = StatusEnum.Not_Start,
+                    Client = clientList[2]
+
+                },
+                new Project()
+                {
+                    Id = "Project4",
+                    Name = "Movies ",
+                    StartTime = DateTime.Now,
+                    Description = "Description 4",
+
+                    DeadTime = DateTime.Now.AddDays(555),
+                    Status = StatusEnum.Not_Start,
+                    Client = clientList[2]
+
+                },
+                new Project()
+                {
+                    Id = "Project5",
+                    Name = "Movies ",
+                    StartTime = DateTime.Now,
+                    Description = "Description 5",
+
+                    DeadTime = DateTime.Now.AddDays(555),
+                    Status = StatusEnum.Not_Start,
+                    Client = clientList[2]
+
+                },
+                new Project()
+                {
+                    Id = "Project6",
+                    Name = "Movies ",
+                    StartTime = DateTime.Now,
+                    Description = "Description 6",
+
+                    DeadTime = DateTime.Now.AddDays(555),
+                    Status = StatusEnum.Not_Start,
+                    Client = clientList[2]
+
+                },
+                new Project()
+                {
+                    Id = "Project7",
+                    Name = "Movies ",
+                    StartTime = DateTime.Now,
+                    Description = "Description7",
+
+                    DeadTime = DateTime.Now.AddDays(555),
+                    Status = StatusEnum.Not_Start,
+                    Client = clientList[2]
+
+                },
+                new Project()
+                {
+                    Id = "Project8",
+                    Name = "Movies ",
+                    StartTime = DateTime.Now,
+                    Description = "Description 8",
+
+                    DeadTime = DateTime.Now.AddDays(555),
+                    Status = StatusEnum.Not_Start,
+                    Client = clientList[2]
+
+                },
+                new Project()
+                {
+                    Id = "Project9",
+                    Name = "Movies ",
+                    StartTime = DateTime.Now,
+                    Description = "Description9",
+
+                    DeadTime = DateTime.Now.AddDays(555),
+                    Status = StatusEnum.Not_Start,
+                    Client = clientList[0]
+
+                },
+                new Project()
+                {
+                    Id = "Project10",
+                    Name = "Movies ",
+                    StartTime = DateTime.Now,
+                    Description = "Description 10",
+
+                    DeadTime = DateTime.Now.AddDays(555),
+                    Status = StatusEnum.Not_Start,
+                    Client = clientList[0]
+
+                },
+                new Project()
+                {
+                    Id = "Project11",
+                    Name = "Movies ",
+                    StartTime = DateTime.Now,
+                    Description = "Description 11",
+
+                    DeadTime = DateTime.Now.AddDays(555),
+                    Status = StatusEnum.Not_Start,
+                    Client = clientList[0]
+
+                },
+                new Project()
+                {
+                    Id = "Project12",
+                    Name = "Movies ",
+                    StartTime = DateTime.Now,
+                    Description = "Description 12",
+
+                    DeadTime = DateTime.Now.AddDays(555),
+                    Status = StatusEnum.Not_Start,
+                    Client = clientList[1]
+
+                },
+                new Project()
+                {
+                    Id = "Project13",
+                    Name = "Movies ",
+                    StartTime = DateTime.Now,
+                    Description = "Description 13",
+
+                    DeadTime = DateTime.Now.AddDays(555),
+                    Status = StatusEnum.Not_Start,
+                    Client = clientList[1]
+
+                },
+                new Project()
+                {
+                    Id = "Project 14",
+                    Name = "Movies ",
+                    StartTime = DateTime.Now,
+                    Description = "Description 14",
+
+                    DeadTime = DateTime.Now.AddDays(555),
+                    Status = StatusEnum.Not_Start,
+                    Client = clientList[1]
+
+                },
+                new Project()
+                {
+                    Id = "Project15",
+                    Name = "Movies ",
+                    StartTime = DateTime.Now,
+                    Description = "Description 15",
+
+                    DeadTime = DateTime.Now.AddDays(555),
+                    Status = StatusEnum.Not_Start,
+                    Client = clientList[1]
+
+                },
+                new Project()
+                {
+                    Id = "Project16",
+                    Name = "Movies ",
+                    StartTime = DateTime.Now,
+                    Description = "Description 16",
+
+                    DeadTime = DateTime.Now.AddDays(555),
+                    Status = StatusEnum.Not_Start,
+                    Client = clientList[1]
+
+                },
+                new Project()
+                {
+                    Id = "Project17",
+                    Name = "Movies ",
+                    StartTime = DateTime.Now,
+                    Description = "Description 2",
+
+                    DeadTime = DateTime.Now.AddDays(555),
+                    Status = StatusEnum.Not_Start,
+                    Client = clientList[1]
+
+                },
+                new Project()
+                {
+                    Id = "Project18",
+                    Name = "Movies ",
+                    StartTime = DateTime.Now,
+                    Description = "Description 2",
+
+                    DeadTime = DateTime.Now.AddDays(555),
+                    Status = StatusEnum.Not_Start,
+                    Client = clientList[1]
+
                 }
             };
             projects.ForEach(p => context.Projects.AddOrUpdate(project => project.Id, p));
-
+            context.SaveChanges();
 
             //Add Task
-            var tasks= new List<TTask>()
+            var tasks = new List<TTask>()
             {
                 new TTask()
                 {
@@ -156,7 +353,7 @@ namespace MyTaskManagement.Migrations
                 }
             };
             tasks.ForEach(t => context.Tasks.AddOrUpdate(task => task.Id, t));
-
+            context.SaveChanges();
 
             //Add Finanitail status 
             var finanitail = new List<Financialstatus>()
@@ -186,13 +383,12 @@ namespace MyTaskManagement.Migrations
 
                 }
             };
-            finanitail.ForEach(f => context.Financialstatuses.AddOrUpdate( financialstatus => financialstatus.Id, f));
-
-
+            finanitail.ForEach(f => context.Financialstatuses.AddOrUpdate(financialstatus => financialstatus.Id, f));
             context.SaveChanges();
+
         }
 
-        private async void InitUsers( ApplicationDbContext context)
+        private   void InitUsers( ApplicationDbContext context)
         {
 
             var store = new UserStore<ApplicationUser>(context);

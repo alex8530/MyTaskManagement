@@ -5,14 +5,15 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.css"/>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
 <body>
      
-<div id="firstDiv" class="container-fluid">
-    <div class="row content">
+<div   class="container-fluid">
+    <div class="row content  "  >
 
 
 
@@ -21,10 +22,13 @@
  
 
         @*side Nave*@
-        @RenderPage("~/Views/Shared/_SideName.cshtml")
- 
+        <div class="col-sm-2 sidenav  ">
+            @RenderPage("~/Views/Shared/_SideName.cshtml")
+        </div>
+        
+
         @*body*@
-        <div class="col-sm-9">
+        <div class="col-sm-10">
             @RenderBody()
 
         </div>
