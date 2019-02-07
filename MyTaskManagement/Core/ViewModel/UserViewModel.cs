@@ -9,7 +9,7 @@ namespace MyTaskManagement.Core.ViewModel
     public class ListUserViewModel
     {
 
-
+        public string Id{ get; set; }
 
         [Required]
         [StringLength(255)]

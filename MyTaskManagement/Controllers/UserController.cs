@@ -40,12 +40,14 @@ namespace MyTaskManagement.Controllers
             {
                 listUserViewModel.Add(new ListUserViewModel()
                 {
+                    Id = user.Id,
                     Email = user.Email,
                     FirstName = user.UserName
                 });
             }
             return View(listUserViewModel);
         }
+ 
 
         // GET: Employee/Details/5
         public ActionResult Details(int id)
