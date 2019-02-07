@@ -178,6 +178,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProjectController.cs" />
     <Compile Include="Controllers\TTaskController.cs" />
@@ -191,6 +192,7 @@
     <Compile Include="Core\Repositories\IProjectRepositry.cs" />
     <Compile Include="Core\Repositories\IUserRepositry.cs" />
     <Compile Include="Core\ViewModel\ProjectViewModels.cs" />
+    <Compile Include="Core\ViewModel\UserViewModel.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -229,6 +231,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Core\Domain\Project.cs" />
     <Compile Include="Core\Domain\StatusEnum.cs" />
+    <Compile Include="Persistence\Repositories\UserRepository.cs" />
     <Compile Include="Persistence\Repositories\TTaskRepository.cs" />
     <Compile Include="Persistence\Repositories\ProjectRepository.cs" />
     <Compile Include="Persistence\Repositories\Repository.cs" />
@@ -331,6 +334,7 @@
     <Content Include="Views\Shared\_SideName.cshtml" />
     <Content Include="Views\Shared\_TopNav.cshtml" />
     <Content Include="Views\TTask\Index.cshtml" />
+    <Content Include="Views\User\ListUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

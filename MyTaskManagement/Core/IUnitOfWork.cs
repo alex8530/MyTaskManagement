@@ -10,6 +10,7 @@ namespace MyTaskManagement.Core
     {
         ITTaskRepositry  TTaskRepositry { get; }
         IProjectRepositry  ProjectRepositry { get; }
+        IUserRepositry   UserRepositry { get; }
         int Complete();
     }
 }

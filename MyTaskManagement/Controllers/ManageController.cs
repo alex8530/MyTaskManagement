@@ -10,6 +10,8 @@ using MyTaskManagement.Models;
 
 namespace MyTaskManagement.Controllers
 {
+
+
     [Authorize]
     public class ManageController : Controller
     {
@@ -18,6 +20,7 @@ namespace MyTaskManagement.Controllers
 
         public ManageController()
         {
+           
         }
 
         public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)

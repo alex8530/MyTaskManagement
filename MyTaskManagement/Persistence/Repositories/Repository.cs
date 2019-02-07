@@ -15,6 +15,7 @@ namespace MyTaskManagement.Persistence.Repositories
 
         public Repository(ApplicationDbContext context)
         {
+            
             Context = context;
             SetEntities();
         }
