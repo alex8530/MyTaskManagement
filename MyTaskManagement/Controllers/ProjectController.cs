@@ -34,7 +34,8 @@ namespace MyTaskManagement.Controllers
             var viewmodel = new IndexViewModels()
             {
                  Project = new Project(),
-                 Users = _unitOfWork.UserRepositry.GetAll().ToList()
+                 Users = _unitOfWork.UserRepositry.GetAll().ToList(),
+                Clients = _unitOfWork.ClientRepositry.GetAll().ToList()
 
             };
             return View(viewmodel);

@@ -12,6 +12,8 @@ namespace MyTaskManagement.Core.ViewModel
        
        public Project Project ;
         public IEnumerable<ApplicationUser> Users ;
+        public IEnumerable<Client>  Clients ;
+        
 
 
     }

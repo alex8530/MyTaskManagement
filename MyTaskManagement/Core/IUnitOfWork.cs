@@ -11,6 +11,7 @@ namespace MyTaskManagement.Core
         ITTaskRepositry  TTaskRepositry { get; }
         IProjectRepositry  ProjectRepositry { get; }
         IUserRepositry   UserRepositry { get; }
+        IClientRepositry  ClientRepositry { get; }
         int Complete();
     }
 }

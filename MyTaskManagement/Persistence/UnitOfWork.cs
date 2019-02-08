@@ -20,6 +20,7 @@ namespace MyTaskManagement.Persistence
             ProjectRepositry= new ProjectRepository(_context);
             TTaskRepositry = new TTaskRepository(_context);
             UserRepositry = new  UserRepository(_context);
+            ClientRepositry = new   ClientRepository(_context);
         }
 
         public IProjectRepositry ProjectRepositry { get; private set; }
@@ -27,6 +28,8 @@ namespace MyTaskManagement.Persistence
         public ITTaskRepositry TTaskRepositry { get; private set; }
 
         public IUserRepositry UserRepositry { get; private set; }
+
+        public IClientRepositry ClientRepositry { get; private set; }
 
         public int Complete()
         {
