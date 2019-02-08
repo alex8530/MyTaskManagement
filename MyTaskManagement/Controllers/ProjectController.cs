@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MyTaskManagement.Core.ViewModel;
 
 namespace MyTaskManagement.Controllers
 {
@@ -29,7 +30,14 @@ namespace MyTaskManagement.Controllers
         // GET: Project/Create
         public ActionResult Create()
         {
-            return View();
+
+            var viewmodel = new IndexViewModels()
+            {
+                 Project = new Project(),
+                 Users = _unitOfWork.UserRepositry.GetAll().ToList()
+
+            };
+            return View(viewmodel);
         }
 
         // POST: Project/Create

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -36,7 +37,10 @@ namespace MyTaskManagement.Models
         public ICollection<TTask> Tasks { get; set; }
 
         [Required]
+        [ForeignKey("ClientId")]
         public  Client Client { get; set; }
+        
+        public int ClientId { get; set; }
        
     }
 }

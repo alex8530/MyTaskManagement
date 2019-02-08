@@ -224,6 +224,14 @@
     <Compile Include="Migrations\201902061315438_AddConditionOnFinancialTable.Designer.cs">
       <DependentUpon>201902061315438_AddConditionOnFinancialTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201902071248476_AddClientForigenKeyToProjectTable.cs" />
+    <Compile Include="Migrations\201902071248476_AddClientForigenKeyToProjectTable.Designer.cs">
+      <DependentUpon>201902071248476_AddClientForigenKeyToProjectTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902072344250_AddForinProjectIdToTask.cs" />
+    <Compile Include="Migrations\201902072344250_AddForinProjectIdToTask.Designer.cs">
+      <DependentUpon>201902072344250_AddForinProjectIdToTask.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Core\Domain\Client.cs" />
@@ -335,6 +343,7 @@
     <Content Include="Views\Shared\_TopNav.cshtml" />
     <Content Include="Views\TTask\Index.cshtml" />
     <Content Include="Views\User\ListUser.cshtml" />
+    <Content Include="Views\Project\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -371,6 +380,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201902061315438_AddConditionOnFinancialTable.resx">
       <DependentUpon>201902061315438_AddConditionOnFinancialTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902071248476_AddClientForigenKeyToProjectTable.resx">
+      <DependentUpon>201902071248476_AddClientForigenKeyToProjectTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902072344250_AddForinProjectIdToTask.resx">
+      <DependentUpon>201902072344250_AddForinProjectIdToTask.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
