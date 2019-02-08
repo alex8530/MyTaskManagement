@@ -10,10 +10,14 @@ namespace MyTaskManagement.Core.ViewModel
     public class IndexViewModels
     {
        
-       public Project Project ;
-        public IEnumerable<ApplicationUser> Users ;
-        public IEnumerable<Client>  Clients ;
-        
+       public Project Project   { get; set; }
+    public IEnumerable<ApplicationUser> Users { get; set; }
+    public IEnumerable<Client> Clients { get; set; }
+
+
+
+
+         
 
 
     }
