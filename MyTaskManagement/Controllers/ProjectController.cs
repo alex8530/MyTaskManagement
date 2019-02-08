@@ -6,6 +6,7 @@ using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.WebPages;
 using MyTaskManagement.Core.ViewModel;
 
 namespace MyTaskManagement.Controllers
@@ -45,6 +46,7 @@ namespace MyTaskManagement.Controllers
 
         // POST: Project/Create
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Create(IndexViewModels  viewmodel, string __UserId__,string __ClientId__)
         {
 
@@ -55,31 +57,25 @@ namespace MyTaskManagement.Controllers
                 if (viewmodel == null)
                     return HttpNotFound();
 
-                //if (!ModelState.IsValid)
-                //{
-                //    var v = new IndexViewModels()
-                //    {
-                //        Project = new Project(),
-                //        Users = _unitOfWork.UserRepositry.GetAll().ToList(),
-                //        Clients = _unitOfWork.ClientRepositry.GetAll().ToList()
+                if (!ModelState.IsValid)
+                {
+                    var v = new IndexViewModels()
+                    {
+                        Project = new Project(),
+                        Users = _unitOfWork.UserRepositry.GetAll().ToList(),
+                        Clients = _unitOfWork.ClientRepositry.GetAll().ToList()
 
-                //    };
+                    };
 
-                //    return View(v);
-                //}
+                    return View(v);
+                }
 
                 //Add To Projects..we need user,client,to add them to project   
 
-                //get user //it may to add list of users not only list
-                var user = _unitOfWork.UserRepositry.SingleOrDefault(u => u.Id == __UserId__);
-
-
-
-
-               
+ 
 
                 //get client
-             
+
                 var client = _unitOfWork.ClientRepositry.SingleOrDefault(c => c.Name == __ClientId__);
 
 
@@ -91,14 +87,20 @@ namespace MyTaskManagement.Controllers
                     Name = viewmodel.Project.Name,
                     DeadTime = viewmodel.Project.DeadTime,
                     StartTime = viewmodel.Project.StartTime,
-                    Status = StatusEnum.Ended,
+                    Status = StatusEnum.Not_Start,
                     Description = viewmodel.Project.Description,
                     Client = client,
-                    Users = new List<ApplicationUser>()
+                    Users = new List<ApplicationUser>()//this is must
                 };
 
-                 newProject.Users.Add(user);
-              
+                //get user //it may to add list of users not only list
+                if (!__UserId__.IsEmpty())
+                {
+                    var user = _unitOfWork.UserRepositry.SingleOrDefault(u => u.Id == __UserId__);
+                    newProject.Users.Add(user);
+
+                }
+
 
                 _unitOfWork.ProjectRepositry.Add(newProject);
                 _unitOfWork.Complete();
