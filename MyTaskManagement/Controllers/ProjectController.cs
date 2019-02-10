@@ -19,8 +19,9 @@ namespace MyTaskManagement.Controllers
         // GET: Project
         public ActionResult Index()
         {
-            var projects = _unitOfWork.ProjectRepositry.GetAll();
-            return View(projects);
+            //var projects = _unitOfWork.ProjectRepositry.GetAll();
+            var ProjectsWithClientAndUsers = _unitOfWork.ProjectRepositry.GetAllProjectsWithClientAndUsers();
+            return View(ProjectsWithClientAndUsers);
         }
 
         // GET: Project/Details/5
@@ -47,7 +48,7 @@ namespace MyTaskManagement.Controllers
         // POST: Project/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IndexViewModels  viewmodel, string __UserId__,string __ClientId__)
+        public ActionResult Create(IndexViewModels  viewmodel, string __UserId__,string ClientId)
         {
 
            
@@ -57,18 +58,20 @@ namespace MyTaskManagement.Controllers
                 if (viewmodel == null)
                     return HttpNotFound();
 
-                if (!ModelState.IsValid)
-                {
-                    var v = new IndexViewModels()
-                    {
-                        Project = new Project(),
-                        Users = _unitOfWork.UserRepositry.GetAll().ToList(),
-                        Clients = _unitOfWork.ClientRepositry.GetAll().ToList()
+                //if (!ModelState.IsValid)
+                //{
+                //    var errors = ModelState.Values.SelectMany(vr => vr.Errors);
+                //    var s = ModelState.Values;
+                //    var v = new IndexViewModels()
+                //    {
+                //        Project = new Project(),
+                //        Users = _unitOfWork.UserRepositry.GetAll().ToList(),
+                //        Clients = _unitOfWork.ClientRepositry.GetAll().ToList()
 
-                    };
+                //    };
 
-                    return View(v);
-                }
+                //    return View(v);
+                //}
 
                 //Add To Projects..we need user,client,to add them to project   
 
@@ -76,7 +79,7 @@ namespace MyTaskManagement.Controllers
 
                 //get client
 
-                var client = _unitOfWork.ClientRepositry.SingleOrDefault(c => c.Name == __ClientId__);
+                var client = _unitOfWork.ClientRepositry.SingleOrDefault(c => c.Name == ClientId);
 
 
 

@@ -9,5 +9,7 @@ namespace MyTaskManagement.Core.Repositories
     public interface IProjectRepositry : IRepository<Project>
     {
         //if i need method for project<<<<<<<<< put it here
+
+        IEnumerable<Project> GetAllProjectsWithClientAndUsers();
     }
 }

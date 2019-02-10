@@ -26,6 +26,12 @@ namespace MyTaskManagement.Persistence.Repositories
         {
             get { return Context as ApplicationDbContext; }
         }
+
+        public IEnumerable<Project> GetAllProjectsWithClientAndUsers()
+        {
+
+            return CuurentContext.Projects.Include(project => project.Client).Include(project => project.Users).ToList();
+        }
     }
 }
 
