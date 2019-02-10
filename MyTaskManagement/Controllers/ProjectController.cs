@@ -152,19 +152,22 @@ namespace MyTaskManagement.Controllers
         }
 
         // GET: Project/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(string id)
         {
-            return View();
+            var deletedUser = _unitOfWork.UserRepositry.SingleOrDefault(user => user.Id == id);
+            return View(deletedUser);
         }
 
         // POST: Project/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(string id, ApplicationUser   applicationUser)
         {
             try
             {
                 // TODO: Add delete logic here
-
+                var deletedUser = _unitOfWork.UserRepositry.SingleOrDefault(user => user.Id == id);
+                _unitOfWork.UserRepositry.Remove(deletedUser);
+                _unitOfWork.Complete();
                 return RedirectToAction("Index");
             }
             catch
