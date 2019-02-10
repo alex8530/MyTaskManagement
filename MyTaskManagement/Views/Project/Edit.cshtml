@@ -10,7 +10,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Project</h4>
         <hr />
@@ -50,7 +50,7 @@
         </div>
 
         <div class="form-group">
-            <label class="control-label col-md-2"  >Client</label>
+            <label class="control-label col-md-2">Client</label>
             <select name="ClientId" class="col-md-10 form-control   " required>
                 @*<option value="" disabled selected>Choose your Client</option>*@
                 @foreach (var c in Model.Clients)
@@ -60,30 +60,42 @@
                         <option value="@c.Name" selected="selected">@c.Name</option>
 
                     }
-                    <option value="@c.Name"  >@c.Name</option>
+                    <option value="@c.Name">@c.Name</option>
 
                 }
 
             </select>
- 
-        </div> 
-        
-        <label class="control-label col-md-2"  >Users</label>
-        <label class="control-label col-md-12"  ></label>
-        
-           @foreach (var applicationUser in Model.Project.Users)
-            {
-                <div>
-                    
-                    <button type="button" class="btn btn-lg btn-primary" disabled>@applicationUser.FirstName</button>
-                    @Html.ActionLink("Delete", "Delete", new {id = applicationUser.Id}, new {@class = "btn btn-danger"})
+
+        </div>
+
+        <p>_________________________________ Users On Project_______________________________</p>
+
+        @foreach (var applicationUser in Model.Project.Users)
+        {
+            <div>
+
+                <button type="button" class="btn btn-lg btn-primary" disabled>@applicationUser.FirstName</button>
+                @Html.ActionLink("Delete", "Delete", new { id = applicationUser.Id }, new { @class = "btn btn-danger" })
 
 
-                </div>
+            </div>
+
+        }
+        <p>_________________________________All Users_________________________________ </p>
+
+
+        @foreach (var applicationUser in Model.Users)
+        {
+            <div>
+
+                <button type="button" class="btn btn-lg btn-primary" disabled>@applicationUser.FirstName</button>
+                @Html.ActionLink("Add", "AddUserToProject", new { idUser = applicationUser.Id  ,idProject =Model.Project.Id }, new { @class = "btn btn-success" })
+
                
-            }
-         
-     
+
+            </div>
+
+        }
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -99,4 +111,6 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
 }
+ 

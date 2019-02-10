@@ -6,6 +6,7 @@ using System.Web;
 using MyTaskManagement.Models;
 using System.Linq.Expressions;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 
 namespace MyTaskManagement.Persistence.Repositories
 {
@@ -54,7 +55,7 @@ namespace MyTaskManagement.Persistence.Repositories
 
         public void Add(TEntity entity)
         {
-            _entities.Add(entity);
+            _entities.AddOrUpdate(entity);
         }
 
         public void AddRange(IEnumerable<TEntity> entities)

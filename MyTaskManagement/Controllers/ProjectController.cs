@@ -177,8 +177,38 @@ namespace MyTaskManagement.Controllers
                 return View();
             }
         }
-    }
+         
+        public ActionResult AddUserToProject(string idUser)
+        {
+            var addUser  = _unitOfWork.UserRepositry.SingleOrDefault(user => user.Id == idUser);
 
+
+            return View(addUser);
+
+        }
+
+        [HttpPost]
+        public ActionResult AddUserToProject(string idUser, string idProject)
+        {
+            try
+            {
+                
+                var addUser = _unitOfWork.UserRepositry.SingleOrDefault(user => user.Id == idUser);
+
+                /// Note we must include the oject with thier navigation proparity
+                var project = _unitOfWork.ProjectRepositry.GetProjectsWithClientAndUsers(idProject);
+                project.Users.Add(addUser);
+                 _unitOfWork.ProjectRepositry.Add(project);
+                 _unitOfWork.Complete();
+                return RedirectToAction("Index");
+            }
+            catch(Exception e)
+            {
+                return View();
+            }
+        }
+    }
+    
 
 
 }
