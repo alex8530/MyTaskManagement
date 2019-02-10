@@ -25,9 +25,11 @@ namespace MyTaskManagement.Controllers
         }
 
         // GET: Project/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(string id)
         {
-            return View();
+           
+
+            return View(_unitOfWork.ProjectRepositry.SingleOrDefault( project => project.Id == id));
         }
 
         // GET: Project/Create
@@ -176,4 +178,7 @@ namespace MyTaskManagement.Controllers
             }
         }
     }
+
+
+
 }
