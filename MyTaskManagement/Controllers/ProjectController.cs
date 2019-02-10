@@ -119,9 +119,20 @@ namespace MyTaskManagement.Controllers
         }
 
         // GET: Project/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(string id)
         {
-            return View();
+            var viewmodel = new EditViewModel()
+            {
+                Project = _unitOfWork.ProjectRepositry.GetProjectsWithClientAndUsers(id),
+                Users = _unitOfWork.UserRepositry.GetAll().ToList(),
+                Clients = _unitOfWork.ClientRepositry.GetAll().ToList()
+
+
+            };
+             
+            
+
+            return View(viewmodel);
         }
 
         // POST: Project/Edit/5

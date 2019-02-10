@@ -15,6 +15,9 @@ namespace MyTaskManagement.Migrations
 
     internal sealed class Configuration : DbMigrationsConfiguration< ApplicationDbContext>
     {
+        List<ApplicationUser> _users = new List<ApplicationUser>();
+
+
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
@@ -69,7 +72,8 @@ namespace MyTaskManagement.Migrations
                     DeadTime = DateTime.Now.AddDays(20),
                     Status = StatusEnum.Not_Start,
                     Description = "Description 0",
-                    Client = clientList[0]
+                    Client = clientList[0],
+                    Users = _users
 
                 },
                 new Project()
@@ -414,13 +418,23 @@ namespace MyTaskManagement.Migrations
                 IsAcceptedOnCondition = true
             };
             manager.Create(user2, "123123");
-            
 
+            var user3 = new ApplicationUser
+            {
+                UserName = "Ahmed",
+                Email = "Ahmed@Ahmed.com",
+                FirstName = "Ahmed",
+                LastName = "Abu Ahmed",
+                IsAcceptedOnCondition = true
+            };
+            manager.Create(user3, "123123");
 
-
-        } 
-
+            _users.Add (user1);
+            _users.Add (user2);
+            _users.Add (user3);
         }
+
+    }
 
 
    

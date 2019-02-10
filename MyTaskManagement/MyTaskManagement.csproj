@@ -346,6 +346,7 @@
     <Content Include="Views\TTask\Index.cshtml" />
     <Content Include="Views\User\ListUser.cshtml" />
     <Content Include="Views\Project\Create.cshtml" />
+    <Content Include="Views\Project\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
