@@ -154,27 +154,27 @@ namespace MyTaskManagement.Controllers
         }
 
         // GET: Project/DeleteUser/5
-        public ActionResult DeleteUser(string id)
+        public ActionResult DeleteUser(string idUser)
         {
-            var deletedUser = _unitOfWork.UserRepositry.SingleOrDefault(user => user.Id == id);
+            var deletedUser = _unitOfWork.UserRepositry.SingleOrDefault(user => user.Id == idUser);
             return View(deletedUser);
         }
       
 
         // POST: Project/DeleteUser/5
         [HttpPost]
-        public ActionResult DeleteUser(string id,string idProject)
+        public ActionResult DeleteUser(string idUser, string idProject)
         {
             try
             {
                 // TODO: Add delete logic here
-                var deletedUser = _unitOfWork.UserRepositry.SingleOrDefault(user => user.Id == id);
+                var deletedUser = _unitOfWork.UserRepositry.SingleOrDefault(user => user.Id == idUser);
                 var project = _unitOfWork.ProjectRepositry.GetProjectsWithClientAndUsers(idProject);
                 //Note ,,, You must delete user from project table, not  from user table...
 
                 project.Users.Remove(deletedUser);
                 _unitOfWork.Complete();
-                return RedirectToAction("Index");
+                return RedirectToAction("Edit" , new {id= idProject });
             }
             catch (Exception exception)
             {
@@ -231,7 +231,7 @@ namespace MyTaskManagement.Controllers
                 project.Users.Add(addUser);
                  _unitOfWork.ProjectRepositry.Add(project);
                  _unitOfWork.Complete();
-                return RedirectToAction("Index");
+                return RedirectToAction("Edit",new {id=idProject});
             }
             catch(Exception e)
             {
