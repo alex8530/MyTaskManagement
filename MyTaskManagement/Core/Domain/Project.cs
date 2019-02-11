@@ -36,7 +36,7 @@ namespace MyTaskManagement.Models
         public ICollection<ApplicationUser> Users { get; set; }
         public ICollection<TTask> Tasks { get; set; }
 
-        [Required]
+         
         [ForeignKey("ClientId")]
         public  Client Client { get; set; }
         

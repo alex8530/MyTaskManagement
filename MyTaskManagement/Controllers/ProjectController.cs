@@ -77,9 +77,10 @@ namespace MyTaskManagement.Controllers
 
                 //Add To Projects..we need user,client,to add them to project   
 
- 
 
-                //get client
+
+                //get client 
+                //Note , here i send Name of client but i name ClientId in that form
 
                 var client = _unitOfWork.ClientRepositry.SingleOrDefault(c => c.Name == ClientId);
 
@@ -129,8 +130,7 @@ namespace MyTaskManagement.Controllers
                 Project = _unitOfWork.ProjectRepositry.GetProjectsWithClientAndUsers(id),
                 Users = _unitOfWork.UserRepositry.GetAll().ToList(),
                 Clients = _unitOfWork.ClientRepositry.GetAll().ToList()
-
-
+                 
             };
              
             
@@ -140,15 +140,29 @@ namespace MyTaskManagement.Controllers
 
         // POST: Project/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, Project collection)
+        public ActionResult Edit(string id, Project  project,  int ClientId)
         {
             try
             {
-                // TODO: Add update logic here
+                if (ModelState.IsValid)
+                {
+                    
+                    var oldProject = _unitOfWork.ProjectRepositry.SingleOrDefault(p => p.Id == id);
+                    oldProject.Name = project.Name;
+                    oldProject.StartTime = project.StartTime;
+                    oldProject.DeadTime = project.DeadTime;
+                    oldProject.Description = project.Description;
+                    
+                    oldProject.ClientId =  ClientId;
+
+                    _unitOfWork.Complete();
+
+                }
+               
 
                 return RedirectToAction("Index");
             }
-            catch
+            catch (Exception exception)
             {
                 return View();
             }
