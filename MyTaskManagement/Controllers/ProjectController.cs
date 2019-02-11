@@ -50,7 +50,7 @@ namespace MyTaskManagement.Controllers
         // POST: Project/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IndexViewModels  viewmodel, string __UserId__,string ClientId)
+        public ActionResult Create(IndexViewModels  viewmodel, string __UserId__,string ClientId, int status )
         {
 
            
@@ -84,6 +84,7 @@ namespace MyTaskManagement.Controllers
                 var client = _unitOfWork.ClientRepositry.SingleOrDefault(c => c.Name == ClientId);
 
 
+            
 
                 //only corspond data will be set ,so users,clinet will be null
                 var newProject = new Project()
@@ -92,7 +93,7 @@ namespace MyTaskManagement.Controllers
                     Name = viewmodel.Project.Name,
                     DeadTime = viewmodel.Project.DeadTime,
                     StartTime = viewmodel.Project.StartTime,
-                    Status = StatusEnum.Not_Start,
+                    Status = (StatusEnum)Enum.ToObject(typeof(StatusEnum), status),
                     Description = viewmodel.Project.Description,
                     Client = client,
                     Users = new List<ApplicationUser>()//this is must
