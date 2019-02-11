@@ -1,4 +1,5 @@
-﻿@model MyTaskManagement.Core.ViewModel.IndexViewModels
+﻿@using MyTaskManagement.Models
+@model MyTaskManagement.Core.ViewModel.IndexViewModels
 
 @{
     ViewBag.Title = "Create";
@@ -58,7 +59,26 @@
             </div>
         </div>
 
-   
+        <div class="form-group">
+            <label class="control-label col-md-2  " for="StatusId">Status</label>
+            @{
+                var values = Enum.GetValues(typeof(StatusEnum));
+            }
+            <select name="StatusId" class="col-md-10 form-control ">
+                <option value="" disabled selected>Choose Status</option>
+
+                @foreach (var status in values)
+                {
+                   
+                     
+                        <option value="@status">@status</option>
+                   
+
+                }
+
+            </select>
+        </div> 
+
  
         <div class="form-group">
             <label class="control-label col-md-2  " for="__UserId__">User</label>
@@ -67,6 +87,7 @@
 
                 @foreach (var u in Model.Users)
                 {
+
                     <option value="@u.Id">@u.FirstName</option>
 
                 }

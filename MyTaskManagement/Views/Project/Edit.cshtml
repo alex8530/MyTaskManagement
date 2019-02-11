@@ -7,7 +7,7 @@
 <h2>Edit</h2>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm() )
 {
     @Html.AntiForgeryToken()
 
@@ -48,7 +48,8 @@
                 @Html.ValidationMessageFor(model => model.Project.Description, "", new { @class = "text-danger" })
             </div>
         </div>
-
+  
+        
         <div class="form-group">
             <label class="control-label col-md-2">Client</label>
             <select name="ClientId" class="col-md-10 form-control   " required>
@@ -60,7 +61,11 @@
                         <option value="@c.Name" selected="selected">@c.Name</option>
 
                     }
-                    <option value="@c.Name">@c.Name</option>
+                    else
+                    {
+                        <option value="@c.Name">@c.Name</option>
+                        
+                    }
 
                 }
 
@@ -68,41 +73,42 @@
 
         </div>
 
-        <p>_________________________________ Users On Project_______________________________</p>
-
-        @foreach (var applicationUser in Model.Project.Users)
-        {
-            <div>
-
-                <button type="button" class="btn btn-lg btn-primary" disabled>@applicationUser.FirstName</button>
-                @Html.ActionLink("Delete", "DeleteUser", new { idUser = applicationUser.Id , idProject = Model.Project.Id }, new { @class = "btn btn-danger" })
-
-
-            </div>
-
-        }
-        <p>_________________________________All Users_________________________________ </p>
-
-
-        @foreach (var applicationUser in Model.Users)
-        {
-            <div>
-
-                <button type="button" class="btn btn-lg btn-primary" disabled>@applicationUser.FirstName</button>
-                @Html.ActionLink("Add", "AddUserToProject", new { idUser = applicationUser.Id  ,idProject =Model.Project.Id }, new { @class = "btn btn-success" })
-
-               
-
-            </div>
-
-        }
-
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </div>
     </div>
+}
+
+
+<p>_________________________________ Users On Project_______________________________</p>
+
+@foreach (var applicationUser in Model.Project.Users)
+{
+    <div>
+
+        <button type="button" class="btn btn-lg btn-primary" disabled>@applicationUser.FirstName</button>
+        @Html.ActionLink("Delete", "DeleteUser",new { idUser = applicationUser.Id , idProject = Model.Project.Id }, new { @class = "btn btn-danger" })
+
+
+    </div>
+
+}
+<p>_________________________________All Users_________________________________ </p>
+
+
+@foreach (var applicationUser in Model.Users)
+{
+    <div>
+
+        <button type="button" class="btn btn-lg btn-primary" disabled>@applicationUser.FirstName</button>
+        @Html.ActionLink("Add", "AddUserToProject", new { idUser = applicationUser.Id  ,idProject =Model.Project.Id }, new { @class = "btn btn-success" })
+
+               
+
+    </div>
+
 }
 
 <div>

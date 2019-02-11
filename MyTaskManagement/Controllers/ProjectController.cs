@@ -139,7 +139,7 @@ namespace MyTaskManagement.Controllers
 
         // POST: Project/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, Project collection)
         {
             try
             {
