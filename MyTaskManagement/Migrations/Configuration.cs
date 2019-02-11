@@ -72,7 +72,7 @@ namespace MyTaskManagement.Migrations
                     DeadTime = DateTime.Now.AddDays(20),
                     Status = StatusEnum.Not_Start,
                     Description = "Description 0",
-                    Client = clientList[0],
+                    ClientId = clientList[0].Id,
                     Users = _users
 
                 },
@@ -85,7 +85,7 @@ namespace MyTaskManagement.Migrations
                     Status = StatusEnum.InProgress,
                     Description = "Description 1",
 
-                    Client = clientList[0]
+                    ClientId = clientList[0].Id
 
                 } ,
                 new Project()
@@ -97,7 +97,7 @@ namespace MyTaskManagement.Migrations
 
                     DeadTime = DateTime.Now.AddDays(555),
                     Status = StatusEnum.Not_Start,
-                    Client = clientList[2]
+                    ClientId = clientList[2].Id
 
                 },
                 new Project()
@@ -109,7 +109,7 @@ namespace MyTaskManagement.Migrations
 
                     DeadTime = DateTime.Now.AddDays(555),
                     Status = StatusEnum.Not_Start,
-                    Client = clientList[2]
+                    ClientId = clientList[2].Id
 
                 },
                 new Project()
@@ -121,7 +121,7 @@ namespace MyTaskManagement.Migrations
 
                     DeadTime = DateTime.Now.AddDays(555),
                     Status = StatusEnum.Not_Start,
-                    Client = clientList[2]
+                    ClientId = clientList[2].Id
 
                 },
                 new Project()
@@ -133,7 +133,7 @@ namespace MyTaskManagement.Migrations
 
                     DeadTime = DateTime.Now.AddDays(555),
                     Status = StatusEnum.Not_Start,
-                    Client = clientList[2]
+                    ClientId = clientList[2].Id
 
                 },
                 new Project()
@@ -145,7 +145,7 @@ namespace MyTaskManagement.Migrations
 
                     DeadTime = DateTime.Now.AddDays(555),
                     Status = StatusEnum.Not_Start,
-                    Client = clientList[2]
+                    ClientId = clientList[2].Id
 
                 },
                 new Project()
@@ -390,6 +390,7 @@ namespace MyTaskManagement.Migrations
             finanitail.ForEach(f => context.Financialstatuses.AddOrUpdate(financialstatus => financialstatus.Id, f));
             context.SaveChanges();
 
+
         }
 
         private   void InitUsers( ApplicationDbContext context)
@@ -428,10 +429,32 @@ namespace MyTaskManagement.Migrations
                 IsAcceptedOnCondition = true
             };
             manager.Create(user3, "123123");
+            var user4 = new ApplicationUser
+            {
+                UserName = "Sameer",
+                Email = "Sameer@Sameer.com",
+                FirstName = "Sameer",
+                LastName = "Abu Sameer",
+                IsAcceptedOnCondition = true
+            };
+            manager.Create(user4, "123123");
+
+            var user5 = new ApplicationUser
+            {
+                UserName = "FoFo",
+                Email = "FoFo@FoFo.com",
+                FirstName = "FoFo",
+                LastName = "Abu FoFo",
+                IsAcceptedOnCondition = true
+            };
+            manager.Create(user5, "123123");
+
 
             _users.Add (user1);
             _users.Add (user2);
             _users.Add (user3);
+            _users.Add (user4);
+            _users.Add (user5);
         }
 
     }
