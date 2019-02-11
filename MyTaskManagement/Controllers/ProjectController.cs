@@ -153,16 +153,17 @@ namespace MyTaskManagement.Controllers
             }
         }
 
-        // GET: Project/Delete/5
-        public ActionResult Delete(string id)
+        // GET: Project/DeleteUser/5
+        public ActionResult DeleteUser(string id)
         {
             var deletedUser = _unitOfWork.UserRepositry.SingleOrDefault(user => user.Id == id);
             return View(deletedUser);
         }
+      
 
-        // POST: Project/Delete/5
+        // POST: Project/DeleteUser/5
         [HttpPost]
-        public ActionResult Delete(string id,string idProject)
+        public ActionResult DeleteUser(string id,string idProject)
         {
             try
             {
@@ -180,7 +181,34 @@ namespace MyTaskManagement.Controllers
                 return View();
             }
         }
-         
+
+        // GET: Project/DeleteProject/5
+        public ActionResult DeleteProject(string id)
+        {
+            var deletedProject = _unitOfWork.ProjectRepositry.SingleOrDefault(project => project.Id == id);
+            return View(deletedProject);
+        }
+
+
+        // POST: Project/DeleteProject/5
+        [HttpPost]
+        public ActionResult DeleteProject(string id ,Project project )
+        {
+            try
+            {
+                // TODO: Add delete logic here
+                var deletedProject = _unitOfWork.ProjectRepositry.SingleOrDefault(p => p.Id == id);
+ 
+                _unitOfWork.ProjectRepositry.Remove(deletedProject);
+                _unitOfWork.Complete();
+                return RedirectToAction("Index");
+            }
+            catch (Exception exception)
+            {
+                return View();
+            }
+        }
+
         public ActionResult AddUserToProject(string idUser)
         {
             var addUser  = _unitOfWork.UserRepositry.SingleOrDefault(user => user.Id == idUser);

@@ -75,7 +75,7 @@
             <div>
 
                 <button type="button" class="btn btn-lg btn-primary" disabled>@applicationUser.FirstName</button>
-                @Html.ActionLink("Delete", "Delete", new { id = applicationUser.Id , idProject = Model.Project.Id }, new { @class = "btn btn-danger" })
+                @Html.ActionLink("Delete", "DeleteUser", new { id = applicationUser.Id , idProject = Model.Project.Id }, new { @class = "btn btn-danger" })
 
 
             </div>
