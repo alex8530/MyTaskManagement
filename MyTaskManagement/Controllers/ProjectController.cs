@@ -162,17 +162,20 @@ namespace MyTaskManagement.Controllers
 
         // POST: Project/Delete/5
         [HttpPost]
-        public ActionResult Delete(string id, ApplicationUser   applicationUser)
+        public ActionResult Delete(string id,string idProject)
         {
             try
             {
                 // TODO: Add delete logic here
                 var deletedUser = _unitOfWork.UserRepositry.SingleOrDefault(user => user.Id == id);
-                _unitOfWork.UserRepositry.Remove(deletedUser);
+                var project = _unitOfWork.ProjectRepositry.GetProjectsWithClientAndUsers(idProject);
+                //Note ,,, You must delete user from project table, not  from user table...
+
+                project.Users.Remove(deletedUser);
                 _unitOfWork.Complete();
                 return RedirectToAction("Index");
             }
-            catch
+            catch (Exception exception)
             {
                 return View();
             }
