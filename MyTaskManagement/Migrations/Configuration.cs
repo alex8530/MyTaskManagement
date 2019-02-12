@@ -355,6 +355,20 @@ namespace MyTaskManagement.Migrations
                     ApplicationUser = context.Users.SingleOrDefault(user => user.FirstName =="Admin"),
                     Project = projects[2]
 
+                },
+                new TTask()
+                {
+                    Name = "Task 4" ,
+                    Priority = PriorityEnum.High,
+                    Status = StatusEnum.Not_Start,
+                    StartTime = DateTime.Now,
+                    DeadTime = DateTime.Now.AddHours(24),
+                    Description = "This is Description for this task4",
+                    WorkingHours = 4,
+                    OverTime = 44,
+                    ApplicationUser = context.Users.SingleOrDefault(user => user.FirstName =="Admin"),
+                    Project = projects[0]
+
                 }
             };
             tasks.ForEach(t => context.Tasks.AddOrUpdate(task => task.Id, t));

@@ -45,6 +45,9 @@
             <th>
                 <p>In Progress</p>
             </th>
+            <th>
+                <p>Done</p>
+            </th>
             <th></th>
         </tr>
 
@@ -91,15 +94,30 @@
                     <p>@item.Tasks.Count</p>
                 </td>
                    
+                
+
+                   
+                <td>
                     @{
                         var numberOfTaskInProgress = item.Tasks.Where(task => task.Status == StatusEnum.InProgress).ToList().Count();
 
 
                     }
-                <td>
-                     <p> @numberOfTaskInProgress </p>
+                    <p> @numberOfTaskInProgress </p>
                 </td>
                    
+               
+                 <td>
+                    @{
+                        var numberOfTaskInDoneCount  = item.Tasks.Where(task => task.Status == StatusEnum.Ended).ToList().Count();
+
+
+                    }
+                    <p> @numberOfTaskInDoneCount </p>
+                </td>
+                   
+               
+                
 
                 <td>
                     @Html.ActionLink("Edit", "Edit", new {id = item.Id}, new {@class = "btn btn-success"}) |
