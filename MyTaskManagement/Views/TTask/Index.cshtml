@@ -18,6 +18,10 @@
                 @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
+                <p>Project_Id</p>
+
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.StartTime)
             </th>
             <th>
@@ -50,6 +54,11 @@
                      <td>
                          @Html.DisplayFor(modelItem => item.Name)
                      </td>
+                     
+                     <td>
+                         @Html.DisplayFor(modelItem => item.Project.Id)
+                     </td>
+
                      <td>
                          @Html.DisplayFor(modelItem => item.StartTime)
                      </td>

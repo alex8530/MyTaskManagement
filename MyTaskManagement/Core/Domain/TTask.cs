@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using MyTaskManagement.Core.Domain;
@@ -47,6 +48,8 @@ namespace MyTaskManagement.Models
         [ForeignKey("ProjectId")]
         public Project Project { get; set; }
 
+
+       
         public string ProjectId { get; set; }
 
 
