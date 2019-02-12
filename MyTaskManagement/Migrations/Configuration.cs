@@ -318,7 +318,7 @@ namespace MyTaskManagement.Migrations
                 {
                     Name = "Task 1" ,
                     Priority = PriorityEnum.High,
-                    Status = StatusEnum.InProgress,
+                    Status = StatusEnum.Ended,
                     StartTime = DateTime.Now,
                     DeadTime = DateTime.Now.AddHours(21),
                     Description = "This is Description for this task 1",
