@@ -15,7 +15,7 @@ namespace MyTaskManagement.Controllers
         // GET: TTask
         public ActionResult Index()
         {
-            var tasks = _unitOfWork.TTaskRepositry.GetAll();
+            var tasks = _unitOfWork.TTaskRepositry.GetAllTasksWithUserAndUserAndProject();
             return View(tasks);
         }
 

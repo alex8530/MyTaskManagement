@@ -8,5 +8,8 @@ namespace MyTaskManagement.Core.Repositories
 {
     public interface ITTaskRepositry : IRepository<TTask>
     {
+
+        IEnumerable<TTask> GetAllTasksWithUserAndUserAndProject();
+
     }
 }
