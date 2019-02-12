@@ -60,6 +60,8 @@ namespace MyTaskManagement.Models
 
         public static ApplicationDbContext Create()
         {
+
+            
             return new ApplicationDbContext();
         }
 

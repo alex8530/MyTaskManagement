@@ -11,6 +11,7 @@ namespace MyTaskManagement.Core.Repositories
         //if i need method for project<<<<<<<<< put it here
 
         IEnumerable<Project> GetAllProjectsWithClientAndUsers();
+        IEnumerable<Project> GetAllProjectsWithClientAndUsersAndTasks();
        Project  GetProjectsWithClientAndUsers(string id);
     }
 }

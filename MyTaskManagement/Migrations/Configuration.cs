@@ -25,6 +25,7 @@ namespace MyTaskManagement.Migrations
 
         protected override void Seed( ApplicationDbContext context)
         {
+
             //Add Test User
             InitUsers(context);
             context.SaveChanges();

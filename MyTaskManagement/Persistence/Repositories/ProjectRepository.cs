@@ -33,7 +33,10 @@ namespace MyTaskManagement.Persistence.Repositories
             return CuurentContext.Projects.Include(project => project.Client).Include(project => project.Users).ToList();
         }
 
-       
+        public IEnumerable<Project> GetAllProjectsWithClientAndUsersAndTasks()
+        {
+            return CuurentContext.Projects.Include(project => project.Client).Include(project => project.Users).Include(project => project.Tasks).ToList();
+        }
 
         public  Project  GetProjectsWithClientAndUsers(string id)
         {

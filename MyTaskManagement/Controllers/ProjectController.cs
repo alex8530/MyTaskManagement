@@ -3,24 +3,28 @@ using MyTaskManagement.Persistence;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.WebPages;
 using MyTaskManagement.Core.ViewModel;
+using System.Data.Entity;
 
 namespace MyTaskManagement.Controllers
 {
     public class ProjectController : Controller
     {
         private UnitOfWork _unitOfWork = new UnitOfWork(new ApplicationDbContext());
-
+        
  
         // GET: Project
         public ActionResult Index()
         {
+             
+
             //var projects = _unitOfWork.ProjectRepositry.GetAll();
-            var ProjectsWithClientAndUsers = _unitOfWork.ProjectRepositry.GetAllProjectsWithClientAndUsers();
+            var ProjectsWithClientAndUsers = _unitOfWork.ProjectRepositry.GetAllProjectsWithClientAndUsersAndTasks() ;
             return View(ProjectsWithClientAndUsers);
         }
 
