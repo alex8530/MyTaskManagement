@@ -44,7 +44,7 @@ namespace MyTaskManagement.Models
         [Required]
         public ApplicationUser ApplicationUser { get; set; }
 
-        [Required]
+        //[Required]
         [ForeignKey("ProjectId")]
         public Project Project { get; set; }
 
@@ -54,6 +54,7 @@ namespace MyTaskManagement.Models
 
 
         public Financialstatus  Financialstatus { get; set; }
-            
+
+         
     }
 }   

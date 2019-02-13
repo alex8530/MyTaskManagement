@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MyTaskManagement.Core.Domain;
+using MyTaskManagement.Core.ViewModel;
 
 namespace MyTaskManagement.Controllers
 {
@@ -26,24 +28,71 @@ namespace MyTaskManagement.Controllers
         }
 
         // GET: TTask/Create
-        public ActionResult Create()
+        //this is comming from project controller 
+        public ActionResult Create(string id_current_project)
         {
-            return View();
+            var newTaskViewModel = new TaskViewModel()  
+            {
+                Task = new TTask()
+                {
+                    ProjectId = id_current_project,//this is must neot change !!!
+                    StartTime = DateTime.Now //this is defult time
+                  
+                },
+                Users = _unitOfWork.UserRepositry.GetAll().ToList() 
+            };
+
+            return View(newTaskViewModel);
         }
 
         // POST: TTask/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(TTask  task , string id_current_project)
         {
+
+            // you should note that id_current_project comming from viewmodel !! not from form 
+
             try
             {
-                // TODO: Add insert logic here
+                int stat = Int32.Parse(Request.Form["status"]);
+                int pri = Int32.Parse(Request.Form["priority"]);
+                var ui = Request.Form["__UserId__"];
+                 //var id_current_project = Request.Form["id_current_project"];
 
+                
+                var user = _unitOfWork.UserRepositry.SingleOrDefault(u => u.Id == ui);
+               //var project = _unitOfWork.ProjectRepositry.SingleOrDefault(pp => pp.Id == id_current_project);
+                var dbContext= new ApplicationDbContext();
+          
+              
+                var newTask = new TTask()
+                {
+                    ProjectId = id_current_project,
+                    ApplicationUser = user,
+                    Description = task.Description,
+                    DeadTime = task.DeadTime,
+                    StartTime = task.StartTime,
+                    Name = task.Name,
+                    Status = (StatusEnum)Enum.ToObject(typeof(StatusEnum), stat),
+                    Priority = (PriorityEnum)Enum.ToObject(typeof(PriorityEnum), pri),
+                    OverTime = task.OverTime,
+                    WorkingHours = task.WorkingHours  
+                    //Project =new Project() // here no need to add project object , just add his forign key
+                    //, but if you need to add project object , you must init it
+
+                };
+                //newTask.Project = project;
+
+
+                _unitOfWork.TTaskRepositry.Add(newTask);
+                _unitOfWork.Complete();
+
+               
                 return RedirectToAction("Index");
             }
-            catch
+            catch (Exception exception)
             {
-                return View();
+                return Content(exception.Message);
             }
         }
 

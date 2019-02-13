@@ -1,0 +1,157 @@
+﻿@using System.Web.UI.WebControls
+@using MyTaskManagement.Core.Domain
+@using MyTaskManagement.Models
+@model MyTaskManagement.Core.ViewModel.TaskViewModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm())
+{
+    // store the project id  as hidden, to send when post this form 
+    @*@Html.Hidden("id_current_project",@Model.Task.ProjectId)*@
+    //No NEED TO STORE IT ... BECAUSE IT WILL STORE BY DEFAULT
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>TTask</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Task.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Task.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Task.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Task.StartTime, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Task.StartTime, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Task.StartTime, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Task.DeadTime, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Task.DeadTime, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Task.DeadTime, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Task.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Task.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Task.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Task.WorkingHours, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Task.WorkingHours, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Task.WorkingHours, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Task.OverTime, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Task.OverTime, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Task.OverTime, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Task.ProjectId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Task.ProjectId, new { htmlAttributes = new { @class = "form-control" , @disabled = "disabled" } })
+                @Html.ValidationMessageFor(model => model.Task.ProjectId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        
+        
+        <div class="form-group">
+            <label class="control-label col-md-2 "  >Status</label>
+            @{
+                var values = Enum.GetValues(typeof(StatusEnum));
+            }
+          
+            <select name="status" class="col-md-10 form-control ">
+                <option value="" disabled selected>Choose Status</option>
+            
+                @foreach (var status in values)
+                {
+                    int i = status.GetHashCode();
+
+                    <option value="@i">@status</option>
+
+
+                }
+
+            </select>
+        </div> 
+
+
+        
+        <div class="form-group">
+            <label class="control-label col-md-2  "  >Priority</label>
+            @{
+                var valPriority = Enum.GetValues(typeof(PriorityEnum));
+            }
+          
+            <select name="priority" class="col-md-10 form-control ">
+                <option value="" disabled selected>Choose Priority</option>
+            
+                @foreach (var p in valPriority)
+                {
+                    int i = p.GetHashCode();
+
+                    <option value="@i">@p</option>
+
+
+                }
+
+            </select>
+        </div> 
+        
+
+        <div class="form-group">
+            <label class="control-label col-md-2  " for="__UserId__">User</label>
+            <select name="__UserId__" class="col-md-10 form-control " >
+                <option value="" disabled selected>Choose your Employees</option>
+
+                @foreach (var u in Model.Users)
+                {
+
+                    <option value="@u.Id">@u.FirstName</option>
+
+                }
+
+            </select>
+        </div> 
+
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

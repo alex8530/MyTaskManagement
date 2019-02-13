@@ -193,6 +193,7 @@
     <Compile Include="Core\Repositories\IProjectRepositry.cs" />
     <Compile Include="Core\Repositories\IUserRepositry.cs" />
     <Compile Include="Core\ViewModel\ProjectViewModels.cs" />
+    <Compile Include="Core\ViewModel\TaskViewModel .cs" />
     <Compile Include="Core\ViewModel\UserViewModel.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -232,6 +233,10 @@
     <Compile Include="Migrations\201902072344250_AddForinProjectIdToTask.cs" />
     <Compile Include="Migrations\201902072344250_AddForinProjectIdToTask.Designer.cs">
       <DependentUpon>201902072344250_AddForinProjectIdToTask.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902122356120_removeReqProjectFromTask.cs" />
+    <Compile Include="Migrations\201902122356120_removeReqProjectFromTask.Designer.cs">
+      <DependentUpon>201902122356120_removeReqProjectFromTask.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -351,6 +356,7 @@
     <Content Include="Views\Project\Details.cshtml" />
     <Content Include="Views\Project\AddUserToProject.cshtml" />
     <Content Include="Views\Project\DeleteProject.cshtml" />
+    <Content Include="Views\TTask\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -393,6 +399,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201902072344250_AddForinProjectIdToTask.resx">
       <DependentUpon>201902072344250_AddForinProjectIdToTask.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902122356120_removeReqProjectFromTask.resx">
+      <DependentUpon>201902122356120_removeReqProjectFromTask.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
