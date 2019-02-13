@@ -131,7 +131,7 @@ namespace MyTaskManagement.Controllers
         {
             var viewmodel = new EditViewModel()
             {
-                Project = _unitOfWork.ProjectRepositry.GetProjectsWithClientAndUsers(id),
+                Project = _unitOfWork.ProjectRepositry.GetProjectsWithClientAndUsersAndTasks(id),
                 Users = _unitOfWork.UserRepositry.GetAll().ToList(),
                 Clients = _unitOfWork.ClientRepositry.GetAll().ToList()
                  

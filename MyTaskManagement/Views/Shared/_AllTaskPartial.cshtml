@@ -1,17 +1,6 @@
 ﻿@using MyTaskManagement.Core.Domain
 @model IEnumerable<MyTaskManagement.Models.TTask>
-
-@{
-    ViewBag.Title = "Tasks";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
-
-<h2>Tasks</h2>
-
-<p>
-
-    @Html.ActionLink("Create New", "Create", "TTask", "", new { @class = "btn btn-success" })
-</p>
+ 
 <table class="table" id="listTask">
     <thead>
         <tr>

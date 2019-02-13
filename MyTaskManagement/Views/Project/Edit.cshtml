@@ -1,4 +1,5 @@
-﻿@model MyTaskManagement.Core.ViewModel.EditViewModel
+﻿@using Microsoft.Ajax.Utilities
+@model MyTaskManagement.Core.ViewModel.EditViewModel
 
 @{
     ViewBag.Title = "Edit";
@@ -125,21 +126,19 @@ else
 
 
 
-<p>______________________________Form Add Task__________________________________</p>
-
- 
-
+<p>______________________________All Tasks__________________________________</p>
 
 
 <div>
-    @Html.ActionLink("Add Task", "Create", "TTask", new { id_current_project = Model.Project.Id }, htmlAttributes : new{@class="btn btn-warning"})
+    @Html.ActionLink("Add Task", "Create", "TTask", new { id_current_project = Model.Project.Id }, htmlAttributes: new { @class = "btn btn-warning" })
 </div>
 
-<p>______________________________All Tasks__________________________________</p>
 
 @{
-    var tasksForCurrentProject = Model.Project.Tasks;
+    var tasksForCurrentProject = Model.Project.Tasks.ToList();
+
 }
+@Html.Partial("_AllTaskPartial", tasksForCurrentProject)
 
 
 <div>

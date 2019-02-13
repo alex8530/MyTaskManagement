@@ -38,10 +38,17 @@ namespace MyTaskManagement.Persistence.Repositories
             return CuurentContext.Projects.Include(project => project.Client).Include(project => project.Users).Include(project => project.Tasks).ToList();
         }
 
+        public Project GetProjectsWithClientAndUsersAndTasks(string id)
+        {
+            return CuurentContext.Projects.Where(p => p.Id == id).Include(project => project.Client).Include(project => project.Users).Include(project => project.Tasks).SingleOrDefault() ;
+        }
+
         public  Project  GetProjectsWithClientAndUsers(string id)
         {
             return  CuurentContext.Projects.Where(p => p.Id==id).Include(project => project.Client).Include(project => project.Users).FirstOrDefault();
         }
+
+    
     }
 }
 

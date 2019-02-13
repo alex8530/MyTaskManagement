@@ -12,6 +12,7 @@ namespace MyTaskManagement.Core.Repositories
 
         IEnumerable<Project> GetAllProjectsWithClientAndUsers();
         IEnumerable<Project> GetAllProjectsWithClientAndUsersAndTasks();
+       Project GetProjectsWithClientAndUsersAndTasks(string id);
        Project  GetProjectsWithClientAndUsers(string id);
     }
 }
