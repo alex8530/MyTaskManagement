@@ -1,0 +1,41 @@
+﻿
+@model MyTaskManagement.Models.TTask 
+     
+<tr>
+     <td>
+         @Html.DisplayFor(item => item.Name)
+     </td>
+
+     <td>
+         @Html.DisplayFor(item => item.Project.Id)
+     </td>
+
+     <td>
+         @Html.DisplayFor(item => item.StartTime)
+     </td>
+     <td>
+         @Html.DisplayFor(item => item.DeadTime)
+     </td>
+     <td>
+         @Html.DisplayFor(item => item.Description)
+     </td>
+     @*<td>
+                        @Html.DisplayFor(modelItem => item.WorkingHours)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OverTime)
+                    </td>*@
+     <td>
+         @Html.DisplayFor(item => item.Priority)
+     </td>
+     <td>
+     @Html.DisplayFor(item => item.Status)
+     <td>
+         @Html.DisplayFor(item => item.ApplicationUser.FirstName)
+     </td>
+     <td>
+         @Html.ActionLink("Edit", "Edit", new {id = Model.Id}, new {@class = "btn btn-success"}) |
+         @Html.ActionLink("Details", "Details", new {id = Model.Id}, new {@class = "btn btn-info"}) |
+         @Html.ActionLink("Delete", "Delete", new {id = Model.Id}, new {@class = "btn btn-danger"})
+     </td>
+ </tr>

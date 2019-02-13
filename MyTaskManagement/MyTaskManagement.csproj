@@ -357,6 +357,7 @@
     <Content Include="Views\Project\AddUserToProject.cshtml" />
     <Content Include="Views\Project\DeleteProject.cshtml" />
     <Content Include="Views\TTask\Create.cshtml" />
+    <Content Include="Views\Shared\_AllTaskPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
