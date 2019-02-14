@@ -31,6 +31,12 @@ namespace MyTaskManagement.Persistence.Repositories
         {
             return CuurentContext.Tasks.Include(task => task.ApplicationUser).Include(task => task.Project).ToList();
         }
+
+        public TTask GetTasksWithUserAndUserAndProject(int id)
+        {
+            return CuurentContext.Tasks.Where(task => task.Id == id).Include(task => task.Project)
+                .Include(task => task.ApplicationUser).SingleOrDefault();
+        }
     }
 }
 

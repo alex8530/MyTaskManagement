@@ -193,7 +193,7 @@
     <Compile Include="Core\Repositories\IProjectRepositry.cs" />
     <Compile Include="Core\Repositories\IUserRepositry.cs" />
     <Compile Include="Core\ViewModel\ProjectViewModels.cs" />
-    <Compile Include="Core\ViewModel\TaskViewModel .cs" />
+    <Compile Include="Core\ViewModel\TaskViewModel.cs" />
     <Compile Include="Core\ViewModel\UserViewModel.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -237,6 +237,10 @@
     <Compile Include="Migrations\201902122356120_removeReqProjectFromTask.cs" />
     <Compile Include="Migrations\201902122356120_removeReqProjectFromTask.Designer.cs">
       <DependentUpon>201902122356120_removeReqProjectFromTask.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902140922597_AllowTaskToBeNullInTaskTable.cs" />
+    <Compile Include="Migrations\201902140922597_AllowTaskToBeNullInTaskTable.Designer.cs">
+      <DependentUpon>201902140922597_AllowTaskToBeNullInTaskTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -358,6 +362,9 @@
     <Content Include="Views\Project\DeleteProject.cshtml" />
     <Content Include="Views\TTask\Create.cshtml" />
     <Content Include="Views\Shared\_AllTaskPartial.cshtml" />
+    <Content Include="Views\TTask\Edit.cshtml" />
+    <Content Include="Views\TTask\DeleteUserFromTask.cshtml" />
+    <Content Include="Views\TTask\AddUserToTask.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -403,6 +410,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201902122356120_removeReqProjectFromTask.resx">
       <DependentUpon>201902122356120_removeReqProjectFromTask.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902140922597_AllowTaskToBeNullInTaskTable.resx">
+      <DependentUpon>201902140922597_AllowTaskToBeNullInTaskTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

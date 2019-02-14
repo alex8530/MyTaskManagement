@@ -21,11 +21,12 @@ namespace MyTaskManagement.Controllers
         // GET: Project
         public ActionResult Index()
         {
+
+
+                var ProjectsWithClientAndUsers = _unitOfWork.ProjectRepositry.GetAllProjectsWithClientAndUsersAndTasks();
+                return View(ProjectsWithClientAndUsers);
              
 
-            //var projects = _unitOfWork.ProjectRepositry.GetAll();
-            var ProjectsWithClientAndUsers = _unitOfWork.ProjectRepositry.GetAllProjectsWithClientAndUsersAndTasks() ;
-            return View(ProjectsWithClientAndUsers);
         }
 
         // GET: Project/Details/5
@@ -40,7 +41,7 @@ namespace MyTaskManagement.Controllers
         public ActionResult Create()
         {
 
-            var viewmodel = new IndexViewModels()
+            var viewmodel = new IndexProjectViewModels()
             {
                  Project = new Project(),
                  Users = _unitOfWork.UserRepositry.GetAll().ToList(),
@@ -54,7 +55,7 @@ namespace MyTaskManagement.Controllers
         // POST: Project/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IndexViewModels  viewmodel, string __UserId__,string ClientId, int status )
+        public ActionResult Create(IndexProjectViewModels viewmodel, string __UserId__,string ClientId, int status )
         {
 
            
@@ -129,7 +130,7 @@ namespace MyTaskManagement.Controllers
         // GET: Project/Edit/5
         public ActionResult Edit(string id)
         {
-            var viewmodel = new EditViewModel()
+            var viewmodel = new IndexProjectViewModels()
             {
                 Project = _unitOfWork.ProjectRepositry.GetProjectsWithClientAndUsersAndTasks(id),
                 Users = _unitOfWork.UserRepositry.GetAll().ToList(),
@@ -172,15 +173,15 @@ namespace MyTaskManagement.Controllers
             }
         }
 
-        // GET: Project/DeleteUser/5
+        // GET: Project/DeleteUser/idUser/idProject
         public ActionResult DeleteUser(string idUser)
         {
             var deletedUser = _unitOfWork.UserRepositry.SingleOrDefault(user => user.Id == idUser);
             return View(deletedUser);
         }
-      
 
-        // POST: Project/DeleteUser/5
+
+        // POST: Project/DeleteUser/idUser/idProject
         [HttpPost]
         public ActionResult DeleteUser(string idUser, string idProject)
         {

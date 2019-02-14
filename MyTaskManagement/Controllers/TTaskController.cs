@@ -27,11 +27,13 @@ namespace MyTaskManagement.Controllers
             return View();
         }
 
+
+        
         // GET: TTask/Create
         //this is comming from project controller 
         public ActionResult Create(string id_current_project)
         {
-            var newTaskViewModel = new TaskViewModel()  
+            var newViewModel = new CreateTaskViewModel()   
             {
                 Task = new TTask()
                 {
@@ -42,7 +44,7 @@ namespace MyTaskManagement.Controllers
                 Users = _unitOfWork.UserRepositry.GetAll().ToList() 
             };
 
-            return View(newTaskViewModel);
+            return View(newViewModel);
         }
 
         // POST: TTask/Create
@@ -99,7 +101,14 @@ namespace MyTaskManagement.Controllers
         // GET: TTask/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+           
+
+            var vm = new EditTaskViewModel()
+            {
+                Users = _unitOfWork.UserRepositry.GetAll().ToList(),
+                Task = _unitOfWork.TTaskRepositry.GetTasksWithUserAndUserAndProject(id)
+            };
+            return View(vm);
         }
 
         // POST: TTask/Edit/5
@@ -139,5 +148,78 @@ namespace MyTaskManagement.Controllers
                 return View();
             }
         }
+
+
+
+        // GET: TTask/DeleteUserFromTask/idUser/
+        // GET: TTask/DeleteUserFromTask/idUser/idTask
+        public ActionResult DeleteUserFromTask(string idUser)
+        {
+
+            var deletedUser = _unitOfWork.UserRepositry.SingleOrDefault(user => user.Id == idUser);
+
+            return View(deletedUser);
+        }
+
+        // POST: TTask/DeleteUserFromTask/idUser/idTask
+        [HttpPost]
+        public ActionResult DeleteUserFromTask(string idUser, int idTask)
+        {
+            try
+            {
+                // TODO: Add delete logic here
+                var deletedUser = _unitOfWork.UserRepositry.SingleOrDefault(user => user.Id == idUser);
+                var task = _unitOfWork.TTaskRepositry.GetTasksWithUserAndUserAndProject(idTask);
+                //Note ,,, You must delete user from project table, not  from user table...
+
+                //task.ApplicationUser.Remove(deletedUser);
+               
+                //now , because we have one user , i will do that
+                task.ApplicationUser = null;
+                _unitOfWork.Complete();
+                return RedirectToAction("Edit", new { id = idTask });
+            }
+            catch (Exception exception)
+            {
+                return View();
+            }
+        }
+
+
+        // GET: TTask/AddUserToTask/idUser/
+        // GET: TTask/AddUserToTask/idUser/idTask
+        public ActionResult AddUserToTask(string idUser)
+        {
+
+            var addUser = _unitOfWork.UserRepositry.SingleOrDefault(user => user.Id == idUser);
+
+            return View(addUser);
+        }
+
+        // POST: TTask/AddUserToTask/idUser/idTask
+        [HttpPost]
+        public ActionResult AddUserToTask(string idUser, int idTask)
+        {
+            try
+            {
+                // TODO: Add delete logic here
+                var addedUser = _unitOfWork.UserRepositry.SingleOrDefault(user => user.Id == idUser);
+                var task = _unitOfWork.TTaskRepositry.GetTasksWithUserAndUserAndProject(idTask);
+               
+                task.ApplicationUser = new ApplicationUser();
+                task.ApplicationUser = addedUser;
+
+                _unitOfWork.Complete();
+                return RedirectToAction("Edit", new { id = idTask });
+            }
+            catch (Exception exception)
+            {
+                return View();
+            }
+        }
+
+
+ 
     }
+
 }

@@ -41,7 +41,7 @@ namespace MyTaskManagement.Models
         public int OverTime { get; set; }
 
 
-        [Required]
+        //[Required]
         public ApplicationUser ApplicationUser { get; set; }
 
         //[Required]

@@ -51,12 +51,12 @@ namespace MyTaskManagement.Models
         {
         }
 
+
         public DbSet<Project> Projects { get; set; }
-        public DbSet<TTask>  Tasks { get; set; }
+         public DbSet<TTask>  Tasks { get; set; }
         public DbSet<Client> Clients { get; set; }
         public DbSet<Financialstatus> Financialstatuses { get; set; }
-        //public DbSet<ApplicationUser> ApplicationUser { get; set; }
-       
+        
 
         public static ApplicationDbContext Create()
         {
@@ -65,8 +65,7 @@ namespace MyTaskManagement.Models
             return new ApplicationDbContext();
         }
 
-       
-      
+     
 
     }
 }
