@@ -113,11 +113,21 @@ namespace MyTaskManagement.Controllers
 
         // POST: TTask/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, TTask  task)
         {
             try
             {
                 // TODO: Add update logic here
+                var oldTask = _unitOfWork.TTaskRepositry.GetTasksWithUserAndUserAndProject(id);
+                oldTask.Priority = task.Priority;
+                oldTask.Status= task.Status;
+                oldTask.StartTime = task.StartTime;
+                oldTask.DeadTime= task.DeadTime;
+                oldTask.Description = task.Description;
+
+
+                _unitOfWork.Complete();
+
 
                 return RedirectToAction("Index");
             }
