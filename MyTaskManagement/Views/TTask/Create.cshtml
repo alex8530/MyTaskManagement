@@ -7,7 +7,7 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<h2>Create Task</h2>
 
 
 @using (Html.BeginForm())
@@ -18,7 +18,7 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>TTask</h4>
+    
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -68,15 +68,37 @@
                 @Html.ValidationMessageFor(model => model.Task.OverTime, "", new { @class = "text-danger" })
             </div>
         </div>
+        @if (@ViewBag.fromTask.Equals("yes"))
+        {
+            <div class="form-group">
+                <label class="control-label col-md-2  " for="__ProjectId__">Project</label>
+                <select name="__ProjectId__" class="col-md-10 form-control " >
+                    <option value="" disabled selected>Choose A Project</option>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Task.ProjectId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Task.ProjectId, new { htmlAttributes = new { @class = "form-control" , @disabled = "disabled" } })
-                @Html.ValidationMessageFor(model => model.Task.ProjectId, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                    @foreach (var p in Model.Projects)
+                    {
+
+                        <option value="@p.Id">@p.Name</option>
+
+                    }
+
+                </select>
+            </div> 
+    
         
+        }
+        else
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.Task.ProjectId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Task.ProjectId, new { htmlAttributes = new { @class = "form-control" , @disabled = "disabled" } })
+                    @Html.ValidationMessageFor(model => model.Task.ProjectId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        
+        }
+      
         
         <div class="form-group">
             <label class="control-label col-md-2 "  >Status</label>

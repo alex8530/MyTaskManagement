@@ -15,6 +15,7 @@ namespace MyTaskManagement.Core.ViewModel
         
         //we pass here list DayOfWeek user , to show all users in DBNull and let user choose one from select
         public IEnumerable<ApplicationUser> Users { get; set; }
+        public IEnumerable<Project>Projects{ get; set; }
      
 
 
