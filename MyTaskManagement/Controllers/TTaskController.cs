@@ -24,7 +24,9 @@ namespace MyTaskManagement.Controllers
         // GET: TTask/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var task = _unitOfWork.TTaskRepositry.GetTasksWithUserAndUserAndProject(id);
+
+            return View(task);
         }
 
 

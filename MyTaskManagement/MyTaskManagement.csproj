@@ -365,6 +365,7 @@
     <Content Include="Views\TTask\Edit.cshtml" />
     <Content Include="Views\TTask\DeleteUserFromTask.cshtml" />
     <Content Include="Views\TTask\AddUserToTask.cshtml" />
+    <Content Include="Views\TTask\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
