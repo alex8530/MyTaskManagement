@@ -24,7 +24,7 @@ namespace MyTaskManagement.Core.Domain
         
         public ApplicationUser User { get; set; }
          
-        [Required]//this is because Financialstatus depend on Task
-        public TTask Task { get; set; }
+        //[Required]//this is because Financialstatus depend on Task
+        //public TTask Task { get; set; }
     }
 }

@@ -142,7 +142,9 @@ namespace MyTaskManagement.Controllers
         // GET: TTask/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var task = _unitOfWork.TTaskRepositry.GetTasksWithUserAndUserAndProject(id);
+
+            return View(task);
         }
 
         // POST: TTask/Delete/5
@@ -152,10 +154,12 @@ namespace MyTaskManagement.Controllers
             try
             {
                 // TODO: Add delete logic here
-
+                var task = _unitOfWork.TTaskRepositry.GetTasksWithUserAndUserAndProject(id);
+                _unitOfWork.TTaskRepositry.Remove(task);
+                _unitOfWork.Complete();
                 return RedirectToAction("Index");
             }
-            catch
+            catch (Exception exception)
             {
                 return View();
             }

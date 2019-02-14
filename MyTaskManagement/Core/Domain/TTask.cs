@@ -53,7 +53,7 @@ namespace MyTaskManagement.Models
         public string ProjectId { get; set; }
 
 
-        public Financialstatus  Financialstatus { get; set; }
+        //public Financialstatus  Financialstatus { get; set; }
 
          
     }

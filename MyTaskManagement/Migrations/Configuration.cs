@@ -374,36 +374,36 @@ namespace MyTaskManagement.Migrations
             tasks.ForEach(t => context.Tasks.AddOrUpdate(task => task.Id, t));
             context.SaveChanges();
 
-            //Add Finanitail status 
-            var finanitail = new List<Financialstatus>()
-            {
-                new Financialstatus()
-                {
-                    Bonus = 5,
-                    OTH_Rate = 4,
-                    OTHours = 6,
-                    Total = 5+4+6,
-                    W_Hours = 15,
-                    Wh_Rate = 33,
-                    Task = tasks[0],
-                    User = context.Users.FirstOrDefault(user => user.FirstName=="Alex")
+            ////Add Finanitail status 
+            //var finanitail = new List<Financialstatus>()
+            //{
+            //    new Financialstatus()
+            //    {
+            //        Bonus = 5,
+            //        OTH_Rate = 4,
+            //        OTHours = 6,
+            //        Total = 5+4+6,
+            //        W_Hours = 15,
+            //        Wh_Rate = 33,
+            //        Task = tasks[0],
+            //        User = context.Users.FirstOrDefault(user => user.FirstName=="Alex")
 
-                },
-                new Financialstatus()
-                {
-                    Bonus = 4,
-                    OTH_Rate = 4,
-                    OTHours = 4,
-                    Total = 4+4+4,
-                    W_Hours = 4,
-                    Wh_Rate = 43,
-                    Task = tasks[2],
-                    User = context.Users.FirstOrDefault(user => user.FirstName=="Admin")
+            //    },
+            //    new Financialstatus()
+            //    {
+            //        Bonus = 4,
+            //        OTH_Rate = 4,
+            //        OTHours = 4,
+            //        Total = 4+4+4,
+            //        W_Hours = 4,
+            //        Wh_Rate = 43,
+            //        Task = tasks[2],
+            //        User = context.Users.FirstOrDefault(user => user.FirstName=="Admin")
 
-                }
-            };
-            finanitail.ForEach(f => context.Financialstatuses.AddOrUpdate(financialstatus => financialstatus.Id, f));
-            context.SaveChanges();
+            //    }
+            //};
+            //finanitail.ForEach(f => context.Financialstatuses.AddOrUpdate(financialstatus => financialstatus.Id, f));
+            //context.SaveChanges();
 
 
         }

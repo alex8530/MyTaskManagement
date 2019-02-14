@@ -51,7 +51,7 @@ namespace MyTaskManagement.Models
         {
         }
 
-
+  
         public DbSet<Project> Projects { get; set; }
          public DbSet<TTask>  Tasks { get; set; }
         public DbSet<Client> Clients { get; set; }
