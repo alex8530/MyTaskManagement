@@ -17,7 +17,7 @@
                 @Html.DisplayNameFor(model => model.FirstName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Email)
+                @Html.DisplayNameFor(model => model.JopTitle)
             </th>
             <th>
                 <p>Projects</p>
@@ -31,15 +31,7 @@
                 <p>Done</p>
 
             </th>
-            @*<th>
-                @Html.DisplayNameFor(model => model.)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>*@
+         
             <th></th>
         </tr>
     </thead>
@@ -54,7 +46,7 @@
                 @Html.DisplayFor(modelItem => item.FirstName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Email)
+                @Html.DisplayFor(modelItem => item.JopTitle)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Projects.Count)

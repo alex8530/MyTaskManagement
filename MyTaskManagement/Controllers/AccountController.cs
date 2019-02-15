@@ -158,7 +158,10 @@ namespace MyTaskManagement.Controllers
                     Email = model.Email,
                     FirstName = model.FirstName,
                     LastName = model.LastName,
-                    IsAcceptedOnCondition = model.IsAcceptedOnCondition
+                    IsAcceptedOnCondition = model.IsAcceptedOnCondition,
+                    HourlyRate = model.HourlyRate,
+                    O_T_H_Rate = model.O_T_H_Rate,
+                    JopTitle = model.JopTitle
                 };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
@@ -171,7 +174,7 @@ namespace MyTaskManagement.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("ListUser", "User");
                 }
                 AddErrors(result);
             }

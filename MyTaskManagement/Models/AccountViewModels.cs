@@ -97,6 +97,20 @@ namespace MyTaskManagement.Models
         public string ConfirmPassword { get; set; }
 
 
+        [Required]
+        [StringLength(100)]
+        public string JopTitle { get; set; }
+
+
+        [Required]
+        public double HourlyRate { get; set; }
+
+
+
+        [Required]
+        public double O_T_H_Rate { get; set; }
+
+
     }
 
     public class ResetPasswordViewModel

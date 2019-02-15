@@ -25,6 +25,20 @@ namespace MyTaskManagement.Models
         [StringLength(255)]
         public string LastName { get; set; }
 
+       
+        [Required]
+        [StringLength(100)]
+        public string JopTitle { get; set; }
+
+        
+        [Required]
+        public double HourlyRate { get; set; }
+
+
+
+        [Required]
+        public double O_T_H_Rate { get; set; }
+
         
 
         public ICollection<Project> Projects { get; set; }
@@ -65,7 +79,6 @@ namespace MyTaskManagement.Models
             return new ApplicationDbContext();
         }
 
-     
-
+       
     }
 }

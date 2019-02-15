@@ -178,6 +178,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProjectController.cs" />
@@ -245,6 +246,10 @@
     <Compile Include="Migrations\201902141912174_RemoveRelationTaskAndFinanitalState.cs" />
     <Compile Include="Migrations\201902141912174_RemoveRelationTaskAndFinanitalState.Designer.cs">
       <DependentUpon>201902141912174_RemoveRelationTaskAndFinanitalState.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902151827130_Add3ColumnToApplicationTable.cs" />
+    <Compile Include="Migrations\201902151827130_Add3ColumnToApplicationTable.Designer.cs">
+      <DependentUpon>201902151827130_Add3ColumnToApplicationTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -371,9 +376,13 @@
     <Content Include="Views\TTask\AddUserToTask.cshtml" />
     <Content Include="Views\TTask\Details.cshtml" />
     <Content Include="Views\TTask\Delete.cshtml" />
+    <Content Include="Views\User\Edit.cshtml" />
+    <Content Include="Views\User\Details.cshtml" />
+    <Content Include="Views\User\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Home\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -422,6 +431,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201902141912174_RemoveRelationTaskAndFinanitalState.resx">
       <DependentUpon>201902141912174_RemoveRelationTaskAndFinanitalState.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902151827130_Add3ColumnToApplicationTable.resx">
+      <DependentUpon>201902151827130_Add3ColumnToApplicationTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

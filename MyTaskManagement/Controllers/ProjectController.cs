@@ -203,7 +203,7 @@ namespace MyTaskManagement.Controllers
             }
         }
 
-        // GET: Project/DeleteProject/5
+        // GET: Project/DeleteProject/asdasd
         public ActionResult DeleteProject(string id)
         {
             var deletedProject = _unitOfWork.ProjectRepositry.SingleOrDefault(project => project.Id == id);

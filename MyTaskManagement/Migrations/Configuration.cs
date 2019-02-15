@@ -458,6 +458,9 @@ namespace MyTaskManagement.Migrations
                 FirstName = "Admin",
                 LastName = "Abu Admin",
                 IsAcceptedOnCondition = true,
+                JopTitle = "SuperAdmin , Co-Founder & CTO",
+                O_T_H_Rate = 4,
+                HourlyRate = 7.9
                 
             };
            var chkUser1= userManager.Create(user1, "123123");
@@ -475,7 +478,10 @@ namespace MyTaskManagement.Migrations
                 Email = "Alex@Alex.com",
                 FirstName = "Alex",
                 LastName = "Abu Alex",
-                IsAcceptedOnCondition = true
+                IsAcceptedOnCondition = true,
+                JopTitle = "ProjectManager , Android Developer",
+                O_T_H_Rate = 2.6,
+                HourlyRate = 5.9
             };
             var chkUser2  = userManager.Create(user2, "123123");
             //Add default User to Role ProjectManager  
@@ -493,7 +499,11 @@ namespace MyTaskManagement.Migrations
                 Email = "Ahmed@Ahmed.com",
                 FirstName = "Ahmed",
                 LastName = "Abu Ahmed",
-                IsAcceptedOnCondition = true
+                IsAcceptedOnCondition = true,
+                JopTitle = " Front-end Developer",
+                O_T_H_Rate =8,
+                HourlyRate = 2.9
+
             };
  
             var chkUser3 = userManager.Create(user3, "123123");
@@ -511,7 +521,12 @@ namespace MyTaskManagement.Migrations
                 Email = "Sameer@Sameer.com",
                 FirstName = "Sameer",
                 LastName = "Abu Sameer",
-                IsAcceptedOnCondition = true
+                IsAcceptedOnCondition = true,
+                JopTitle = " Back-end Developer",
+                O_T_H_Rate = 44,
+                HourlyRate = 29.6
+
+
             };
 
             var chkUser4 = userManager.Create(user4, "123123");
@@ -529,7 +544,12 @@ namespace MyTaskManagement.Migrations
                 Email = "FoFo@FoFo.com",
                 FirstName = "FoFo",
                 LastName = "Abu FoFo",
-                IsAcceptedOnCondition = true
+                IsAcceptedOnCondition = true,
+                JopTitle = " Graghic Designer",
+                O_T_H_Rate = 0.9,
+                HourlyRate = 5.8
+
+
             };
  
             var chkUser5 = userManager.Create(user5, "123123");

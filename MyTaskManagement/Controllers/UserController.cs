@@ -37,10 +37,10 @@ namespace MyTaskManagement.Controllers
         }
  
 
-        // GET: Employee/Details/5
-        public ActionResult Details(int id)
+        // GET: Employee/Details/fdsfdsfdsf
+        public ActionResult Details(string id)
         {
-            return View();
+            return View(_unitOfWork.UserRepositry.SingleOrDefault(user => user.Id == id));
         }
 
         // GET: Employee/Create
@@ -66,44 +66,65 @@ namespace MyTaskManagement.Controllers
         }
 
         // GET: Employee/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(string id)
         {
-            return View();
+            var editUser = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRoles(id);
+
+            return View(editUser);
         }
 
         // POST: Employee/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(string id, ApplicationUser model)
         {
             try
             {
-                // TODO: Add update logic here
+                if (ModelState.IsValid)
+                {
 
-                return RedirectToAction("Index");
+                    var oldUser = _unitOfWork.UserRepositry.SingleOrDefault(user => user.Id== id);
+                    oldUser.FirstName =model.FirstName ;
+                    oldUser.LastName = model.LastName;
+                    oldUser.JopTitle = model.JopTitle;
+                    oldUser.HourlyRate = model.HourlyRate;
+                    oldUser.O_T_H_Rate = model.O_T_H_Rate;
+                    oldUser.UserName = model.UserName;
+                    oldUser.Email = model.Email;
+                    
+
+                    _unitOfWork.Complete();
+
+                }
+
+
+                return RedirectToAction("ListUser");
             }
-            catch
+            catch(Exception exception)
             {
-                return View();
+                return View( model);
             }
         }
 
-        // GET: Employee/Delete/5
-        public ActionResult Delete(int id)
+        // GET: Employee/Delete/asdasd
+        public ActionResult Delete(string id)
         {
-            return View();
+          
+
+            return View(_unitOfWork.UserRepositry.SingleOrDefault(user => user.Id == id));
         }
 
-        // POST: Employee/Delete/5
+        // POST: Employee/Delete/asdasd
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(string id, ApplicationUser  model)
         {
             try
             {
-                // TODO: Add delete logic here
+                var deleteUser = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRoles(id);
+                _unitOfWork.UserRepositry.Remove(deleteUser);
 
-                return RedirectToAction("Index");
+                return RedirectToAction("ListUser");
             }
-            catch
+            catch 
             {
                 return View();
             }
