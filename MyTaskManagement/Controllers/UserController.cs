@@ -31,21 +31,9 @@ namespace MyTaskManagement.Controllers
         public ActionResult ListUser()
         {
 
-            var listUser = _unitOfWork.UserRepositry.GetAll();
-
-            var listUserViewModel = new List<ListUserViewModel>();
-         
-
-            foreach (var user in listUser)
-            {
-                listUserViewModel.Add(new ListUserViewModel()
-                {
-                    Id = user.Id,
-                    Email = user.Email,
-                    FirstName = user.UserName
-                });
-            }
-            return View(listUserViewModel);
+            var listUser = _unitOfWork.UserRepositry.GetAllUsersWithProjectsAndTasksAndRoles();
+ 
+            return View(listUser);
         }
  
 

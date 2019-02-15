@@ -28,6 +28,18 @@ namespace MyTaskManagement.Persistence.Repositories
         {
             get { return Context as ApplicationDbContext; }
         }
+
+        public IEnumerable<ApplicationUser> GetAllUsersWithProjectsAndTasksAndRoles()
+        {
+            return CuurentContext.Users.Include(user => user.Tasks)
+                .Include(user => user.Projects).Include(user => user.Roles).ToList();
+        }
+
+        public  ApplicationUser  GetUserWithProjectsAndTasksAndRoles(string id)
+        {
+            return CuurentContext.Users.Where(user => user.Id == id).Include(user => user.Tasks)
+                .Include(user => user.Projects).Include(user => user.Roles).SingleOrDefault();
+        }
     }
 }
 

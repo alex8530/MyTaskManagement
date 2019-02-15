@@ -95,13 +95,26 @@ namespace MyTaskManagement.Controllers
                  //var id_current_project = Request.Form["id_current_project"];
 
                 
-                var user = _unitOfWork.UserRepositry.SingleOrDefault(u => u.Id == ui);
-               //var project = _unitOfWork.ProjectRepositry.SingleOrDefault(pp => pp.Id == id_current_project);
-                var dbContext= new ApplicationDbContext();
+                //var user = _unitOfWork.UserRepositry.SingleOrDefault(u => u.Id == ui);
+                var user = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRoles( ui);
+
+                /*
+                 * Very important here
+                 *when you add task to project .. the task must be have user ..
+                 * and then when you add task to poject ..you must add this project to user !!
+                 *
+                 *
+                 *
+                 */
+                //var project = _unitOfWork.ProjectRepositry.SingleOrDefault(pp => pp.Id == id_current_project);
+                var dbContext = new ApplicationDbContext();
 
                 if (id_current_project.IsNullOrWhiteSpace())
                 {
                     //thats mean we will create new task from out side project , no will be project id as forign_key
+
+                     
+
                     var newTask = new TTask()
                     {
                         ProjectId = pi,
@@ -118,13 +131,24 @@ namespace MyTaskManagement.Controllers
                         //, but if you need to add project object , you must init it
 
                     };
-                   
+
+
+                    //will add project to user to increse number of projects thats user work on
+                    var pro = _unitOfWork.ProjectRepositry.SingleOrDefault(p => p.Id == pi);
+
+                    if (!user.Projects.Contains(pro))
+                    {
+                        user.Projects.Add(pro);
+
+                    }
                     _unitOfWork.TTaskRepositry.Add(newTask);
                     _unitOfWork.Complete();
 
                 }
                 else
                 {
+
+
                     var newTask = new TTask()
                     {
                         ProjectId = id_current_project,
@@ -141,7 +165,15 @@ namespace MyTaskManagement.Controllers
                         //, but if you need to add project object , you must init it
 
                     };
-                    //newTask.Project = project;
+
+
+                    var pro = _unitOfWork.ProjectRepositry.SingleOrDefault(p => p.Id == id_current_project);
+                   
+                        if (!user.Projects.Contains(pro))
+                        {
+                          user.Projects.Add(pro);
+
+                        }
 
 
                     _unitOfWork.TTaskRepositry.Add(newTask);

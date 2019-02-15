@@ -1,39 +1,93 @@
-﻿@model IEnumerable<MyTaskManagement.Core.ViewModel.ListUserViewModel>
+﻿@using MyTaskManagement.Models
+@model IEnumerable<MyTaskManagement.Models.ApplicationUser>
 
 @{
     ViewBag.Title = "ListUser";
 }
 
-<h2>ListUser</h2>
+<h2>All Users</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create", "User", "", new { @class = "btn btn-success" })
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-        <th></th>
-    </tr>
+<table class="table" id="listUsers">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                <p>Projects</p>
+            </th>
+            <th>
+                <p>Tasks</p>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.FirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+            </th>
+            <th>
+
+                <p>Done</p>
+
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>*@
+            <th></th>
+        </tr>
+    </thead>
+  
+  
+    <tbody>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Projects.Count)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tasks.Count)
+            </td>
+            @{
+                var numTaskDone = item.Tasks.Where(task => task.Status == StatusEnum.Ended).ToList().Count;
+                <td>
+                    @Html.DisplayFor(modelItem =>  numTaskDone)
+                </td>
+            }
+           
+                
+            <td>
+                @Html.ActionLink("Edit", "Edit", new {id = item.Id}, new {@class = "btn btn-success"}) |
+                @Html.ActionLink("Details", "Details", new {id = item.Id}, new {@class = "btn btn-info"}) |
+                @Html.ActionLink("Delete", "Delete", new {id = item.Id}, new {@class = "btn btn-danger"})
+            </td>
+        </tr>
+    }
+    </tbody>
+   
 
 </table>
+@section scripts
+{
+
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#listUsers").dataTable();
+        });
+    </script>
+}

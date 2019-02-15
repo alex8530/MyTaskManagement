@@ -297,82 +297,89 @@ namespace MyTaskManagement.Migrations
             projects.ForEach(p => context.Projects.AddOrUpdate(project => project.Id, p));
             context.SaveChanges();
 
-            //Add Task
-            var tasks = new List<TTask>()
-            {
-                new TTask()
-                {
-                    Name = "Task 0" ,
-                    Priority = PriorityEnum.High,
-                    Status = StatusEnum.InProgress,
-                    StartTime = DateTime.Now,
-                    DeadTime = DateTime.Now.AddHours(20),
-                    Description = "This is Description for this task 0",
-                    WorkingHours = 3,
-                    OverTime = 2,
-                    ApplicationUser = context.Users.SingleOrDefault(user => user.FirstName =="Alex"),
-                    Project = projects[0]
+            ////Add Task
+            ////after add task with user and  project ,, we should add this project in user
+            ////because this task work under project of that user OR DELETE THIS TASKS AND CREATE MANUALLY 
+            //var tasks = new List<TTask>()
+            //{
+            //    new TTask()
+            //    {
+            //        Name = "Task 0" ,
+            //        Priority = PriorityEnum.High,
+            //        Status = StatusEnum.InProgress,
+            //        StartTime = DateTime.Now,
+            //        DeadTime = DateTime.Now.AddHours(20),
+            //        Description = "This is Description for this task 0",
+            //        WorkingHours = 3,
+            //        OverTime = 2,
+            //        ApplicationUser = context.Users.SingleOrDefault(user => user.FirstName =="Alex"),
+            //        Project = projects[0]
 
-                },
-                new TTask()
-                {
-                    Name = "Task 1" ,
-                    Priority = PriorityEnum.High,
-                    Status = StatusEnum.Ended,
-                    StartTime = DateTime.Now,
-                    DeadTime = DateTime.Now.AddHours(21),
-                    Description = "This is Description for this task 1",
-                    WorkingHours = 1,
-                    OverTime = 44,
-                    ApplicationUser = context.Users.SingleOrDefault(user => user.FirstName =="Alex"),
-                    Project = projects[0]
+            //    },
+            //    new TTask()
+            //    {
+            //        Name = "Task 1" ,
+            //        Priority = PriorityEnum.High,
+            //        Status = StatusEnum.Ended,
+            //        StartTime = DateTime.Now,
+            //        DeadTime = DateTime.Now.AddHours(21),
+            //        Description = "This is Description for this task 1",
+            //        WorkingHours = 1,
+            //        OverTime = 44,
+            //        ApplicationUser = context.Users.SingleOrDefault(user => user.FirstName =="Alex"),
+            //        Project = projects[0]
 
-                },
-                new TTask()
-                {
-                    Name = "Task 2" ,
-                    Priority = PriorityEnum.Low,
-                    Status = StatusEnum.InProgress,
-                    StartTime = DateTime.Now,
-                    DeadTime = DateTime.Now.AddHours(20),
-                    Description = "This is Description for this task 2",
-                    WorkingHours = 33,
-                    OverTime = 32,
-                    ApplicationUser = context.Users.SingleOrDefault(user => user.FirstName =="Alex"),
-                    Project = projects[1]
+            //    },
+            //    new TTask()
+            //    {
+            //        Name = "Task 2" ,
+            //        Priority = PriorityEnum.Low,
+            //        Status = StatusEnum.InProgress,
+            //        StartTime = DateTime.Now,
+            //        DeadTime = DateTime.Now.AddHours(20),
+            //        Description = "This is Description for this task 2",
+            //        WorkingHours = 33,
+            //        OverTime = 32,
+            //        ApplicationUser = context.Users.SingleOrDefault(user => user.FirstName =="Alex"),
+            //        Project = projects[1]
 
-                },
-                new TTask()
-                {
-                    Name = "Task 3" ,
-                    Priority = PriorityEnum.High,
-                    Status = StatusEnum.InProgress,
-                    StartTime = DateTime.Now,
-                    DeadTime = DateTime.Now.AddHours(20),
-                    Description = "This is Description for this task 3",
-                    WorkingHours = 3,
-                    OverTime = 33,
-                    ApplicationUser = context.Users.SingleOrDefault(user => user.FirstName =="Admin"),
-                    Project = projects[2]
+            //    },
+            //    new TTask()
+            //    {
+            //        Name = "Task 3" ,
+            //        Priority = PriorityEnum.High,
+            //        Status = StatusEnum.InProgress,
+            //        StartTime = DateTime.Now,
+            //        DeadTime = DateTime.Now.AddHours(20),
+            //        Description = "This is Description for this task 3",
+            //        WorkingHours = 3,
+            //        OverTime = 33,
+            //        ApplicationUser = context.Users.SingleOrDefault(user => user.FirstName =="Admin"),
+            //        Project = projects[2]
 
-                },
-                new TTask()
-                {
-                    Name = "Task 4" ,
-                    Priority = PriorityEnum.High,
-                    Status = StatusEnum.Not_Start,
-                    StartTime = DateTime.Now,
-                    DeadTime = DateTime.Now.AddHours(24),
-                    Description = "This is Description for this task4",
-                    WorkingHours = 4,
-                    OverTime = 44,
-                    ApplicationUser = context.Users.SingleOrDefault(user => user.FirstName =="Admin"),
-                    Project = projects[0]
+            //    },
+            //    new TTask()
+            //    {
+            //        Name = "Task 4" ,
+            //        Priority = PriorityEnum.High,
+            //        Status = StatusEnum.Not_Start,
+            //        StartTime = DateTime.Now,
+            //        DeadTime = DateTime.Now.AddHours(24),
+            //        Description = "This is Description for this task4",
+            //        WorkingHours = 4,
+            //        OverTime = 44,
+            //        ApplicationUser = context.Users.SingleOrDefault(user => user.FirstName =="Admin"),
+            //        Project = projects[0]
 
-                }
-            };
-            tasks.ForEach(t => context.Tasks.AddOrUpdate(task => task.Id, t));
-            context.SaveChanges();
+            //    }
+            //};
+
+             
+            //tasks.ForEach(t => context.Tasks.AddOrUpdate(task => task.Id, t));
+            //context.SaveChanges();
+
+           
+
 
             ////Add Finanitail status 
             //var finanitail = new List<Financialstatus>()
@@ -450,7 +457,8 @@ namespace MyTaskManagement.Migrations
                 Email = "Admin@Admin.com",
                 FirstName = "Admin",
                 LastName = "Abu Admin",
-                IsAcceptedOnCondition = true
+                IsAcceptedOnCondition = true,
+                
             };
            var chkUser1= userManager.Create(user1, "123123");
 
