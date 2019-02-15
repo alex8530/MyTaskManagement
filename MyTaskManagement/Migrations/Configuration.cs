@@ -485,7 +485,7 @@ namespace MyTaskManagement.Migrations
             };
             var chkUser2  = userManager.Create(user2, "123123");
             //Add default User to Role ProjectManager  
-            if (chkUser1.Succeeded)
+            if (chkUser2.Succeeded)
             {
                 var result1 = userManager.AddToRole(user2.Id, "ProjectManager");
 
@@ -508,7 +508,7 @@ namespace MyTaskManagement.Migrations
  
             var chkUser3 = userManager.Create(user3, "123123");
             //Add default User to Role Employee  
-            if (chkUser1.Succeeded)
+            if (chkUser3.Succeeded)
             {
                 var result1 = userManager.AddToRole(user3.Id, "Employee");
 
@@ -531,7 +531,7 @@ namespace MyTaskManagement.Migrations
 
             var chkUser4 = userManager.Create(user4, "123123");
             //Add default User to Role Employee  
-            if (chkUser1.Succeeded)
+            if (chkUser4.Succeeded)
             {
                 var result1 = userManager.AddToRole(user4.Id, "Employee");
 
@@ -554,7 +554,7 @@ namespace MyTaskManagement.Migrations
  
             var chkUser5 = userManager.Create(user5, "123123");
             //Add default User to Role Employee  
-            if (chkUser1.Succeeded)
+            if (chkUser5.Succeeded)
             {
                 var result1 = userManager.AddToRole(user5.Id, "Employee");
 

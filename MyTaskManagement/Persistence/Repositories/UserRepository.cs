@@ -6,6 +6,9 @@ using System.Web;
 using MyTaskManagement.Models;
 using System.Linq.Expressions;
 using System.Data.Entity;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using MyTaskManagement.Core;
 
 namespace MyTaskManagement.Persistence.Repositories
 {
@@ -18,15 +21,31 @@ namespace MyTaskManagement.Persistence.Repositories
         public UserRepository(ApplicationDbContext context)
             : base(context)
         {
+            
 
         }
-
-         
-
 
         public ApplicationDbContext CuurentContext
         {
             get { return Context as ApplicationDbContext; }
+        }
+       
+
+        public void AddUser(ApplicationUser user, string pass)
+        {
+             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(CuurentContext));
+             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(CuurentContext));
+
+
+            var chkUser = userManager.Create(user, pass);
+            //Add default User to Role ProjectManager  
+            if (chkUser.Succeeded)
+            {
+                //by default , will be employee , and then the admin can change the role..
+                var result1 = userManager.AddToRole(user.Id, ConstantsRolesNames.Employee);
+
+            }
+
         }
 
         public IEnumerable<ApplicationUser> GetAllUsersWithProjectsAndTasksAndRoles()

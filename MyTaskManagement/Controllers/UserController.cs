@@ -46,18 +46,34 @@ namespace MyTaskManagement.Controllers
         // GET: Employee/Create
         public ActionResult Create()
         {
-            return View();
+            return View(new RegisterViewModel());
         }
 
         // POST: Employee/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(RegisterViewModel  model)
         {
             try
             {
                 // TODO: Add insert logic here
 
-                return RedirectToAction("Index");
+                var newUser = new ApplicationUser
+                {
+                    UserName = model.UserName,
+                    Email = model.Email,
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    IsAcceptedOnCondition = model.IsAcceptedOnCondition,
+                    JopTitle = model.JopTitle,
+                    O_T_H_Rate = model.O_T_H_Rate,
+                    HourlyRate = model.HourlyRate
+
+
+                };
+                _unitOfWork.UserRepositry.AddUser(newUser,model.Password);
+                _unitOfWork.Complete();
+
+                return RedirectToAction("ListUser");
             }
             catch
             {
