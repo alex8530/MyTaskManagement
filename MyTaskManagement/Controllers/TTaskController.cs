@@ -48,8 +48,8 @@ namespace MyTaskManagement.Controllers
                     Task = new TTask()
                     {
                          
-                        StartTime = DateTime.Now //this is defult time
-
+                        StartTime = DateTime.Now, //this is defult time
+                        DeadTime = DateTime.Now.AddDays(3)  
                     },
                     Users = _unitOfWork.UserRepositry.GetAll().ToList(),
                     Projects = _unitOfWork.ProjectRepositry.GetAll().ToList() 

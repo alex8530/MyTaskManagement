@@ -10,14 +10,14 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-      
+
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
 
-     
+
 
 
         <div class="form-group">
@@ -60,7 +60,7 @@
             </div>
         </div>
 
-  
+
 
         <div class="form-group">
             @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -69,8 +69,8 @@
                 @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
             </div>
         </div>
-       
-    
+
+
 
         <div class="form-group">
             @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -88,10 +88,118 @@
     </div>
 }
 
+
+
+
+
+<div>
+    @*@Html.ActionLink("Add Task", "Create", "TTask", new { id_current_project = Model.Project.Id }, htmlAttributes: new { @class = "btn btn-warning" })*@
+</div>
+
+ 
+<table class="table" id="listTask">
+    <thead>
+        <tr>
+            <th>
+                <p>TaskId</p>
+            </th>
+            <th>
+             <p>TaskName</p>
+            </th>
+            <th>
+                <p>Project_Id</p>
+
+            </th> 
+            
+            <th>
+                <p><p>StartTime</p></p>
+
+            </th> 
+            <th>
+                <p>DeadTime</p>
+
+            </th> 
+            <th>
+                <p>Description</p>
+
+            </th>  
+            
+            <th>
+                <p>Priority</p>
+
+            </th> 
+            
+            <th>
+                <p>Status</p>
+
+            </th>
+           
+            
+            <th>
+                <p>Assignee</p>
+            </th>
+            <th></th> <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Tasks.ToList())
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Project.Id)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DeadTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Priority)
+                </td>
+
+                <td>
+                @Html.DisplayFor(modelItem => item.Status)
+                <td>
+                    @Html.DisplayFor(modelItem => item.ApplicationUser.FirstName)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", "TTask", new {id = item.Id}, new {@class = "btn btn-success"}) |
+                    @Html.ActionLink("Details", "Details", "TTask", new {id = item.Id}, new {@class = "btn btn-info"}) |
+                    @Html.ActionLink("Delete", "Delete", "TTask", new {id = item.Id}, new {@class = "btn btn-danger"})
+                </td>
+            </tr>
+        }
+    </tbody>
+
+
+</table>
+
+
+
 <div>
     @Html.ActionLink("Back to List", "ListUser")
 </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#listTask").dataTable();
+        });
+    </script>
 }
+ 

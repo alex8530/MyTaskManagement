@@ -40,7 +40,7 @@ namespace MyTaskManagement.Controllers
         // GET: Employee/Details/fdsfdsfdsf
         public ActionResult Details(string id)
         {
-            return View(_unitOfWork.UserRepositry.SingleOrDefault(user => user.Id == id));
+            return View(_unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRoles(id));
         }
 
         // GET: Employee/Create
@@ -121,7 +121,7 @@ namespace MyTaskManagement.Controllers
             {
                 var deleteUser = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRoles(id);
                 _unitOfWork.UserRepositry.Remove(deleteUser);
-
+                _unitOfWork.Complete();
                 return RedirectToAction("ListUser");
             }
             catch 

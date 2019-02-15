@@ -1,4 +1,5 @@
-﻿@model MyTaskManagement.Models.ApplicationUser
+﻿@using MyTaskManagement.Models
+@model MyTaskManagement.Models.ApplicationUser
 
 @{
     ViewBag.Title = "Details";
@@ -66,7 +67,36 @@
         <dd>
             @Html.DisplayFor(model => model.O_T_H_Rate)
         </dd>
+     
+        <dt>
+           <p>Projects</p>
+        </dt>
 
+        <dd>
+            @Html.DisplayFor(model => model.Projects.Count)
+        </dd>
+        <dt>
+           <p>Tasks</p>
+        </dt>   
+
+        <dd>
+            @Html.DisplayFor(model => model.Tasks.Count)
+        </dd>  
+        <dt>
+           <p>Done</p>
+        </dt>
+
+        <dd>
+            @{
+                var numTaskDone = Model.Tasks.Where(task => task.Status == StatusEnum.Ended).ToList().Count;
+                
+                  @Html.DisplayFor(modelItem =>  numTaskDone)
+                
+            }
+
+
+        </dd>
+     
     </dl>
 </div>
 <p>
