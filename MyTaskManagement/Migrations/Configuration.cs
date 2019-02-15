@@ -408,11 +408,41 @@ namespace MyTaskManagement.Migrations
 
         }
 
-        private   void InitUsers( ApplicationDbContext context)
+        private void InitUsers( ApplicationDbContext context)
         {
+ 
+            //Here we create a Admin super user who will maintain the website                 
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            //////////////////////////////////Create Default Roles////////////////////////////////////////
+            if (!roleManager.RoleExists("Admin"))
+            {
 
-            var store = new UserStore<ApplicationUser>(context);
-            var manager = new ApplicationUserManager(store);
+                // first we create Admin role   
+                var role = new IdentityRole();
+                role.Name = "Admin";
+                roleManager.Create(role);
+
+
+            }
+            //   Creating ProjectManager role   
+            if (!roleManager.RoleExists("ProjectManager"))
+            {
+                var role = new IdentityRole();
+                role.Name = "ProjectManager";
+                roleManager.Create(role);
+
+            }
+
+            //   Creating Employee role   
+            if (!roleManager.RoleExists("Employee"))
+            {
+                var role = new IdentityRole();
+                role.Name = "Employee";
+                roleManager.Create(role);
+
+            }
+            //////////////////////////////////Create Default Users////////////////////////////////////////
 
             var user1 = new ApplicationUser
             {
@@ -422,8 +452,14 @@ namespace MyTaskManagement.Migrations
                 LastName = "Abu Admin",
                 IsAcceptedOnCondition = true
             };
-            manager.Create(user1, "123123");
+           var chkUser1= userManager.Create(user1, "123123");
 
+            //Add default User to Role Admin  
+            if (chkUser1.Succeeded)
+            {
+                var result1 = userManager.AddToRole(user1.Id, "Admin");
+
+            }
 
             var user2 = new ApplicationUser
             {
@@ -433,7 +469,15 @@ namespace MyTaskManagement.Migrations
                 LastName = "Abu Alex",
                 IsAcceptedOnCondition = true
             };
-            manager.Create(user2, "123123");
+            var chkUser2  = userManager.Create(user2, "123123");
+            //Add default User to Role ProjectManager  
+            if (chkUser1.Succeeded)
+            {
+                var result1 = userManager.AddToRole(user2.Id, "ProjectManager");
+
+            }
+
+
 
             var user3 = new ApplicationUser
             {
@@ -443,7 +487,16 @@ namespace MyTaskManagement.Migrations
                 LastName = "Abu Ahmed",
                 IsAcceptedOnCondition = true
             };
-            manager.Create(user3, "123123");
+ 
+            var chkUser3 = userManager.Create(user3, "123123");
+            //Add default User to Role Employee  
+            if (chkUser1.Succeeded)
+            {
+                var result1 = userManager.AddToRole(user3.Id, "Employee");
+
+            }
+
+
             var user4 = new ApplicationUser
             {
                 UserName = "Sameer",
@@ -452,8 +505,16 @@ namespace MyTaskManagement.Migrations
                 LastName = "Abu Sameer",
                 IsAcceptedOnCondition = true
             };
-            manager.Create(user4, "123123");
 
+            var chkUser4 = userManager.Create(user4, "123123");
+            //Add default User to Role Employee  
+            if (chkUser1.Succeeded)
+            {
+                var result1 = userManager.AddToRole(user4.Id, "Employee");
+
+            }
+
+             
             var user5 = new ApplicationUser
             {
                 UserName = "FoFo",
@@ -462,7 +523,15 @@ namespace MyTaskManagement.Migrations
                 LastName = "Abu FoFo",
                 IsAcceptedOnCondition = true
             };
-            manager.Create(user5, "123123");
+ 
+            var chkUser5 = userManager.Create(user5, "123123");
+            //Add default User to Role Employee  
+            if (chkUser1.Succeeded)
+            {
+                var result1 = userManager.AddToRole(user5.Id, "Employee");
+
+            }
+
 
 
             _users.Add (user1);
