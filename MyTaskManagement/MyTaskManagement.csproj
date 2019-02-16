@@ -298,6 +298,24 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="webhome\css\bootstrap.css" />
+    <Content Include="webhome\css\font-awesome.min.css" />
+    <Content Include="webhome\css\style.css" />
+    <Content Include="webhome\fonts\fontawesome-webfont.svg" />
+    <Content Include="webhome\images\1.jpg" />
+    <Content Include="webhome\images\bg1.jpg" />
+    <Content Include="webhome\images\bg2.jpg" />
+    <Content Include="webhome\images\blog1.jpg" />
+    <Content Include="webhome\images\blog2.jpg" />
+    <Content Include="webhome\images\blog3.jpg" />
+    <Content Include="webhome\images\middle.jpg" />
+    <Content Include="webhome\images\move-top.png" />
+    <Content Include="webhome\images\ser.jpg" />
+    <Content Include="webhome\images\team1.jpg" />
+    <Content Include="webhome\images\team2.jpg" />
+    <Content Include="webhome\images\team3.jpg" />
+    <Content Include="webhome\index.html" />
+    <Content Include="webhome\w3layouts-License.txt" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -381,6 +399,11 @@
     <Content Include="Views\User\Details.cshtml" />
     <Content Include="Views\User\Delete.cshtml" />
     <Content Include="Views\User\Create.cshtml" />
+    <Content Include="webhome\fonts\fontawesome-webfont.eot" />
+    <Content Include="webhome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="webhome\fonts\fontawesome-webfont.woff" />
+    <Content Include="webhome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="webhome\fonts\FontAwesome.otf" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

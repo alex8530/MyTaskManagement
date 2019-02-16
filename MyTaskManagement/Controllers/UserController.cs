@@ -33,7 +33,8 @@ namespace MyTaskManagement.Controllers
         {
             var listUser = _unitOfWork.UserRepositry.GetAllUsersWithProjectsAndTasksAndRoles();
             var roles = new List<string>();
-
+            // get all names of role for user ...
+            //i use this method because there is a role id inside user , not role name
             foreach (var user in listUser)
             {
                 string str = "";
