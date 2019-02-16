@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyTaskManagement.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -8,17 +9,8 @@ namespace MyTaskManagement.Core.ViewModel
 {
     public class ListUserViewModel
     {
-
-        public string Id{ get; set; }
-
-        [Required]
-        [StringLength(255)]
-        public string FirstName { get; set; }
-         
-
-        [Required]
-        [Display(Name = "Email")]
-        public string Email { get; set; }
+        public IEnumerable<ApplicationUser> Users { get; set; }
+        public List<string> RolesNames { get; set; }
 
     }
 }

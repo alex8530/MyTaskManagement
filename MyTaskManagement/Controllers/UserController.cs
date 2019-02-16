@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Identity.Owin;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using MyTaskManagement.Core.ViewModel;
 using MyTaskManagement.Models;
 using MyTaskManagement.Persistence;
@@ -30,10 +31,25 @@ namespace MyTaskManagement.Controllers
         // GET: Employee
         public ActionResult ListUser()
         {
-
             var listUser = _unitOfWork.UserRepositry.GetAllUsersWithProjectsAndTasksAndRoles();
-           
-            return View(listUser);
+            var roles = new List<string>();
+
+            foreach (var user in listUser)
+            {
+                string str = "";
+                foreach (var role in UserManager.GetRoles(user.Id))
+                {
+                    str = (str == "") ? role.ToString() : str + " - " + role.ToString();
+                }
+                roles.Add(str);
+            }
+            var model = new ListUserViewModel()
+            {
+                 Users = listUser,
+                 RolesNames = roles.ToList()
+            };
+
+            return View(model);
         }
  
 
