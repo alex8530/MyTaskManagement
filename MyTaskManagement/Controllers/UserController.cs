@@ -32,7 +32,7 @@ namespace MyTaskManagement.Controllers
         {
 
             var listUser = _unitOfWork.UserRepositry.GetAllUsersWithProjectsAndTasksAndRoles();
- 
+           
             return View(listUser);
         }
  
@@ -73,6 +73,15 @@ namespace MyTaskManagement.Controllers
                 _unitOfWork.UserRepositry.AddUser(newUser,model.Password);
                 _unitOfWork.Complete();
 
+                //_unitOfWork.UserRepositry.AddUser(newUser, model.Password);
+                //var oldRoleId = newUser.Roles.SingleOrDefault().RoleId;
+                //var oldRoleName = ApplicationDbContext.Create().Roles.SingleOrDefault(r => r.Id == oldRoleId).Name;
+                //if (oldRoleName != role)
+                //{
+                //    UserManager.RemoveFromRole(user.Id, oldRoleName);
+                //    UserManager.AddToRole(user.Id, role);
+                //}
+
                 return RedirectToAction("ListUser");
             }
             catch
@@ -85,6 +94,7 @@ namespace MyTaskManagement.Controllers
         public ActionResult Edit(string id)
         {
             var editUser = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRoles(id);
+            ViewBag.AllRoles = ApplicationDbContext.Create().Roles.ToList();
 
             return View(editUser);
         }
@@ -106,11 +116,17 @@ namespace MyTaskManagement.Controllers
                     oldUser.O_T_H_Rate = model.O_T_H_Rate;
                     oldUser.UserName = model.UserName;
                     oldUser.Email = model.Email;
-                    
+
+
+                string newRole = Request.Form["CurrenrRole"];
+                     _unitOfWork.UserRepositry.UpdateRolesToUser(id, newRole);
 
                     _unitOfWork.Complete();
 
                 }
+
+
+
 
 
                 return RedirectToAction("ListUser");

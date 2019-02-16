@@ -9,6 +9,7 @@ using System.Data.Entity;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using MyTaskManagement.Core;
+using System.Threading.Tasks;
 
 namespace MyTaskManagement.Persistence.Repositories
 {
@@ -43,10 +44,13 @@ namespace MyTaskManagement.Persistence.Repositories
             {
                 //by default , will be employee , and then the admin can change the role..
                 var result1 = userManager.AddToRole(user.Id, ConstantsRolesNames.Employee);
+                var result1g = userManager.RemoveFromRole(user.Id, ConstantsRolesNames.Employee);
 
             }
 
         }
+
+       
 
         public IEnumerable<ApplicationUser> GetAllUsersWithProjectsAndTasksAndRoles()
         {
@@ -58,6 +62,18 @@ namespace MyTaskManagement.Persistence.Repositories
         {
             return CuurentContext.Users.Where(user => user.Id == id).Include(user => user.Tasks)
                 .Include(user => user.Projects).Include(user => user.Roles).SingleOrDefault();
+        }
+
+        public void UpdateRolesToUser(string idUser, string newRole)
+        {
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(CuurentContext));
+             
+            //first delete the preivuos roles
+            var roles =   userManager.GetRoles (idUser);
+              userManager.RemoveFromRoles (idUser, roles.ToArray());
+
+            //add new role
+            userManager.AddToRole(idUser, newRole);
         }
     }
 }

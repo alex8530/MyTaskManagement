@@ -1,4 +1,5 @@
-﻿@using MyTaskManagement.Models
+﻿@using Microsoft.AspNet.Identity
+@using MyTaskManagement.Models
 @model IEnumerable<MyTaskManagement.Models.ApplicationUser>
 
 @{
@@ -31,6 +32,7 @@
                 <p>Done</p>
 
             </th>
+       
          
             <th></th>
         </tr>
@@ -57,15 +59,16 @@
             @{
                 var numTaskDone = item.Tasks.Where(task => task.Status == StatusEnum.Ended).ToList().Count;
                 <td>
-                    @Html.DisplayFor(modelItem =>  numTaskDone)
+                    @Html.DisplayFor(modelItem => numTaskDone)
                 </td>
             }
-           
-                
+
+            
+
             <td>
-                @Html.ActionLink("Edit", "Edit", new {id = item.Id}, new {@class = "btn btn-success"}) |
-                @Html.ActionLink("Details", "Details", new {id = item.Id}, new {@class = "btn btn-info"}) |
-                @Html.ActionLink("Delete", "Delete", new {id = item.Id}, new {@class = "btn btn-danger"})
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-success" }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-info" }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
             </td>
         </tr>
     }
