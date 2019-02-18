@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
@@ -8,6 +9,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using MyTaskManagement.Core.Domain;
 using MyTaskManagement.Models;
 
 namespace MyTaskManagement.Controllers
@@ -148,7 +150,7 @@ namespace MyTaskManagement.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(RegisterViewModel model, HttpPostedFileBase upload)
         {
             if (ModelState.IsValid)
             {
@@ -161,8 +163,26 @@ namespace MyTaskManagement.Controllers
                     IsAcceptedOnCondition = model.IsAcceptedOnCondition,
                     HourlyRate = model.HourlyRate,
                     O_T_H_Rate = model.O_T_H_Rate,
-                    JopTitle = model.JopTitle
+                    JopTitle = model.JopTitle   ,
+                    MyFiles = new List<MyFile>()
                 };
+                //Guid is used as a file name on the basis that it can pretty much guarantee uniqueness
+                if (upload != null && upload.ContentLength > 0)
+                {
+                    var photo = new MyFile
+                    {
+                        FileName = Guid.NewGuid().ToString() + System.IO.Path.GetExtension(upload.FileName),
+                        MyFileType = MyFileType.Photo
+                    };
+
+
+                    string physicalPath = Server.MapPath("~/images/" + photo.FileName);
+
+                    // save image in folder
+                    upload.SaveAs(physicalPath);
+                    user.MyFiles.Add(photo);
+
+                }
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

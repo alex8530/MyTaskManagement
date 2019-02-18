@@ -113,18 +113,11 @@ namespace MyTaskManagement.Controllers
                     newUser.MyFiles.Add(photo);
                     
                 }
+                //i dont user Manager here, because no need to write here.. 
                 _unitOfWork.UserRepositry.AddUser(newUser,model.Password);
                 _unitOfWork.Complete();
 
-                //_unitOfWork.UserRepositry.AddUser(newUser, model.Password);
-                //var oldRoleId = newUser.Roles.SingleOrDefault().RoleId;
-                //var oldRoleName = ApplicationDbContext.Create().Roles.SingleOrDefault(r => r.Id == oldRoleId).Name;
-                //if (oldRoleName != role)
-                //{
-                //    UserManager.RemoveFromRole(user.Id, oldRoleName);
-                //    UserManager.AddToRole(user.Id, role);
-                //}
-
+               
                 return RedirectToAction("ListUser");
             }
             catch
