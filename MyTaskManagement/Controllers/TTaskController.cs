@@ -96,7 +96,7 @@ namespace MyTaskManagement.Controllers
 
                 
                 //var user = _unitOfWork.UserRepositry.SingleOrDefault(u => u.Id == ui);
-                var user = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRoles( ui);
+                var user = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFiles( ui);
 
                 /*
                  * Very important here

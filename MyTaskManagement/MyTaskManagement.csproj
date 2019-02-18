@@ -185,6 +185,8 @@
     <Compile Include="Controllers\TTaskController.cs" />
     <Compile Include="Core\Constants\Constants.cs" />
     <Compile Include="Core\Domain\Financialstatus.cs" />
+    <Compile Include="Core\Domain\MyFile.cs" />
+    <Compile Include="Core\Domain\MyFileType.cs" />
     <Compile Include="Core\Domain\PriorityEnum.cs" />
     <Compile Include="Core\Domain\TTask.cs" />
     <Compile Include="Core\IUnitOfWork.cs" />
@@ -251,6 +253,14 @@
     <Compile Include="Migrations\201902151827130_Add3ColumnToApplicationTable.cs" />
     <Compile Include="Migrations\201902151827130_Add3ColumnToApplicationTable.Designer.cs">
       <DependentUpon>201902151827130_Add3ColumnToApplicationTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902181252570_AddMyFilesTable.cs" />
+    <Compile Include="Migrations\201902181252570_AddMyFilesTable.Designer.cs">
+      <DependentUpon>201902181252570_AddMyFilesTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902181315598_RenameColumnMyFileInUserTable.cs" />
+    <Compile Include="Migrations\201902181315598_RenameColumnMyFileInUserTable.Designer.cs">
+      <DependentUpon>201902181315598_RenameColumnMyFileInUserTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -407,6 +417,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="images\" />
     <Folder Include="Views\Home\" />
   </ItemGroup>
   <ItemGroup>
@@ -459,6 +470,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201902151827130_Add3ColumnToApplicationTable.resx">
       <DependentUpon>201902151827130_Add3ColumnToApplicationTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902181252570_AddMyFilesTable.resx">
+      <DependentUpon>201902181252570_AddMyFilesTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902181315598_RenameColumnMyFileInUserTable.resx">
+      <DependentUpon>201902181315598_RenameColumnMyFileInUserTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

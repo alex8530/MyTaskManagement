@@ -58,12 +58,13 @@ namespace MyTaskManagement.Persistence.Repositories
                 .Include(user => user.Projects).Include(user => user.Roles).ToList();
         }
 
-        public  ApplicationUser  GetUserWithProjectsAndTasksAndRoles(string id)
+        public  ApplicationUser GetUserWithProjectsAndTasksAndRolesAndFiles(string id)
         {
             return CuurentContext.Users.Where(user => user.Id == id).Include(user => user.Tasks)
-                .Include(user => user.Projects).Include(user => user.Roles).SingleOrDefault();
+                .Include(user => user.Projects).Include(user => user.Roles).Include(user => user.MyFiles).SingleOrDefault();
         }
 
+       
         public void UpdateRolesToUser(string idUser, string newRole)
         {
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(CuurentContext));

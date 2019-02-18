@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MyTaskManagement.Core.Domain;
 
 namespace MyTaskManagement.Controllers
 {
@@ -54,10 +55,16 @@ namespace MyTaskManagement.Controllers
         }
  
 
-        // GET: Employee/Details/fdsfdsfdsf
+        // GET: Employee/Details/fds 
         public ActionResult Details(string id)
         {
-            return View(_unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRoles(id));
+
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(_unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFiles(id));
         }
 
         // GET: Employee/Create
@@ -68,11 +75,12 @@ namespace MyTaskManagement.Controllers
 
         // POST: Employee/Create
         [HttpPost]
-        public ActionResult Create(RegisterViewModel  model)
+        public ActionResult Create(RegisterViewModel  model, HttpPostedFileBase upload)
         {
             try
             {
                 // TODO: Add insert logic here
+
 
                 var newUser = new ApplicationUser
                 {
@@ -83,10 +91,28 @@ namespace MyTaskManagement.Controllers
                     IsAcceptedOnCondition = model.IsAcceptedOnCondition,
                     JopTitle = model.JopTitle,
                     O_T_H_Rate = model.O_T_H_Rate,
-                    HourlyRate = model.HourlyRate
+                    HourlyRate = model.HourlyRate,
+                    MyFiles = new List<MyFile>()
 
 
                 };
+                //Guid is used as a file name on the basis that it can pretty much guarantee uniqueness
+                if (upload != null && upload.ContentLength > 0)
+                {
+                    var photo = new MyFile
+                    {
+                        FileName = Guid.NewGuid().ToString() + System.IO.Path.GetExtension(upload.FileName),
+                        MyFileType = MyFileType.Photo
+                    };
+
+
+                   string physicalPath = Server.MapPath("~/images/" + photo.FileName);
+
+                    // save image in folder
+                    upload.SaveAs(physicalPath);
+                    newUser.MyFiles.Add(photo);
+                    
+                }
                 _unitOfWork.UserRepositry.AddUser(newUser,model.Password);
                 _unitOfWork.Complete();
 
@@ -110,7 +136,7 @@ namespace MyTaskManagement.Controllers
         // GET: Employee/Edit/5
         public ActionResult Edit(string id)
         {
-            var editUser = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRoles(id);
+            var editUser = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFiles(id);
             ViewBag.AllRoles = ApplicationDbContext.Create().Roles.ToList();
 
             return View(editUser);
@@ -168,7 +194,7 @@ namespace MyTaskManagement.Controllers
         {
             try
             {
-                var deleteUser = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRoles(id);
+                var deleteUser = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFiles(id);
                 _unitOfWork.UserRepositry.Remove(deleteUser);
                 _unitOfWork.Complete();
                 return RedirectToAction("ListUser");

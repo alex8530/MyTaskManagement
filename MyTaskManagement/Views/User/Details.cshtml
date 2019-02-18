@@ -1,4 +1,5 @@
-﻿@using MyTaskManagement.Models
+﻿@using MyTaskManagement.Core.Domain
+@using MyTaskManagement.Models
 @model MyTaskManagement.Models.ApplicationUser
 
 @{
@@ -86,16 +87,29 @@
            <p>Done</p>
         </dt>
 
-        <dd>
+        <dd>  
             @{
                 var numTaskDone = Model.Tasks.Where(task => task.Status == StatusEnum.Ended).ToList().Count;
                 
-                  @Html.DisplayFor(modelItem =>  numTaskDone)
+                @Html.DisplayFor(modelItem =>  numTaskDone)
                 
             }
 
 
         </dd>
+        
+        @if(Model.MyFiles.Any(f => f.MyFileType ==MyFileType.Photo))
+        {
+            <dt>
+                Photo
+            </dt>
+            <dd>
+                @{
+                    var imgPath = @Model.MyFiles.FirstOrDefault(f => f.MyFileType == MyFileType.Photo).FileName;
+                }
+                <img src="~/images/@imgPath" alt=""/>
+            </dd>
+        }
      
     </dl>
 </div>

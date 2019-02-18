@@ -46,7 +46,8 @@ namespace MyTaskManagement.Models
         public ICollection<Financialstatus> TaFinancialstatussks { get; set; }
 
 
-        public Byte[] Image { get; set; }
+         
+        public ICollection<MyFile> MyFiles  { get; set; }
 
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
@@ -70,6 +71,7 @@ namespace MyTaskManagement.Models
          public DbSet<TTask>  Tasks { get; set; }
         public DbSet<Client> Clients { get; set; }
         public DbSet<Financialstatus> Financialstatuses { get; set; }
+        public DbSet<MyFile>  MyFiles { get; set; }
         
 
         public static ApplicationDbContext Create()
