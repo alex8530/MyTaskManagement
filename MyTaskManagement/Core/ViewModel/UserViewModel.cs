@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using MyTaskManagement.Core.Domain;
 
 namespace MyTaskManagement.Core.ViewModel
 {
@@ -17,7 +18,7 @@ namespace MyTaskManagement.Core.ViewModel
     public class EditUserViewModel
     {
         public  ApplicationUser  User { get; set; }
-        public List<TTask>  Tasks { get; set; }
+        public List<Financialstatus>   Financialstatuses { get; set; }
 
     }
 }

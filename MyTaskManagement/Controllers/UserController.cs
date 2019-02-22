@@ -130,28 +130,28 @@ namespace MyTaskManagement.Controllers
         public ActionResult Edit(string id ,int month =0 , int year = 0 )
         {
             var editUser = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanical(id);
-            var listOwnTask = editUser.Tasks;
+            var listOwnFinan = editUser.FinancialstatusList ;
 
             if (month == 0 && year != 0)
             { //No sorting  for month
-                listOwnTask = listOwnTask.Where(task => task.StartTime.Year == year).ToList();
+                listOwnFinan = listOwnFinan.Where( f => f.Date.Year == year).ToList();
  
             }
             else if (month != 0 && year == 0)
             {//No sorting  for year
-                listOwnTask = listOwnTask.Where(task => task.StartTime.Month == month).ToList();
+                listOwnFinan = listOwnFinan.Where(f => f.Date.Month == month).ToList();
                  
             }
             else if (month != 0 && year != 0)
             {//No sorting  for year
-                listOwnTask = listOwnTask.Where(task => task.StartTime.Month == month && task.StartTime.Year == year).ToList();
+                listOwnFinan = listOwnFinan.Where(f => f.Date.Month == month &&   f.Date.Year == year).ToList();
                  
             }
         
             var vm = new EditUserViewModel()
             {
-                User = editUser,
-                Tasks = listOwnTask.ToList()
+                 User = editUser,
+                 Financialstatuses = listOwnFinan.ToList()
             };
             ViewBag.AllRoles = ApplicationDbContext.Create().Roles.ToList();
 

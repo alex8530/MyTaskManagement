@@ -252,7 +252,7 @@ namespace MyTaskManagement.Controllers
                     var financial = new Financialstatus()
                     {
                         Id = task.Id.ToString(),
-                        Date = DateTime.Now, //must change
+                        Date = task.StartTime, //must change
                         Bonus = 20,//?????????
                         W_Hours = task.WorkingHours,
                         OTH_Rate = (int)user.O_T_H_Rate * task.OverTime,

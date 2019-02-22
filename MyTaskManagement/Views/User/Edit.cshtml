@@ -147,85 +147,7 @@
 
 
 <h3> Task List</h3>
-@using (Html.BeginForm("Edit", "User" ,FormMethod.Get,new {id= Model.User.Id }))
-{
-
-<select name="month">
-
-    @{
-        Dictionary<int, string> Months = Enumerable.Range(1, 12).Select(i => new KeyValuePair<int, string>(i, System.Globalization.DateTimeFormatInfo.CurrentInfo.GetMonthName(i))).ToDictionary(x => x.Key, x => x.Value);
-
-
-        if ((int)ViewBag.m == 0)
-        {
-             <option value="0" selected="selected"> </option>
-
-         }
-         else
-         {
-             <option value="0"  > </option>
-
-         }
-
-        foreach (var key in Months.Keys)
-        {
-            if ((int)ViewBag.m == key)
-            {//select it
-                <option value="@key" selected="selected"> @Months[key]</option>
-
-            }
-            else
-            {
-                <option value="@key" > @Months[key]</option>
-
-            }
-        }
-
-    }
-   
-   
-</select>
-  
-    <select name="year">
-        @{
-            var listYears = Enumerable.Range(2016, 81).ToList();
-
-            if ((int) ViewBag.y == 0)
-            {
-                <option value="0" selected="selected"> </option>
-
-            }
-            else
-            {
-                <option value="0"> </option>
-
-            }
-
-
-            foreach (var  i in listYears)
-            {
-                if ((int)ViewBag.y == i)
-                {//select it
-                    <option value="@i" selected="selected"> @i</option>
-
-                }
-                else
-                {
-                    <option value="@i"  > @i</option>
-
-
-                }
-            }
-
-
-        }
-        
-      
-    </select>
-
-    <input type="submit" value="Sort" class="btn btn-default" />
-
-    }
+ 
 <table class="table" id="listTask">
     <thead>
         <tr>
@@ -272,7 +194,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Tasks.ToList())
+        @foreach (var item in Model.User.Tasks.ToList())
         {
             <tr>
                 <td>
@@ -320,6 +242,85 @@
 
 
 <h3> Financial Status</h3>
+@using (Html.BeginForm("Edit", "User" ,FormMethod.Get,new {id= Model.User.Id }))
+{
+
+    <select name="month">
+
+        @{
+            Dictionary<int, string> Months = Enumerable.Range(1, 12).Select(i => new KeyValuePair<int, string>(i, System.Globalization.DateTimeFormatInfo.CurrentInfo.GetMonthName(i))).ToDictionary(x => x.Key, x => x.Value);
+
+
+            if ((int)ViewBag.m == 0)
+            {
+                <option value="0" selected="selected"> </option>
+
+            }
+            else
+            {
+                <option value="0"  > </option>
+
+            }
+
+            foreach (var key in Months.Keys)
+            {
+                if ((int)ViewBag.m == key)
+                {//select it
+                    <option value="@key" selected="selected"> @Months[key]</option>
+
+                }
+                else
+                {
+                    <option value="@key" > @Months[key]</option>
+
+                }
+            }
+
+        }
+   
+   
+    </select>
+  
+    <select name="year">
+        @{
+            var listYears = Enumerable.Range(2016, 81).ToList();
+
+            if ((int) ViewBag.y == 0)
+            {
+                <option value="0" selected="selected"> </option>
+
+            }
+            else
+            {
+                <option value="0"> </option>
+
+            }
+
+
+            foreach (var  i in listYears)
+            {
+                if ((int)ViewBag.y == i)
+                {//select it
+                    <option value="@i" selected="selected"> @i</option>
+
+                }
+                else
+                {
+                    <option value="@i"> @i</option>
+
+
+                }
+            }
+
+
+        }
+        
+      
+    </select>
+
+    <input type="submit" value="Sort" class="btn btn-default" />
+
+}
 <table class="table" id="listFinancial">
     <thead>
         <tr>
@@ -366,7 +367,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.User.FinancialstatusList.ToList())
+        @foreach (var item in Model.Financialstatuses.ToList())
         {
             <tr>
                 <td>
