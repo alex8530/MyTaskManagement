@@ -127,12 +127,39 @@ namespace MyTaskManagement.Controllers
         }
 
         // GET: Employee/Edit/5
-        public ActionResult Edit(string id)
+        public ActionResult Edit(string id ,int month =0 , int year = 0 )
         {
             var editUser = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanical(id);
+            var listOwnTask = editUser.Tasks;
+
+            if (month == 0 && year != 0)
+            { //No sorting  for month
+                listOwnTask = listOwnTask.Where(task => task.StartTime.Year == year).ToList();
+ 
+            }
+            else if (month != 0 && year == 0)
+            {//No sorting  for year
+                listOwnTask = listOwnTask.Where(task => task.StartTime.Month == month).ToList();
+                 
+            }
+            else if (month != 0 && year != 0)
+            {//No sorting  for year
+                listOwnTask = listOwnTask.Where(task => task.StartTime.Month == month && task.StartTime.Year == year).ToList();
+                 
+            }
+        
+            var vm = new EditUserViewModel()
+            {
+                User = editUser,
+                Tasks = listOwnTask.ToList()
+            };
             ViewBag.AllRoles = ApplicationDbContext.Create().Roles.ToList();
 
-            return View(editUser);
+
+            ViewBag.m = month;
+            ViewBag.y = year;
+
+            return View(vm);
         }
 
         // POST: Employee/Edit/5

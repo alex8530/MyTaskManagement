@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNet.Identity.EntityFramework
-@model MyTaskManagement.Models.ApplicationUser
+@model  MyTaskManagement.Core.ViewModel.EditUserViewModel  
 
 @{
     ViewBag.Title = "Edit";
@@ -16,68 +16,68 @@
 
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.User.Id)
 
 
 
 
         <div class="form-group">
-            @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.User.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.User.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.User.FirstName, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.User.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.User.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.User.LastName, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.JopTitle, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.User.JopTitle, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.JopTitle, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.JopTitle, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.User.JopTitle, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.User.JopTitle, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.HourlyRate, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.User.HourlyRate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.HourlyRate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.HourlyRate, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.User.HourlyRate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.User.HourlyRate, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.O_T_H_Rate, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.User.O_T_H_Rate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.O_T_H_Rate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.O_T_H_Rate, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.User.O_T_H_Rate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.User.O_T_H_Rate, "", new { @class = "text-danger" })
             </div>
         </div>
 
 
 
         <div class="form-group">
-            @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.User.Email, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.User.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.User.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.User.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.User.UserName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.User.UserName, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -87,14 +87,14 @@
             <label class="control-label col-md-2">Role</label>
 
 
-            @if (Model.Roles != null && Model.Roles.Count != 0)
+            @if (Model.User.Roles != null && Model.User.Roles.Count != 0)
             {
 
                 <select name="CurrenrRole" class="col-md-10 form-control " required>
                     @*<option value="" disabled selected>Choose your Role</option>*@
                     @foreach (var r in (List<IdentityRole>)ViewBag.AllRoles)
                     {
-                        if (Model.Roles.FirstOrDefault().RoleId == r.Id)
+                        if (Model.User.Roles.FirstOrDefault().RoleId == r.Id)
                         {
 
                             <option value="@r.Name" selected="selected">@r.Name</option>
@@ -146,14 +146,86 @@
 
 
 
-
-
-<div>
-    @*@Html.ActionLink("Add Task", "Create", "TTask", new { id_current_project = Model.Project.Id }, htmlAttributes: new { @class = "btn btn-warning" })*@
-</div>
-
 <h3> Task List</h3>
+@using (Html.BeginForm("Edit", "User" ,FormMethod.Get,new {id= Model.User.Id }))
+{
 
+<select name="month">
+
+    @{
+        Dictionary<int, string> Months = Enumerable.Range(1, 12).Select(i => new KeyValuePair<int, string>(i, System.Globalization.DateTimeFormatInfo.CurrentInfo.GetMonthName(i))).ToDictionary(x => x.Key, x => x.Value);
+
+
+        if ((int)ViewBag.m == 0)
+        {
+             <option value="0" selected="selected"> </option>
+
+         }
+         else
+         {
+             <option value="0"  > </option>
+
+         }
+
+        foreach (var key in Months.Keys)
+        {
+            if ((int)ViewBag.m == key)
+            {//select it
+                <option value="@key" selected="selected"> @Months[key]</option>
+
+            }
+            else
+            {
+                <option value="@key" > @Months[key]</option>
+
+            }
+        }
+
+    }
+   
+   
+</select>
+  
+    <select name="year">
+        @{
+            var listYears = Enumerable.Range(2016, 81).ToList();
+
+            if ((int) ViewBag.y == 0)
+            {
+                <option value="0" selected="selected"> </option>
+
+            }
+            else
+            {
+                <option value="0"> </option>
+
+            }
+
+
+            foreach (var  i in listYears)
+            {
+                if ((int)ViewBag.y == i)
+                {//select it
+                    <option value="@i" selected="selected"> @i</option>
+
+                }
+                else
+                {
+                    <option value="@i"  > @i</option>
+
+
+                }
+            }
+
+
+        }
+        
+      
+    </select>
+
+    <input type="submit" value="Sort" class="btn btn-default" />
+
+    }
 <table class="table" id="listTask">
     <thead>
         <tr>
@@ -185,7 +257,7 @@
                 <p>Priority</p>
 
             </th>
-        
+
             <th>
                 <p>Status</p>
 
@@ -228,7 +300,7 @@
                     @Html.DisplayFor(modelItem => item.Priority)
                 </td>
 
-                
+
                 <td>
                     @Html.DisplayFor(modelItem => item.Status)
                 <td>
@@ -294,11 +366,11 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.FinancialstatusList.ToList())
+        @foreach (var item in Model.User.FinancialstatusList.ToList())
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Date)  
+                    @Html.DisplayFor(modelItem => item.Date)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.pro__id)
@@ -309,7 +381,7 @@
                 </td>
 
                 <td>
-                    @Html.DisplayFor(modelItem => item.W_Hours) 
+                    @Html.DisplayFor(modelItem => item.W_Hours)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.OTHours)
@@ -347,7 +419,7 @@
         @{
             var totalPrice = 0.0;
         }
-        @foreach (var item in Model.FinancialstatusList.ToList())
+        @foreach (var item in Model.User.FinancialstatusList.ToList())
         {
             totalPrice = totalPrice + item.Total;
         }
@@ -378,7 +450,7 @@
         @{
             var totalBounes = 0.0;
         }
-        @foreach (var item in Model.FinancialstatusList.ToList())
+        @foreach (var item in Model.User.FinancialstatusList.ToList())
         {
             totalBounes = totalBounes + item.Bonus;
         }

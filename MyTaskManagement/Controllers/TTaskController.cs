@@ -2,6 +2,7 @@
 using MyTaskManagement.Persistence;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -16,10 +17,25 @@ namespace MyTaskManagement.Controllers
         private UnitOfWork _unitOfWork = new UnitOfWork(new ApplicationDbContext());
 
         // GET: TTask
-        public ActionResult Index()
-        {
-            var tasks = _unitOfWork.TTaskRepositry.GetAllTasksWithUserAndUserAndProject();
-            return View( tasks);
+        public ActionResult Index(  )
+        { 
+          
+                //No sorting , show all tasks
+                var taskss = _unitOfWork.TTaskRepositry.GetAllTasksWithUserAndUserAndProject();
+
+                return View(taskss);
+ 
+
+
+            //var grouped = from T in tasks 
+            //              group T by new { month = T.StartTime.Month, year = T.StartTime.Year } into d
+            //    select new { dt = string.Format("{0}/{1}", d.Key.month, d.Key.year), count = d.Count() };
+
+
+            //Debug.WriteLine( "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"); 
+            //Debug.WriteLine( grouped.ToList());
+            //Debug.WriteLine("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz");
+
         }
 
         // GET: TTask/Details/5
@@ -364,6 +380,9 @@ namespace MyTaskManagement.Controllers
             }
         }
 
+
+
+        
 
  
     }

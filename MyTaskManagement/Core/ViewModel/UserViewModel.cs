@@ -13,4 +13,11 @@ namespace MyTaskManagement.Core.ViewModel
         public List<string> RolesNames { get; set; }
 
     }
+
+    public class EditUserViewModel
+    {
+        public  ApplicationUser  User { get; set; }
+        public List<TTask>  Tasks { get; set; }
+
+    }
 }

@@ -3,13 +3,111 @@
 
 @{
     ViewBag.Title = "Tasks";
-     Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Tasks</h2>
 
- <p>
+<p>
 
     @Html.ActionLink("Create New", "Create", "TTask", "", new { @class = "btn btn-success" })
-</p> 
- @Html.Partial("_AllTaskPartial",Model.ToList() )
+</p>
+
+
+
+<table class="table" id="listTask">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                <p>Project_Id</p>
+
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DeadTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                    @Html.DisplayNameFor(model => model.WorkingHours)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.OverTime)
+                </th> 
+            <th>
+                @Html.DisplayNameFor(model => model.Priority)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                <p>Assignee</p>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Project.Id)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DeadTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                 <td>
+                        @Html.DisplayFor(modelItem => item.WorkingHours)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OverTime)
+                    </td> 
+                <td>
+                    @Html.DisplayFor(modelItem => item.Priority)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                <td>
+                    @Html.DisplayFor(modelItem => item.ApplicationUser.FirstName)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", "TTask", new { id = item.Id }, new { @class = "btn btn-success" }) |
+                    @Html.ActionLink("Details", "Details", "TTask", new { id = item.Id }, new { @class = "btn btn-info" }) |
+                    @Html.ActionLink("Delete", "Delete", "TTask", new { id = item.Id }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+    </tbody>
+
+
+</table>
+
+
+
+@section scripts
+{
+
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#listTask").dataTable();
+        });
+    </script>
+}
