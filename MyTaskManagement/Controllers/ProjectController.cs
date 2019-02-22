@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using System.Web.WebPages;
 using MyTaskManagement.Core.ViewModel;
 using System.Data.Entity;
+using MyTaskManagement.Core.Domain;
 
 namespace MyTaskManagement.Controllers
 {
@@ -131,15 +132,51 @@ namespace MyTaskManagement.Controllers
         // GET: Project/Edit/5
         public ActionResult Edit(string id)
         {
+
+            var users = _unitOfWork.UserRepositry.GetAll().ToList();
             var viewmodel = new IndexProjectViewModels()
             {
                 Project = _unitOfWork.ProjectRepositry.GetProjectsWithClientAndUsersAndTasks(id),
-                Users = _unitOfWork.UserRepositry.GetAll().ToList(),
+                Users = users,
                 Clients = _unitOfWork.ClientRepositry.GetAll().ToList()
                  
             };
              
-            
+            //at the same time .. add preivues financial to users
+         
+            //foreach (var user in users)
+            //{
+            //    if (user.Tasks!=null  )
+            //    {
+
+            //        if (user.Tasks.Count != 0)
+            //        {
+            //        foreach (var task in user.Tasks)
+            //        {
+            //            var financial = new Financialstatus()
+            //            {    Id = task.Id.ToString(),
+            //                Date = DateTime.Now, //must change
+            //                Bonus = 0,
+            //                W_Hours = task.WorkingHours,
+            //                OTH_Rate = 5,
+            //                OTHours = task.OverTime,
+            //                pro__id = task.ProjectId,
+            //                task__id = task.Name,
+            //                Wh_Rate = 6,
+            //                user__id = user.Id,
+            //                Total = 5 + 5
+            //            };
+
+            //             _unitOfWork.FinancialRepositry.Add(financial);
+            //            //_unitOfWork.UserRepositry.AddUser();
+            //            _unitOfWork.Complete();
+            //        }
+
+            //        }
+
+            //    }
+
+            //}
 
             return View(viewmodel);
         }

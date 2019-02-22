@@ -12,135 +12,136 @@
 {
     @Html.AntiForgeryToken()
 
-<div class="form-horizontal">
+    <div class="form-horizontal">
 
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.HiddenFor(model => model.Id)
-
-
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
 
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.JopTitle, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.JopTitle, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.JopTitle, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.JopTitle, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.JopTitle, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.JopTitle, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.HourlyRate, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.HourlyRate, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.HourlyRate, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.HourlyRate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.HourlyRate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.HourlyRate, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.O_T_H_Rate, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.O_T_H_Rate, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.O_T_H_Rate, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.O_T_H_Rate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.O_T_H_Rate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.O_T_H_Rate, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
 
 
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
 
 
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
-    
-    
 
-    <div class="form-group">
-        <label class="control-label col-md-2">Role</label>
-        
-        
-        @if (Model.Roles != null && Model.Roles.Count != 0)
-        {
 
-            <select name="CurrenrRole" class="col-md-10 form-control " required>
-                @*<option value="" disabled selected>Choose your Role</option>*@
-                @foreach (var r in (List<IdentityRole>) ViewBag.AllRoles)
-                {
-                    if (Model.Roles.FirstOrDefault().RoleId == r.Id)
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Role</label>
+
+
+            @if (Model.Roles != null && Model.Roles.Count != 0)
+            {
+
+                <select name="CurrenrRole" class="col-md-10 form-control " required>
+                    @*<option value="" disabled selected>Choose your Role</option>*@
+                    @foreach (var r in (List<IdentityRole>)ViewBag.AllRoles)
                     {
+                        if (Model.Roles.FirstOrDefault().RoleId == r.Id)
+                        {
 
-                        <option value="@r.Name" selected="selected">@r.Name</option>
+                            <option value="@r.Name" selected="selected">@r.Name</option>
+
+                        }
+                        else
+
+                        {
+                            <option value="@r.Name">@r.Name</option>
+
+                        }
+
+
+
 
                     }
-                    else
 
+                </select>
+            }
+            else
+
+            {
+
+                //No role for this user !!
+                <select name="CurrenrRole" class="col-md-10 form-control " required>
+                    <option value="" disabled selected>Choose a Role</option>
+                    @foreach (var r in (List<IdentityRole>)ViewBag.AllRoles)
                     {
+
                         <option value="@r.Name">@r.Name</option>
+
+
 
                     }
 
+                </select>
+
+            }
 
 
-
-                }
-
-            </select>
-        }  else
-
-        {
-                     
-            //No role for this user !!
-            <select name="CurrenrRole" class="col-md-10 form-control " required>
-                <option value="" disabled selected>Choose a Role</option> 
-                @foreach (var r in (List<IdentityRole>) ViewBag.AllRoles)
-                {
-                    
-                        <option value="@r.Name">@r.Name</option>
-
-                   
-
-                }
-
-            </select>
-
-        }
-
-
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Save" class="btn btn-default" />
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
         </div>
     </div>
-</div>
 }
 
 
@@ -151,7 +152,8 @@
     @*@Html.ActionLink("Add Task", "Create", "TTask", new { id_current_project = Model.Project.Id }, htmlAttributes: new { @class = "btn btn-warning" })*@
 </div>
 
- 
+<h3> Task List</h3>
+
 <table class="table" id="listTask">
     <thead>
         <tr>
@@ -159,41 +161,42 @@
                 <p>TaskId</p>
             </th>
             <th>
-             <p>TaskName</p>
+                <p>TaskName</p>
             </th>
             <th>
                 <p>Project_Id</p>
 
-            </th> 
-            
+            </th>
+
             <th>
                 <p><p>StartTime</p></p>
 
-            </th> 
+            </th>
             <th>
                 <p>DeadTime</p>
 
-            </th> 
+            </th>
             <th>
                 <p>Description</p>
 
-            </th>  
-            
+            </th>
+
             <th>
                 <p>Priority</p>
 
-            </th> 
-            
+            </th>
+        
             <th>
                 <p>Status</p>
 
             </th>
-           
-            
+
+
             <th>
                 <p>Assignee</p>
             </th>
-            <th></th> <th></th>
+            <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -225,15 +228,16 @@
                     @Html.DisplayFor(modelItem => item.Priority)
                 </td>
 
+                
                 <td>
-                @Html.DisplayFor(modelItem => item.Status)
+                    @Html.DisplayFor(modelItem => item.Status)
                 <td>
                     @Html.DisplayFor(modelItem => item.ApplicationUser.FirstName)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", "TTask", new {id = item.Id}, new {@class = "btn btn-success"}) |
-                    @Html.ActionLink("Details", "Details", "TTask", new {id = item.Id}, new {@class = "btn btn-info"}) |
-                    @Html.ActionLink("Delete", "Delete", "TTask", new {id = item.Id}, new {@class = "btn btn-danger"})
+                    @Html.ActionLink("Edit", "Edit", "TTask", new { id = item.Id }, new { @class = "btn btn-success" }) |
+                    @Html.ActionLink("Details", "Details", "TTask", new { id = item.Id }, new { @class = "btn btn-info" }) |
+                    @Html.ActionLink("Delete", "Delete", "TTask", new { id = item.Id }, new { @class = "btn btn-danger" })
                 </td>
             </tr>
         }
@@ -243,6 +247,161 @@
 </table>
 
 
+<h3> Financial Status</h3>
+<table class="table" id="listFinancial">
+    <thead>
+        <tr>
+            <th>
+                <p>Date</p>
+            </th>
+            <th>
+                <p>Proj Id</p>
+            </th>
+            <th>
+                <p>TaskName</p>
+
+            </th>
+
+            <th>
+                <p><p>W Hours</p></p>
+
+            </th>
+            <th>
+                <p>OTHours</p>
+
+            </th>
+            <th>
+                <p>Wh rate</p>
+
+            </th>
+
+            <th>
+                <p>O.T.h rate</p>
+
+            </th>
+
+            <th>
+                <p>Total</p>
+
+            </th>
+
+
+            <th>
+                <p>Bonus</p>
+            </th>
+            <th></th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.FinancialstatusList.ToList())
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)  
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.pro__id)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.task__id)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.W_Hours) 
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OTHours)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Wh_Rate) $
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.OTH_Rate) $
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Total) $
+                <td>
+                    @{
+                        var bounes = item.Bonus;
+                    }
+                    @Html.DisplayFor(modelItem => item.Bonus) $
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", "TTask", new { id = item.Id }, new { @class = "btn btn-success" }) |
+                    @Html.ActionLink("Details", "Details", "TTask", new { id = item.Id }, new { @class = "btn btn-info" }) |
+                    @Html.ActionLink("Delete", "Delete", "TTask", new { id = item.Id }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+    </tbody>
+
+
+</table>
+<div>
+    <h3>Total</h3>
+    <p>
+        @{
+            var totalPrice = 0.0;
+        }
+        @foreach (var item in Model.FinancialstatusList.ToList())
+        {
+            totalPrice = totalPrice + item.Total;
+        }
+
+        @totalPrice $
+    </p>
+</div>
+
+<div>
+    <h3>
+        Defered Ammount
+    </h3>
+    <p>
+        @{
+            var DeferedAmmount = (totalPrice * 0.20);
+
+
+        }
+        @DeferedAmmount $
+    </p>
+</div>
+
+<div>
+    <h3>
+        Bonus
+    </h3>
+    <p>
+        @{
+            var totalBounes = 0.0;
+        }
+        @foreach (var item in Model.FinancialstatusList.ToList())
+        {
+            totalBounes = totalBounes + item.Bonus;
+        }
+
+        @totalBounes $
+    </p>
+</div>
+
+<div>
+    <h3>
+        Monthly Payment
+
+    </h3>
+    <p>
+        @{
+            var MonthlyPayment
+                = (totalPrice - DeferedAmmount + totalBounes);
+
+
+        }
+        @MonthlyPayment $
+    </p>
+</div>
 
 <div>
     @Html.ActionLink("Back to List", "ListUser")
@@ -256,5 +415,10 @@
             $("#listTask").dataTable();
         });
     </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#listFinancial").dataTable();
+        });
+    </script>
 }
- 

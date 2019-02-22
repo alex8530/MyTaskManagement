@@ -64,7 +64,7 @@ namespace MyTaskManagement.Controllers
                 return HttpNotFound();
             }
 
-            return View(_unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFiles(id));
+            return View(_unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanical(id));
         }
 
         // GET: Employee/Create
@@ -129,7 +129,7 @@ namespace MyTaskManagement.Controllers
         // GET: Employee/Edit/5
         public ActionResult Edit(string id)
         {
-            var editUser = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFiles(id);
+            var editUser = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanical(id);
             ViewBag.AllRoles = ApplicationDbContext.Create().Roles.ToList();
 
             return View(editUser);
@@ -187,7 +187,7 @@ namespace MyTaskManagement.Controllers
         {
             try
             {
-                var deleteUser = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFiles(id);
+                var deleteUser = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanical(id);
                 _unitOfWork.UserRepositry.Remove(deleteUser);
                 _unitOfWork.Complete();
                 return RedirectToAction("ListUser");

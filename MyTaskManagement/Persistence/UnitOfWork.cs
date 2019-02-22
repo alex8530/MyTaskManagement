@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using MyTaskManagement.Core;
+using MyTaskManagement.Core.Domain;
 using MyTaskManagement.Core.Repositories;
 using MyTaskManagement.Models;
 using MyTaskManagement.Persistence.Repositories;
@@ -21,6 +22,7 @@ namespace MyTaskManagement.Persistence
             TTaskRepositry = new TTaskRepository(_context);
             UserRepositry = new  UserRepository(_context);
             ClientRepositry = new   ClientRepository(_context);
+            FinancialRepositry = new    FinancialRepositry(_context);  
         }
 
         public IProjectRepositry ProjectRepositry { get; private set; }
@@ -30,6 +32,7 @@ namespace MyTaskManagement.Persistence
         public IUserRepositry UserRepositry { get; private set; }
 
         public IClientRepositry ClientRepositry { get; private set; }
+        public IFinancialRepositry  FinancialRepositry { get; private set; }
 
         public int Complete()
         {

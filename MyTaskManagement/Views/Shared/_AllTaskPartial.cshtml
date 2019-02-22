@@ -3,87 +3,90 @@
  
 <table class="table" id="listTask">
     <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                <p>Project_Id</p>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            <p>Project_Id</p>
 
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StartTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DeadTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            @*<th>
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StartTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DeadTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        @*<th>
                     @Html.DisplayNameFor(model => model.WorkingHours)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.OverTime)
                 </th>*@
-            <th>
-                @Html.DisplayNameFor(model => model.Priority)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
-            <th>
-                <p>Assignee</p>
-            </th>
-            <th></th>
-        </tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Priority)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            <p>Assignee</p>
+        </th>
+        <th></th>
+    </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.Project.Id)
-                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Project.Id)
+            </td>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.StartTime)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DeadTime)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                @*<td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DeadTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            @*<td>
                         @Html.DisplayFor(modelItem => item.WorkingHours)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.OverTime)
                     </td>*@
-                <td>
-                    @Html.DisplayFor(modelItem => item.Priority)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Status)
-                <td>
-                    @Html.DisplayFor(modelItem => item.ApplicationUser.FirstName)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit","TTask", new { id = item.Id }, new { @class = "btn btn-success" }) |
-                    @Html.ActionLink("Details", "Details",  "TTask", new { id = item.Id }, new { @class = "btn btn-info" }) |
-                    @Html.ActionLink("Delete", "Delete",   "TTask",new { id = item.Id }, new { @class = "btn btn-danger" })
-                </td>
-            </tr>
-        } 
+            <td>
+                @Html.DisplayFor(modelItem => item.Priority)
+            </td>
+            <td>
+            @Html.DisplayFor(modelItem => item.Status)
+            <td>
+                @Html.DisplayFor(modelItem => item.ApplicationUser.FirstName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit","TTask", new { id = item.Id }, new { @class = "btn btn-success" }) |
+                @Html.ActionLink("Details", "Details",  "TTask", new { id = item.Id }, new { @class = "btn btn-info" }) |
+                @Html.ActionLink("Delete", "Delete",   "TTask",new { id = item.Id }, new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+    } 
     </tbody>
 
 
 </table>
+
+
+ 
 @section scripts
 {
 

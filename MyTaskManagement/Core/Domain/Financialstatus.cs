@@ -11,8 +11,13 @@ namespace MyTaskManagement.Core.Domain
 {
     public class Financialstatus
     {
-        [Required]
-        public int Id { get; set; }
+         
+        public string Id { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime Date { get; set; }
+
 
         public int W_Hours { get; set; }
 
@@ -21,6 +26,14 @@ namespace MyTaskManagement.Core.Domain
         public int OTH_Rate { get; set; }
         public int Total { get; set; }
         public int Bonus { get; set; }
+        public string pro__id { get; set; }
+
+        public string task__id { get; set; }
+
+        [ForeignKey("User")]
+        public string user__id { get; set; }
+
+         
         
         public ApplicationUser User { get; set; }
          

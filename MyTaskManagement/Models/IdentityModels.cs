@@ -43,9 +43,7 @@ namespace MyTaskManagement.Models
 
         public ICollection<Project> Projects { get; set; }
         public   ICollection<TTask> Tasks { get; set; }
-        public ICollection<Financialstatus> TaFinancialstatussks { get; set; }
-
-
+        public ICollection<Financialstatus>  FinancialstatusList  { get; set; }
          
         public ICollection<MyFile> MyFiles  { get; set; }
 

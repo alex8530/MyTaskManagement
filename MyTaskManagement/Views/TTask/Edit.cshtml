@@ -17,6 +17,9 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Task.Id)
+        @* i need these id's to financail *@
+        @Html.Hidden("ProjectId", Model.Task.ProjectId)
+        @Html.Hidden("ApplicationUserId", Model.Task.ApplicationUser.Id)
 
         <div class="form-group">
             @Html.LabelFor(model => model.Task.Name, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -66,21 +69,21 @@
             </div>
         </div>
 
-        @*<div class="form-group">
-                @Html.LabelFor(model => model.WorkingHours, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="form-group">
+                @Html.LabelFor(model => model.Task.WorkingHours, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.WorkingHours, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.WorkingHours, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.Task.WorkingHours, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Task.WorkingHours, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.OverTime, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.Task.OverTime, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.OverTime, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.OverTime, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.Task.OverTime, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Task.OverTime, "", new { @class = "text-danger" })
                 </div>
-            </div>*@
+            </div> 
 
 
          <p>_________________________________ User  On Task _______________________________</p>

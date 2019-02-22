@@ -262,6 +262,22 @@
     <Compile Include="Migrations\201902181315598_RenameColumnMyFileInUserTable.Designer.cs">
       <DependentUpon>201902181315598_RenameColumnMyFileInUserTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201902201221363_addDateToFinancial.cs" />
+    <Compile Include="Migrations\201902201221363_addDateToFinancial.Designer.cs">
+      <DependentUpon>201902201221363_addDateToFinancial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902201226485_addTwoColumnToFinancial.cs" />
+    <Compile Include="Migrations\201902201226485_addTwoColumnToFinancial.Designer.cs">
+      <DependentUpon>201902201226485_addTwoColumnToFinancial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902202138034_AddUserIdInFainanicalStatus.cs" />
+    <Compile Include="Migrations\201902202138034_AddUserIdInFainanicalStatus.Designer.cs">
+      <DependentUpon>201902202138034_AddUserIdInFainanicalStatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902202158592_AddUserIdInFainanicalStatus1.cs" />
+    <Compile Include="Migrations\201902202158592_AddUserIdInFainanicalStatus1.Designer.cs">
+      <DependentUpon>201902202158592_AddUserIdInFainanicalStatus1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Core\Domain\Client.cs" />
@@ -269,6 +285,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Core\Domain\Project.cs" />
     <Compile Include="Core\Domain\StatusEnum.cs" />
+    <Compile Include="Persistence\Repositories\FinancialRepositry.cs" />
     <Compile Include="Persistence\Repositories\ClientRepository.cs" />
     <Compile Include="Persistence\Repositories\UserRepository.cs" />
     <Compile Include="Persistence\Repositories\TTaskRepository.cs" />
@@ -476,6 +493,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201902181315598_RenameColumnMyFileInUserTable.resx">
       <DependentUpon>201902181315598_RenameColumnMyFileInUserTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902201221363_addDateToFinancial.resx">
+      <DependentUpon>201902201221363_addDateToFinancial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902201226485_addTwoColumnToFinancial.resx">
+      <DependentUpon>201902201226485_addTwoColumnToFinancial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902202138034_AddUserIdInFainanicalStatus.resx">
+      <DependentUpon>201902202138034_AddUserIdInFainanicalStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902202158592_AddUserIdInFainanicalStatus1.resx">
+      <DependentUpon>201902202158592_AddUserIdInFainanicalStatus1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

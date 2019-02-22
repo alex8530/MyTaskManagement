@@ -96,7 +96,7 @@ namespace MyTaskManagement.Controllers
 
                 
                 //var user = _unitOfWork.UserRepositry.SingleOrDefault(u => u.Id == ui);
-                var user = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFiles( ui);
+                var user = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanical( ui);
 
                 /*
                  * Very important here
@@ -207,8 +207,12 @@ namespace MyTaskManagement.Controllers
         [HttpPost]
         public ActionResult Edit(int id, TTask  task)
         {
+
+            var ApplicationUserId = Request.Form["ApplicationUserId"];
+            var ProjectId = Request.Form["ProjectId"];
             try
             {
+
                 // TODO: Add update logic here
                 var oldTask = _unitOfWork.TTaskRepositry.GetTasksWithUserAndUserAndProject(id);
                 oldTask.Priority = task.Priority;
@@ -216,14 +220,50 @@ namespace MyTaskManagement.Controllers
                 oldTask.StartTime = task.StartTime;
                 oldTask.DeadTime= task.DeadTime;
                 oldTask.Description = task.Description;
+                oldTask.WorkingHours = task.WorkingHours;
+                oldTask.OverTime = task.OverTime;
 
 
+                var user = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanical(ApplicationUserId);
+
+
+                //check if status change to end
+                if (task.Status==StatusEnum.Ended)
+                {
+                    //add this  to financail status
+                    var totalEquation = (int) user.HourlyRate * task.WorkingHours +
+                                        (int) user.O_T_H_Rate * task.OverTime;
+                    var financial = new Financialstatus()
+                    {
+                        Id = task.Id.ToString(),
+                        Date = DateTime.Now, //must change
+                        Bonus = 20,//?????????
+                        W_Hours = task.WorkingHours,
+                        OTH_Rate = (int)user.O_T_H_Rate * task.OverTime,
+                        OTHours = task.OverTime,
+                        pro__id = ProjectId,
+                        task__id = task.Id.ToString(),
+                        Wh_Rate =(int) user.HourlyRate * task.WorkingHours,
+                        user__id =  ApplicationUserId,
+                        Total = totalEquation
+                    };
+                    try
+                    {
+                        _unitOfWork.FinancialRepositry.Add(financial);
+
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e);
+                    }
+
+                }
                 _unitOfWork.Complete();
 
 
                 return RedirectToAction("Index");
             }
-            catch
+            catch (Exception e)
             {
                 return View();
             }
