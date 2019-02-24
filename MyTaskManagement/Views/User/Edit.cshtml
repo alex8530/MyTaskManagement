@@ -1,7 +1,9 @@
 ﻿@using Microsoft.AspNet.Identity.EntityFramework
-@model  MyTaskManagement.Core.ViewModel.EditUserViewModel  
+@model  MyTaskManagement.Core.ViewModel.EditUserViewModel
 
 @{
+    /**/
+
     ViewBag.Title = "Edit";
 }
 
@@ -147,7 +149,7 @@
 
 
 <h3> Task List</h3>
- 
+
 <table class="table" id="listTask">
     <thead>
         <tr>
@@ -242,7 +244,7 @@
 
 
 <h3> Financial Status</h3>
-@using (Html.BeginForm("Edit", "User" ,FormMethod.Get,new {id= Model.User.Id }))
+@using (Html.BeginForm("Edit", "User", FormMethod.Get, new { id = Model.User.Id }))
 {
 
     <select name="month">
@@ -258,7 +260,7 @@
             }
             else
             {
-                <option value="0"  > </option>
+                <option value="0"> </option>
 
             }
 
@@ -271,21 +273,21 @@
                 }
                 else
                 {
-                    <option value="@key" > @Months[key]</option>
+                    <option value="@key"> @Months[key]</option>
 
                 }
             }
 
         }
-   
-   
+
+
     </select>
-  
+
     <select name="year">
         @{
             var listYears = Enumerable.Range(2016, 81).ToList();
 
-            if ((int) ViewBag.y == 0)
+            if ((int)ViewBag.y == 0)
             {
                 <option value="0" selected="selected"> </option>
 
@@ -297,7 +299,7 @@
             }
 
 
-            foreach (var  i in listYears)
+            foreach (var i in listYears)
             {
                 if ((int)ViewBag.y == i)
                 {//select it
@@ -314,8 +316,8 @@
 
 
         }
-        
-      
+
+
     </select>
 
     <input type="submit" value="Sort" class="btn btn-default" />
@@ -366,7 +368,7 @@
 
         </tr>
     </thead>
-    <tbody>
+    <tbody  >
         @foreach (var item in Model.Financialstatuses.ToList())
         {
             <tr>
@@ -476,8 +478,176 @@
     </p>
 </div>
 
+
+@using (Html.BeginForm("Export", "FinancialStatus", FormMethod.Post))
+{
+    <input type="hidden" name="GridHtml" />
+    <input type="submit" id="btnSubmit" value="Export To PDF" class="btn btn-danger" />
+}
+
+
+
 <div>
     @Html.ActionLink("Back to List", "ListUser")
+</div>
+
+
+
+
+
+@*----------------------------------------------------------------*@
+
+<div  hidden="" id="hiddinToPdf">
+    <table class="table"  >
+        <thead class="thead-dark">
+            <tr>
+                <th>
+                    <p>Date</p>
+                </th>
+                <th>
+                    <p>Proj Id</p>
+                </th>
+                <th>
+                    <p>TaskName</p>
+
+                </th>
+
+                <th>
+                    <p>W Hours</p> 
+
+                </th>
+                <th>
+                    <p>OTHours</p>
+
+                </th>
+                <th>
+                    <p>Wh rate</p>
+
+                </th>
+
+                <th>
+                    <p>O.T.h rate</p>
+
+                </th>
+
+                <th>
+                    <p>Total</p>
+
+                </th>
+
+
+                <th>
+                    <p>Bonus</p>
+                </th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Financialstatuses.ToList())
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.pro__id)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.task__id)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.W_Hours)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OTHours)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Wh_Rate) $
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OTH_Rate) $
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Total) $
+                    <td>
+                        @{
+                            var bounes = item.Bonus;
+                        }
+                        @Html.DisplayFor(modelItem => item.Bonus) $
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+
+
+    </table>
+    <div>
+        <h3>Total</h3>
+        <p>
+            @{
+                var totalPrice1 = 0.0;
+            }
+            @foreach (var item in Model.User.FinancialstatusList.ToList())
+            {
+                totalPrice1 = totalPrice1 + item.Total;
+            }
+
+            @totalPrice1 $
+        </p>
+    </div>
+
+    <div>
+        <h3>
+            Defered Ammount
+        </h3>
+        <p>
+            @{
+                var DeferedAmmount1 = (totalPrice1 * 0.20);
+
+
+            }
+            @DeferedAmmount1 $
+        </p>
+    </div>
+
+    <div>
+        <h3>
+            Bonus
+        </h3>
+        <p>
+            @{
+                var totalBounes1 = 0.0;
+            }
+            @foreach (var item in Model.User.FinancialstatusList.ToList())
+            {
+                totalBounes1 = totalBounes1 + item.Bonus;
+            }
+
+            @totalBounes1 $
+        </p>
+    </div>
+
+    <div>
+        <h3>
+            Monthly Payment
+
+        </h3>
+        <p>
+            @{
+                var MonthlyPayment1
+                    = (totalPrice1 - DeferedAmmount1 + totalBounes1);
+
+
+            }
+            @MonthlyPayment1 $
+        </p>
+    </div>
 </div>
 
 @section Scripts {
@@ -492,6 +662,16 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $("#listFinancial").dataTable();
+        });
+    </script>
+
+
+    @*for pdf*@
+    <script type="text/javascript">
+        $(function () {
+            $("#btnSubmit").click(function () {
+                $("input[name='GridHtml']").val($("#hiddinToPdf").html());
+            });
         });
     </script>
 }
