@@ -5,161 +5,341 @@
 }
 
 <h2>Employees Financial status</h2>
- 
-<table class="table" id="listEmployeeFinanical">
-    <thead>
-    <tr>
-     
-        
-        <th>
-            <p>Employee Name</p>
-        </th>
-      
-        
-        <th>
-            <p>Rate Details</p>
-        </th>
-        <th>
-            <p>WH/month</p>
-        </th>  
-        
-        <th>
-            <p>O.T.H/month</p>
-        </th>
-        
-           
-        <th>
-            <p>WH Rate</p>
-        </th>
-        
-           
-        <th>
-            <p>O.T.H Rate</p>
-        </th>
-        
-            
-        <th>
-            <p>Total</p>
-        </th>
-            
-        <th>
-            <p>Deffered</p>
-        </th>
-        
-              
-        <th>
-            <p>Bonus</p>
-        </th>
-        
-                
-        <th>
-            <p>Payment</p>
-        </th>
-         
-    </tr>
-
-
-    </thead>
-    <tbody>
-
-        @foreach (var item in Model)
-        {
+<div id="asd">
+    <table class="table" id="listEmployeeFinanical">
+        <thead>
             <tr>
-               
-                <td>
-                    @Html.DisplayFor(modelItem => item.FirstName)
-                </td>
-            
-            
-                
-                <td>
-                    <div>
-                        <p> R/H  @item.HourlyRate$</p>
-                        <p>R/O.T.H @item.O_T_H_Rate$ </p>
-                    </div>
-                </td>
-                
-                <td>
-                    @{
-                        var listFin = item.FinancialstatusList;
-                        <p>@listFin.Sum(f => f.W_Hours)</p>
-                    }
 
-                  
-                </td> 
-      
-                <td>
-                    @{
-                        
-                        <p>@listFin.Sum(f => f.OTHours)</p>
-                    }
 
-                  
-                </td> 
+                <th>
+                    <p>Employee Name</p>
+                </th>
 
-                <td>
-                    @{
-                        
-                        <p>@listFin.Sum(f => f.Wh_Rate)$</p>
-                    }
 
-                  
-                </td> 
+                <th>
+                    <p>Rate Details</p>
+                </th>
+                <th>
+                    <p>WH/month</p>
+                </th>
 
-                <td>
-                    @{
-                        
-                        <p>@listFin.Sum(f => f.OTH_Rate)$ </p>
-                    }
+                <th>
+                    <p>O.T.H/month</p>
+                </th>
 
-                  
-                </td> 
 
-                <td>
-                    @{
-                        var total = listFin.Sum(f => f.Total);
-                        <p>@total$ </p>
-                    }
+                <th>
+                    <p>WH Rate</p>
+                </th>
 
-                  
-                </td> 
-                <td>
-                    @{
 
-                        var defferd = (total * 0.2);
-                    <p>@defferd $ </p>
+                <th>
+                    <p>O.T.H Rate</p>
+                </th>
 
-                    }
 
-                  
-                </td> 
-                 <td>
-                     @{
-                         var bounes = listFin.Sum(f => f.Bonus);
+                <th>
+                    <p>Total</p>
+                </th>
 
-                         <p>@bounes$ </p>
+                <th>
+                    <p>Deffered</p>
+                </th>
 
-                     }
-                  
-                </td> 
-                 <td>
-                     @{
-                         var payment = total - defferd + bounes;
-                         <p>@payment$ </p>
 
-                     }
-                   
+                <th>
+                    <p>Bonus</p>
+                </th>
 
-                  
-                </td> 
 
-           
+                <th>
+                    <p>Payment</p>
+                </th>
+
             </tr>
-        }
 
-    </tbody>
 
-</table>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FirstName)
+                    </td>
+
+
+
+                    <td>
+                        <div>
+                            <p> R/H  @item.HourlyRate$</p>
+                            <p>R/O.T.H @item.O_T_H_Rate$ </p>
+                        </div>
+                    </td>
+
+                    <td>
+                        @{
+                            var listFin = item.FinancialstatusList;
+                            <p>@listFin.Sum(f => f.W_Hours)</p>
+                        }
+
+
+                    </td>
+
+                    <td>
+                        @{
+
+                            <p>@listFin.Sum(f => f.OTHours)</p>
+                        }
+
+
+                    </td>
+
+                    <td>
+                        @{
+
+                            <p>@listFin.Sum(f => f.Wh_Rate)$</p>
+                        }
+
+
+                    </td>
+
+                    <td>
+                        @{
+
+                            <p>@listFin.Sum(f => f.OTH_Rate)$ </p>
+                        }
+
+
+                    </td>
+
+                    <td>
+                        @{
+                            var total = listFin.Sum(f => f.Total);
+                            <p>@total$ </p>
+                        }
+
+
+                    </td>
+                    <td>
+                        @{
+
+                            var defferd = (total * 0.2);
+                            <p>@defferd $ </p>
+
+                        }
+
+
+                    </td>
+                    <td>
+                        @{
+                            var bounes = listFin.Sum(f => f.Bonus);
+
+                            <p>@bounes$ </p>
+
+                        }
+
+                    </td>
+                    <td>
+                        @{
+                            var payment = total - defferd + bounes;
+                            <p>@payment$ </p>
+
+                        }
+
+
+
+                    </td>
+
+
+                </tr>
+            }
+
+        </tbody>
+
+    </table>
+
+</div>
+
+@using (Html.BeginForm("Export", "FinancialStatus", FormMethod.Post))
+{
+    <input type="hidden" name="GridHtml" />
+    <input type="submit" id="btnSubmit" value="Export To PDF" class="btn btn-danger"/>
+}
+
+
+
+@*----------------------------------------------------------------*@
+    <div id="hiddenTableForPdf" hidden="" >
+        <table class="table" id="pdfTable">
+            <thead>
+                <tr>
+
+
+                    <th>
+                        <p>Employee Name</p>
+                    </th>
+
+
+                    <th>
+                        <p>Rate Details</p>
+                    </th>
+                    <th>
+                        <p>WH/month</p>
+                    </th>
+
+                    <th>
+                        <p>O.T.H/month</p>
+                    </th>
+
+
+                    <th>
+                        <p>WH Rate</p>
+                    </th>
+
+
+                    <th>
+                        <p>O.T.H Rate</p>
+                    </th>
+
+
+                    <th>
+                        <p>Total</p>
+                    </th>
+
+                    <th>
+                        <p>Deffered</p>
+                    </th>
+
+
+                    <th>
+                        <p>Bonus</p>
+                    </th>
+
+
+                    <th>
+                        <p>Payment</p>
+                    </th>
+
+                </tr>
+
+
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FirstName)
+                        </td>
+
+
+
+                        <td>
+                            <div>
+                                <p> R/H  @item.HourlyRate$</p>
+                                <p>R/O.T.H @item.O_T_H_Rate$ </p>
+                            </div>
+                        </td>
+
+                        <td>
+                            @{
+                                var listFin = item.FinancialstatusList;
+                                <p>@listFin.Sum(f => f.W_Hours)</p>
+                            }
+
+
+                        </td>
+
+                        <td>
+                            @{
+
+                                <p>@listFin.Sum(f => f.OTHours)</p>
+                            }
+
+
+                        </td>
+
+                        <td>
+                            @{
+
+                                <p>@listFin.Sum(f => f.Wh_Rate)$</p>
+                            }
+
+
+                        </td>
+
+                        <td>
+                            @{
+
+                                <p>@listFin.Sum(f => f.OTH_Rate)$ </p>
+                            }
+
+
+                        </td>
+
+                        <td>
+                            @{
+                                var total = listFin.Sum(f => f.Total);
+                                <p>@total$ </p>
+                            }
+
+
+                        </td>
+                        <td>
+                            @{
+
+                                var defferd = (total * 0.2);
+                                <p>@defferd $ </p>
+
+                            }
+
+
+                        </td>
+                        <td>
+                            @{
+                                var bounes = listFin.Sum(f => f.Bonus);
+
+                                <p>@bounes$ </p>
+
+                            }
+
+                        </td>
+                        <td>
+                            @{
+                                var payment = total - defferd + bounes;
+                                <p>@payment$ </p>
+
+                            }
+
+
+
+                        </td>
+
+
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script>
@@ -167,7 +347,18 @@
         $(document).ready(function () {
             $("#listEmployeeFinanical").dataTable();
         });
+       
     </script>
 
-  
+
+    @*for pdf*@
+     <script type="text/javascript">
+        $(function () {
+            $("#btnSubmit").click(function () {
+                $("input[name='GridHtml']").val($("#hiddenTableForPdf").html());
+            });
+        });
+    </script>
+
+
 }
