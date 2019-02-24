@@ -8,5 +8,7 @@ namespace MyTaskManagement.Core.Repositories
 {
     public interface IFinancialRepositry : IRepository<Financialstatus>
     {
+        IEnumerable<Financialstatus> GetAllFinancialstatusWithUser();
+
     }
 }

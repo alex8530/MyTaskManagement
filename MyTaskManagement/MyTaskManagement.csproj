@@ -178,6 +178,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\FinancialStatusController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -431,6 +432,7 @@
     <Content Include="webhome\fonts\fontawesome-webfont.woff" />
     <Content Include="webhome\fonts\fontawesome-webfont.woff2" />
     <Content Include="webhome\fonts\FontAwesome.otf" />
+    <Content Include="Views\FinancialStatus\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

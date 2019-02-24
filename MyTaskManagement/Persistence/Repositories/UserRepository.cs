@@ -52,10 +52,10 @@ namespace MyTaskManagement.Persistence.Repositories
 
        
 
-        public IEnumerable<ApplicationUser> GetAllUsersWithProjectsAndTasksAndRoles()
+        public IEnumerable<ApplicationUser> GetAllUsersWithProjectsAndTasksAndRolesAndFinanical()
         {
             return CuurentContext.Users.Include(user => user.Tasks)
-                .Include(user => user.Projects).Include(user => user.Roles).ToList();
+                .Include(user => user.Projects).Include(user => user.Roles).Include(user => user.FinancialstatusList).ToList();
         }
 
         public  ApplicationUser GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanical(string id)

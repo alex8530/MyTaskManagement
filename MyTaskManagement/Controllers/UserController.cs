@@ -32,7 +32,7 @@ namespace MyTaskManagement.Controllers
         // GET: Employee
         public ActionResult ListUser()
         {
-            var listUser = _unitOfWork.UserRepositry.GetAllUsersWithProjectsAndTasksAndRoles();
+            var listUser = _unitOfWork.UserRepositry.GetAllUsersWithProjectsAndTasksAndRolesAndFinanical();
             var roles = new List<string>();
             // get all names of role for user ...
             //i use this method because there is a role id inside user , not role name
@@ -127,6 +127,9 @@ namespace MyTaskManagement.Controllers
         }
 
         // GET: Employee/Edit/5
+        //int month =0 , int year = 0  will be avairiaable when i click on sort button in Edit View ,
+       
+
         public ActionResult Edit(string id ,int month =0 , int year = 0 )
         {
             var editUser = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanical(id);
@@ -147,7 +150,8 @@ namespace MyTaskManagement.Controllers
                 listOwnFinan = listOwnFinan.Where(f => f.Date.Month == month &&   f.Date.Year == year).ToList();
                  
             }
-        
+
+            // i send the Financialstatuses  as seperad on user , because i need to make some sort on it
             var vm = new EditUserViewModel()
             {
                  User = editUser,

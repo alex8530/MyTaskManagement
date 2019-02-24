@@ -24,6 +24,11 @@ namespace MyTaskManagement.Persistence.Repositories
         {
             get { return Context as ApplicationDbContext; }
         }
+
+        public IEnumerable<Financialstatus> GetAllFinancialstatusWithUser()
+        {
+            return CuurentContext.Financialstatuses.Include(f => f.User).ToList();
+        }
     }
 }
 
