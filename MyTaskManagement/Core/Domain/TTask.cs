@@ -33,14 +33,29 @@ namespace MyTaskManagement.Models
 
         public string Description { get; set; }
 
-        [Required]
-        public int WorkingHours { get; set; }
 
 
         [Required]
-        public int OverTime { get; set; }
+        public long EstimatedTime { get; set; }
 
+        [Required]
+        public long EffortHours { get; set; }
+
+       [Required]
+        public long RemainingHours {
+           get
+           {
+               return this.EstimatedTime - this.EffortHours;
+
+           }
+
+       }
+
+
+         
         public string Ticket { get; set; }
+
+        public string Notes { get; set; }
 
 
         //[Required]

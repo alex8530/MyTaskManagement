@@ -289,6 +289,14 @@
     <Compile Include="Migrations\201902271515254_AddTicketToTaskTable.Designer.cs">
       <DependentUpon>201902271515254_AddTicketToTaskTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201902272134150_UPdateColumsInTask.cs" />
+    <Compile Include="Migrations\201902272134150_UPdateColumsInTask.Designer.cs">
+      <DependentUpon>201902272134150_UPdateColumsInTask.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902272144095_addChangeToTask.cs" />
+    <Compile Include="Migrations\201902272144095_addChangeToTask.Designer.cs">
+      <DependentUpon>201902272144095_addChangeToTask.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Core\Domain\Client.cs" />
@@ -520,6 +528,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201902271515254_AddTicketToTaskTable.resx">
       <DependentUpon>201902271515254_AddTicketToTaskTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902272134150_UPdateColumsInTask.resx">
+      <DependentUpon>201902272134150_UPdateColumsInTask.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902272144095_addChangeToTask.resx">
+      <DependentUpon>201902272144095_addChangeToTask.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -84,7 +84,8 @@ namespace MyTaskManagement.Controllers
                     Task = new TTask()
                     {
                         ProjectId = id_current_project,//this is must neot change !!!
-                        StartTime = DateTime.Now //this is defult time
+                        StartTime = DateTime.Now,//this is defult time,
+                        DeadTime = DateTime.Now.AddDays(3)
 
                     },
                     Users = _unitOfWork.UserRepositry.GetAll().ToList()
@@ -141,9 +142,11 @@ namespace MyTaskManagement.Controllers
                         Name = task.Name,
                         Status = (StatusEnum)Enum.ToObject(typeof(StatusEnum), stat),
                         Priority = (PriorityEnum)Enum.ToObject(typeof(PriorityEnum), pri),
-                        OverTime = task.OverTime,
+                        EstimatedTime = task.EstimatedTime,
+                         EffortHours = task.EffortHours,
                         Ticket= task.Ticket,
-                        WorkingHours = task.WorkingHours
+                         Notes= task.Notes 
+                       
                         //Project =new Project() // here no need to add project object , just add his forign key
                         //, but if you need to add project object , you must init it
 
@@ -176,9 +179,10 @@ namespace MyTaskManagement.Controllers
                         Name = task.Name,
                         Status = (StatusEnum)Enum.ToObject(typeof(StatusEnum), stat),
                         Priority = (PriorityEnum)Enum.ToObject(typeof(PriorityEnum), pri),
-                        OverTime = task.OverTime,
+                        EstimatedTime = task.EstimatedTime,
+                        EffortHours = task.EffortHours,
                         Ticket = task.Ticket,
-                        WorkingHours = task.WorkingHours
+                        Notes = task.Notes
                         //Project =new Project() // here no need to add project object , just add his forign key
                         //, but if you need to add project object , you must init it
 
@@ -223,7 +227,7 @@ namespace MyTaskManagement.Controllers
 
         // POST: TTask/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, TTask  task)
+        public ActionResult Edit(int id, TTask task)
         {
 
             var ApplicationUserId = Request.Form["ApplicationUserId"];
@@ -234,49 +238,51 @@ namespace MyTaskManagement.Controllers
                 // TODO: Add update logic here
                 var oldTask = _unitOfWork.TTaskRepositry.GetTasksWithUserAndUserAndProject(id);
                 oldTask.Priority = task.Priority;
-                oldTask.Status= task.Status;
+                oldTask.Status = task.Status;
                 oldTask.StartTime = task.StartTime;
-                oldTask.DeadTime= task.DeadTime;
+                oldTask.DeadTime = task.DeadTime;
                 oldTask.Description = task.Description;
-                oldTask.WorkingHours = task.WorkingHours;
-                oldTask.OverTime = task.OverTime;
+                oldTask.EstimatedTime = task.EstimatedTime;
+                oldTask.EffortHours = task.EffortHours;
                 oldTask.Ticket = task.Ticket;
+                oldTask.Notes = task.Notes;
+
 
 
                 var user = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanical(ApplicationUserId);
 
 
-                //check if status change to end
-                if (task.Status==StatusEnum.Ended)
-                {
-                    //add this  to financail status
-                    var totalEquation = (int) user.HourlyRate * task.WorkingHours +
-                                        (int) user.O_T_H_Rate * task.OverTime;
-                    var financial = new Financialstatus()
-                    {
-                        Id = task.Id.ToString(),
-                        Date = task.StartTime, //must change
-                        Bonus = 20,//?????????
-                        W_Hours = task.WorkingHours,
-                        OTH_Rate = (int)user.O_T_H_Rate * task.OverTime,
-                        OTHours = task.OverTime,
-                        pro__id = ProjectId,
-                        task__id = task.Id.ToString(),
-                        Wh_Rate =(int) user.HourlyRate * task.WorkingHours,
-                        user__id =  ApplicationUserId,
-                        Total = totalEquation
-                    };
-                    try
-                    {
-                        _unitOfWork.FinancialRepositry.Add(financial);
+                ////check if status change to end
+                //if (task.Status == StatusEnum.Ended)
+                //{
+                //    //add this  to financail status
+                //    var totalEquation = (int)user.HourlyRate * task.EffortHours +
+                //                        (int)user.O_T_H_Rate * task.OverTime;
+                //    var financial = new Financialstatus()
+                //    {
+                //        Id = task.Id.ToString(),
+                //        Date = task.StartTime, //must change
+                //        Bonus = 20,//?????????
+                //        W_Hours = task.WorkingHours,
+                //        OTH_Rate = (int)user.O_T_H_Rate * task.OverTime,
+                //        OTHours = task.OverTime,
+                //        pro__id = ProjectId,
+                //        task__id = task.Id.ToString(),
+                //        Wh_Rate = (int)user.HourlyRate * task.WorkingHours,
+                //        user__id = ApplicationUserId,
+                //        Total = totalEquation
+                //    };
+                //    try
+                //    {
+                //        _unitOfWork.FinancialRepositry.Add(financial);
 
-                    }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine(e);
-                    }
+                //    }
+                //    catch (Exception e)
+                //    {
+                //        Console.WriteLine(e);
+                //    }
 
-                }
+                //}
                 _unitOfWork.Complete();
 
 

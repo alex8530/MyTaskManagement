@@ -54,25 +54,33 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Task.WorkingHours, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Task.EstimatedTime, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Task.WorkingHours, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Task.WorkingHours, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Task.EstimatedTime, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Task.EstimatedTime, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Task.OverTime, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Task.EffortHours, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Task.OverTime, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Task.OverTime, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Task.EffortHours, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Task.EffortHours, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div> 
+     
         <div class="form-group">
             @Html.LabelFor(model => model.Task.Ticket, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Task.Ticket, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Task.Ticket, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Task.Notes, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Task.Notes, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Task.Notes, "", new { @class = "text-danger" })
             </div>
         </div>
         @if (@ViewBag.fromTask.Equals("yes"))
@@ -153,7 +161,7 @@
         
 
         <div class="form-group">
-            <label class="control-label col-md-2  " for="__UserId__">User</label>
+            <label class="control-label col-md-2  " for="__UserId__">Assigne To</label>
             <select name="__UserId__" class="col-md-10 form-control " >
                 <option value="" disabled selected>Choose your Employees</option>
 

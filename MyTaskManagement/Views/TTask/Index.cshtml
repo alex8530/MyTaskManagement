@@ -34,11 +34,14 @@
             <th>
                 @Html.DisplayNameFor(model => model.Description)
             </th>
-            <th>
-                    @Html.DisplayNameFor(model => model.WorkingHours)
+                <th>
+                    @Html.DisplayNameFor(model => model.EstimatedTime)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.OverTime)
+                    @Html.DisplayNameFor(model => model.EffortHours)
+                </th> 
+                <th>
+                    @Html.DisplayNameFor(model => model.RemainingHours)
                 </th> 
             <th>
                 @Html.DisplayNameFor(model => model.Priority)
@@ -48,6 +51,9 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Ticket)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Notes)
             </th>
             <th>
                 <p>Assignee</p>
@@ -77,10 +83,13 @@
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
                  <td>
-                        @Html.DisplayFor(modelItem => item.WorkingHours)
+                        @Html.DisplayFor(modelItem => item.EstimatedTime)
+                  </td>
+                 <td>
+                        @Html.DisplayFor(modelItem => item.EffortHours)
                   </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.OverTime)
+                        @Html.DisplayFor(modelItem => item. RemainingHours)
                 </td> 
                 
 
@@ -95,6 +104,9 @@
 
                 <td>
                     @Html.DisplayFor(modelItem => item.Ticket)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Notes)
                 </td>
 
                 <td>
