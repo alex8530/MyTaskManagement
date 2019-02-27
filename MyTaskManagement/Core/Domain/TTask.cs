@@ -24,12 +24,7 @@ namespace MyTaskManagement.Models
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime StartTime { get; set; }
-
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime DeadTime { get; set; }
-
+        public DateTime StartTime { get; set; } 
 
         public string Description { get; set; }
 

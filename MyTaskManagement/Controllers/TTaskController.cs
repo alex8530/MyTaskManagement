@@ -65,7 +65,7 @@ namespace MyTaskManagement.Controllers
                     {
                          
                         StartTime = DateTime.Now, //this is defult time
-                        DeadTime = DateTime.Now.AddDays(3)  
+                       
                     },
                     Users = _unitOfWork.UserRepositry.GetAll().ToList(),
                     Projects = _unitOfWork.ProjectRepositry.GetAll().ToList() 
@@ -85,7 +85,7 @@ namespace MyTaskManagement.Controllers
                     {
                         ProjectId = id_current_project,//this is must neot change !!!
                         StartTime = DateTime.Now,//this is defult time,
-                        DeadTime = DateTime.Now.AddDays(3)
+                        
 
                     },
                     Users = _unitOfWork.UserRepositry.GetAll().ToList()
@@ -137,7 +137,7 @@ namespace MyTaskManagement.Controllers
                         ProjectId = pi,
                         ApplicationUser = user,
                         Description = task.Description,
-                        DeadTime = task.DeadTime,
+                        
                         StartTime = task.StartTime,
                         Name = task.Name,
                         Status = (StatusEnum)Enum.ToObject(typeof(StatusEnum), stat),
@@ -174,7 +174,7 @@ namespace MyTaskManagement.Controllers
                         ProjectId = id_current_project,
                         ApplicationUser = user,
                         Description = task.Description,
-                        DeadTime = task.DeadTime,
+                     
                         StartTime = task.StartTime,
                         Name = task.Name,
                         Status = (StatusEnum)Enum.ToObject(typeof(StatusEnum), stat),
@@ -240,8 +240,7 @@ namespace MyTaskManagement.Controllers
                 oldTask.Priority = task.Priority;
                 oldTask.Status = task.Status;
                 oldTask.StartTime = task.StartTime;
-                oldTask.DeadTime = task.DeadTime;
-                oldTask.Description = task.Description;
+                 oldTask.Description = task.Description;
                 oldTask.EstimatedTime = task.EstimatedTime;
                 oldTask.EffortHours = task.EffortHours;
                 oldTask.Ticket = task.Ticket;

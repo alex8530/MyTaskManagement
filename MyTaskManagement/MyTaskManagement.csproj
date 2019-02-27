@@ -301,6 +301,10 @@
     <Compile Include="Migrations\201902272201345_EditFinanicalColume.Designer.cs">
       <DependentUpon>201902272201345_EditFinanicalColume.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201902272215538_removeEndTimeFromTask.cs" />
+    <Compile Include="Migrations\201902272215538_removeEndTimeFromTask.Designer.cs">
+      <DependentUpon>201902272215538_removeEndTimeFromTask.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Core\Domain\Client.cs" />
@@ -541,6 +545,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201902272201345_EditFinanicalColume.resx">
       <DependentUpon>201902272201345_EditFinanicalColume.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902272215538_removeEndTimeFromTask.resx">
+      <DependentUpon>201902272215538_removeEndTimeFromTask.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
