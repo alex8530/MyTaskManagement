@@ -253,36 +253,34 @@ namespace MyTaskManagement.Controllers
 
 
                 ////check if status change to end
-                //if (task.Status == StatusEnum.Ended)
-                //{
-                //    //add this  to financail status
-                //    var totalEquation = (int)user.HourlyRate * task.EffortHours +
-                //                        (int)user.O_T_H_Rate * task.OverTime;
-                //    var financial = new Financialstatus()
-                //    {
-                //        Id = task.Id.ToString(),
-                //        Date = task.StartTime, //must change
-                //        Bonus = 20,//?????????
-                //        W_Hours = task.WorkingHours,
-                //        OTH_Rate = (int)user.O_T_H_Rate * task.OverTime,
-                //        OTHours = task.OverTime,
-                //        pro__id = ProjectId,
-                //        task__id = task.Id.ToString(),
-                //        Wh_Rate = (int)user.HourlyRate * task.WorkingHours,
-                //        user__id = ApplicationUserId,
-                //        Total = totalEquation
-                //    };
-                //    try
-                //    {
-                //        _unitOfWork.FinancialRepositry.Add(financial);
+                if (task.Status == StatusEnum.Ended)
+                {
+                    //add this  to financail status
+                    var totalEquation =(long)(  user.HourlyRate * task.EffortHours);
+                    var financial = new Financialstatus()
+                    {
+                        Id = task.Id.ToString(),
+                        Date = task.StartTime, //must change
+                        EstimatedHours = task.EstimatedTime,
+                        EffortHours = task.EffortHours,
+                         
+                        pro__id = ProjectId,
+                        task__id = task.Id.ToString(),
+                        
+                        user__id = ApplicationUserId,
+                        Total = totalEquation
+                    };
+                    try
+                    {
+                        _unitOfWork.FinancialRepositry.Add(financial);
 
-                //    }
-                //    catch (Exception e)
-                //    {
-                //        Console.WriteLine(e);
-                //    }
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e);
+                    }
 
-                //}
+                }
                 _unitOfWork.Complete();
 
 

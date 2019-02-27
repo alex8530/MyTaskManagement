@@ -19,13 +19,12 @@ namespace MyTaskManagement.Core.Domain
         public DateTime Date { get; set; }
 
 
-        public int W_Hours { get; set; }
-
-        public int OTHours { get; set; }
-        public int Wh_Rate { get; set; }
-        public int OTH_Rate { get; set; }
-        public int Total { get; set; }
-        public int Bonus { get; set; }
+        public long EstimatedHours { get; set; }
+        public long EffortHours { get; set; }
+        
+    
+        public long Total { get; set; }
+        
         public string pro__id { get; set; }
 
         public string task__id { get; set; }

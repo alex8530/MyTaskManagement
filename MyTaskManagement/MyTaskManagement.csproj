@@ -297,6 +297,10 @@
     <Compile Include="Migrations\201902272144095_addChangeToTask.Designer.cs">
       <DependentUpon>201902272144095_addChangeToTask.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201902272201345_EditFinanicalColume.cs" />
+    <Compile Include="Migrations\201902272201345_EditFinanicalColume.Designer.cs">
+      <DependentUpon>201902272201345_EditFinanicalColume.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Core\Domain\Client.cs" />
@@ -534,6 +538,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201902272144095_addChangeToTask.resx">
       <DependentUpon>201902272144095_addChangeToTask.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902272201345_EditFinanicalColume.resx">
+      <DependentUpon>201902272201345_EditFinanicalColume.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
