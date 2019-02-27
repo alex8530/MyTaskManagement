@@ -40,6 +40,8 @@ namespace MyTaskManagement.Models
         [Required]
         public int OverTime { get; set; }
 
+        public string Ticket { get; set; }
+
 
         //[Required]
         public ApplicationUser ApplicationUser { get; set; }

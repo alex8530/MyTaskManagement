@@ -142,6 +142,7 @@ namespace MyTaskManagement.Controllers
                         Status = (StatusEnum)Enum.ToObject(typeof(StatusEnum), stat),
                         Priority = (PriorityEnum)Enum.ToObject(typeof(PriorityEnum), pri),
                         OverTime = task.OverTime,
+                        Ticket= task.Ticket,
                         WorkingHours = task.WorkingHours
                         //Project =new Project() // here no need to add project object , just add his forign key
                         //, but if you need to add project object , you must init it
@@ -176,6 +177,7 @@ namespace MyTaskManagement.Controllers
                         Status = (StatusEnum)Enum.ToObject(typeof(StatusEnum), stat),
                         Priority = (PriorityEnum)Enum.ToObject(typeof(PriorityEnum), pri),
                         OverTime = task.OverTime,
+                        Ticket = task.Ticket,
                         WorkingHours = task.WorkingHours
                         //Project =new Project() // here no need to add project object , just add his forign key
                         //, but if you need to add project object , you must init it
@@ -238,6 +240,7 @@ namespace MyTaskManagement.Controllers
                 oldTask.Description = task.Description;
                 oldTask.WorkingHours = task.WorkingHours;
                 oldTask.OverTime = task.OverTime;
+                oldTask.Ticket = task.Ticket;
 
 
                 var user = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanical(ApplicationUserId);
