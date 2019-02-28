@@ -192,7 +192,6 @@
     <Compile Include="Controllers\TTaskController.cs" />
     <Compile Include="Core\Constants\Constants.cs" />
     <Compile Include="Core\Domain\Financialstatus.cs" />
-    <Compile Include="Core\Domain\ManagerProjectsTable.cs" />
     <Compile Include="Core\Domain\MyFile.cs" />
     <Compile Include="Core\Domain\MyFileType.cs" />
     <Compile Include="Core\Domain\PriorityEnum.cs" />
@@ -306,22 +305,9 @@
     <Compile Include="Migrations\201902272215538_removeEndTimeFromTask.Designer.cs">
       <DependentUpon>201902272215538_removeEndTimeFromTask.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201902272313234_addOwnerToTask.cs" />
-    <Compile Include="Migrations\201902272313234_addOwnerToTask.Designer.cs">
-      <DependentUpon>201902272313234_addOwnerToTask.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201902280003126_addManagerProject.cs" />
-    <Compile Include="Migrations\201902280003126_addManagerProject.Designer.cs">
-      <DependentUpon>201902280003126_addManagerProject.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201902281022426_addManagerProjectTable.cs" />
-    <Compile Include="Migrations\201902281022426_addManagerProjectTable.Designer.cs">
-      <DependentUpon>201902281022426_addManagerProjectTable.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Core\Domain\Client.cs" />
-    <Compile Include="Models\ApplicationDbContext.Views.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Core\Domain\Project.cs" />
@@ -562,15 +548,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201902272215538_removeEndTimeFromTask.resx">
       <DependentUpon>201902272215538_removeEndTimeFromTask.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201902272313234_addOwnerToTask.resx">
-      <DependentUpon>201902272313234_addOwnerToTask.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201902280003126_addManagerProject.resx">
-      <DependentUpon>201902280003126_addManagerProject.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201902281022426_addManagerProjectTable.resx">
-      <DependentUpon>201902281022426_addManagerProjectTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
