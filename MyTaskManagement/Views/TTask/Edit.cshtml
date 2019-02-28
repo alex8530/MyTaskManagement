@@ -28,7 +28,13 @@
                 @Html.ValidationMessageFor(model => model.Task.Name, "", new { @class = "text-danger" })
             </div>
         </div>
-
+        <div class="form-group">
+            @Html.LabelFor(model => model.Task.Owner, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Task.Owner, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                @Html.ValidationMessageFor(model => model.Task.Owner, "", new { @class = "text-danger" })
+            </div>
+        </div>
         <div class="form-group">
             @Html.LabelFor(model => model.Task.Priority, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -53,13 +59,7 @@
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Task.DeadTime, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Task.DeadTime, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Task.DeadTime, "", new { @class = "text-danger" })
-            </div>
-        </div>
+      
 
         <div class="form-group">
             @Html.LabelFor(model => model.Task.Description, htmlAttributes: new { @class = "control-label col-md-2" })

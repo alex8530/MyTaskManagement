@@ -145,8 +145,8 @@ namespace MyTaskManagement.Controllers
                         EstimatedTime = task.EstimatedTime,
                          EffortHours = task.EffortHours,
                         Ticket= task.Ticket,
-                         Notes= task.Notes 
-                       
+                         Notes= task.Notes,
+                        Owner = User.Identity.Name
                         //Project =new Project() // here no need to add project object , just add his forign key
                         //, but if you need to add project object , you must init it
 

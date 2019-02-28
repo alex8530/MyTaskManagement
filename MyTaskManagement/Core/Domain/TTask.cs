@@ -51,6 +51,7 @@ namespace MyTaskManagement.Models
         public string Ticket { get; set; }
 
         public string Notes { get; set; }
+        public string Owner { get; set; }
 
 
         //[Required]
@@ -65,7 +66,7 @@ namespace MyTaskManagement.Models
         public string ProjectId { get; set; }
 
 
-        //public Financialstatus  Financialstatus { get; set; }
+       
 
          
     }
