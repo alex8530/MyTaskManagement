@@ -148,7 +148,7 @@
 
 
 
-<h3> Task List</h3>
+<h3> Employee Scrum</h3>
 
 <table class="table" id="listTask">
     <thead>
@@ -168,10 +168,7 @@
                 <p><p>StartTime</p></p>
 
             </th>
-            <th>
-                <p>DeadTime</p>
-
-            </th>
+          
             <th>
                 <p>Description</p>
 
@@ -186,12 +183,19 @@
                 <p>Status</p>
 
             </th>
-
+             
 
             <th>
-                <p>Assignee</p>
+                <p>Effort Hours</p>
             </th>
-            <th></th>
+          
+            <th>
+                <p> Remaining Hours</p>
+            </th>
+            <th>
+                <p>Assigne To</p>
+            </th>
+          
             <th></th>
         </tr>
     </thead>
@@ -213,9 +217,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.StartTime)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DeadTime)
-                </td>
+               
                 <td>
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
@@ -227,6 +229,12 @@
 
                 <td>
                     @Html.DisplayFor(modelItem => item.Status)
+                <td>
+                    @Html.DisplayFor(modelItem => item.EffortHours)
+                </td>  
+                <td>
+                    @Html.DisplayFor(modelItem => item.RemainingHours)
+                </td>  
                 <td>
                     @Html.DisplayFor(modelItem => item.ApplicationUser.FirstName)
                 </td>
@@ -323,7 +331,7 @@
     <input type="submit" value="Sort" class="btn btn-default" />
 
 }
-<table class="table" id="listFinancial">
+@*<table class="table" id="listFinancial">
     <thead>
         <tr>
             <th>
@@ -476,14 +484,14 @@
         }
         @MonthlyPayment $
     </p>
-</div>
+</div>*@
 
 
-@using (Html.BeginForm("Export", "FinancialStatus", FormMethod.Post))
+@*@using (Html.BeginForm("Export", "FinancialStatus", FormMethod.Post))
 {
     <input type="hidden" name="GridHtml" />
     <input type="submit" id="btnSubmit" value="Export To PDF" class="btn btn-danger" />
-}
+}*@
 
 
 
@@ -497,7 +505,7 @@
 
 @*----------------------------------------------------------------*@
 
-<div  hidden=""  id="hiddinToPdf">
+@*<div  hidden=""  id="hiddinToPdf">
     <table class="table table-bordered"  border="1" >
         <thead  class="thead-dark">
             <tr >
@@ -649,7 +657,7 @@
             @MonthlyPayment1 $
         </p>
     </div>
-</div>
+</div>*@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
@@ -660,11 +668,11 @@
         });
     </script>
 
-    <script type="text/javascript">
+    @*<script type="text/javascript">
         $(document).ready(function () {
             $("#listFinancial").dataTable();
         });
-    </script>
+    </script>*@
 
 
     @*for pdf*@

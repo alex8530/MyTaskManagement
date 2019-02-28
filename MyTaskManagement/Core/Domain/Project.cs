@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using MyTaskManagement.Core.Domain;
 
 namespace MyTaskManagement.Models
 {
@@ -41,6 +42,8 @@ namespace MyTaskManagement.Models
         public  Client Client { get; set; }
         
         public int ClientId { get; set; }
-       
+
+         
+
     }
 }

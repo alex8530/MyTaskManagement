@@ -46,7 +46,7 @@ namespace MyTaskManagement.Models
         public ICollection<Financialstatus>  FinancialstatusList  { get; set; }
          
         public ICollection<MyFile> MyFiles  { get; set; }
-
+         
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
@@ -66,6 +66,7 @@ namespace MyTaskManagement.Models
 
   
         public DbSet<Project> Projects { get; set; }
+        public DbSet<ManagerProjectsTable>  ManagerProjectsTables { get; set; }
          public DbSet<TTask>  Tasks { get; set; }
         public DbSet<Client> Clients { get; set; }
         public DbSet<Financialstatus> Financialstatuses { get; set; }
