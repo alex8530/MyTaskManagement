@@ -11,9 +11,11 @@ using System.Web.WebPages;
 using MyTaskManagement.Core.ViewModel;
 using System.Data.Entity;
 using MyTaskManagement.Core.Domain;
+using Project = MyTaskManagement.Models.Project;
 
 namespace MyTaskManagement.Controllers
 {
+   
     public class ProjectController : Controller
     {
         private UnitOfWork _unitOfWork = new UnitOfWork(new ApplicationDbContext());
@@ -24,9 +26,24 @@ namespace MyTaskManagement.Controllers
         public ActionResult Index()
         {
 
+            //get all projects
+          var ProjectsWithClientAndUsers = _unitOfWork.ProjectRepositry.GetAllProjectsWithClientAndUsersAndTasks();
 
-                var ProjectsWithClientAndUsers = _unitOfWork.ProjectRepositry.GetAllProjectsWithClientAndUsersAndTasks();
-                return View(ProjectsWithClientAndUsers);
+            var vm = new IndexProjectViewModel();
+            vm.Projects = new List<Project>();
+            vm.Managers=  new List<ApplicationUser>();
+
+
+            foreach (var project in ProjectsWithClientAndUsers)
+            {   
+                //add project to list
+                vm.Projects.Add(project);
+                //then add thier manager
+                 
+              vm.Managers.Add(GetManagerForProject(project.Id));  
+
+            }
+             return View(vm);
              
 
         }
@@ -43,7 +60,7 @@ namespace MyTaskManagement.Controllers
         public ActionResult Create()
         {
 
-            var viewmodel = new IndexProjectViewModels()
+            var viewmodel = new CreateProjectViewModels()
             {
                  Project = new Project(),
                  Users = _unitOfWork.UserRepositry.GetAll().ToList(),
@@ -57,7 +74,7 @@ namespace MyTaskManagement.Controllers
         // POST: Project/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IndexProjectViewModels viewmodel, string __UserId__,string ClientId, int status )
+        public ActionResult Create(CreateProjectViewModels viewmodel, string __UserId__,string ClientId, int status )
         {
 
            
@@ -111,16 +128,25 @@ namespace MyTaskManagement.Controllers
                 if (!__UserId__.IsEmpty())
                 {
                     var user = _unitOfWork.UserRepositry.SingleOrDefault(u => u.Id == __UserId__);
-                    newProject.Users.Add(user);
+                    //Add this manger 
+                    //newProject.Users.Add(user);
+                    var pm = new ProjectManagerTable()
+                    {
+                        ManagerID = user.Id,
+                        ProjectID = viewmodel.Project.Id
+
+
+                    };
+                    _unitOfWork.ProjectMangerRepositry.Add(pm);
 
                 }
 
 
                 _unitOfWork.ProjectRepositry.Add(newProject);
+                 
                 _unitOfWork.Complete();
 
-
-
+                 
                 return RedirectToAction("Index");
             }
             catch (Exception ex)
@@ -132,51 +158,26 @@ namespace MyTaskManagement.Controllers
         // GET: Project/Edit/5
         public ActionResult Edit(string id)
         {
-
+            //All users
             var users = _unitOfWork.UserRepositry.GetAll().ToList();
-            var viewmodel = new IndexProjectViewModels()
+
+            //current project
+            var currentProject = _unitOfWork.ProjectRepositry.GetProjectsWithClientAndUsersAndTasks(id);
+
+            var currentManager = GetManagerForProject(currentProject.Id);
+            //get current project
+
+            var viewmodel = new CreateProjectViewModels()
             {
-                Project = _unitOfWork.ProjectRepositry.GetProjectsWithClientAndUsersAndTasks(id),
+                Project = currentProject,
                 Users = users,
-                Clients = _unitOfWork.ClientRepositry.GetAll().ToList()
-                 
+                Clients = _unitOfWork.ClientRepositry.GetAll().ToList(),
+                Manager = currentManager
+
+
             };
-             
-            //at the same time .. add preivues financial to users
+
          
-            //foreach (var user in users)
-            //{
-            //    if (user.Tasks!=null  )
-            //    {
-
-            //        if (user.Tasks.Count != 0)
-            //        {
-            //        foreach (var task in user.Tasks)
-            //        {
-            //            var financial = new Financialstatus()
-            //            {    Id = task.Id.ToString(),
-            //                Date = DateTime.Now, //must change
-            //                Bonus = 0,
-            //                W_Hours = task.WorkingHours,
-            //                OTH_Rate = 5,
-            //                OTHours = task.OverTime,
-            //                pro__id = task.ProjectId,
-            //                task__id = task.Name,
-            //                Wh_Rate = 6,
-            //                user__id = user.Id,
-            //                Total = 5 + 5
-            //            };
-
-            //             _unitOfWork.FinancialRepositry.Add(financial);
-            //            //_unitOfWork.UserRepositry.AddUser();
-            //            _unitOfWork.Complete();
-            //        }
-
-            //        }
-
-            //    }
-
-            //}
 
             return View(viewmodel);
         }
@@ -295,6 +296,14 @@ namespace MyTaskManagement.Controllers
             {
                 return View();
             }
+        }
+
+
+        private ApplicationUser GetManagerForProject(string projectId)
+        {
+            var result = _unitOfWork.ProjectMangerRepositry.SingleOrDefault(s => s.ProjectID == projectId);
+            var managerUser = _unitOfWork.UserRepositry.SingleOrDefault(user => user.Id == result.ManagerID);
+            return managerUser;
         }
     }
     

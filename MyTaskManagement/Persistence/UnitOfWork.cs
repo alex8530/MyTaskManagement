@@ -22,10 +22,12 @@ namespace MyTaskManagement.Persistence
             TTaskRepositry = new TTaskRepository(_context);
             UserRepositry = new  UserRepository(_context);
             ClientRepositry = new   ClientRepository(_context);
-            FinancialRepositry = new    FinancialRepositry(_context);  
+            FinancialRepositry = new    FinancialRepositry(_context);
+            ProjectMangerRepositry = new     ProjectManagerRepositry(_context);  
         }
 
         public IProjectRepositry ProjectRepositry { get; private set; }
+        public IProjectMangerRepositry ProjectMangerRepositry{ get; private set; }
 
         public ITTaskRepositry TTaskRepositry { get; private set; }
 

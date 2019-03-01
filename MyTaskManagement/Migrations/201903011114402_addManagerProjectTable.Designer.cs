@@ -7,13 +7,13 @@ namespace MyTaskManagement.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class RenameColumnMyFileInUserTable : IMigrationMetadata
+    public sealed partial class addManagerProjectTable : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(RenameColumnMyFileInUserTable));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(addManagerProjectTable));
         
         string IMigrationMetadata.Id
         {
-            get { return "201902181315598_RenameColumnMyFileInUserTable"; }
+            get { return "201903011114402_addManagerProjectTable"; }
         }
         
         string IMigrationMetadata.Source

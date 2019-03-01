@@ -1,7 +1,8 @@
 ﻿@using MyTaskManagement.Models
-@model IEnumerable<MyTaskManagement.Models.Project>
+@model   MyTaskManagement.Core.ViewModel.IndexProjectViewModel 
 
-@{
+@{ 
+    int i = 0;
     ViewBag.Title = "Projects";
 }
 
@@ -15,27 +16,32 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                <p>Name</p>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Id)
+                 <p>Id</p>
             </th>
 
             <th>
-                @Html.DisplayNameFor(model => model.StartTime)
-            </th>
+                <p> Manager Name </p>
+            </th> 
+
             <th>
-                @Html.DisplayNameFor(model => model.DeadTime)
-            </th>
+                <p>StartTime</p>
+             </th>
+
             <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
+                <p>DeadTime</p>
+             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
+                <p>Description</p>
+             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Client.Name)
-            </th>
+                <p>Status</p>
+             </th>
+            <th>
+                <p>Client</p>
+             </th>
             <th>
                 <p> Users</p>
             </th>
@@ -54,8 +60,8 @@
     </thead>
     
     <tbody>
-
-        @foreach (var item in Model)
+        ss
+        @foreach (var item in Model.Projects.ToList())
         {
             <tr>
              
@@ -64,7 +70,15 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Id)
-                </td>
+                </td> 
+                 <td>
+                    <p>
+                        @{
+                            @Model.Managers[i].FirstName
+                            i++;
+                        }
+                    </p>
+                </td> 
                 <td>
                     @Html.DisplayFor(modelItem => item.StartTime)
                 </td>

@@ -41,6 +41,6 @@ namespace MyTaskManagement.Models
         public  Client Client { get; set; }
         
         public int ClientId { get; set; }
-       
+         
     }
 }
