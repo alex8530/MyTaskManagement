@@ -184,7 +184,7 @@ namespace MyTaskManagement.Controllers
 
         // POST: Project/Edit/5
         [HttpPost]
-        public ActionResult Edit(string id, Project  project,  int ClientId)
+        public ActionResult Edit(string id, Project  project,  int ClientId, string ManagerId)
         {
             try
             {
@@ -198,6 +198,15 @@ namespace MyTaskManagement.Controllers
                     oldProject.Description = project.Description;
                     
                     oldProject.ClientId =  ClientId;
+
+
+                    //update manager in that table
+                    var newProjectManager= new ProjectManagerTable()
+                    {
+                        ProjectID = id,
+                        ManagerID = ManagerId
+                    };
+                     _unitOfWork.ProjectMangerRepositry.Add(newProjectManager);
 
                     _unitOfWork.Complete();
 
