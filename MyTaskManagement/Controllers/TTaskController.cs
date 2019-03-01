@@ -112,7 +112,6 @@ namespace MyTaskManagement.Controllers
                  //var id_current_project = Request.Form["id_current_project"];
 
                 
-                //var user = _unitOfWork.UserRepositry.SingleOrDefault(u => u.Id == ui);
                 var user = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanical( ui);
 
                 /*

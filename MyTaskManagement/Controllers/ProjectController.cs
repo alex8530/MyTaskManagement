@@ -62,7 +62,10 @@ namespace MyTaskManagement.Controllers
 
             var viewmodel = new CreateProjectViewModels()
             {
-                 Project = new Project(),
+                 Project = new Project()
+                 {
+                     StartTime = DateTime.Now , DeadTime = DateTime.Now.AddDays(66)
+                 },
                  Users = _unitOfWork.UserRepositry.GetAll().ToList(),
                 Clients = _unitOfWork.ClientRepositry.GetAll().ToList() 
              

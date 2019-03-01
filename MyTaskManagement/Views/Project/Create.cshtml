@@ -82,9 +82,9 @@
 
  
         <div class="form-group">
-            <label class="control-label col-md-2  " for="__UserId__">User</label>
+            <label class="control-label col-md-2  " for="__UserId__">Manager</label>
             <select name="__UserId__" class="col-md-10 form-control " >
-                <option value="" disabled selected>Choose your Employee</option>
+                <option value="" disabled selected>Choose your Manager</option>
 
                 @foreach (var u in Model.Users)
                 {
@@ -100,7 +100,7 @@
     
         <div class="form-group">
             <label class="control-label col-md-2"  >Client</label>
-            <select name="ClientId" class="col-md-10 form-control input-validation-error  " required >
+            <select name="ClientId" class="col-md-10 form-control   " required >
                 <option value="" disabled selected >Choose your Client</option>
                 @foreach (var c in Model.Clients)
                 {
