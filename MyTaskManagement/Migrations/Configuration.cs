@@ -297,6 +297,24 @@ namespace MyTaskManagement.Migrations
             projects.ForEach(p => context.Projects.AddOrUpdate(project => project.Id, p));
             context.SaveChanges();
 
+
+
+            //add manager for each project
+            foreach (var   project in projects)
+            {
+                var pm = new ProjectManagerTable()
+                {
+                    //one manager for all project to test only !!
+                    ManagerID = _users[0].Id,
+                    ProjectID = project.Id
+
+
+                };
+                context.ProjectManagerTable.Add(pm);
+
+            }
+
+
             ////Add Task
             ////after add task with user and  project ,, we should add this project in user
             ////because this task work under project of that user OR DELETE THIS TASKS AND CREATE MANUALLY 
@@ -374,11 +392,11 @@ namespace MyTaskManagement.Migrations
             //    }
             //};
 
-             
+
             //tasks.ForEach(t => context.Tasks.AddOrUpdate(task => task.Id, t));
             //context.SaveChanges();
 
-           
+
 
 
             ////Add Finanitail status 

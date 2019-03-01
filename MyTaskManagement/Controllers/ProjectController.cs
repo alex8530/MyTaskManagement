@@ -130,12 +130,12 @@ namespace MyTaskManagement.Controllers
                 //get user //it may to add list of users not only list
                 if (!__UserId__.IsEmpty())
                 {
-                    var user = _unitOfWork.UserRepositry.SingleOrDefault(u => u.Id == __UserId__);
+                    var userManager = _unitOfWork.UserRepositry.SingleOrDefault(u => u.Id == __UserId__);
                     //Add this manger 
                     //newProject.Users.Add(user);
                     var pm = new ProjectManagerTable()
                     {
-                        ManagerID = user.Id,
+                        ManagerID = userManager.Id,
                         ProjectID = viewmodel.Project.Id
 
 
