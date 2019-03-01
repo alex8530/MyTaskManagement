@@ -39,9 +39,7 @@
             <th>
                 <p>Status</p>
              </th>
-            <th>
-                <p>Client</p>
-             </th>
+         
             <th>
                 <p> Users</p>
             </th>
@@ -91,9 +89,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Status)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Client.Name)
-                </td>
+       
                 <th>
                     @foreach (var u in item.Users)
                     {

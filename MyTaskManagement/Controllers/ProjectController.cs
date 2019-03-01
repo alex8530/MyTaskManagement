@@ -67,8 +67,7 @@ namespace MyTaskManagement.Controllers
                      StartTime = DateTime.Now , DeadTime = DateTime.Now.AddDays(66)
                  },
                  Users = _unitOfWork.UserRepositry.GetAll().ToList(),
-                Clients = _unitOfWork.ClientRepositry.GetAll().ToList() 
-             
+              
 
             };
             return View(viewmodel);
@@ -77,7 +76,7 @@ namespace MyTaskManagement.Controllers
         // POST: Project/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(CreateProjectViewModels viewmodel, string __UserId__,string ClientId, int status )
+        public ActionResult Create(CreateProjectViewModels viewmodel, string __UserId__,  int status )
         {
 
            
@@ -109,7 +108,7 @@ namespace MyTaskManagement.Controllers
                 //get client 
                 //Note , here i send Name of client but i name ClientId in that form
 
-                var client = _unitOfWork.ClientRepositry.SingleOrDefault(c => c.Name == ClientId);
+                //var client = _unitOfWork.ClientRepositry.SingleOrDefault(c => c.Name == ClientId);
 
 
             
@@ -123,8 +122,8 @@ namespace MyTaskManagement.Controllers
                     StartTime = viewmodel.Project.StartTime,
                     Status = (StatusEnum)Enum.ToObject(typeof(StatusEnum), status),
                     Description = viewmodel.Project.Description,
-                    Client = client,
-                    Users = new List<ApplicationUser>()//this is must
+                    ClientId = 1,
+                     Users = new List<ApplicationUser>()//this is must
                 };
 
                 //get user //it may to add list of users not only list
@@ -187,7 +186,7 @@ namespace MyTaskManagement.Controllers
 
         // POST: Project/Edit/5
         [HttpPost]
-        public ActionResult Edit(string id, Project  project,  int ClientId, string ManagerId)
+        public ActionResult Edit(string id, Project  project,    string ManagerId)
         {
             try
             {
@@ -200,7 +199,7 @@ namespace MyTaskManagement.Controllers
                     oldProject.DeadTime = project.DeadTime;
                     oldProject.Description = project.Description;
                     
-                    oldProject.ClientId =  ClientId;
+                  
 
 
                     //update manager in that table
