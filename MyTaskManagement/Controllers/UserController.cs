@@ -92,14 +92,14 @@ namespace MyTaskManagement.Controllers
                     JopTitle = model.JopTitle,
                     O_T_H_Rate = model.O_T_H_Rate,
                     HourlyRate = model.HourlyRate,
-                    MyFiles = new List<MyFile>()
+                    MyFiles = new List<MyUserFile>()
 
 
                 };
                 //Guid is used as a file name on the basis that it can pretty much guarantee uniqueness
                 if (upload != null && upload.ContentLength > 0)
                 {
-                    var photo = new MyFile
+                    var photo = new MyUserFile()
                     {
                         FileName = Guid.NewGuid().ToString() + System.IO.Path.GetExtension(upload.FileName),
                         MyFileType = MyFileType.Photo

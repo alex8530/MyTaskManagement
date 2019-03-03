@@ -76,7 +76,7 @@ namespace MyTaskManagement.Controllers
         // POST: Project/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(CreateProjectViewModels viewmodel, string __UserId__,  int status )
+        public ActionResult Create(CreateProjectViewModels viewmodel, string __UserId__,  int status, HttpPostedFileBase upload)
         {
 
            
@@ -123,10 +123,12 @@ namespace MyTaskManagement.Controllers
                     Status = (StatusEnum)Enum.ToObject(typeof(StatusEnum), status),
                     Description = viewmodel.Project.Description,
                     ClientId = 1,
-                     Users = new List<ApplicationUser>()//this is must
+                     Users = new List<ApplicationUser>(),//this is must
+                     ProjectFiles = new List<MyProjectFile>()
+                    
                 };
 
-                //get user //it may to add list of users not only list
+                //get user manager
                 if (!__UserId__.IsEmpty())
                 {
                     var userManager = _unitOfWork.UserRepositry.SingleOrDefault(u => u.Id == __UserId__);
@@ -139,7 +141,26 @@ namespace MyTaskManagement.Controllers
 
 
                     };
+
                     _unitOfWork.ProjectMangerRepositry.Add(pm);
+
+                }
+
+                //Guid is used as a file name on the basis that it can pretty much guarantee uniqueness
+                if (upload != null && upload.ContentLength > 0)
+                {
+                    var photo = new MyProjectFile()
+                    {
+                        FileName = Guid.NewGuid().ToString() + System.IO.Path.GetExtension(upload.FileName),
+                        MyFileType = MyFileType.Photo
+                    };
+
+
+                    string physicalPath = Server.MapPath("~/images/" + photo.FileName);
+
+                    // save image in folder
+                    upload.SaveAs(physicalPath);
+                    newProject.ProjectFiles.Add(photo);
 
                 }
 

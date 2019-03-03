@@ -8,16 +8,18 @@ using System.Web;
 
 namespace MyTaskManagement.Core.Domain
 {
-    public class MyFile
+    public class MyProjectFile
     {
         public int Id { get; set; }
         [StringLength(255)]
         public string FileName { get; set; }
         public MyFileType  MyFileType { get; set; }
 
-        [ForeignKey("UserFile")]
-        public string UserFileId { get; set; }
-        public ApplicationUser UserFile { get; set; }
+        [ForeignKey("Project")]
+        public string ProjectId { get; set; }
+        public Project Project { get; set; }
+
+
 
     }
 

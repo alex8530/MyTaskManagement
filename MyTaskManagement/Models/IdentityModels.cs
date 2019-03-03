@@ -46,7 +46,7 @@ namespace MyTaskManagement.Models
         public   ICollection<TTask> Tasks { get; set; }
         public ICollection<Financialstatus>  FinancialstatusList  { get; set; }
          
-        public ICollection<MyFile> MyFiles  { get; set; }
+        public ICollection<MyUserFile> MyFiles  { get; set; }
          
         
 
@@ -72,7 +72,8 @@ namespace MyTaskManagement.Models
          public DbSet<TTask>  Tasks { get; set; }
         public DbSet<Client> Clients { get; set; }
         public DbSet<Financialstatus> Financialstatuses { get; set; }
-        public DbSet<MyFile>  MyFiles { get; set; }
+        public DbSet<MyUserFile >   MyUserFiles { get; set; }
+        public DbSet<MyProjectFile > MyProjectFiles  { get; set; }
         public DbSet<ProjectManagerTable> ProjectManagerTable { get; set; }
         
 

@@ -192,8 +192,9 @@
     <Compile Include="Controllers\TTaskController.cs" />
     <Compile Include="Core\Constants\Constants.cs" />
     <Compile Include="Core\Domain\Financialstatus.cs" />
+    <Compile Include="Core\Domain\MyProjectFile.cs" />
     <Compile Include="Core\Domain\ProjectManagerTable.cs" />
-    <Compile Include="Core\Domain\MyFile.cs" />
+    <Compile Include="Core\Domain\MyUserFile.cs" />
     <Compile Include="Core\Domain\MyFileType.cs" />
     <Compile Include="Core\Domain\PriorityEnum.cs" />
     <Compile Include="Core\Domain\TTask.cs" />
@@ -310,6 +311,14 @@
     <Compile Include="Migrations\201903011114402_addManagerProjectTable.cs" />
     <Compile Include="Migrations\201903011114402_addManagerProjectTable.Designer.cs">
       <DependentUpon>201903011114402_addManagerProjectTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903030919545_ChangeTableName.cs" />
+    <Compile Include="Migrations\201903030919545_ChangeTableName.Designer.cs">
+      <DependentUpon>201903030919545_ChangeTableName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903030942072_AddProjectFile.cs" />
+    <Compile Include="Migrations\201903030942072_AddProjectFile.Designer.cs">
+      <DependentUpon>201903030942072_AddProjectFile.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -558,6 +567,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903011114402_addManagerProjectTable.resx">
       <DependentUpon>201903011114402_addManagerProjectTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903030919545_ChangeTableName.resx">
+      <DependentUpon>201903030919545_ChangeTableName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903030942072_AddProjectFile.resx">
+      <DependentUpon>201903030942072_AddProjectFile.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
