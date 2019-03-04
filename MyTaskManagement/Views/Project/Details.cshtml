@@ -1,4 +1,5 @@
-﻿@model MyTaskManagement.Models.Project
+﻿@using MyTaskManagement.Core.Domain
+@model MyTaskManagement.Models.Project
 
 @{
     ViewBag.Title = "Details";
@@ -42,14 +43,25 @@
             @Html.DisplayFor(model => model.Description)
         </dd>
 
-        <dt>
+        @*<dt>
             @Html.DisplayNameFor(model => model.ClientId)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.ClientId)
-        </dd>
-
+        </dd>*@
+        @if (Model. ProjectFiles.Any(f => f.MyFileType == MyFileType.Photo ))
+        {
+            <dt>
+                Photo
+            </dt>
+            <dd>
+                @{
+                    var imgPath = @Model. ProjectFiles.LastOrDefault(f => f.MyFileType == MyFileType.Photo).FileName;
+                }
+                <img src="~/images/@imgPath" alt="" width="200px"  height="200px"/>
+            </dd>
+        }
     </dl>
 </div>
 <p>

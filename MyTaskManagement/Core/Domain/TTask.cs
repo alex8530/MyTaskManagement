@@ -24,21 +24,34 @@ namespace MyTaskManagement.Models
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime StartTime { get; set; }
-
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime DeadTime { get; set; }
-
+        public DateTime StartTime { get; set; } 
 
         public string Description { get; set; }
 
-        [Required]
-        public int WorkingHours { get; set; }
 
 
         [Required]
-        public int OverTime { get; set; }
+        public long EstimatedTime { get; set; }
+
+        [Required]
+        public long EffortHours { get; set; }
+
+       [Required]
+        public long RemainingHours {
+           get
+           {
+               return this.EstimatedTime - this.EffortHours;
+
+           }
+
+       }
+
+
+         
+        public string Ticket { get; set; }
+
+        public string Notes { get; set; }
+        public string Owner { get; set; }
 
 
         //[Required]
@@ -53,7 +66,7 @@ namespace MyTaskManagement.Models
         public string ProjectId { get; set; }
 
 
-        //public Financialstatus  Financialstatus { get; set; }
+       
 
          
     }

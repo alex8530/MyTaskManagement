@@ -1,7 +1,9 @@
-﻿@using MyTaskManagement.Models
-@model IEnumerable<MyTaskManagement.Models.Project>
+﻿@using MyTaskManagement.Core.Domain
+@using MyTaskManagement.Models
+@model   MyTaskManagement.Core.ViewModel.IndexProjectViewModel 
 
-@{
+@{ 
+    int i = 0;
     ViewBag.Title = "Projects";
 }
 
@@ -15,27 +17,31 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+
+                <p>Name</p>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Id)
+                 <p>Id</p>
             </th>
 
             <th>
-                @Html.DisplayNameFor(model => model.StartTime)
-            </th>
+                <p> Manager </p>
+            </th> 
+
             <th>
-                @Html.DisplayNameFor(model => model.DeadTime)
-            </th>
+                <p>StartTime</p>
+             </th>
+
             <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
+                <p>DeadTime</p>
+             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
+                <p>Description</p>
+             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Client.Name)
-            </th>
+                <p>Status</p>
+             </th>
+         
             <th>
                 <p> Users</p>
             </th>
@@ -54,17 +60,36 @@
     </thead>
     
     <tbody>
-
-        @foreach (var item in Model)
+         
+        @foreach (var item in Model.Projects.ToList())
         {
             <tr>
              
                 <td>
+                    <div>  
+
+                        @if (item.ProjectFiles.Any(f => f.MyFileType == MyFileType.Photo ))
+                        {  
+                            var imgPath = item.ProjectFiles.LastOrDefault(f => f.MyFileType == MyFileType.Photo).FileName;
+                       
+                            <img src="~/images/@imgPath" alt="" width="50px" height="50px"/>
+                    
+                        }
+                    </div>
+
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Id)
-                </td>
+                </td> 
+                 <td>
+                    <p>
+                        @{
+                            @Model.Managers[i].FirstName
+                            i++;
+                        }
+                    </p>
+                </td> 
                 <td>
                     @Html.DisplayFor(modelItem => item.StartTime)
                 </td>
@@ -77,9 +102,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Status)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Client.Name)
-                </td>
+       
                 <th>
                     @foreach (var u in item.Users)
                     {

@@ -22,29 +22,39 @@
                 @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.Owner )
+            </th>
+            <th>
                 <p>Project_Id</p>
 
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.StartTime)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DeadTime)
-            </th>
+          
             <th>
                 @Html.DisplayNameFor(model => model.Description)
             </th>
-            <th>
-                    @Html.DisplayNameFor(model => model.WorkingHours)
+                <th>
+                    @Html.DisplayNameFor(model => model.EstimatedTime)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.OverTime)
+                    @Html.DisplayNameFor(model => model.EffortHours)
+                </th> 
+                <th>
+                    @Html.DisplayNameFor(model => model.RemainingHours)
                 </th> 
             <th>
                 @Html.DisplayNameFor(model => model.Priority)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ticket)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Notes)
             </th>
             <th>
                 <p>Assignee</p>
@@ -61,29 +71,47 @@
                 </td>
 
                 <td>
+                    @Html.DisplayFor(modelItem => item.Owner)
+                </td>
+
+                <td>
                     @Html.DisplayFor(modelItem => item.Project.Id)
                 </td>
 
                 <td>
                     @Html.DisplayFor(modelItem => item.StartTime)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DeadTime)
-                </td>
+                
                 <td>
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
                  <td>
-                        @Html.DisplayFor(modelItem => item.WorkingHours)
-                    </td>
+                        @Html.DisplayFor(modelItem => item.EstimatedTime)
+                  </td>
+                 <td>
+                        @Html.DisplayFor(modelItem => item.EffortHours)
+                  </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.OverTime)
-                    </td> 
+                        @Html.DisplayFor(modelItem => item. RemainingHours)
+                </td> 
+                
+
                 <td>
                     @Html.DisplayFor(modelItem => item.Priority)
                 </td>
+                
+
                 <td>
                     @Html.DisplayFor(modelItem => item.Status)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ticket)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Notes)
+                </td>
+
                 <td>
                     @Html.DisplayFor(modelItem => item.ApplicationUser.FirstName)
                 </td>

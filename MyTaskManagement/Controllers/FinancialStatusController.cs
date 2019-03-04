@@ -1,10 +1,17 @@
-﻿using MyTaskManagement.Models;
+﻿using iTextSharp.text;
+using iTextSharp.text.pdf;
+using MyTaskManagement.Models;
 using MyTaskManagement.Persistence;
+  
+using iTextSharp.text.html.simpleparser;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Xml.Linq;
+using iTextSharp.tool.xml;
 
 namespace MyTaskManagement.Controllers
 {
@@ -18,7 +25,7 @@ namespace MyTaskManagement.Controllers
         {
             //so will pass list of users with thier financials 
 
-            var listEmployeeFinanical = _unitOfWork.UserRepositry.GetAllUsersWithProjectsAndTasksAndRolesAndFinanical();
+            var listEmployeeFinanical = _unitOfWork.UserRepositry.GetAllUsersWithProjectsAndTasksAndRolesAndFinanicalWithFiles();
             return View(listEmployeeFinanical);
         }
 
@@ -91,6 +98,25 @@ namespace MyTaskManagement.Controllers
             catch
             {
                 return View();
+            }
+        }
+
+        
+
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult Export(string GridHtml)
+        {
+         
+            using (MemoryStream stream = new System.IO.MemoryStream())
+            {
+                StringReader sr = new StringReader(GridHtml);
+                Document pdfDoc = new Document(PageSize.A4, 10f, 10f, 100f, 0f);
+                PdfWriter writer = PdfWriter.GetInstance(pdfDoc, stream);
+                pdfDoc.Open();
+                XMLWorkerHelper.GetInstance().ParseXHtml(writer, pdfDoc, sr);
+                pdfDoc.Close();
+                return File(stream.ToArray(), "application/pdf", "Grid.pdf");
             }
         }
     }

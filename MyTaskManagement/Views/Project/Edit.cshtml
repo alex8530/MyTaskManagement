@@ -1,5 +1,6 @@
 ﻿@using Microsoft.Ajax.Utilities
-@model MyTaskManagement.Core.ViewModel.IndexProjectViewModels
+@using MyTaskManagement.Core.Domain
+@model MyTaskManagement.Core.ViewModel.CreateProjectViewModels
 
 @{
     ViewBag.Title = "Edit";
@@ -8,7 +9,7 @@
 <h2>Edit</h2>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit", "Project", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -52,19 +53,19 @@
 
 
         <div class="form-group">
-            <label class="control-label col-md-2">Client</label>
-            <select name="ClientId" class="col-md-10 form-control   " required>
-                @*<option value="" disabled selected>Choose your Client</option>*@
-                @foreach (var c in Model.Clients)
+            <label class="control-label col-md-2">Manager</label>
+            <select name="ManagerId" class="col-md-10 form-control" required>
+ 
+                @foreach (var c in Model.Users.ToList())
                 {
-                    if (c.Id == Model.Project.ClientId)
+                    if (c.Id == Model.Manager.Id)
                     {
-                        <option value="@c.Id" selected="selected">@c.Name</option>
+                        <option value="@c.Id" selected="selected">@c.FirstName</option>
 
                     }
                     else
                     {
-                        <option value="@c.Id">@c.Name</option>
+                        <option value="@c.Id">@c.FirstName</option>
 
                     }
 
@@ -75,14 +76,36 @@
         </div>
 
         <div class="form-group">
+            @Html.Label("Icon ", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @if (Model.Project. ProjectFiles.Any(f => f.MyFileType == MyFileType.Photo  ))
+                { 
+                       var imgPath = @Model.Project.ProjectFiles.LastOrDefault(f => f.MyFileType == MyFileType.Photo).FileName;
+               
+                        <img src="~/images/@imgPath" alt="" width="300px"  height="200px"/>
+                     
+                }
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Icon ", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="file" id="Photo" name="upload" accept="image/*" />
+            </div>
+        </div>
+
+
+        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </div>
     </div>
+
+
 }
-
-
+     
 <p>_________________________________ Users On Project_______________________________</p>
 @if (Model.Project.Users.Count == 0)
 {

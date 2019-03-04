@@ -11,9 +11,11 @@ using System.Web.WebPages;
 using MyTaskManagement.Core.ViewModel;
 using System.Data.Entity;
 using MyTaskManagement.Core.Domain;
+using Project = MyTaskManagement.Models.Project;
 
 namespace MyTaskManagement.Controllers
 {
+   
     public class ProjectController : Controller
     {
         private UnitOfWork _unitOfWork = new UnitOfWork(new ApplicationDbContext());
@@ -24,9 +26,24 @@ namespace MyTaskManagement.Controllers
         public ActionResult Index()
         {
 
+            //get all projects
+          var ProjectsWithClientAndUsers = _unitOfWork.ProjectRepositry.GetAllProjectsWithClientAndUsersAndTasksWithFiles();
 
-                var ProjectsWithClientAndUsers = _unitOfWork.ProjectRepositry.GetAllProjectsWithClientAndUsersAndTasks();
-                return View(ProjectsWithClientAndUsers);
+            var vm = new IndexProjectViewModel();
+            vm.Projects = new List<Project>();
+            vm.Managers=  new List<ApplicationUser>();
+
+
+            foreach (var project in ProjectsWithClientAndUsers)
+            {   
+                //add project to list
+                vm.Projects.Add(project);
+                //then add thier manager
+                 
+              vm.Managers.Add(GetManagerForProject(project.Id));  
+
+            }
+             return View(vm);
              
 
         }
@@ -36,19 +53,21 @@ namespace MyTaskManagement.Controllers
         {
            
 
-            return View(_unitOfWork.ProjectRepositry.SingleOrDefault( project => project.Id == id));
+            return View(_unitOfWork.ProjectRepositry.GetProjectsWithClientAndUsersAndTasksWithFiles(id));
         }
 
         // GET: Project/Create
         public ActionResult Create()
         {
 
-            var viewmodel = new IndexProjectViewModels()
+            var viewmodel = new CreateProjectViewModels()
             {
-                 Project = new Project(),
+                 Project = new Project()
+                 {
+                     StartTime = DateTime.Now , DeadTime = DateTime.Now.AddDays(66)
+                 },
                  Users = _unitOfWork.UserRepositry.GetAll().ToList(),
-                Clients = _unitOfWork.ClientRepositry.GetAll().ToList() 
-             
+              
 
             };
             return View(viewmodel);
@@ -57,7 +76,7 @@ namespace MyTaskManagement.Controllers
         // POST: Project/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IndexProjectViewModels viewmodel, string __UserId__,string ClientId, int status )
+        public ActionResult Create(CreateProjectViewModels viewmodel, string __UserId__,  int status, HttpPostedFileBase upload)
         {
 
            
@@ -89,7 +108,7 @@ namespace MyTaskManagement.Controllers
                 //get client 
                 //Note , here i send Name of client but i name ClientId in that form
 
-                var client = _unitOfWork.ClientRepositry.SingleOrDefault(c => c.Name == ClientId);
+                //var client = _unitOfWork.ClientRepositry.SingleOrDefault(c => c.Name == ClientId);
 
 
             
@@ -103,24 +122,54 @@ namespace MyTaskManagement.Controllers
                     StartTime = viewmodel.Project.StartTime,
                     Status = (StatusEnum)Enum.ToObject(typeof(StatusEnum), status),
                     Description = viewmodel.Project.Description,
-                    Client = client,
-                    Users = new List<ApplicationUser>()//this is must
+                    ClientId = 1,
+                     Users = new List<ApplicationUser>(),//this is must
+                     ProjectFiles = new List<MyProjectFile>()
+                    
                 };
 
-                //get user //it may to add list of users not only list
+                //get user manager
                 if (!__UserId__.IsEmpty())
                 {
-                    var user = _unitOfWork.UserRepositry.SingleOrDefault(u => u.Id == __UserId__);
-                    newProject.Users.Add(user);
+                    var userManager = _unitOfWork.UserRepositry.SingleOrDefault(u => u.Id == __UserId__);
+                    //Add this manger 
+                    //newProject.Users.Add(user);
+                    var pm = new ProjectManagerTable()
+                    {
+                        ManagerID = userManager.Id,
+                        ProjectID = viewmodel.Project.Id
+
+
+                    };
+
+                    _unitOfWork.ProjectMangerRepositry.Add(pm);
+
+                }
+
+                //Guid is used as a file name on the basis that it can pretty much guarantee uniqueness
+                if (upload != null && upload.ContentLength > 0)
+                {
+                    var photo = new MyProjectFile()
+                    {
+                        FileName = Guid.NewGuid().ToString() + System.IO.Path.GetExtension(upload.FileName),
+                        MyFileType = MyFileType.Photo
+                    };
+
+
+                    string physicalPath = Server.MapPath("~/images/" + photo.FileName);
+
+                    // save image in folder
+                    upload.SaveAs(physicalPath);
+                    newProject.ProjectFiles.Add(photo);
 
                 }
 
 
                 _unitOfWork.ProjectRepositry.Add(newProject);
+                 
                 _unitOfWork.Complete();
 
-
-
+                 
                 return RedirectToAction("Index");
             }
             catch (Exception ex)
@@ -132,58 +181,33 @@ namespace MyTaskManagement.Controllers
         // GET: Project/Edit/5
         public ActionResult Edit(string id)
         {
-
+            //All users
             var users = _unitOfWork.UserRepositry.GetAll().ToList();
-            var viewmodel = new IndexProjectViewModels()
+
+            //current project
+            var currentProject = _unitOfWork.ProjectRepositry.GetProjectsWithClientAndUsersAndTasksWithFiles(id);
+
+            var currentManager = GetManagerForProject(currentProject.Id);
+            //get current project
+
+            var viewmodel = new CreateProjectViewModels()
             {
-                Project = _unitOfWork.ProjectRepositry.GetProjectsWithClientAndUsersAndTasks(id),
+                Project = currentProject,
                 Users = users,
-                Clients = _unitOfWork.ClientRepositry.GetAll().ToList()
-                 
+                Clients = _unitOfWork.ClientRepositry.GetAll().ToList(),
+                Manager = currentManager
+
+
             };
-             
-            //at the same time .. add preivues financial to users
+
          
-            //foreach (var user in users)
-            //{
-            //    if (user.Tasks!=null  )
-            //    {
-
-            //        if (user.Tasks.Count != 0)
-            //        {
-            //        foreach (var task in user.Tasks)
-            //        {
-            //            var financial = new Financialstatus()
-            //            {    Id = task.Id.ToString(),
-            //                Date = DateTime.Now, //must change
-            //                Bonus = 0,
-            //                W_Hours = task.WorkingHours,
-            //                OTH_Rate = 5,
-            //                OTHours = task.OverTime,
-            //                pro__id = task.ProjectId,
-            //                task__id = task.Name,
-            //                Wh_Rate = 6,
-            //                user__id = user.Id,
-            //                Total = 5 + 5
-            //            };
-
-            //             _unitOfWork.FinancialRepositry.Add(financial);
-            //            //_unitOfWork.UserRepositry.AddUser();
-            //            _unitOfWork.Complete();
-            //        }
-
-            //        }
-
-            //    }
-
-            //}
 
             return View(viewmodel);
         }
 
         // POST: Project/Edit/5
         [HttpPost]
-        public ActionResult Edit(string id, Project  project,  int ClientId)
+        public ActionResult Edit(string id, Project  project,    string ManagerId, HttpPostedFileBase upload)
         {
             try
             {
@@ -196,7 +220,37 @@ namespace MyTaskManagement.Controllers
                     oldProject.DeadTime = project.DeadTime;
                     oldProject.Description = project.Description;
                     
-                    oldProject.ClientId =  ClientId;
+                  
+
+
+                    //update manager in that table
+                    var newProjectManager= new ProjectManagerTable()
+                    {
+                        ProjectID = id,
+                        ManagerID = ManagerId
+                    }; 
+                    
+                    //Guid is used as a file name on the basis that it can pretty much guarantee uniqueness
+                    if (upload != null && upload.ContentLength > 0)
+                    {
+                        var photo = new MyProjectFile()
+                        {
+                            FileName = Guid.NewGuid().ToString() + System.IO.Path.GetExtension(upload.FileName),
+                            MyFileType = MyFileType.Photo
+                        };
+
+
+                        string physicalPath = Server.MapPath("~/images/" + photo.FileName);
+
+                        // save image in folder
+                        upload.SaveAs(physicalPath);
+                        oldProject.ProjectFiles= new List<MyProjectFile>();
+                       
+
+                        oldProject.ProjectFiles.Add(photo);
+
+                    }
+                    _unitOfWork.ProjectMangerRepositry.Add(newProjectManager);//this is for add or update
 
                     _unitOfWork.Complete();
 
@@ -227,7 +281,7 @@ namespace MyTaskManagement.Controllers
             {
                 // TODO: Add delete logic here
                 var deletedUser = _unitOfWork.UserRepositry.SingleOrDefault(user => user.Id == idUser);
-                var project = _unitOfWork.ProjectRepositry.GetProjectsWithClientAndUsers(idProject);
+                var project = _unitOfWork.ProjectRepositry.GetProjectsWithClientAndUsersAndTasksWithFiles(idProject);
                 //Note ,,, You must delete user from project table, not  from user table...
 
                 project.Users.Remove(deletedUser);
@@ -285,7 +339,7 @@ namespace MyTaskManagement.Controllers
                 var addUser = _unitOfWork.UserRepositry.SingleOrDefault(user => user.Id == idUser);
 
                 /// Note we must include the oject with thier navigation proparity
-                var project = _unitOfWork.ProjectRepositry.GetProjectsWithClientAndUsers(idProject);
+                var project = _unitOfWork.ProjectRepositry.GetProjectsWithClientAndUsersAndTasksWithFiles(idProject);
                 project.Users.Add(addUser);
                  _unitOfWork.ProjectRepositry.Add(project);
                  _unitOfWork.Complete();
@@ -295,6 +349,14 @@ namespace MyTaskManagement.Controllers
             {
                 return View();
             }
+        }
+
+
+        private ApplicationUser GetManagerForProject(string projectId)
+        {
+            var result = _unitOfWork.ProjectMangerRepositry.SingleOrDefault(s => s.ProjectID == projectId);
+            var managerUser = _unitOfWork.UserRepositry.SingleOrDefault(user => user.Id == result.ManagerID);
+            return managerUser;
         }
     }
     

@@ -49,6 +49,12 @@
     <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="itextsharp, Version=5.5.13.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.13\lib\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp.xmlworker, Version=5.5.13.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itextsharp.xmlworker.5.5.13\lib\itextsharp.xmlworker.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -186,11 +192,14 @@
     <Compile Include="Controllers\TTaskController.cs" />
     <Compile Include="Core\Constants\Constants.cs" />
     <Compile Include="Core\Domain\Financialstatus.cs" />
-    <Compile Include="Core\Domain\MyFile.cs" />
+    <Compile Include="Core\Domain\MyProjectFile.cs" />
+    <Compile Include="Core\Domain\ProjectManagerTable.cs" />
+    <Compile Include="Core\Domain\MyUserFile.cs" />
     <Compile Include="Core\Domain\MyFileType.cs" />
     <Compile Include="Core\Domain\PriorityEnum.cs" />
     <Compile Include="Core\Domain\TTask.cs" />
     <Compile Include="Core\IUnitOfWork.cs" />
+    <Compile Include="Core\Repositories\IProjectMangerRepositry .cs" />
     <Compile Include="Core\Repositories\IClientRepositry.cs" />
     <Compile Include="Core\Repositories\ITTaskRepositry.cs" />
     <Compile Include="Core\Repositories\IFinancialRepositry.cs" />
@@ -259,10 +268,6 @@
     <Compile Include="Migrations\201902181252570_AddMyFilesTable.Designer.cs">
       <DependentUpon>201902181252570_AddMyFilesTable.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201902181315598_RenameColumnMyFileInUserTable.cs" />
-    <Compile Include="Migrations\201902181315598_RenameColumnMyFileInUserTable.Designer.cs">
-      <DependentUpon>201902181315598_RenameColumnMyFileInUserTable.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\201902201221363_addDateToFinancial.cs" />
     <Compile Include="Migrations\201902201221363_addDateToFinancial.Designer.cs">
       <DependentUpon>201902201221363_addDateToFinancial.cs</DependentUpon>
@@ -279,6 +284,42 @@
     <Compile Include="Migrations\201902202158592_AddUserIdInFainanicalStatus1.Designer.cs">
       <DependentUpon>201902202158592_AddUserIdInFainanicalStatus1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201902271515254_AddTicketToTaskTable.cs" />
+    <Compile Include="Migrations\201902271515254_AddTicketToTaskTable.Designer.cs">
+      <DependentUpon>201902271515254_AddTicketToTaskTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902272134150_UPdateColumsInTask.cs" />
+    <Compile Include="Migrations\201902272134150_UPdateColumsInTask.Designer.cs">
+      <DependentUpon>201902272134150_UPdateColumsInTask.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902272144095_addChangeToTask.cs" />
+    <Compile Include="Migrations\201902272144095_addChangeToTask.Designer.cs">
+      <DependentUpon>201902272144095_addChangeToTask.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902272201345_EditFinanicalColume.cs" />
+    <Compile Include="Migrations\201902272201345_EditFinanicalColume.Designer.cs">
+      <DependentUpon>201902272201345_EditFinanicalColume.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902272215538_removeEndTimeFromTask.cs" />
+    <Compile Include="Migrations\201902272215538_removeEndTimeFromTask.Designer.cs">
+      <DependentUpon>201902272215538_removeEndTimeFromTask.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902281217312_AddOwnerToTask.cs" />
+    <Compile Include="Migrations\201902281217312_AddOwnerToTask.Designer.cs">
+      <DependentUpon>201902281217312_AddOwnerToTask.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903011114402_addManagerProjectTable.cs" />
+    <Compile Include="Migrations\201903011114402_addManagerProjectTable.Designer.cs">
+      <DependentUpon>201903011114402_addManagerProjectTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903030919545_ChangeTableName.cs" />
+    <Compile Include="Migrations\201903030919545_ChangeTableName.Designer.cs">
+      <DependentUpon>201903030919545_ChangeTableName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903030942072_AddProjectFile.cs" />
+    <Compile Include="Migrations\201903030942072_AddProjectFile.Designer.cs">
+      <DependentUpon>201903030942072_AddProjectFile.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Core\Domain\Client.cs" />
@@ -286,6 +327,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Core\Domain\Project.cs" />
     <Compile Include="Core\Domain\StatusEnum.cs" />
+    <Compile Include="Persistence\Repositories\ProjectManagerRepositry.cs" />
     <Compile Include="Persistence\Repositories\FinancialRepositry.cs" />
     <Compile Include="Persistence\Repositories\ClientRepository.cs" />
     <Compile Include="Persistence\Repositories\UserRepository.cs" />
@@ -493,9 +535,6 @@
     <EmbeddedResource Include="Migrations\201902181252570_AddMyFilesTable.resx">
       <DependentUpon>201902181252570_AddMyFilesTable.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201902181315598_RenameColumnMyFileInUserTable.resx">
-      <DependentUpon>201902181315598_RenameColumnMyFileInUserTable.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201902201221363_addDateToFinancial.resx">
       <DependentUpon>201902201221363_addDateToFinancial.cs</DependentUpon>
     </EmbeddedResource>
@@ -507,6 +546,33 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201902202158592_AddUserIdInFainanicalStatus1.resx">
       <DependentUpon>201902202158592_AddUserIdInFainanicalStatus1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902271515254_AddTicketToTaskTable.resx">
+      <DependentUpon>201902271515254_AddTicketToTaskTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902272134150_UPdateColumsInTask.resx">
+      <DependentUpon>201902272134150_UPdateColumsInTask.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902272144095_addChangeToTask.resx">
+      <DependentUpon>201902272144095_addChangeToTask.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902272201345_EditFinanicalColume.resx">
+      <DependentUpon>201902272201345_EditFinanicalColume.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902272215538_removeEndTimeFromTask.resx">
+      <DependentUpon>201902272215538_removeEndTimeFromTask.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902281217312_AddOwnerToTask.resx">
+      <DependentUpon>201902281217312_AddOwnerToTask.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903011114402_addManagerProjectTable.resx">
+      <DependentUpon>201903011114402_addManagerProjectTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903030919545_ChangeTableName.resx">
+      <DependentUpon>201903030919545_ChangeTableName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903030942072_AddProjectFile.resx">
+      <DependentUpon>201903030942072_AddProjectFile.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

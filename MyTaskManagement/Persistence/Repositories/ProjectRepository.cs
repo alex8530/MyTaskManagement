@@ -27,26 +27,19 @@ namespace MyTaskManagement.Persistence.Repositories
             get { return Context as ApplicationDbContext; }
         }
 
-        public IEnumerable<Project> GetAllProjectsWithClientAndUsers()
-        {
+    
 
-            return CuurentContext.Projects.Include(project => project.Client).Include(project => project.Users).ToList();
+        public IEnumerable<Project> GetAllProjectsWithClientAndUsersAndTasksWithFiles()
+        {
+            return CuurentContext.Projects.Include(project => project.Client).Include(project => project.Users).Include(project => project.ProjectFiles).Include(project => project.Tasks).ToList();
         }
 
-        public IEnumerable<Project> GetAllProjectsWithClientAndUsersAndTasks()
+        public Project GetProjectsWithClientAndUsersAndTasksWithFiles(string id)
         {
-            return CuurentContext.Projects.Include(project => project.Client).Include(project => project.Users).Include(project => project.Tasks).ToList();
+            return CuurentContext.Projects.Where(p => p.Id == id).Include(project => project.Client).Include(project => project.ProjectFiles).Include(project => project.Users).Include(project => project.Tasks).SingleOrDefault() ;
         }
 
-        public Project GetProjectsWithClientAndUsersAndTasks(string id)
-        {
-            return CuurentContext.Projects.Where(p => p.Id == id).Include(project => project.Client).Include(project => project.Users).Include(project => project.Tasks).SingleOrDefault() ;
-        }
-
-        public  Project  GetProjectsWithClientAndUsers(string id)
-        {
-            return  CuurentContext.Projects.Where(p => p.Id==id).Include(project => project.Client).Include(project => project.Users).FirstOrDefault();
-        }
+       
 
     
     }

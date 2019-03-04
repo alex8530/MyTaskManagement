@@ -1,5 +1,5 @@
 ﻿@using MyTaskManagement.Models
-@model MyTaskManagement.Core.ViewModel.IndexProjectViewModels
+@model MyTaskManagement.Core.ViewModel.CreateProjectViewModels
 
 @{
     ViewBag.Title = "Create";
@@ -8,116 +8,109 @@
 <h2>Create Project</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("Create", "Project", null, FormMethod.Post, new { enctype = "multipart/form-data" })) 
 {
     @Html.AntiForgeryToken()
     
-    <div class="form-horizontal">
-     
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Project.Id, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Project.Id, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Project.Id, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        
-        
-        
-        
-        <div class="form-group">
-            @Html.LabelFor(model => model.Project.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Project.Name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Project.Name, "", new { @class = "text-danger" })
-            </div>
-        </div>
+<div class="form-horizontal">
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Project.StartTime, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Project.StartTime, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Project.StartTime, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Project.DeadTime, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Project.DeadTime, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Project.DeadTime, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Project.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Project.Description, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Project.Description, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-2  " for="StatusId">Status</label>
-            @{
-                var values = Enum.GetValues(typeof(StatusEnum));
-            }
-          
-            <select name="status" class="col-md-10 form-control ">
-                <option value="" disabled selected>Choose Status</option>
-                @*get status as string*@
-                @foreach (var status in values)
-                {
-                    int i = status.GetHashCode();
-
-                    <option value="@i">@status</option>
-
-
-                }
-
-            </select>
-        </div> 
-
- 
-        <div class="form-group">
-            <label class="control-label col-md-2  " for="__UserId__">User</label>
-            <select name="__UserId__" class="col-md-10 form-control " >
-                <option value="" disabled selected>Choose your Employee</option>
-
-                @foreach (var u in Model.Users)
-                {
-
-                    <option value="@u.Id">@u.FirstName</option>
-
-                }
-
-            </select>
-        </div> 
-    
-    
-    
-        <div class="form-group">
-            <label class="control-label col-md-2"  >Client</label>
-            <select name="ClientId" class="col-md-10 form-control input-validation-error  " required >
-                <option value="" disabled selected >Choose your Client</option>
-                @foreach (var c in Model.Clients)
-                {
-                    <option value="@c.Name" >@c.Name</option>
-
-                }
-
-            </select>
- 
-        </div> 
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.Project.Id, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Project.Id, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Project.Id, "", new { @class = "text-danger" })
         </div>
     </div>
+
+
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Project.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Project.Name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Project.Name, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Project.StartTime, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Project.StartTime, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Project.StartTime, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Project.DeadTime, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Project.DeadTime, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Project.DeadTime, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Project.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Project.Description, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Project.Description, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2  " for="StatusId">Status</label>
+        @{
+            var values = Enum.GetValues(typeof(StatusEnum));
+        }
+
+        <select name="status" class="col-md-10 form-control ">
+            <option value="" disabled selected>Choose Status</option>
+            @*get status as string*@
+            @foreach (var status in values)
+            {
+                int i = status.GetHashCode();
+
+                <option value="@i">@status</option>
+
+
+            }
+
+        </select>
+    </div>
+
+
+    <div class="form-group">
+        <label class="control-label col-md-2  " for="__UserId__">Manager</label>
+        <select name="__UserId__" class="col-md-10 form-control ">
+            <option value="" disabled selected>Choose your Manager</option>
+
+            @foreach (var u in Model.Users)
+            {
+
+                <option value="@u.Id">@u.FirstName</option>
+
+            }
+
+        </select>
+    </div>
+
+
+    <div class="form-group">
+        @Html.Label("Icon ", new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="file" id="Photo" name="upload" accept="image/*" />
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+</div>
 }
 
 <div>

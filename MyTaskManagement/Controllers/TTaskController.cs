@@ -65,7 +65,7 @@ namespace MyTaskManagement.Controllers
                     {
                          
                         StartTime = DateTime.Now, //this is defult time
-                        DeadTime = DateTime.Now.AddDays(3)  
+                       
                     },
                     Users = _unitOfWork.UserRepositry.GetAll().ToList(),
                     Projects = _unitOfWork.ProjectRepositry.GetAll().ToList() 
@@ -84,7 +84,8 @@ namespace MyTaskManagement.Controllers
                     Task = new TTask()
                     {
                         ProjectId = id_current_project,//this is must neot change !!!
-                        StartTime = DateTime.Now //this is defult time
+                        StartTime = DateTime.Now,//this is defult time,
+                        
 
                     },
                     Users = _unitOfWork.UserRepositry.GetAll().ToList()
@@ -111,8 +112,7 @@ namespace MyTaskManagement.Controllers
                  //var id_current_project = Request.Form["id_current_project"];
 
                 
-                //var user = _unitOfWork.UserRepositry.SingleOrDefault(u => u.Id == ui);
-                var user = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanical( ui);
+                var user = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFiles( ui);
 
                 /*
                  * Very important here
@@ -136,13 +136,16 @@ namespace MyTaskManagement.Controllers
                         ProjectId = pi,
                         ApplicationUser = user,
                         Description = task.Description,
-                        DeadTime = task.DeadTime,
+                        
                         StartTime = task.StartTime,
                         Name = task.Name,
                         Status = (StatusEnum)Enum.ToObject(typeof(StatusEnum), stat),
                         Priority = (PriorityEnum)Enum.ToObject(typeof(PriorityEnum), pri),
-                        OverTime = task.OverTime,
-                        WorkingHours = task.WorkingHours
+                        EstimatedTime = task.EstimatedTime,
+                         EffortHours = task.EffortHours,
+                        Ticket= task.Ticket,
+                         Notes= task.Notes,
+                        Owner = User.Identity.Name
                         //Project =new Project() // here no need to add project object , just add his forign key
                         //, but if you need to add project object , you must init it
 
@@ -170,13 +173,15 @@ namespace MyTaskManagement.Controllers
                         ProjectId = id_current_project,
                         ApplicationUser = user,
                         Description = task.Description,
-                        DeadTime = task.DeadTime,
+                     
                         StartTime = task.StartTime,
                         Name = task.Name,
                         Status = (StatusEnum)Enum.ToObject(typeof(StatusEnum), stat),
                         Priority = (PriorityEnum)Enum.ToObject(typeof(PriorityEnum), pri),
-                        OverTime = task.OverTime,
-                        WorkingHours = task.WorkingHours
+                        EstimatedTime = task.EstimatedTime,
+                        EffortHours = task.EffortHours,
+                        Ticket = task.Ticket,
+                        Notes = task.Notes
                         //Project =new Project() // here no need to add project object , just add his forign key
                         //, but if you need to add project object , you must init it
 
@@ -221,7 +226,7 @@ namespace MyTaskManagement.Controllers
 
         // POST: TTask/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, TTask  task)
+        public ActionResult Edit(int id, TTask task)
         {
 
             var ApplicationUserId = Request.Form["ApplicationUserId"];
@@ -232,35 +237,35 @@ namespace MyTaskManagement.Controllers
                 // TODO: Add update logic here
                 var oldTask = _unitOfWork.TTaskRepositry.GetTasksWithUserAndUserAndProject(id);
                 oldTask.Priority = task.Priority;
-                oldTask.Status= task.Status;
+                oldTask.Status = task.Status;
                 oldTask.StartTime = task.StartTime;
-                oldTask.DeadTime= task.DeadTime;
-                oldTask.Description = task.Description;
-                oldTask.WorkingHours = task.WorkingHours;
-                oldTask.OverTime = task.OverTime;
+                 oldTask.Description = task.Description;
+                oldTask.EstimatedTime = task.EstimatedTime;
+                oldTask.EffortHours = task.EffortHours;
+                oldTask.Ticket = task.Ticket;
+                oldTask.Notes = task.Notes;
 
 
-                var user = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanical(ApplicationUserId);
+
+                var user = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFiles(ApplicationUserId);
 
 
-                //check if status change to end
-                if (task.Status==StatusEnum.Ended)
+                ////check if status change to end
+                if (task.Status == StatusEnum.Ended)
                 {
                     //add this  to financail status
-                    var totalEquation = (int) user.HourlyRate * task.WorkingHours +
-                                        (int) user.O_T_H_Rate * task.OverTime;
+                    var totalEquation =(long)(  user.HourlyRate * task.EffortHours);
                     var financial = new Financialstatus()
                     {
                         Id = task.Id.ToString(),
                         Date = task.StartTime, //must change
-                        Bonus = 20,//?????????
-                        W_Hours = task.WorkingHours,
-                        OTH_Rate = (int)user.O_T_H_Rate * task.OverTime,
-                        OTHours = task.OverTime,
+                        EstimatedHours = task.EstimatedTime,
+                        EffortHours = task.EffortHours,
+                         
                         pro__id = ProjectId,
                         task__id = task.Id.ToString(),
-                        Wh_Rate =(int) user.HourlyRate * task.WorkingHours,
-                        user__id =  ApplicationUserId,
+                        
+                        user__id = ApplicationUserId,
                         Total = totalEquation
                     };
                     try
