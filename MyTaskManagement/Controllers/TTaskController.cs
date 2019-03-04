@@ -76,9 +76,9 @@ namespace MyTaskManagement.Controllers
             }
             else
             {
-                //come from project
+                //come from project , the only diff here , to show list users that work on this project to avoid show list of user
                 ViewBag.fromTask = "no";
-
+ 
                 var newViewModel = new CreateTaskViewModel()
                 {
                     Task = new TTask()
@@ -116,7 +116,7 @@ namespace MyTaskManagement.Controllers
 
                 /*
                  * Very important here
-                 *when you add task to project .. the task must be have user ..
+                 *when you add task to project .. the task must assgin   to user ..
                  * and then when you add task to poject ..you must add this project to user !!
                  *
                  *

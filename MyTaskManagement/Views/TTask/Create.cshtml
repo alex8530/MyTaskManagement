@@ -12,9 +12,8 @@
 
 @using (Html.BeginForm())
 {
-    // store the project id  as hidden, to send when post this form 
-    @*@Html.Hidden("id_current_project",@Model.Task.ProjectId)*@
-    //No NEED TO STORE IT ... BECAUSE IT WILL STORE BY DEFAULT
+   
+
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
