@@ -25,7 +25,7 @@ namespace MyTaskManagement.Controllers
         {
             //so will pass list of users with thier financials 
 
-            var listEmployeeFinanical = _unitOfWork.UserRepositry.GetAllUsersWithProjectsAndTasksAndRolesAndFinanical();
+            var listEmployeeFinanical = _unitOfWork.UserRepositry.GetAllUsersWithProjectsAndTasksAndRolesAndFinanicalWithFiles();
             return View(listEmployeeFinanical);
         }
 

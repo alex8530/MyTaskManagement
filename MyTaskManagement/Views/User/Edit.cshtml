@@ -321,7 +321,7 @@
     <input type="submit" value="Sort" class="btn btn-default" />
 
 }
-<table class="table" id="listFinancial">
+@*<table class="table" id="listFinancial">
     <thead>
         <tr>
             <th>
@@ -413,8 +413,8 @@
     </tbody>
 
 
-</table>
-<div>
+</table>*@
+@*<div>
     <h3>Total</h3>
     <p>
         @{
@@ -474,7 +474,7 @@
         }
         @MonthlyPayment $
     </p>
-</div>
+</div>*@
 
 
 @using (Html.BeginForm("Export", "FinancialStatus", FormMethod.Post))
@@ -495,7 +495,7 @@
 
 @*----------------------------------------------------------------*@
 
-<div  hidden=""  id="hiddinToPdf">
+@*<div  hidden=""  id="hiddinToPdf">
     <table class="table table-bordered"  border="1" >
         <thead  class="thead-dark">
             <tr >
@@ -647,7 +647,7 @@
             @MonthlyPayment1 $
         </p>
     </div>
-</div>
+</div>*@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

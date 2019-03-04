@@ -27,7 +27,7 @@ namespace MyTaskManagement.Controllers
         {
 
             //get all projects
-          var ProjectsWithClientAndUsers = _unitOfWork.ProjectRepositry.GetAllProjectsWithClientAndUsersAndTasks();
+          var ProjectsWithClientAndUsers = _unitOfWork.ProjectRepositry.GetAllProjectsWithClientAndUsersAndTasksWithFiles();
 
             var vm = new IndexProjectViewModel();
             vm.Projects = new List<Project>();
@@ -53,7 +53,7 @@ namespace MyTaskManagement.Controllers
         {
            
 
-            return View(_unitOfWork.ProjectRepositry.SingleOrDefault( project => project.Id == id));
+            return View(_unitOfWork.ProjectRepositry.GetProjectsWithClientAndUsersAndTasksWithFiles(id));
         }
 
         // GET: Project/Create
@@ -185,7 +185,7 @@ namespace MyTaskManagement.Controllers
             var users = _unitOfWork.UserRepositry.GetAll().ToList();
 
             //current project
-            var currentProject = _unitOfWork.ProjectRepositry.GetProjectsWithClientAndUsersAndTasks(id);
+            var currentProject = _unitOfWork.ProjectRepositry.GetProjectsWithClientAndUsersAndTasksWithFiles(id);
 
             var currentManager = GetManagerForProject(currentProject.Id);
             //get current project
@@ -229,7 +229,7 @@ namespace MyTaskManagement.Controllers
                         ProjectID = id,
                         ManagerID = ManagerId
                     };
-                     _unitOfWork.ProjectMangerRepositry.Add(newProjectManager);
+                     _unitOfWork.ProjectMangerRepositry.Add(newProjectManager);//this is for add or update
 
                     _unitOfWork.Complete();
 
@@ -260,7 +260,7 @@ namespace MyTaskManagement.Controllers
             {
                 // TODO: Add delete logic here
                 var deletedUser = _unitOfWork.UserRepositry.SingleOrDefault(user => user.Id == idUser);
-                var project = _unitOfWork.ProjectRepositry.GetProjectsWithClientAndUsers(idProject);
+                var project = _unitOfWork.ProjectRepositry.GetProjectsWithClientAndUsersAndTasksWithFiles(idProject);
                 //Note ,,, You must delete user from project table, not  from user table...
 
                 project.Users.Remove(deletedUser);
@@ -318,7 +318,7 @@ namespace MyTaskManagement.Controllers
                 var addUser = _unitOfWork.UserRepositry.SingleOrDefault(user => user.Id == idUser);
 
                 /// Note we must include the oject with thier navigation proparity
-                var project = _unitOfWork.ProjectRepositry.GetProjectsWithClientAndUsers(idProject);
+                var project = _unitOfWork.ProjectRepositry.GetProjectsWithClientAndUsersAndTasksWithFiles(idProject);
                 project.Users.Add(addUser);
                  _unitOfWork.ProjectRepositry.Add(project);
                  _unitOfWork.Complete();

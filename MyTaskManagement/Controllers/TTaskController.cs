@@ -112,7 +112,7 @@ namespace MyTaskManagement.Controllers
                  //var id_current_project = Request.Form["id_current_project"];
 
                 
-                var user = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanical( ui);
+                var user = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFiles( ui);
 
                 /*
                  * Very important here
@@ -247,7 +247,7 @@ namespace MyTaskManagement.Controllers
 
 
 
-                var user = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanical(ApplicationUserId);
+                var user = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFiles(ApplicationUserId);
 
 
                 ////check if status change to end

@@ -32,7 +32,7 @@ namespace MyTaskManagement.Controllers
         // GET: Employee
         public ActionResult ListUser()
         {
-            var listUser = _unitOfWork.UserRepositry.GetAllUsersWithProjectsAndTasksAndRolesAndFinanical();
+            var listUser = _unitOfWork.UserRepositry.GetAllUsersWithProjectsAndTasksAndRolesAndFinanicalWithFiles();
             var roles = new List<string>();
             // get all names of role for user ...
             //i use this method because there is a role id inside user , not role name
@@ -64,7 +64,7 @@ namespace MyTaskManagement.Controllers
                 return HttpNotFound();
             }
 
-            return View(_unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanical(id));
+            return View(_unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFiles(id));
         }
 
         // GET: Employee/Create
@@ -132,7 +132,7 @@ namespace MyTaskManagement.Controllers
 
         public ActionResult Edit(string id ,int month =0 , int year = 0 )
         {
-            var editUser = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanical(id);
+            var editUser = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFiles(id);
             var listOwnFinan = editUser.FinancialstatusList ;
 
             if (month == 0 && year != 0)
@@ -218,7 +218,7 @@ namespace MyTaskManagement.Controllers
         {
             try
             {
-                var deleteUser = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanical(id);
+                var deleteUser = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFiles(id);
                 _unitOfWork.UserRepositry.Remove(deleteUser);
                 _unitOfWork.Complete();
                 return RedirectToAction("ListUser");

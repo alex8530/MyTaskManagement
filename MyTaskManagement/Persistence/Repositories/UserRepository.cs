@@ -52,16 +52,16 @@ namespace MyTaskManagement.Persistence.Repositories
 
        
 
-        public IEnumerable<ApplicationUser> GetAllUsersWithProjectsAndTasksAndRolesAndFinanical()
+        public IEnumerable<ApplicationUser> GetAllUsersWithProjectsAndTasksAndRolesAndFinanicalWithFiles()
         {
             return CuurentContext.Users.Include(user => user.Tasks)
-                .Include(user => user.Projects).Include(user => user.Roles).Include(user => user.FinancialstatusList).ToList();
+                .Include(user => user.Projects).Include(user => user.Roles).Include(user => user.FinancialstatusList).Include(user => user.MyFiles).ToList();
         }
 
-        public  ApplicationUser GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanical(string id)
+        public  ApplicationUser GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFiles(string id)
         {
             return CuurentContext.Users.Where(user => user.Id == id).Include(user => user.Tasks)
-                .Include(user => user.Projects).Include(user => user.Roles).Include(user => user.MyFiles).Include(user => user.FinancialstatusList).SingleOrDefault();
+                .Include(user => user.Projects).Include(user => user.Roles).Include(user => user.MyFiles).Include(user => user.MyFiles).Include(user => user.FinancialstatusList).SingleOrDefault();
         }
 
          
