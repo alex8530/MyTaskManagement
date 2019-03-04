@@ -228,5 +228,17 @@ namespace MyTaskManagement.Controllers
                 return View();
             }
         }
+
+
+        [Authorize]
+        public ActionResult Setting()
+        {
+            var currentUserId = User.Identity.GetUserId();
+            var currentUser =
+                _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFiles(
+                    currentUserId);
+
+            return View(currentUser);
+        }
     }
 }

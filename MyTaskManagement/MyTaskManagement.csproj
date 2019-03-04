@@ -475,6 +475,7 @@
     <Content Include="webhome\fonts\fontawesome-webfont.woff2" />
     <Content Include="webhome\fonts\FontAwesome.otf" />
     <Content Include="Views\FinancialStatus\Index.cshtml" />
+    <Content Include="Views\User\Setting.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
