@@ -207,7 +207,7 @@ namespace MyTaskManagement.Controllers
 
         // POST: Project/Edit/5
         [HttpPost]
-        public ActionResult Edit(string id, Project  project,    string ManagerId)
+        public ActionResult Edit(string id, Project  project,    string ManagerId, HttpPostedFileBase upload)
         {
             try
             {
@@ -228,8 +228,29 @@ namespace MyTaskManagement.Controllers
                     {
                         ProjectID = id,
                         ManagerID = ManagerId
-                    };
-                     _unitOfWork.ProjectMangerRepositry.Add(newProjectManager);//this is for add or update
+                    }; 
+                    
+                    //Guid is used as a file name on the basis that it can pretty much guarantee uniqueness
+                    if (upload != null && upload.ContentLength > 0)
+                    {
+                        var photo = new MyProjectFile()
+                        {
+                            FileName = Guid.NewGuid().ToString() + System.IO.Path.GetExtension(upload.FileName),
+                            MyFileType = MyFileType.Photo
+                        };
+
+
+                        string physicalPath = Server.MapPath("~/images/" + photo.FileName);
+
+                        // save image in folder
+                        upload.SaveAs(physicalPath);
+                        oldProject.ProjectFiles= new List<MyProjectFile>();
+                       
+
+                        oldProject.ProjectFiles.Add(photo);
+
+                    }
+                    _unitOfWork.ProjectMangerRepositry.Add(newProjectManager);//this is for add or update
 
                     _unitOfWork.Complete();
 
