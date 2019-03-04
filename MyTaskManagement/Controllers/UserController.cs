@@ -240,5 +240,57 @@ namespace MyTaskManagement.Controllers
 
             return View(currentUser);
         }
+       
+        [HttpPost]
+        public ActionResult Setting (ApplicationUser applicationUser, HttpPostedFileBase upload)
+        {
+            try 
+            {
+
+               
+                var currentUser =
+                    _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFiles(
+                        applicationUser.Id);
+
+
+                //update the new data
+                currentUser.Email = applicationUser.Email;
+                currentUser.FirstName = applicationUser.FirstName;
+                currentUser.LastName = applicationUser.LastName;
+                currentUser.JopTitle = applicationUser.JopTitle;
+                currentUser.HourlyRate = applicationUser.HourlyRate;
+
+                //update image// create new one and show the last one in the view
+                //Guid is used as a file name on the basis that it can pretty much guarantee uniqueness
+                if (upload != null && upload.ContentLength > 0)
+                {
+                    var photo = new MyUserFile()
+                    {
+                        FileName = Guid.NewGuid().ToString() + System.IO.Path.GetExtension(upload.FileName),
+                        MyFileType = MyFileType.Photo
+                    };
+
+
+                    string physicalPath = Server.MapPath("~/images/" + photo.FileName);
+
+                    // save image in folder
+                    upload.SaveAs(physicalPath);
+                    currentUser.MyFiles = new List<MyUserFile>();
+
+
+                    currentUser.MyFiles.Add(photo);
+
+                    
+                }
+                _unitOfWork.UserRepositry.Add(currentUser); //this is for add or update
+
+                _unitOfWork.Complete();
+                return RedirectToAction("Setting");
+            }
+            catch (Exception exception)
+            {
+                return View();
+            }
+        }
     }
 }
