@@ -57,7 +57,7 @@
             </dt>
             <dd>
                 @{
-                    var imgPath = @Model. ProjectFiles.FirstOrDefault(f => f.MyFileType == MyFileType.Photo).FileName;
+                    var imgPath = @Model. ProjectFiles.LastOrDefault(f => f.MyFileType == MyFileType.Photo).FileName;
                 }
                 <img src="~/images/@imgPath" alt="" width="200px"  height="200px"/>
             </dd>
