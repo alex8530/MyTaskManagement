@@ -168,21 +168,21 @@ namespace MyTaskManagement.Controllers
 
         // POST: Employee/Edit/5
         [HttpPost]
-        public ActionResult Edit(string id, ApplicationUser model)
+        public ActionResult Edit(string id, EditUserViewModel model)
         {
             try
             {
-                if (ModelState.IsValid)
-                {
+                 if (ModelState.IsValid)
+                 {
 
                     var oldUser = _unitOfWork.UserRepositry.SingleOrDefault(user => user.Id== id);
-                    oldUser.FirstName =model.FirstName ;
-                    oldUser.LastName = model.LastName;
-                    oldUser.JopTitle = model.JopTitle;
-                    oldUser.HourlyRate = model.HourlyRate;
-                    oldUser.O_T_H_Rate = model.O_T_H_Rate;
-                    oldUser.UserName = model.UserName;
-                    oldUser.Email = model.Email;
+                    oldUser.FirstName =model.User.FirstName ;
+                    oldUser.LastName = model.User.LastName;
+                    oldUser.JopTitle = model.User.JopTitle;
+                    oldUser.HourlyRate = model.User.HourlyRate;
+                    oldUser.O_T_H_Rate = model.User.O_T_H_Rate;
+                    oldUser.UserName = model.User.UserName;
+                    oldUser.Email = model.User.Email;
 
 
                 string newRole = Request.Form["CurrenrRole"];
