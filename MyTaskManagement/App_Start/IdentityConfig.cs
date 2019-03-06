@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
@@ -18,8 +20,40 @@ namespace MyTaskManagement
     {
         public Task SendAsync(IdentityMessage message)
         {
-            // Plug in your email service here to send an email.
-            return Task.FromResult(0);
+            var from = "aliabuharbdev@gmail.com";
+            var pass = "********";
+             
+      
+            //setting up smtp client
+            
+            var client = new SmtpClient()
+            {
+                Port = 587,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Host = "smtp.gmail.com",
+                EnableSsl = true,
+                Credentials = new NetworkCredential(from, pass) 
+        };
+            //create email
+            var mail = new MailMessage( from,message.Destination )
+            { 
+                Subject = message.Subject,
+                Body = message.Body
+            };
+        
+            mail.IsBodyHtml = true;
+          
+
+            //client.Send(mail);
+            //send email
+
+            return client.SendMailAsync(mail);
+             
+
+            //Send email from Gmail with SMTP authentication but got "5.5.1
+            //Authentication Required" error
+            //https://www.smarterasp.net/support/kb/a1546/send-email-from-gmail-with-smtp-authentication-but-got-5_5_1-authentication-required-error.aspx
         }
     }
 
