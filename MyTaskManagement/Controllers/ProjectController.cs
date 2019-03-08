@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using System.Web.WebPages;
 using MyTaskManagement.Core.ViewModel;
 using System.Data.Entity;
+using Microsoft.AspNet.Identity;
 using MyTaskManagement.Core.Domain;
 using Project = MyTaskManagement.Models.Project;
 
@@ -51,8 +52,6 @@ namespace MyTaskManagement.Controllers
         // GET: Project/Details/5
         public ActionResult Details(string id)
         {
-           
-
             return View(_unitOfWork.ProjectRepositry.GetProjectsWithClientAndUsersAndTasksWithFiles(id));
         } 
         
@@ -60,7 +59,7 @@ namespace MyTaskManagement.Controllers
         public ActionResult ShowProjectsForEmployee( )
         {
             //get all projects
-            var ProjectsWithClientAndUsers = _unitOfWork.ProjectRepositry.GetAllProjectsWithClientAndUsersAndTasksWithFiles();
+            var ProjectsWithClientAndUsers = _unitOfWork.ProjectRepositry.GetAllProjectsWithClientAndUsersAndTasksWithFiles() ;
 
             var vm = new IndexProjectViewModel();
             vm.Projects = new List<Project>();
@@ -69,11 +68,53 @@ namespace MyTaskManagement.Controllers
 
             foreach (var project in ProjectsWithClientAndUsers)
             {
-                //add project to list
-                vm.Projects.Add(project);
-                //then add thier manager
+                foreach (var user in project.Users)
+                {
+                    if (user.Id == User.Identity.GetUserId())
+                    {
+                        //add project to list
+                        vm.Projects.Add(project);   
+                        //then add thier manager
 
-                vm.Managers.Add(GetManagerForProject(project.Id));
+                        vm.Managers.Add(GetManagerForProject(project.Id));
+                    }
+
+                }
+              
+
+            }
+            return View(vm);
+        }
+        // GET: Project/ShowProjectsForManager 
+        public ActionResult ShowProjectsForManager( )
+        {
+            //get all projects
+            var ProjectsWithClientAndUsers = _unitOfWork.ProjectRepositry.GetAllProjectsWithClientAndUsersAndTasksWithFiles() ;
+
+            var vm = new IndexProjectViewModel
+            {
+                Projects = new List<Project>(),
+                Managers = new List<ApplicationUser>()
+            };
+
+
+            foreach (var project in ProjectsWithClientAndUsers)
+            {
+                 
+                    //then check if this user is manager
+                var i = User.Identity.GetUserId();
+                var e = GetManagerForProject(project.Id).Id;
+                    if ( User.Identity.GetUserId()  == GetManagerForProject(project.Id).Id)
+                    {
+                        //add project to list
+                        vm.Projects.Add(project);   
+                        //then add thier manager
+
+                        vm.Managers.Add(GetManagerForProject(project.Id));
+                
+
+                    }
+              
 
             }
             return View(vm);

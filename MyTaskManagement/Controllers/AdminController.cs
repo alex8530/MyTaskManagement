@@ -9,6 +9,8 @@ using MyTaskManagement.Persistence;
 
 namespace MyTaskManagement.Controllers
 {
+
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
 
