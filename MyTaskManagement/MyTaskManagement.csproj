@@ -2418,6 +2418,7 @@
     <Content Include="Views\TTask\ShowTaskForEmployee.cshtml" />
     <Content Include="Views\Project\ShowProjectsForEmployee.cshtml" />
     <Content Include="Views\TTask\Index - Copy.cshtml" />
+    <Content Include="Views\Shared\_LayoutLogin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
