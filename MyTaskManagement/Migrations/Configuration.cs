@@ -473,7 +473,7 @@ namespace MyTaskManagement.Migrations
             {
                 UserName = "Admin",
                 Email = "Admin@Admin.com",
-                FirstName = "Admin",
+                FirstName = "Alex Abu Harb",
                 LastName = "Abu Admin",
                 IsAcceptedOnCondition = true,
                 JopTitle = "SuperAdmin , Co-Founder & CTO",

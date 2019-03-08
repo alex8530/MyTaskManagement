@@ -3,15 +3,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MyTaskManagement.Core.ViewModel;
+using MyTaskManagement.Models;
+using MyTaskManagement.Persistence;
 
 namespace MyTaskManagement.Controllers
 {
     public class AdminController : Controller
     {
+
+        UnitOfWork _unitOfWork =   new UnitOfWork(new ApplicationDbContext());
         // GET: Admin
         public ActionResult Index()
         {
-            return View();
+            var allProjects = _unitOfWork.ProjectRepositry.GetAllProjectsWithClientAndUsersAndTasksWithFiles().ToList();
+            var allEmployees = _unitOfWork.UserRepositry.GetAllUsersWithProjectsAndTasksAndRolesAndFinanicalWithFiles().ToList();
+            var allTasks = _unitOfWork.TTaskRepositry.GetAllTasksWithUserAndUserAndProject().ToList();
+
+            var vm = new IndexAdminViewModel()
+            {
+                Projects = allProjects,
+                Users = allEmployees,
+                Tasks = allTasks
+            };
+            return View(vm);
         }
 
         // GET: Admin/Details/5

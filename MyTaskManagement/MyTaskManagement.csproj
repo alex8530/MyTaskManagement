@@ -223,6 +223,7 @@
     <Compile Include="Core\Repositories\IRepository.cs" />
     <Compile Include="Core\Repositories\IProjectRepositry.cs" />
     <Compile Include="Core\Repositories\IUserRepositry.cs" />
+    <Compile Include="Core\ViewModel\IndexAdminViewModel.cs" />
     <Compile Include="Core\ViewModel\ProjectViewModels.cs" />
     <Compile Include="Core\ViewModel\TaskViewModel.cs" />
     <Compile Include="Core\ViewModel\UserViewModel.cs" />
