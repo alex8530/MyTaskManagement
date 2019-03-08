@@ -2414,6 +2414,16 @@
     <Content Include="vendors\tinymce\skins\lightgray\fonts\tinymce.ttf" />
     <Content Include="vendors\tinymce\skins\lightgray\fonts\tinymce.woff" />
     <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\Project\About.cshtml" />
+    <Content Include="Views\Admin\Project\AddUserToProject.cshtml" />
+    <Content Include="Views\Admin\Project\Contact.cshtml" />
+    <Content Include="Views\Admin\Project\Create.cshtml" />
+    <Content Include="Views\Admin\Project\DeleteProject.cshtml" />
+    <Content Include="Views\Admin\Project\DeleteUser.cshtml" />
+    <Content Include="Views\Admin\Project\Details.cshtml" />
+    <Content Include="Views\Admin\Project\Edit.cshtml" />
+    <Content Include="Views\Admin\Project\Index.cshtml" />
+    <Content Include="Views\TTask\ShowTaskForEmployee.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

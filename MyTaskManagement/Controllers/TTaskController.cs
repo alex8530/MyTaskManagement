@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.Ajax.Utilities;
+using Microsoft.AspNet.Identity;
 using MyTaskManagement.Core.Domain;
 using MyTaskManagement.Core.ViewModel;
 
@@ -37,6 +38,16 @@ namespace MyTaskManagement.Controllers
             //Debug.WriteLine("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz");
 
         }
+
+        // GET: TTask/ShowTaskForEmployee/5
+        public ActionResult ShowTaskForEmployee( )
+        {
+            var currentUserID = User.Identity.GetUserId();
+            var task = _unitOfWork.TTaskRepositry.GetAllTasksWithUserAndUserAndProject().Where(task1 => task1.ApplicationUser.Id== currentUserID);
+
+            return View(task);
+        }
+
 
         // GET: TTask/Details/5
         public ActionResult Details(int id)
