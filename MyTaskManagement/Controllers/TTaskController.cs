@@ -39,7 +39,7 @@ namespace MyTaskManagement.Controllers
 
         }
 
-        // GET: TTask/ShowTaskForEmployee/5
+        // GET: TTask/ShowTaskForEmployee 
         public ActionResult ShowTaskForEmployee( )
         {
             var currentUserID = User.Identity.GetUserId();
@@ -47,6 +47,15 @@ namespace MyTaskManagement.Controllers
 
             return View(task);
         }
+
+        //// GET: TTask/ShowTaskForEmployee 
+        //public ActionResult ShowTaskForEmployee( )
+        //{
+        //    var currentUserID = User.Identity.GetUserId();
+        //    var task = _unitOfWork.TTaskRepositry.GetAllTasksWithUserAndUserAndProject().Where(task1 => task1.ApplicationUser.Id== currentUserID);
+
+        //    return View(task);
+        //}
 
 
         // GET: TTask/Details/5

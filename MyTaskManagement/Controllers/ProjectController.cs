@@ -54,6 +54,29 @@ namespace MyTaskManagement.Controllers
            
 
             return View(_unitOfWork.ProjectRepositry.GetProjectsWithClientAndUsersAndTasksWithFiles(id));
+        } 
+        
+        // GET: Project/ShowProjectsForEmployee 
+        public ActionResult ShowProjectsForEmployee( )
+        {
+            //get all projects
+            var ProjectsWithClientAndUsers = _unitOfWork.ProjectRepositry.GetAllProjectsWithClientAndUsersAndTasksWithFiles();
+
+            var vm = new IndexProjectViewModel();
+            vm.Projects = new List<Project>();
+            vm.Managers = new List<ApplicationUser>();
+
+
+            foreach (var project in ProjectsWithClientAndUsers)
+            {
+                //add project to list
+                vm.Projects.Add(project);
+                //then add thier manager
+
+                vm.Managers.Add(GetManagerForProject(project.Id));
+
+            }
+            return View(vm);
         }
 
         // GET: Project/Create
