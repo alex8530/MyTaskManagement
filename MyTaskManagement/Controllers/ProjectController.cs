@@ -20,9 +20,9 @@ namespace MyTaskManagement.Controllers
     public class ProjectController : Controller
     {
         private UnitOfWork _unitOfWork = new UnitOfWork(new ApplicationDbContext());
-       
 
 
+        [Authorize(Roles = "Admin")]
         // GET: Project
         public ActionResult Index()
         {
@@ -56,6 +56,7 @@ namespace MyTaskManagement.Controllers
         } 
         
         // GET: Project/ShowProjectsForEmployee 
+
         public ActionResult ShowProjectsForEmployee( )
         {
             //get all projects
@@ -120,6 +121,10 @@ namespace MyTaskManagement.Controllers
             return View(vm);
         }
 
+
+
+
+        [Authorize(Roles = "Admin")]
         // GET: Project/Create
         public ActionResult Create()
         {
@@ -329,6 +334,8 @@ namespace MyTaskManagement.Controllers
             }
         }
 
+
+        
         // GET: Project/DeleteUser/idUser/idProject
         public ActionResult DeleteUser(string idUser)
         {
@@ -358,6 +365,8 @@ namespace MyTaskManagement.Controllers
             }
         }
 
+
+        [Authorize(Roles = "Admin")]
         // GET: Project/DeleteProject/asdasd
         public ActionResult DeleteProject(string id)
         {

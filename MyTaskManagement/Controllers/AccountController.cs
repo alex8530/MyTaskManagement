@@ -82,7 +82,9 @@ namespace MyTaskManagement.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+
+                    
+                    return await RedirectToLocalAsync(returnUrl, model);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -480,7 +482,27 @@ namespace MyTaskManagement.Controllers
             {
                 return Redirect(returnUrl);
             }
+ 
             return RedirectToAction("Index", "Home");
+        }
+        private async Task<ActionResult> RedirectToLocalAsync(string returnUrl, LoginViewModel model)
+        {
+            if (Url.IsLocalUrl(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+             
+            ApplicationUser user = await UserManager.FindAsync(model.UserName, model.Password);
+            // Redirect to User landing page on SignIn, according to Role
+            if ((UserManager.IsInRole(user.Id, "Admin")))
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+            else
+            {
+                return RedirectToAction("ShowProjectsForEmployee", "Project");
+
+            }
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult

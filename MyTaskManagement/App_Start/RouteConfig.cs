@@ -18,7 +18,7 @@ namespace MyTaskManagement
                 url: "{controller}/{action}/{id}",
                 defaults: new
                 {
-                    controller = "Project", action = "Index", id = UrlParameter.Optional
+                    controller = "Index", action = "Home", id = UrlParameter.Optional
                     
                 }, new[] { "MyTaskManagement.Controllers" }
             );
