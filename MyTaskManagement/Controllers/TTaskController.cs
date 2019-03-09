@@ -60,7 +60,7 @@ namespace MyTaskManagement.Controllers
         }
 
 
-
+         
         // GET: TTask/Create
         //this is comming from project controller 
         //if this action is called from project  Edit View .. this id_current_project will not null 
@@ -224,6 +224,175 @@ namespace MyTaskManagement.Controllers
             }
         }
 
+
+        /// <summary>
+        /// //////////////////////////////////////////this is for employee
+        /// </summary>
+        /// <param name="id_current_project"></param>
+        /// <returns></returns>
+        
+        // GET: TTask/Create
+        //this is comming from project controller 
+        //if this action is called from project  Edit View .. this id_current_project will not null 
+        //if this action is called from Task  View .. this id_current_project will be null 
+        public ActionResult CreateTaskFromEmployee(string id_current_project)
+        {
+            //come from task page
+
+            if (id_current_project.IsNullOrWhiteSpace())
+            {
+                ViewBag.fromTask = "yes";
+                var newViewModel = new CreateTaskViewModel()
+                {
+                    Task = new TTask()
+                    {
+
+                        StartTime = DateTime.Now, //this is defult time
+
+                    },
+                    Users = _unitOfWork.UserRepositry.GetAll().ToList(),
+                    Projects = _unitOfWork.ProjectRepositry.GetAll().ToList()
+
+                };
+                return View(newViewModel);
+
+            }
+            else
+            {
+                //come from project , the only diff here , to show list users that work on this project to avoid show list of user
+                ViewBag.fromTask = "no";
+
+                var newViewModel = new CreateTaskViewModel()
+                {
+                    Task = new TTask()
+                    {
+                        ProjectId = id_current_project,//this is must neot change !!!
+                        StartTime = DateTime.Now,//this is defult time,
+
+
+                    },
+                    Users = _unitOfWork.UserRepositry.GetAll().ToList()
+                };
+
+                return View(newViewModel);
+            }
+
+        }
+
+        // POST: TTask/Create
+        [HttpPost]
+        public ActionResult CreateTaskFromEmployee(TTask task, string id_current_project)
+        {
+
+            // you should note that id_current_project comming from viewmodel !! not from form 
+
+            try
+            {
+                int stat = Int32.Parse(Request.Form["status"]);
+                int pri = Int32.Parse(Request.Form["priority"]);
+                var ui = Request.Form["__UserId__"];
+                var pi = Request.Form["__ProjectId__"];
+                //var id_current_project = Request.Form["id_current_project"];
+
+
+                var user = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFiles(ui);
+
+                /*
+                 * Very important here
+                 *when you add task to project .. the task must assgin   to user ..
+                 * and then when you add task to poject ..you must add this project to user !!
+                 *
+                 *
+                 *
+                 */
+                //var project = _unitOfWork.ProjectRepositry.SingleOrDefault(pp => pp.Id == id_current_project);
+                var dbContext = new ApplicationDbContext();
+
+                if (id_current_project.IsNullOrWhiteSpace())
+                {
+                    //thats mean we will create new task from out side project , no will be project id as forign_key
+
+
+
+                    var newTask = new TTask()
+                    {
+                        ProjectId = pi,
+                        ApplicationUser = user,
+                        Description = task.Description,
+
+                        StartTime = task.StartTime,
+                        Name = task.Name,
+                        Status = (StatusEnum)Enum.ToObject(typeof(StatusEnum), stat),
+                        Priority = (PriorityEnum)Enum.ToObject(typeof(PriorityEnum), pri),
+                        EstimatedTime = task.EstimatedTime,
+                        EffortHours = task.EffortHours,
+                        Ticket = task.Ticket,
+                        Notes = task.Notes,
+                        Owner = User.Identity.Name
+                        //Project =new Project() // here no need to add project object , just add his forign key
+                        //, but if you need to add project object , you must init it
+
+                    };
+
+
+                    //will add project to user to increse number of projects thats user work on
+                    var pro = _unitOfWork.ProjectRepositry.SingleOrDefault(p => p.Id == pi);
+
+                    if (!user.Projects.Contains(pro))
+                    {
+                        user.Projects.Add(pro);
+
+                    }
+                    _unitOfWork.TTaskRepositry.Add(newTask);
+                    _unitOfWork.Complete();
+
+                }
+                else
+                {
+
+
+                    var newTask = new TTask()
+                    {
+                        ProjectId = id_current_project,
+                        ApplicationUser = user,
+                        Description = task.Description,
+
+                        StartTime = task.StartTime,
+                        Name = task.Name,
+                        Status = (StatusEnum)Enum.ToObject(typeof(StatusEnum), stat),
+                        Priority = (PriorityEnum)Enum.ToObject(typeof(PriorityEnum), pri),
+                        EstimatedTime = task.EstimatedTime,
+                        EffortHours = task.EffortHours,
+                        Ticket = task.Ticket,
+                        Notes = task.Notes
+                        //Project =new Project() // here no need to add project object , just add his forign key
+                        //, but if you need to add project object , you must init it
+
+                    };
+
+
+                    var pro = _unitOfWork.ProjectRepositry.SingleOrDefault(p => p.Id == id_current_project);
+
+                    if (!user.Projects.Contains(pro))
+                    {
+                        user.Projects.Add(pro);
+
+                    }
+
+
+                    _unitOfWork.TTaskRepositry.Add(newTask);
+                    _unitOfWork.Complete();
+
+                }
+
+
+                return RedirectToAction("CreateTaskFromEmployee");
+            }
+            catch (Exception exception)
+            {
+                return Content(exception.Message);
+            }
+        }
         // GET: TTask/Edit/5
         public ActionResult Edit(int id)
         {

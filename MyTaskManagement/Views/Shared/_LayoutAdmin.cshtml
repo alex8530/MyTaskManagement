@@ -189,10 +189,11 @@
                                     </div>
                                 </div>
                             </div>
-                            <button class="btn btn-success btn-block">
-                                New Project
-                                <i class="mdi mdi-plus"></i>
-                            </button>
+                            
+                            <p>
+                                @Html.ActionLink("Create New +", "Create", "Project", "", new { @class = "btn btn-success" })
+                               
+                            </p>
                         </div>
                     </li>
                     <li class="nav-item">
