@@ -74,7 +74,15 @@ namespace MyTaskManagement.Migrations
                     Status = StatusEnum.Not_Start,
                     Description = "Description 0",
                     ClientId = clientList[0].Id,
-                    Users = _users
+                    Users = _users,
+                      ProjectFiles= new List<MyProjectFile>
+                      {
+                          new MyProjectFile()
+                          {
+                               FileName = "~/images/ccad8040-b454-4fa0-8c51-d66984dda0dd.png",
+                              MyFileType = MyFileType.Photo
+                          }
+                      }
 
                 },
                 new Project()
@@ -86,7 +94,15 @@ namespace MyTaskManagement.Migrations
                     Status = StatusEnum.InProgress,
                     Description = "Description 1",
 
-                    ClientId = clientList[0].Id
+                    ClientId = clientList[0].Id,
+                      ProjectFiles= new List<MyProjectFile>
+                      {
+                          new MyProjectFile()
+                          {
+                              FileName = "~/images/ccad8040-b454-4fa0-8c51-d66984dda0dd.png",
+                              MyFileType = MyFileType.Photo
+                          }
+                      }
 
                 } ,
                 new Project()
@@ -98,7 +114,15 @@ namespace MyTaskManagement.Migrations
 
                     DeadTime = DateTime.Now.AddDays(555),
                     Status = StatusEnum.Not_Start,
-                    ClientId = clientList[2].Id
+                    ClientId = clientList[2].Id,
+                      ProjectFiles= new List<MyProjectFile>
+                      {
+                          new MyProjectFile()
+                          {
+                             FileName = "~/images/ccad8040-b454-4fa0-8c51-d66984dda0dd.png",
+                              MyFileType = MyFileType.Photo
+                          }
+                      }
 
                 },
                 new Project()
@@ -110,7 +134,15 @@ namespace MyTaskManagement.Migrations
 
                     DeadTime = DateTime.Now.AddDays(555),
                     Status = StatusEnum.Not_Start,
-                    ClientId = clientList[2].Id
+                    ClientId = clientList[2].Id,
+                      ProjectFiles= new List<MyProjectFile>
+                      {
+                          new MyProjectFile()
+                          {
+                              FileName = "~/images/ccad8040-b454-4fa0-8c51-d66984dda0dd.png",
+                              MyFileType = MyFileType.Photo
+                          }
+                      }
 
                 },
                 new Project()
@@ -122,7 +154,15 @@ namespace MyTaskManagement.Migrations
 
                     DeadTime = DateTime.Now.AddDays(555),
                     Status = StatusEnum.Not_Start,
-                    ClientId = clientList[2].Id
+                    ClientId = clientList[2].Id,
+                      ProjectFiles= new List<MyProjectFile>
+                      {
+                          new MyProjectFile()
+                          {
+                               FileName = "~/images/ccad8040-b454-4fa0-8c51-d66984dda0dd.png",
+                              MyFileType = MyFileType.Photo
+                          }
+                      }
 
                 },
                 new Project()
@@ -134,7 +174,15 @@ namespace MyTaskManagement.Migrations
 
                     DeadTime = DateTime.Now.AddDays(555),
                     Status = StatusEnum.Not_Start,
-                    ClientId = clientList[2].Id
+                    ClientId = clientList[2].Id,
+                      ProjectFiles= new List<MyProjectFile>
+                      {
+                          new MyProjectFile()
+                          {
+                             FileName = "~/images/ccad8040-b454-4fa0-8c51-d66984dda0dd.png",
+                              MyFileType = MyFileType.Photo
+                          }
+                      }
 
                 },
                 new Project()
@@ -146,7 +194,15 @@ namespace MyTaskManagement.Migrations
 
                     DeadTime = DateTime.Now.AddDays(555),
                     Status = StatusEnum.Not_Start,
-                    ClientId = clientList[2].Id
+                    ClientId = clientList[2].Id,
+                      ProjectFiles= new List<MyProjectFile>
+                      {
+                          new MyProjectFile()
+                          {
+                            FileName = "~/images/ccad8040-b454-4fa0-8c51-d66984dda0dd.png",
+                              MyFileType = MyFileType.Photo
+                          }
+                      }
 
                 },
                 new Project()
@@ -158,7 +214,15 @@ namespace MyTaskManagement.Migrations
 
                     DeadTime = DateTime.Now.AddDays(555),
                     Status = StatusEnum.Not_Start,
-                    Client = clientList[2]
+                    Client = clientList[2],
+                      ProjectFiles= new List<MyProjectFile>
+                      {
+                          new MyProjectFile()
+                          {
+                    FileName = "~/images/ccad8040-b454-4fa0-8c51-d66984dda0dd.png",
+                              MyFileType = MyFileType.Photo
+                          }
+                      }
 
                 },
                 new Project()
@@ -170,7 +234,15 @@ namespace MyTaskManagement.Migrations
 
                     DeadTime = DateTime.Now.AddDays(555),
                     Status = StatusEnum.Not_Start,
-                    Client = clientList[2]
+                    Client = clientList[2],
+                      ProjectFiles= new List<MyProjectFile>
+                      {
+                          new MyProjectFile()
+                          {
+                               FileName = "~/images/ccad8040-b454-4fa0-8c51-d66984dda0dd.png",
+                              MyFileType = MyFileType.Photo
+                          }
+                      }
 
                 },
                 new Project()
@@ -182,7 +254,15 @@ namespace MyTaskManagement.Migrations
 
                     DeadTime = DateTime.Now.AddDays(555),
                     Status = StatusEnum.Not_Start,
-                    Client = clientList[0]
+                    Client = clientList[0],
+                      ProjectFiles= new List<MyProjectFile>
+                      {
+                          new MyProjectFile()
+                          {
+                              FileName = "~/images/ccad8040-b454-4fa0-8c51-d66984dda0dd.png",
+                              MyFileType = MyFileType.Photo
+                          }
+                      }
 
                 },
                 new Project()
@@ -194,7 +274,15 @@ namespace MyTaskManagement.Migrations
 
                     DeadTime = DateTime.Now.AddDays(555),
                     Status = StatusEnum.Not_Start,
-                    Client = clientList[0]
+                    Client = clientList[0],
+                      ProjectFiles= new List<MyProjectFile>
+                      {
+                          new MyProjectFile()
+                          {
+                              FileName = "~/images/ccad8040-b454-4fa0-8c51-d66984dda0dd.png",
+                              MyFileType = MyFileType.Photo
+                          }
+                      }
 
                 },
                 new Project()
@@ -206,7 +294,15 @@ namespace MyTaskManagement.Migrations
 
                     DeadTime = DateTime.Now.AddDays(555),
                     Status = StatusEnum.Not_Start,
-                    Client = clientList[0]
+                    Client = clientList[0],
+                      ProjectFiles= new List<MyProjectFile>
+                      {
+                          new MyProjectFile()
+                          {
+                              FileName = "~/images/ccad8040-b454-4fa0-8c51-d66984dda0dd.png",
+                              MyFileType = MyFileType.Photo
+                          }
+                      }
 
                 },
                 new Project()
@@ -218,7 +314,15 @@ namespace MyTaskManagement.Migrations
 
                     DeadTime = DateTime.Now.AddDays(555),
                     Status = StatusEnum.Not_Start,
-                    Client = clientList[1]
+                    Client = clientList[1],
+                      ProjectFiles= new List<MyProjectFile>
+                      {
+                          new MyProjectFile()
+                          {
+                          FileName = "~/images/ccad8040-b454-4fa0-8c51-d66984dda0dd.png",
+                              MyFileType = MyFileType.Photo
+                          }
+                      }
 
                 },
                 new Project()
@@ -230,7 +334,15 @@ namespace MyTaskManagement.Migrations
 
                     DeadTime = DateTime.Now.AddDays(555),
                     Status = StatusEnum.Not_Start,
-                    Client = clientList[1]
+                    Client = clientList[1],
+                      ProjectFiles= new List<MyProjectFile>
+                      {
+                          new MyProjectFile()
+                          {
+                              FileName = "~/images/ccad8040-b454-4fa0-8c51-d66984dda0dd.png",
+                              MyFileType = MyFileType.Photo
+                          }
+                      }
 
                 },
                 new Project()
@@ -242,7 +354,15 @@ namespace MyTaskManagement.Migrations
 
                     DeadTime = DateTime.Now.AddDays(555),
                     Status = StatusEnum.Not_Start,
-                    Client = clientList[1]
+                    Client = clientList[1],
+                      ProjectFiles= new List<MyProjectFile>
+                      {
+                          new MyProjectFile()
+                          {
+                               FileName = "~/images/ccad8040-b454-4fa0-8c51-d66984dda0dd.png",
+                              MyFileType = MyFileType.Photo
+                          }
+                      }
 
                 },
                 new Project()
@@ -254,7 +374,15 @@ namespace MyTaskManagement.Migrations
 
                     DeadTime = DateTime.Now.AddDays(555),
                     Status = StatusEnum.Not_Start,
-                    Client = clientList[1]
+                    Client = clientList[1],
+                      ProjectFiles= new List<MyProjectFile>
+                      {
+                          new MyProjectFile()
+                          {
+                              FileName = "~/images/ccad8040-b454-4fa0-8c51-d66984dda0dd.png",
+                              MyFileType = MyFileType.Photo
+                          }
+                      }
 
                 },
                 new Project()
@@ -266,7 +394,15 @@ namespace MyTaskManagement.Migrations
 
                     DeadTime = DateTime.Now.AddDays(555),
                     Status = StatusEnum.Not_Start,
-                    Client = clientList[1]
+                    Client = clientList[1],
+                      ProjectFiles= new List<MyProjectFile>
+                      {
+                          new MyProjectFile()
+                          {
+                             FileName = "~/images/ccad8040-b454-4fa0-8c51-d66984dda0dd.png",
+                              MyFileType = MyFileType.Photo
+                          }
+                      }
 
                 },
                 new Project()
@@ -278,7 +414,15 @@ namespace MyTaskManagement.Migrations
 
                     DeadTime = DateTime.Now.AddDays(555),
                     Status = StatusEnum.Not_Start,
-                    Client = clientList[1]
+                    Client = clientList[1],
+                      ProjectFiles= new List<MyProjectFile>
+                      {
+                          new MyProjectFile()
+                          {
+                             FileName = "~/images/ccad8040-b454-4fa0-8c51-d66984dda0dd.png",
+                              MyFileType = MyFileType.Photo
+                          }
+                      }
 
                 },
                 new Project()
@@ -290,7 +434,15 @@ namespace MyTaskManagement.Migrations
 
                     DeadTime = DateTime.Now.AddDays(555),
                     Status = StatusEnum.Not_Start,
-                    Client = clientList[1]
+                    Client = clientList[1],
+                      ProjectFiles= new List<MyProjectFile>
+                      {
+                          new MyProjectFile()
+                          {
+                              FileName = "~/images/ccad8040-b454-4fa0-8c51-d66984dda0dd.png",
+                              MyFileType = MyFileType.Photo
+                          }
+                      }
 
                 }
             };
@@ -315,121 +467,7 @@ namespace MyTaskManagement.Migrations
             }
 
 
-            ////Add Task
-            ////after add task with user and  project ,, we should add this project in user
-            ////because this task work under project of that user OR DELETE THIS TASKS AND CREATE MANUALLY 
-            //var tasks = new List<TTask>()
-            //{
-            //    new TTask()
-            //    {
-            //        Name = "Task 0" ,
-            //        Priority = PriorityEnum.High,
-            //        Status = StatusEnum.InProgress,
-            //        StartTime = DateTime.Now,
-            //        DeadTime = DateTime.Now.AddHours(20),
-            //        Description = "This is Description for this task 0",
-            //        WorkingHours = 3,
-            //        OverTime = 2,
-            //        ApplicationUser = context.Users.SingleOrDefault(user => user.FirstName =="Alex"),
-            //        Project = projects[0]
-
-            //    },
-            //    new TTask()
-            //    {
-            //        Name = "Task 1" ,
-            //        Priority = PriorityEnum.High,
-            //        Status = StatusEnum.Ended,
-            //        StartTime = DateTime.Now,
-            //        DeadTime = DateTime.Now.AddHours(21),
-            //        Description = "This is Description for this task 1",
-            //        WorkingHours = 1,
-            //        OverTime = 44,
-            //        ApplicationUser = context.Users.SingleOrDefault(user => user.FirstName =="Alex"),
-            //        Project = projects[0]
-
-            //    },
-            //    new TTask()
-            //    {
-            //        Name = "Task 2" ,
-            //        Priority = PriorityEnum.Low,
-            //        Status = StatusEnum.InProgress,
-            //        StartTime = DateTime.Now,
-            //        DeadTime = DateTime.Now.AddHours(20),
-            //        Description = "This is Description for this task 2",
-            //        WorkingHours = 33,
-            //        OverTime = 32,
-            //        ApplicationUser = context.Users.SingleOrDefault(user => user.FirstName =="Alex"),
-            //        Project = projects[1]
-
-            //    },
-            //    new TTask()
-            //    {
-            //        Name = "Task 3" ,
-            //        Priority = PriorityEnum.High,
-            //        Status = StatusEnum.InProgress,
-            //        StartTime = DateTime.Now,
-            //        DeadTime = DateTime.Now.AddHours(20),
-            //        Description = "This is Description for this task 3",
-            //        WorkingHours = 3,
-            //        OverTime = 33,
-            //        ApplicationUser = context.Users.SingleOrDefault(user => user.FirstName =="Admin"),
-            //        Project = projects[2]
-
-            //    },
-            //    new TTask()
-            //    {
-            //        Name = "Task 4" ,
-            //        Priority = PriorityEnum.High,
-            //        Status = StatusEnum.Not_Start,
-            //        StartTime = DateTime.Now,
-            //        DeadTime = DateTime.Now.AddHours(24),
-            //        Description = "This is Description for this task4",
-            //        WorkingHours = 4,
-            //        OverTime = 44,
-            //        ApplicationUser = context.Users.SingleOrDefault(user => user.FirstName =="Admin"),
-            //        Project = projects[0]
-
-            //    }
-            //};
-
-
-            //tasks.ForEach(t => context.Tasks.AddOrUpdate(task => task.Id, t));
-            //context.SaveChanges();
-
-
-
-
-            ////Add Finanitail status 
-            //var finanitail = new List<Financialstatus>()
-            //{
-            //    new Financialstatus()
-            //    {
-            //        Bonus = 5,
-            //        OTH_Rate = 4,
-            //        OTHours = 6,
-            //        Total = 5+4+6,
-            //        W_Hours = 15,
-            //        Wh_Rate = 33,
-            //        Task = tasks[0],
-            //        User = context.Users.FirstOrDefault(user => user.FirstName=="Alex")
-
-            //    },
-            //    new Financialstatus()
-            //    {
-            //        Bonus = 4,
-            //        OTH_Rate = 4,
-            //        OTHours = 4,
-            //        Total = 4+4+4,
-            //        W_Hours = 4,
-            //        Wh_Rate = 43,
-            //        Task = tasks[2],
-            //        User = context.Users.FirstOrDefault(user => user.FirstName=="Admin")
-
-            //    }
-            //};
-            //finanitail.ForEach(f => context.Financialstatuses.AddOrUpdate(financialstatus => financialstatus.Id, f));
-            //context.SaveChanges();
-
+         
 
         }
 
