@@ -51,8 +51,8 @@ namespace MyTaskManagement.Models
         public string Ticket { get; set; }
 
         public string Notes { get; set; }
-        public string Owner { get; set; }
-
+        public string Creator { get; set; }
+         
 
         //[Required]
         public ApplicationUser ApplicationUser { get; set; }
