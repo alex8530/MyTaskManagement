@@ -15,7 +15,7 @@
 
 
 
-<table class="table" id="listTask">
+<table class="table table-responsive" id="listTask">
     <thead>
         <tr>
             <th>
@@ -23,6 +23,9 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Creator )
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Owner )
             </th>
             <th>
                 <p>Project_Id</p>
@@ -51,76 +54,94 @@
                 @Html.DisplayNameFor(model => model.Status)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model. TypeTask)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Ticket)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Notes)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.ReviewerName)
+            </th>
+            <th>
                 <p>Assignee</p>
             </th>
+       
             <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.Creator)
-                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Creator)
+            </td>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.Project.Id)
-                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Owner)
+            </td>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.StartTime)
-                </td>
-                
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                 <td>
-                        @Html.DisplayFor(modelItem => item.EstimatedTime)
-                  </td>
-                 <td>
-                        @Html.DisplayFor(modelItem => item.EffortHours)
-                  </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item. RemainingHours)
-                </td> 
-                
+            <td>
+                @Html.DisplayFor(modelItem => item.Project.Id)
+            </td>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.Priority)
-                </td>
-                
+            <td>
+                @Html.DisplayFor(modelItem => item.StartTime)
+            </td>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.Status)
-                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EstimatedTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EffortHours)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RemainingHours)
+            </td>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.Ticket)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Notes)
-                </td>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.ApplicationUser.FirstName)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", "TTask", new { id = item.Id }, new { @class = "btn btn-success" }) |
-                    @Html.ActionLink("Details", "Details", "TTask", new { id = item.Id }, new { @class = "btn btn-info" }) |
-                    @Html.ActionLink("Delete", "Delete", "TTask", new { id = item.Id }, new { @class = "btn btn-danger" })
-                </td>
-            </tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Priority)
+            </td>
+
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item. TypeTask)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Ticket)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Notes)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.ReviewerName)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.ApplicationUser.FirstName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", "TTask", new { id = item.Id }, new { @class = "btn btn-success" }) |
+                @Html.ActionLink("Details", "Details", "TTask", new { id = item.Id }, new { @class = "btn btn-info" }) |
+                @Html.ActionLink("Delete", "Delete", "TTask", new { id = item.Id }, new { @class = "btn btn-danger" })
+            </td>
+        </tr>
         }
     </tbody>
 

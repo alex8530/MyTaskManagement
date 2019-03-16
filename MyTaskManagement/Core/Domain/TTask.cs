@@ -22,6 +22,9 @@ namespace MyTaskManagement.Models
         [Required]
         public StatusEnum Status { get; set; }
 
+        [Required]
+        public TypeTaskEnum TypeTask { get; set; }
+
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime StartTime { get; set; } 
@@ -52,6 +55,12 @@ namespace MyTaskManagement.Models
 
         public string Notes { get; set; }
         public string Creator { get; set; }
+        public string Owner { get; set; }
+
+
+
+        public string ReviewerId { get; set; }
+        public string ReviewerName{ get; set; }
          
 
         //[Required]
@@ -60,9 +69,6 @@ namespace MyTaskManagement.Models
         //[Required]
         [ForeignKey("ProjectId")]
         public Project Project { get; set; }
-
-
-       
         public string ProjectId { get; set; }
 
 

@@ -215,6 +215,7 @@
     <Compile Include="Core\Domain\MyFileType.cs" />
     <Compile Include="Core\Domain\PriorityEnum.cs" />
     <Compile Include="Core\Domain\TTask.cs" />
+    <Compile Include="Core\Domain\TypeTaskEnum.cs" />
     <Compile Include="Core\IUnitOfWork.cs" />
     <Compile Include="Core\Repositories\IProjectMangerRepositry .cs" />
     <Compile Include="Core\Repositories\IClientRepositry.cs" />
@@ -341,6 +342,14 @@
     <Compile Include="Migrations\201903152113520_changeOwnerToCreatorInTaskTable.cs" />
     <Compile Include="Migrations\201903152113520_changeOwnerToCreatorInTaskTable.Designer.cs">
       <DependentUpon>201903152113520_changeOwnerToCreatorInTaskTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903152127328_addOwnerAndTypeTaskInTaskTable.cs" />
+    <Compile Include="Migrations\201903152127328_addOwnerAndTypeTaskInTaskTable.Designer.cs">
+      <DependentUpon>201903152127328_addOwnerAndTypeTaskInTaskTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903152247246_addReviewerToTask.cs" />
+    <Compile Include="Migrations\201903152247246_addReviewerToTask.Designer.cs">
+      <DependentUpon>201903152247246_addReviewerToTask.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -2525,6 +2534,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903152113520_changeOwnerToCreatorInTaskTable.resx">
       <DependentUpon>201903152113520_changeOwnerToCreatorInTaskTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903152127328_addOwnerAndTypeTaskInTaskTable.resx">
+      <DependentUpon>201903152127328_addOwnerAndTypeTaskInTaskTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903152247246_addReviewerToTask.resx">
+      <DependentUpon>201903152247246_addReviewerToTask.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
