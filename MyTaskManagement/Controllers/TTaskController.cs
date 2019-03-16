@@ -154,7 +154,7 @@ namespace MyTaskManagement.Controllers
                         Description = task.Description,
                         
                         StartTime = task.StartTime,
-                        Name = task.Name,
+                        Title = task.Title,
                         Status = (StatusEnum)Enum.ToObject(typeof(StatusEnum), stat),
                         TypeTask = (TypeTaskEnum)Enum.ToObject(typeof(TypeTaskEnum), type),
                         Priority = (PriorityEnum)Enum.ToObject(typeof(PriorityEnum), pri),
@@ -195,7 +195,7 @@ namespace MyTaskManagement.Controllers
                         Description = task.Description,
                      
                         StartTime = task.StartTime,
-                        Name = task.Name,
+                        Title = task.Title,
                         Status = (StatusEnum)Enum.ToObject(typeof(StatusEnum), stat),
                         TypeTask = (TypeTaskEnum)Enum.ToObject(typeof(TypeTaskEnum), type),
 
@@ -435,7 +435,7 @@ namespace MyTaskManagement.Controllers
 
                 // TODO: Add update logic here
                 var oldTask = _unitOfWork.TTaskRepositry.GetTasksWithUserAndUserAndProject(id);
-                oldTask.Name = task.Name;
+                oldTask.Title = task.Title;
                 oldTask.Priority = task.Priority;
                 oldTask.Status = task.Status;
                 oldTask. TypeTask = task. TypeTask;
@@ -445,7 +445,7 @@ namespace MyTaskManagement.Controllers
                 oldTask.EffortHours = task.EffortHours;
                 oldTask.Ticket = task.Ticket;
                 oldTask.Notes = task.Notes;
-                oldTask.Creator = task.Creator;
+                oldTask.Owner = task.Owner;
                 oldTask.ReviewerName = newReviewer.FirstName;
                 oldTask.ReviewerId = newReviewer.Id;
 
@@ -511,6 +511,64 @@ namespace MyTaskManagement.Controllers
                 // TODO: Add delete logic here
                 var task = _unitOfWork.TTaskRepositry.GetTasksWithUserAndUserAndProject(id);
                 _unitOfWork.TTaskRepositry.Remove(task);
+                _unitOfWork.Complete();
+                return RedirectToAction("Index");
+            }
+            catch (Exception exception)
+            {
+                return View();
+            }
+        }
+
+
+
+        // GET: TTask/CloneToReviewer/5
+        public ActionResult CloneToReviewer(int id)
+        {
+            var newViewModel = new CreateTaskViewModel()
+            {
+                Task = _unitOfWork.TTaskRepositry.GetTasksWithUserAndUserAndProject(id),
+                Users = _unitOfWork.UserRepositry.GetAll().ToList(),
+                Projects = _unitOfWork.ProjectRepositry.GetAll().ToList()
+
+            };
+
+            return View(newViewModel);
+        }
+
+        // POST: TTask/CloneToReviewer/5
+        [HttpPost]
+        public ActionResult CloneToReviewer(int id,   CreateTaskViewModel model)
+        {
+
+            
+            try
+            {
+                var ApplicationUserId = Request.Form["__UserId__"];
+                var __ProjectId__ = Request.Form["__ProjectId__"];
+
+                var user = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFiles(ApplicationUserId);
+
+
+                var newTask = new TTask();
+                
+                newTask.Title = model.Task.Title;
+                newTask.Priority = model.Task.Priority;
+                newTask.Status = model.Task.Status;
+                //newTask.TypeTask = model.Task.TypeTask; //to take inital value ((Coding))
+                newTask.StartTime = model.Task.StartTime;
+                newTask.Description = model.Task.Description;
+                newTask.EstimatedTime = model.Task.EstimatedTime;
+                newTask.EffortHours = model.Task.EffortHours;
+                newTask.Ticket = model.Task.Ticket;
+                newTask.Notes = model.Task.Notes;
+                newTask.Owner = model.Task.Owner;
+                newTask.Creator = model.Task.Creator;
+                newTask.ProjectId = __ProjectId__;
+                newTask.ApplicationUser= new ApplicationUser();
+                newTask.ApplicationUser = user;
+
+                _unitOfWork.TTaskRepositry.Add(newTask);
                 _unitOfWork.Complete();
                 return RedirectToAction("Index");
             }

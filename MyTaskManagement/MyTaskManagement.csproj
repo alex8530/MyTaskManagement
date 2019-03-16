@@ -351,6 +351,10 @@
     <Compile Include="Migrations\201903152247246_addReviewerToTask.Designer.cs">
       <DependentUpon>201903152247246_addReviewerToTask.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903162006420_changeNameToTitleInTaskTable1.cs" />
+    <Compile Include="Migrations\201903162006420_changeNameToTitleInTaskTable1.Designer.cs">
+      <DependentUpon>201903162006420_changeNameToTitleInTaskTable1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Core\Domain\Client.cs" />
@@ -2435,6 +2439,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\TTask\CreateTaskFromEmployee.cshtml" />
     <Content Include="Views\User\SettingEmployee.cshtml" />
+    <Content Include="Views\TTask\CloneToReviewer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2540,6 +2545,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903152247246_addReviewerToTask.resx">
       <DependentUpon>201903152247246_addReviewerToTask.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903162006420_changeNameToTitleInTaskTable1.resx">
+      <DependentUpon>201903162006420_changeNameToTitleInTaskTable1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

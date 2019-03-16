@@ -14,7 +14,7 @@ namespace MyTaskManagement.Models
 
         [Required]
         [StringLength(255)]
-        public string Name { get; set; }
+        public string Title { get; set; }
 
         [Required]
         public PriorityEnum Priority { get; set; }
@@ -60,6 +60,7 @@ namespace MyTaskManagement.Models
 
 
         public string ReviewerId { get; set; }
+        [DisplayName("Reviewer")]
         public string ReviewerName{ get; set; }
          
 

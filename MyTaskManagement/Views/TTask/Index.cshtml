@@ -19,7 +19,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                @Html.DisplayNameFor(model => model.Title)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Creator )
@@ -77,7 +77,7 @@
         {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                @Html.DisplayFor(modelItem => item.Title)
             </td>
 
             <td>
@@ -138,8 +138,9 @@
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", "TTask", new { id = item.Id }, new { @class = "btn btn-success" }) |
-                @Html.ActionLink("Details", "Details", "TTask", new { id = item.Id }, new { @class = "btn btn-info" }) |
-                @Html.ActionLink("Delete", "Delete", "TTask", new { id = item.Id }, new { @class = "btn btn-danger" })
+                @Html.ActionLink("Clone", "CloneToReviewer", "TTask", new { id = item.Id }, new { @class = "btn btn-info"}) |
+                @Html.ActionLink("Delete", "Delete", "TTask", new { id = item.Id }, new { @class = "btn btn-danger"})
+                @*@Html.ActionLink("Delete", "Delete", "TTask", new { id = item.Id }, new { @class = "btn btn-danger" })*@
             </td>
         </tr>
         }
