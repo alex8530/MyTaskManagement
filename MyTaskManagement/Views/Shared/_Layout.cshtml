@@ -1,4 +1,5 @@
 ﻿@using System.Web.UI.HtmlControls
+@using Microsoft.AspNet.Identity
 <!DOCTYPE html>
 <html lang="en">
 
@@ -222,7 +223,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="/FinancialStatus/index">
+                        <a class="nav-link" href="/FinancialStatus/ListFinancailForOneEmployee/@User.Identity.GetUserId()">
                             <i class="menu-icon mdi mdi-television"></i>
                             <span class="menu-title">FinancialSstatus/TimeSheet</span>
                         </a>

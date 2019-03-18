@@ -224,6 +224,7 @@
     <Compile Include="Core\Repositories\IRepository.cs" />
     <Compile Include="Core\Repositories\IProjectRepositry.cs" />
     <Compile Include="Core\Repositories\IUserRepositry.cs" />
+    <Compile Include="Core\ViewModel\FinanicalstatusViewModel.cs" />
     <Compile Include="Core\ViewModel\IndexAdminViewModel.cs" />
     <Compile Include="Core\ViewModel\ProjectViewModels.cs" />
     <Compile Include="Core\ViewModel\TaskViewModel.cs" />
@@ -354,6 +355,18 @@
     <Compile Include="Migrations\201903162006420_changeNameToTitleInTaskTable1.cs" />
     <Compile Include="Migrations\201903162006420_changeNameToTitleInTaskTable1.Designer.cs">
       <DependentUpon>201903162006420_changeNameToTitleInTaskTable1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903181026056_addPaymentAndRemainToFinanical.cs" />
+    <Compile Include="Migrations\201903181026056_addPaymentAndRemainToFinanical.Designer.cs">
+      <DependentUpon>201903181026056_addPaymentAndRemainToFinanical.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903181035190_changetodoubleinFinancal.cs" />
+    <Compile Include="Migrations\201903181035190_changetodoubleinFinancal.Designer.cs">
+      <DependentUpon>201903181035190_changetodoubleinFinancal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903181050293_changetodoubleinFina.cs" />
+    <Compile Include="Migrations\201903181050293_changetodoubleinFina.Designer.cs">
+      <DependentUpon>201903181050293_changetodoubleinFina.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -2440,6 +2453,7 @@
     <Content Include="Views\TTask\CreateTaskFromEmployee.cshtml" />
     <Content Include="Views\User\SettingEmployee.cshtml" />
     <Content Include="Views\TTask\CloneToReviewer.cshtml" />
+    <Content Include="Views\FinancialStatus\ListFinancailForOneEmployee.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2548,6 +2562,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903162006420_changeNameToTitleInTaskTable1.resx">
       <DependentUpon>201903162006420_changeNameToTitleInTaskTable1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903181026056_addPaymentAndRemainToFinanical.resx">
+      <DependentUpon>201903181026056_addPaymentAndRemainToFinanical.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903181035190_changetodoubleinFinancal.resx">
+      <DependentUpon>201903181035190_changetodoubleinFinancal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903181050293_changetodoubleinFina.resx">
+      <DependentUpon>201903181050293_changetodoubleinFina.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

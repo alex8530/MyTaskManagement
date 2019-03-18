@@ -12,6 +12,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Xml.Linq;
 using iTextSharp.tool.xml;
+using MyTaskManagement.Core.ViewModel;
 
 namespace MyTaskManagement.Controllers
 {
@@ -28,6 +29,50 @@ namespace MyTaskManagement.Controllers
             var listEmployeeFinanical = _unitOfWork.UserRepositry.GetAllUsersWithProjectsAndTasksAndRolesAndFinanicalWithFiles();
             return View(listEmployeeFinanical);
         }
+
+
+         
+
+        // GET: FinancialStatus  return list of  Financial  for one employee
+        public ActionResult ListFinancailForOneEmployee(string id, int month = 0, int year = 0)
+        {
+            //so will pass user  with thier financials 
+
+            var UserWithlistFinanical = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFiles(id);
+            //return View(UserWithlistFinanical);
+
+             var listOwnFinancial = UserWithlistFinanical.FinancialstatusList;
+
+            if (month == 0 && year != 0)
+            { //No sorting  for month
+                listOwnFinancial = listOwnFinancial.Where( financialstatus => financialstatus.Date.Year == year).ToList();
+
+            }
+            else if (month != 0 && year == 0)
+            {//No sorting  for year
+                listOwnFinancial = listOwnFinancial.Where(financialstatus => financialstatus.Date.Month == month).ToList();
+
+            }
+            else if (month != 0 && year != 0)
+            {//No sorting  for year nor month
+                listOwnFinancial = listOwnFinancial.Where(financialstatus => financialstatus.Date.Month == month && financialstatus.Date.Year == year).ToList();
+
+            }
+
+            var vm = new FinanicalstatusViewModel()
+            {
+                 User = UserWithlistFinanical,
+                Financialstatus = listOwnFinancial
+            };
+           
+            ViewBag.m = month;
+            ViewBag.y = year;
+
+            return View(vm);
+
+
+        }
+
 
         // GET: FinancialStatus/Details/5
         public ActionResult Details(int id)

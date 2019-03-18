@@ -453,24 +453,26 @@ namespace MyTaskManagement.Controllers
 
                 var user = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFiles(ApplicationUserId);
 
-
                 ////check if status change to end
                 if (task.Status == StatusEnum.Ended)
                 {
-                    //add this  to financail status
-                    var totalEquation =(long)(  user.HourlyRate * task.EffortHours);
+                    //add this  to financail status ,ok now do the real code !!
+                    
+                    double payment = Math.Round(user.HourlyRate * task.EffortHours * .80, 2);
+                    double  totalEquation  =  user.HourlyRate * task.EffortHours  ;
+                    
                     var financial = new Financialstatus()
                     {
                         Id = task.Id.ToString(),
-                        Date = task.StartTime, //must change
+                        Date = task.StartTime, //must change, but for now for testing  !!
                         EstimatedHours = task.EstimatedTime,
                         EffortHours = task.EffortHours,
                          
-                        pro__id = ProjectId,
-                        task__id = task.Id.ToString(),
-                        
-                        user__id = ApplicationUserId,
-                        Total = totalEquation
+                        Pro__id = ProjectId,
+                        Task__id = task.Id.ToString(),
+                        User__id = ApplicationUserId,
+                        Payment = payment,
+                        Remain = Math.Round(totalEquation - payment, 2) 
                     };
                     try
                     {
