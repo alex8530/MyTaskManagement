@@ -2455,6 +2455,7 @@
     <Content Include="Views\TTask\CloneToReviewer.cshtml" />
     <Content Include="Views\FinancialStatus\ListFinancailForOneEmployee.cshtml" />
     <Content Include="Views\Project\TaskOfProject.cshtml" />
+    <Content Include="Views\Project\TaskOfProjectManager.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
