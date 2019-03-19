@@ -6,7 +6,7 @@
 }
 <h3>Project : @Model.Name</h3>
 <div>
-    @Html.ActionLink("Add Task", "Create", "TTask", new { id_current_project = Model.Id }, htmlAttributes: new { @class = "btn btn-warning" })
+    @Html.ActionLink("Add Task", "CreateByManager", "TTask", new { id_current_project = Model.Id }, htmlAttributes: new { @class = "btn btn-warning" })
 </div>
 
 
