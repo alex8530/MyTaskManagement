@@ -84,7 +84,19 @@ namespace MyTaskManagement.Controllers
                     Projects = _unitOfWork.ProjectRepositry.GetAll().ToList() 
                     
                 };
+
+
+
+                if (User.IsInRole("Admin"))
+                {
                 return View(newViewModel);
+
+                }
+                else
+                {
+                return View("CreateByManager", newViewModel);
+
+                }
 
             }
             else
@@ -104,7 +116,16 @@ namespace MyTaskManagement.Controllers
                     Users = _unitOfWork.UserRepositry.GetAll().ToList()
                 };
 
-                return View(newViewModel);
+                if (User.IsInRole("Admin"))
+                {
+                    return View(newViewModel);
+
+                }
+                else
+                {
+                    return View("CreateByManager", newViewModel);
+
+                }
             }
            
         }
@@ -226,180 +247,20 @@ namespace MyTaskManagement.Controllers
                     _unitOfWork.Complete();
 
                 }
-
-
-                return RedirectToAction("Index");
-            }
-            catch (Exception exception)
-            {
-                return Content(exception.Message);
-            }
-        }
-
-        public ActionResult CreateByManager(string id_current_project)
-        {
-            //come from task page
-
-            if (id_current_project.IsNullOrWhiteSpace())
-            {
-                ViewBag.fromTask = "yes";
-                var newViewModel = new CreateTaskViewModel()
+                if (User.IsInRole("Admin"))
                 {
-                    Task = new TTask()
-                    {
+                    return RedirectToAction("Index");
 
-                        StartTime = DateTime.Now, //this is defult time
-
-                    },
-                    Users = _unitOfWork.UserRepositry.GetAll().ToList(),
-                    Projects = _unitOfWork.ProjectRepositry.GetAll().ToList()
-
-                };
-                return View(newViewModel);
-
-            }
-            else
-            {
-                //come from project , the only diff here , to show list users that work on this project to avoid show list of user
-                ViewBag.fromTask = "no";
-
-                var newViewModel = new CreateTaskViewModel()
-                {
-                    Task = new TTask()
-                    {
-                        ProjectId = id_current_project,//this is must neot change !!!
-                        StartTime = DateTime.Now,//this is defult time,
-
-
-                    },
-                    Users = _unitOfWork.UserRepositry.GetAll().ToList()
-                };
-
-                return View(newViewModel);
-            }
-
-        }
-
-        // POST: TTask/Create
-        [HttpPost]
-        public ActionResult CreateByManager(TTask task, string id_current_project)
-        {
-
-            // you should note that id_current_project comming from viewmodel !! not from form 
-
-            try
-            {
-                int stat = Int32.Parse(Request.Form["status"]);
-                int type = Int32.Parse(Request.Form["type"]);
-                int pri = Int32.Parse(Request.Form["priority"]);
-                var ui = Request.Form["__UserId__"];
-                var ri = Request.Form["__ReviewerId__"];
-                var pi = Request.Form["__ProjectId__"];
-                //var id_current_project = Request.Form["id_current_project"];
-
-
-                var user = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFiles(ui);
-                var reviewer = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFiles(ri);
-
-                /*
-                 * Very important here
-                 *when you add task to project .. the task must assgin   to user ..
-                 * and then when you add task to poject ..you must add this project to user !!
-                 *
-                 *
-                 *
-                 */
-                //var project = _unitOfWork.ProjectRepositry.SingleOrDefault(pp => pp.Id == id_current_project);
-                var dbContext = new ApplicationDbContext();
-
-                if (id_current_project.IsNullOrWhiteSpace())
-                {
-                    //thats mean we will create new task from out side project , no will be project id as forign_key
-
-
-
-                    var newTask = new TTask()
-                    {
-                        ProjectId = pi,
-                        ApplicationUser = user,
-                        Description = task.Description,
-
-                        StartTime = task.StartTime,
-                        Title = task.Title,
-                        Status = (StatusEnum)Enum.ToObject(typeof(StatusEnum), stat),
-                        TypeTask = (TypeTaskEnum)Enum.ToObject(typeof(TypeTaskEnum), type),
-                        Priority = (PriorityEnum)Enum.ToObject(typeof(PriorityEnum), pri),
-                        EstimatedTime = task.EstimatedTime,
-                        EffortHours = task.EffortHours,
-                        Ticket = task.Ticket,
-                        Notes = task.Notes,
-                        Creator = User.Identity.Name,
-                        Owner = task.Owner,
-                        ReviewerName = reviewer.FirstName,
-                        ReviewerId = reviewer.Id
-                        //Project =new Project() // here no need to add project object , just add his forign key
-                        //, but if you need to add project object , you must init it
-
-                    };
-
-
-                    //will add project to user to increse number of projects thats user work on
-                    var pro = _unitOfWork.ProjectRepositry.SingleOrDefault(p => p.Id == pi);
-
-                    if (!user.Projects.Contains(pro))
-                    {
-                        user.Projects.Add(pro);
-
-                    }
-                    _unitOfWork.TTaskRepositry.Add(newTask);
-                    _unitOfWork.Complete();
 
                 }
                 else
                 {
+                    //redirect to his project
+                    return RedirectToAction("ShowProjectsForManager","Project");
 
-
-                    var newTask = new TTask()
-                    {
-                        ProjectId = id_current_project,
-                        ApplicationUser = user,
-                        Description = task.Description,
-
-                        StartTime = task.StartTime,
-                        Title = task.Title,
-                        Status = (StatusEnum)Enum.ToObject(typeof(StatusEnum), stat),
-                        TypeTask = (TypeTaskEnum)Enum.ToObject(typeof(TypeTaskEnum), type),
-
-                        Priority = (PriorityEnum)Enum.ToObject(typeof(PriorityEnum), pri),
-                        EstimatedTime = task.EstimatedTime,
-                        EffortHours = task.EffortHours,
-                        Ticket = task.Ticket,
-                        Notes = task.Notes,
-                        Owner = task.Owner,
-                        ReviewerName = reviewer.FirstName,
-                        ReviewerId = reviewer.Id
-                        //Project =new Project() // here no need to add project object , just add his forign key
-                        //, but if you need to add project object , you must init it
-
-                    };
-
-
-                    var pro = _unitOfWork.ProjectRepositry.SingleOrDefault(p => p.Id == id_current_project);
-
-                    if (!user.Projects.Contains(pro))
-                    {
-                        user.Projects.Add(pro);
-
-                    }
-
-
-                    _unitOfWork.TTaskRepositry.Add(newTask);
-                    _unitOfWork.Complete();
 
                 }
 
-
-                return RedirectToAction("Index");
             }
             catch (Exception exception)
             {
@@ -407,6 +268,7 @@ namespace MyTaskManagement.Controllers
             }
         }
 
+        
         /// <summary>
         /// //////////////////////////////////////////this is for employee
         /// </summary>
