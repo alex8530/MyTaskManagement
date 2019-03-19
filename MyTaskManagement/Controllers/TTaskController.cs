@@ -557,10 +557,11 @@ namespace MyTaskManagement.Controllers
                 newTask.Title = model.Task.Title;
                 newTask.Priority = model.Task.Priority;
                 newTask.Status = model.Task.Status;
-                //newTask.TypeTask = model.Task.TypeTask; //to take inital value ((Coding))
+                 //newTask.TypeTask = model.Task.TypeTask; //to take inital value ((Coding))
                 newTask.StartTime = model.Task.StartTime;
                 newTask.Description = model.Task.Description;
                 newTask.EstimatedTime = model.Task.EstimatedTime;
+                
                 newTask.EffortHours = model.Task.EffortHours;
                 newTask.Ticket = model.Task.Ticket;
                 newTask.Notes = model.Task.Notes;

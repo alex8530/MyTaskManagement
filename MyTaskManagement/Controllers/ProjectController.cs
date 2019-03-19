@@ -49,6 +49,15 @@ namespace MyTaskManagement.Controllers
 
         }
 
+
+        public ActionResult TaskOfProject(string id)
+        {
+            var pro = _unitOfWork.ProjectRepositry.GetProjectsWithClientAndUsersAndTasksWithFiles(id);
+
+
+            return View(pro);
+        }
+
         // GET: Project/Details/5
         public ActionResult Details(string id)
         {
