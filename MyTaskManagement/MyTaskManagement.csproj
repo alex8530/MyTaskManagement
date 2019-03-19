@@ -2456,6 +2456,8 @@
     <Content Include="Views\Project\TaskOfProject.cshtml" />
     <Content Include="Views\Project\TaskOfProjectManager.cshtml" />
     <Content Include="Views\TTask\CreateByManager.cshtml" />
+    <Content Include="Views\TTask\EditByManager.cshtml" />
+    <Content Include="Views\TTask\DeleteByManager.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

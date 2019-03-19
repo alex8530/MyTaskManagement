@@ -447,7 +447,18 @@ namespace MyTaskManagement.Controllers
                 Users = _unitOfWork.UserRepositry.GetAll().ToList(),
                 Task = _unitOfWork.TTaskRepositry.GetTasksWithUserAndUserAndProject(id)
             };
-            return View(vm);
+            if (User.IsInRole("Admin"))
+            {
+                
+                return View(vm);
+
+            }
+            else
+            {
+              
+                return View("EditByManager", vm);
+
+            }
         }
 
         // POST: TTask/Edit/5
@@ -519,8 +530,20 @@ namespace MyTaskManagement.Controllers
                 }
                 _unitOfWork.Complete();
 
+                if (User.IsInRole("Admin"))
+                {
 
-                return RedirectToAction("Index");
+                    return RedirectToAction("Index");
+
+                }
+                else
+                {
+                    //redirect to his project
+                    return RedirectToAction("ShowProjectsForManager", "Project");
+
+
+                }
+               
             }
             catch (Exception e)
             {
@@ -533,7 +556,18 @@ namespace MyTaskManagement.Controllers
         {
             var task = _unitOfWork.TTaskRepositry.GetTasksWithUserAndUserAndProject(id);
 
-            return View(task);
+            if (User.IsInRole("Admin"))
+            {
+
+                return View(task);
+
+            }
+            else
+            {
+                return View("DeleteByManager",task);
+
+            }
+           
         }
 
         // POST: TTask/Delete/5
@@ -546,7 +580,21 @@ namespace MyTaskManagement.Controllers
                 var task = _unitOfWork.TTaskRepositry.GetTasksWithUserAndUserAndProject(id);
                 _unitOfWork.TTaskRepositry.Remove(task);
                 _unitOfWork.Complete();
-                return RedirectToAction("Index");
+
+                if (User.IsInRole("Admin"))
+                {
+
+                    return RedirectToAction("Index");
+
+                }
+                else
+                {
+                    //redirect to his project
+                    return RedirectToAction("ShowProjectsForManager", "Project");
+
+
+                }
+
             }
             catch (Exception exception)
             {
