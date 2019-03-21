@@ -368,6 +368,10 @@
     <Compile Include="Migrations\201903181050293_changetodoubleinFina.Designer.cs">
       <DependentUpon>201903181050293_changetodoubleinFina.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903211021102_addIsApproveByManagerToFinancailTable.cs" />
+    <Compile Include="Migrations\201903211021102_addIsApproveByManagerToFinancailTable.Designer.cs">
+      <DependentUpon>201903211021102_addIsApproveByManagerToFinancailTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Core\Domain\Client.cs" />
@@ -2576,6 +2580,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903181050293_changetodoubleinFina.resx">
       <DependentUpon>201903181050293_changetodoubleinFina.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903211021102_addIsApproveByManagerToFinancailTable.resx">
+      <DependentUpon>201903211021102_addIsApproveByManagerToFinancailTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

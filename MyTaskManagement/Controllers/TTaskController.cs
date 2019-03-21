@@ -518,7 +518,8 @@ namespace MyTaskManagement.Controllers
                         Task__id = task.Id.ToString(),
                         User__id = ApplicationUserId,
                         Payment = payment,
-                        Remain = Math.Round(totalEquation - payment, 2) 
+                        Remain = Math.Round(totalEquation - payment, 2),
+                        IsApproveByManager =false 
                     };
                     try
                     {
@@ -667,6 +668,8 @@ namespace MyTaskManagement.Controllers
                 newTask.ProjectId = __ProjectId__;
                 newTask.ApplicationUser= new ApplicationUser();
                 newTask.ApplicationUser = user;
+
+                 
 
                 _unitOfWork.TTaskRepositry.Add(newTask);
                 _unitOfWork.Complete();

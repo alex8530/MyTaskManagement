@@ -26,6 +26,8 @@ namespace MyTaskManagement.Core.Domain
         public double Payment { get; set; }
 
         public double Remain { get; set; }
+
+        public bool IsApproveByManager { get; set; }
         
         public string Pro__id { get; set; }
 
