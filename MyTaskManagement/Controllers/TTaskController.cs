@@ -2,6 +2,7 @@
 using MyTaskManagement.Persistence;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Diagnostics;
 using System.Linq;
 using System.Web;
@@ -18,11 +19,13 @@ namespace MyTaskManagement.Controllers
         private UnitOfWork _unitOfWork = new UnitOfWork(new ApplicationDbContext());
 
         // GET: TTask
-        public ActionResult Index(  )
+        public ActionResult Index()
         { 
           
                 //No sorting , show all tasks
                 var taskss = _unitOfWork.TTaskRepositry.GetAllTasksWithUserAndUserAndProject();
+       
+
 
                 return View(taskss);
  
@@ -43,9 +46,9 @@ namespace MyTaskManagement.Controllers
         public ActionResult ShowTaskForEmployee( )
         {
             var currentUserID = User.Identity.GetUserId();
-            var task = _unitOfWork.TTaskRepositry.GetAllTasksWithUserAndUserAndProject().Where(task1 => task1.ApplicationUser.Id== currentUserID);
+            var tasks = _unitOfWork.TTaskRepositry.GetAllTasksWithUserAndUserAndProject().Where(task1 => task1.ApplicationUser.Id== currentUserID);
 
-            return View(task);
+            return View(tasks);
         }
 
       
@@ -616,7 +619,20 @@ namespace MyTaskManagement.Controllers
 
             };
 
-            return View(newViewModel);
+            if (User.IsInRole("Admin"))
+            {
+
+                return View(newViewModel);
+
+            }
+            else
+            {
+                return View("CloneToReviewerByEmployee", newViewModel);
+
+
+            }
+
+           
         }
 
         // POST: TTask/CloneToReviewer/5
@@ -654,9 +670,26 @@ namespace MyTaskManagement.Controllers
 
                 _unitOfWork.TTaskRepositry.Add(newTask);
                 _unitOfWork.Complete();
-                return RedirectToAction("Index");
+
+
+                if (User.IsInRole("Admin"))
+                {
+
+                    return RedirectToAction("Index");
+
+
+                }
+                else
+                {
+                    return RedirectToAction("ShowTaskForEmployee");
+
+
+
+                }
+
+
             }
-            catch (Exception exception)
+            catch (Exception e )
             {
                 return View();
             }

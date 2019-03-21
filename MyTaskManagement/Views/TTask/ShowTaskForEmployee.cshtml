@@ -53,6 +53,11 @@
             <th>
                 @Html.DisplayNameFor(model => model.Status)
             </th>
+         
+            <th>
+                @Html.DisplayNameFor(model => model.TypeTask)
+            </th>
+         
             <th>
                 @Html.DisplayNameFor(model => model.Ticket)
             </th>
@@ -133,9 +138,11 @@
                     @Html.DisplayFor(modelItem => item.ApplicationUser.FirstName)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", "TTask", new { id = item.Id }, new { @class = "btn btn-success" }) |
-                    @Html.ActionLink("Details", "Details", "TTask", new { id = item.Id }, new { @class = "btn btn-info" }) |
-                 @*   @Html.ActionLink("Delete", "Delete", "TTask", new { id = item.Id }, new { @class = "btn btn-danger" })*@
+                    @Html.ActionLink("Edit", "Edit", "TTask", new { id = item.Id }, new { @class = "btn btn-success" })  
+                    @if (!item.TypeTask.Equals(TypeTaskEnum.Review))
+                    {
+                        @Html.ActionLink("Clone", "CloneToReviewer", "TTask", new { id = item.Id }, new { @class = "btn btn-info"})  
+                    }
                 </td>
             </tr>
         }
