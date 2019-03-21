@@ -114,6 +114,11 @@
             </th>
          
 
+            <th>
+                <p>IsApprove</p>
+            </th>
+         
+
         </tr>
     </thead>
     <tbody>
@@ -141,6 +146,9 @@
 
                 <td>
                     @Html.DisplayFor(modelItem => item.Remain) $
+                </td>
+                <td>
+                    <input type="checkbox" name="isapprove" onclick="return false;" value="@item.IsApproveByManager"> <br>
                 </td>
  
             </tr>
