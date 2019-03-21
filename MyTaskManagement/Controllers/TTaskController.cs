@@ -219,7 +219,7 @@ namespace MyTaskManagement.Controllers
                         Title = task.Title,
                         Status = (StatusEnum)Enum.ToObject(typeof(StatusEnum), stat),
                         TypeTask = (TypeTaskEnum)Enum.ToObject(typeof(TypeTaskEnum), type),
-
+                        Creator = User.Identity.Name,
                         Priority = (PriorityEnum)Enum.ToObject(typeof(PriorityEnum), pri),
                         EstimatedTime = task.EstimatedTime,
                         EffortHours = task.EffortHours,
@@ -551,6 +551,7 @@ namespace MyTaskManagement.Controllers
             }
         }
 
+       
         // GET: TTask/Delete/5
         public ActionResult Delete(int id)
         {
