@@ -73,6 +73,10 @@ namespace MyTaskManagement.Models
         public string ProjectId { get; set; }
 
 
+        //this is not for database
+        [NotMapped]
+        public bool IsUpdate { get; set; }
+
        
 
          

@@ -133,14 +133,14 @@
 
                     @Html.ActionLink("Delete", "Delete", "TTask", new { id = item.Id }, new { @class = "btn btn-danger" })
                     
-                    @if(item.IsApproveByManager.Equals(false))
+                    @if(item.IsApproveByManager.Equals(false)) 
                     {
                         @Html.ActionLink("Approve", "Approve", "TTask", new { id = item.Id }, new { @class = "btn btn-dark" })
 
                     }
                     else
                     {
-                      <input type="button" class="btn btn-dark"  value="Approve" disabled="disabled"/>
+                      <input type="button" class="btn btn-dark"  value="Approved" disabled="disabled"/>
                     }
                 </td>
                 @*@{

@@ -481,6 +481,27 @@ namespace MyTaskManagement.Controllers
 
                 // TODO: Add update logic here
                 var oldTask = _unitOfWork.TTaskRepositry.GetTasksWithUserAndUserAndProject(id);
+                //very important
+                /*
+                 * if the manager approve the task and go to finanical and then , the employee or
+                 * manager change/update the hour of this task .. then the task must be re approve ,
+                 * so i will show the button approve agian , and to do that ,i will check if there  is
+                 * any change or edit on hour!!
+                 */
+
+                if (oldTask.EffortHours != task.EffortHours || oldTask.EstimatedTime != task.EstimatedTime)
+                {
+                    //there is a change
+                    oldTask.IsApproveByManager = false;
+                    // oldTask.IsUpdate = true;
+
+                }
+                else
+                {
+                    oldTask.IsApproveByManager = true;
+
+                }
+
                 oldTask.Title = task.Title;
                 oldTask.Priority = task.Priority;
                 oldTask.Status = task.Status;
@@ -497,42 +518,11 @@ namespace MyTaskManagement.Controllers
                 oldTask.ReviewerId = newReviewer.Id;
 
 
+              
+
 
                 var user = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFiles(ApplicationUserId);
-
-                ////check if status change to end
-                //if (task.Status == StatusEnum.Ended)
-                //{
-                //    //add this  to financail status ,ok now do the real code !!
-                    
-                //    double payment = Math.Round(user.HourlyRate * task.EffortHours * .80, 2);
-                //    double  totalEquation  =  user.HourlyRate * task.EffortHours  ;
-                    
-                //    var financial = new Financialstatus()
-                //    {
-                //        Id = task.Id.ToString(),
-                //        Date = task.StartTime, //must change, but for now for testing  !!
-                //        EstimatedHours = task.EstimatedTime,
-                //        EffortHours = task.EffortHours,
-                         
-                //        Pro__id = ProjectId,
-                //        Task__id = task.Id.ToString(),
-                //        User__id = ApplicationUserId,
-                //        Payment = payment,
-                //        Remain = Math.Round(totalEquation - payment, 2),
-                //        IsApproveByManager =false 
-                //    };
-                //    try
-                //    {
-                //        _unitOfWork.FinancialRepositry.Add(financial);
-
-                //    }
-                //    catch (Exception e)
-                //    {
-                //        Console.WriteLine(e);
-                //    }
-
-                //}
+   
                 _unitOfWork.Complete();
 
                 if (User.IsInRole("Admin"))
@@ -639,6 +629,11 @@ namespace MyTaskManagement.Controllers
                 var task = _unitOfWork.TTaskRepositry.GetTasksWithUserAndUserAndProject(id);
                 var user = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFiles(ApplicationUserId);
 
+
+                //update task to approve 
+                task.IsApproveByManager = true;
+
+                _unitOfWork.TTaskRepositry.Add(task);
 
                 //now copy it to finanical status
                 ////check if status change to end

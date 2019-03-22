@@ -16,11 +16,11 @@
 {
     @Html.AntiForgeryToken()
  <input hidden="" name="id" value="@Model.Id"/>
-    @Html.Hidden("id", Model .id)
+    @Html.Hidden("id", Model.Id)
     @Html.Hidden("ProjectId", Model .ProjectId)
     @Html.Hidden("ApplicationUserId", Model .ApplicationUser.Id)
     <div class="form-actions no-color">
-        <input type="submit" value="Approve" class="btn btn-default" /> |
+        <input type="submit" value="Approve" class="btn btn-dark" />  
        
     </div>
 }
