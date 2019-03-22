@@ -31,7 +31,7 @@ namespace MyTaskManagement.Models
 
         public string Description { get; set; }
 
-
+        public bool IsApproveByManager { get; set; }
 
         [Required]
         public long EstimatedTime { get; set; }

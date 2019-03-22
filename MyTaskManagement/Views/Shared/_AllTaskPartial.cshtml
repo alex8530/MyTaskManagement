@@ -1,4 +1,5 @@
-﻿@using MyTaskManagement.Core.Domain
+﻿@using System.Web.UI.WebControls
+@using MyTaskManagement.Core.Domain
 @model IEnumerable<MyTaskManagement.Models.TTask>
  
 <table class="table table-responsive" id="listTask">
@@ -131,7 +132,22 @@
                     }
 
                     @Html.ActionLink("Delete", "Delete", "TTask", new { id = item.Id }, new { @class = "btn btn-danger" })
+                    
+                    @if(item.IsApproveByManager.Equals(false))
+                    {
+                        @Html.ActionLink("Approve", "Approve", "TTask", new { id = item.Id }, new { @class = "btn btn-dark" })
+
+                    }
+                    else
+                    {
+                      <input type="button" class="btn btn-dark"  value="Approve" disabled="disabled"/>
+                    }
                 </td>
+                @*@{
+                    var currentProject = Model.Task.Project;
+                    var currentUserManagerId  = User.Identity.GetUserId();
+
+                }*@
             </tr>
         }
     </tbody>

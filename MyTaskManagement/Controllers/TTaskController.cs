@@ -492,6 +492,7 @@ namespace MyTaskManagement.Controllers
                 oldTask.Ticket = task.Ticket;
                 oldTask.Notes = task.Notes;
                 oldTask.Owner = task.Owner;
+                oldTask.IsApproveByManager = task.IsApproveByManager;
                 oldTask.ReviewerName = newReviewer.FirstName;
                 oldTask.ReviewerId = newReviewer.Id;
 
@@ -500,38 +501,38 @@ namespace MyTaskManagement.Controllers
                 var user = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFiles(ApplicationUserId);
 
                 ////check if status change to end
-                if (task.Status == StatusEnum.Ended)
-                {
-                    //add this  to financail status ,ok now do the real code !!
+                //if (task.Status == StatusEnum.Ended)
+                //{
+                //    //add this  to financail status ,ok now do the real code !!
                     
-                    double payment = Math.Round(user.HourlyRate * task.EffortHours * .80, 2);
-                    double  totalEquation  =  user.HourlyRate * task.EffortHours  ;
+                //    double payment = Math.Round(user.HourlyRate * task.EffortHours * .80, 2);
+                //    double  totalEquation  =  user.HourlyRate * task.EffortHours  ;
                     
-                    var financial = new Financialstatus()
-                    {
-                        Id = task.Id.ToString(),
-                        Date = task.StartTime, //must change, but for now for testing  !!
-                        EstimatedHours = task.EstimatedTime,
-                        EffortHours = task.EffortHours,
+                //    var financial = new Financialstatus()
+                //    {
+                //        Id = task.Id.ToString(),
+                //        Date = task.StartTime, //must change, but for now for testing  !!
+                //        EstimatedHours = task.EstimatedTime,
+                //        EffortHours = task.EffortHours,
                          
-                        Pro__id = ProjectId,
-                        Task__id = task.Id.ToString(),
-                        User__id = ApplicationUserId,
-                        Payment = payment,
-                        Remain = Math.Round(totalEquation - payment, 2),
-                        IsApproveByManager =false 
-                    };
-                    try
-                    {
-                        _unitOfWork.FinancialRepositry.Add(financial);
+                //        Pro__id = ProjectId,
+                //        Task__id = task.Id.ToString(),
+                //        User__id = ApplicationUserId,
+                //        Payment = payment,
+                //        Remain = Math.Round(totalEquation - payment, 2),
+                //        IsApproveByManager =false 
+                //    };
+                //    try
+                //    {
+                //        _unitOfWork.FinancialRepositry.Add(financial);
 
-                    }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine(e);
-                    }
+                //    }
+                //    catch (Exception e)
+                //    {
+                //        Console.WriteLine(e);
+                //    }
 
-                }
+                //}
                 _unitOfWork.Complete();
 
                 if (User.IsInRole("Admin"))
@@ -585,6 +586,97 @@ namespace MyTaskManagement.Controllers
                 var task = _unitOfWork.TTaskRepositry.GetTasksWithUserAndUserAndProject(id);
                 _unitOfWork.TTaskRepositry.Remove(task);
                 _unitOfWork.Complete();
+
+                if (User.IsInRole("Admin"))
+                {
+
+                    return RedirectToAction("Index");
+
+                }
+                else
+                {
+                    //redirect to his project
+                    return RedirectToAction("ShowProjectsForManager", "Project");
+
+
+                }
+
+            }
+            catch (Exception exception)
+            {
+                return View();
+            }
+        }
+
+        // GET: TTask/Approve/5
+        public ActionResult Approve(int id)
+        {
+            var task = _unitOfWork.TTaskRepositry.GetTasksWithUserAndUserAndProject(id);
+
+            if (User.IsInRole("Admin"))
+            {
+
+                return View(task);
+
+            }
+            else
+            {
+                return View("ApproveByManager", task);
+
+            }
+           
+        }
+
+        // POST: TTask/Approve/5
+        [HttpPost]
+        public ActionResult Approve(int id, string taskId)
+        {
+            try
+            {
+                // TODO: Add delete logic here
+                var ApplicationUserId = Request.Form["ApplicationUserId"];
+                var ProjectId = Request.Form["ProjectId"];
+                var task = _unitOfWork.TTaskRepositry.GetTasksWithUserAndUserAndProject(id);
+                var user = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFiles(ApplicationUserId);
+
+
+                //now copy it to finanical status
+                ////check if status change to end
+                if (task.Status == StatusEnum.Ended)
+                {
+                    //add this  to financail status ,ok now do the real code !!
+
+                    double payment = Math.Round(user.HourlyRate * task.EffortHours * .80, 2);
+                    double totalEquation = user.HourlyRate * task.EffortHours;
+
+                    var financial = new Financialstatus()
+                    {
+                        Id = task.Id.ToString(),
+                        Date = task.StartTime, //must change, but for now for testing  !!
+                        EstimatedHours = task.EstimatedTime,
+                        EffortHours = task.EffortHours,
+
+                        Pro__id = ProjectId,
+                        Task__id = task.Id.ToString(),
+                        User__id = ApplicationUserId,
+                        Payment = payment,
+                        Remain = Math.Round(totalEquation - payment, 2),
+                        IsApproveByManager = true
+                    };
+                    try
+                    {
+                        _unitOfWork.FinancialRepositry.Add(financial);
+
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e);
+                    }
+
+                }
+                _unitOfWork.Complete();
+
+                
 
                 if (User.IsInRole("Admin"))
                 {

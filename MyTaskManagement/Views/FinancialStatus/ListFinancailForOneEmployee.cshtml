@@ -148,7 +148,16 @@
                     @Html.DisplayFor(modelItem => item.Remain) $
                 </td>
                 <td>
-                    <input type="checkbox" name="isapprove" onclick="return false;" value="@item.IsApproveByManager"> <br>
+                    @if (item.IsApproveByManager==true)
+                    {
+                        <input type="checkbox" name="isapprove" onclick="return false;" checked="checked"> <br>
+
+                    }
+                    else
+                    {
+                        <input type="checkbox" name="isapprove" onclick="return false;"> <br>
+
+                    }
                 </td>
  
             </tr>
@@ -158,12 +167,15 @@
 
 </table>
 
-<div>
+<div> 
     <h3>Total Payment</h3>
     <p>
         @{
             var totalPricePayment = 0.0;
         }
+        
+        
+
         @*show salary only for finanical which is approve by manager*@
         @foreach (var item in Model.Financialstatus.Where(f => f.IsApproveByManager==true).ToList())
         {

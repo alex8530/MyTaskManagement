@@ -70,6 +70,8 @@
             <th>
                 <p>Assignee</p>
             </th>
+             
+
             <th></th>
         </tr>
     </thead>
@@ -137,6 +139,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.ApplicationUser.FirstName)
                 </td>
+                
                 <td>
                     @Html.ActionLink("Edit", "Edit", "TTask", new { id = item.Id }, new { @class = "btn btn-success" })  
                     @if (!item.TypeTask.Equals(TypeTaskEnum.Review))

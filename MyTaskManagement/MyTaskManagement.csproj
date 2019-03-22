@@ -372,6 +372,10 @@
     <Compile Include="Migrations\201903211021102_addIsApproveByManagerToFinancailTable.Designer.cs">
       <DependentUpon>201903211021102_addIsApproveByManagerToFinancailTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903211101533_addIsApproveByManagerToTask.cs" />
+    <Compile Include="Migrations\201903211101533_addIsApproveByManagerToTask.Designer.cs">
+      <DependentUpon>201903211101533_addIsApproveByManagerToTask.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Core\Domain\Client.cs" />
@@ -2463,6 +2467,8 @@
     <Content Include="Views\TTask\EditByManager.cshtml" />
     <Content Include="Views\TTask\DeleteByManager.cshtml" />
     <Content Include="Views\TTask\CloneToReviewerByEmployee.cshtml" />
+    <Content Include="Views\TTask\Approve.cshtml" />
+    <Content Include="Views\TTask\ApproveByManager.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2583,6 +2589,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903211021102_addIsApproveByManagerToFinancailTable.resx">
       <DependentUpon>201903211021102_addIsApproveByManagerToFinancailTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903211101533_addIsApproveByManagerToTask.resx">
+      <DependentUpon>201903211101533_addIsApproveByManagerToTask.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
