@@ -2469,6 +2469,7 @@
     <Content Include="Views\TTask\CloneToReviewerByEmployee.cshtml" />
     <Content Include="Views\TTask\Approve.cshtml" />
     <Content Include="Views\TTask\ApproveByManager.cshtml" />
+    <Content Include="Views\Project\EditByManager.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -286,9 +286,20 @@ namespace MyTaskManagement.Controllers
 
             };
 
-         
 
-            return View(viewmodel);
+            if (User.IsInRole("Admin"))
+            {
+
+                return View(viewmodel);
+
+            }
+            else
+            {
+
+                return View("EditByManager", viewmodel);
+
+
+            }
         }
 
         // POST: Project/Edit/5
@@ -341,9 +352,21 @@ namespace MyTaskManagement.Controllers
                     _unitOfWork.Complete();
 
                 }
-               
 
-                return RedirectToAction("Index");
+                if (User.IsInRole("Admin"))
+                {
+
+                    return RedirectToAction("Index");
+
+
+                }
+                else
+                {
+
+                    return RedirectToAction("ShowProjectsForManager");
+
+
+                }
             }
             catch (Exception exception)
             {
