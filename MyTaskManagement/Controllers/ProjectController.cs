@@ -399,7 +399,7 @@ namespace MyTaskManagement.Controllers
                 _unitOfWork.Complete();
                 return RedirectToAction("Edit" , new {id= idProject });
             }
-            catch (Exception exception)
+            catch (Exception ex)
             {
                 return View();
             }

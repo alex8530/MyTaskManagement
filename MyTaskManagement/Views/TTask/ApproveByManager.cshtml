@@ -1,4 +1,5 @@
 ﻿@using System.Web.UI.HtmlControls
+@using MyTaskManagement.Models
 @model MyTaskManagement.Models.TTask
 
 @{
@@ -8,21 +9,32 @@
 
 <h2>Approve</h2>
 
-
-<h3>Are you sure you want to Approve this task ?</h3>
-
-
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
  
-    @Html.Hidden("id", Model.Id)
 
-    @Html.Hidden("ProjectId", Model.ProjectId)
-    @Html.Hidden("ApplicationUserId", Model.ApplicationUser.Id)
-    <div class="form-actions no-color">
-        <input type="submit" value="Approve" class="btn btn-dark" />  
+@if (Model.Status.Equals(StatusEnum.Ended))
+{
+    <h3>Are you sure you want to Approve this task ?</h3>
 
-    </div>
+
+    using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <input hidden="" name="id" value="@Model.Id" />
+        @Html.Hidden("id", Model.Id)
+        @Html.Hidden("ProjectId", Model.ProjectId)
+        @Html.Hidden("ApplicationUserId", Model.ApplicationUser.Id)
+        <div class="form-actions no-color">
+            <input type="submit" value="Approve" class="btn btn-dark" />
+
+        </div>
+    }
+
+
 }
+else
+{
 
+    <h3>The Task should be complete status before to aprrove to finanical state </h3>
+
+
+}
