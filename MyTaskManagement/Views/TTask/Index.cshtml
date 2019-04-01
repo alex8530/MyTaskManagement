@@ -139,10 +139,10 @@
             <td>
                 @Html.ActionLink("Edit", "Edit", "TTask", new { id = item.Id }, new { @class = "btn btn-success" })  
                
-                @if (!item.TypeTask.Equals(TypeTaskEnum.Review))
+                @*@if (!item.TypeTask.Equals(TypeTaskEnum.Review))
                 {
                     @Html.ActionLink("Clone", "CloneToReviewer", "TTask", new { id = item.Id }, new { @class = "btn btn-info"})  
-                }
+                }*@
 
                 @Html.ActionLink("Delete", "Delete", "TTask", new { id = item.Id }, new { @class = "btn btn-danger"})
              </td>

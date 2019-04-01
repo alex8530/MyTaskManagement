@@ -125,31 +125,27 @@
                     @Html.DisplayFor(modelItem => item.ApplicationUser.FirstName)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", "TTask", new { id = item.Id }, new { @class = "btn btn-success" })
 
-                    @if (!item.TypeTask.Equals(TypeTaskEnum.Review))
+                    @*@if (!item.TypeTask.Equals(TypeTaskEnum.Review))
                     {
                         @Html.ActionLink("Clone", "CloneToReviewer", "TTask", new { id = item.Id }, new { @class = "btn btn-info" })
-                    }
+                    }*@
 
-                    @Html.ActionLink("Delete", "Delete", "TTask", new { id = item.Id }, new { @class = "btn btn-danger" })
                     
                     @if(item.IsApproveByManager.Equals(false))
                     {
-                        
+                       @Html.ActionLink("Edit", "Edit", "TTask", new { id = item.Id }, new { @class = "btn btn-success" })
+                        @Html.ActionLink("Delete", "Delete", "TTask", new { id = item.Id }, new { @class = "btn btn-danger" })
+
                         @Html.ActionLink("Approve", "Approve", "TTask", new { id = item.Id }, new { @class = "btn btn-dark" })
 
                     }
                     else
                     {
-                      <input type="button" class="btn btn-dark"  value="Approved" disabled="disabled"/>
-                    }
+                        <input type="button" class="btn btn-dark"  value="Approved" disabled="disabled"/>
+                     }
                 </td>
-                @*@{
-                    var currentProject = Model.Task.Project;
-                    var currentUserManagerId  = User.Identity.GetUserId();
-
-                }*@
+               
             </tr>
         }
     </tbody>

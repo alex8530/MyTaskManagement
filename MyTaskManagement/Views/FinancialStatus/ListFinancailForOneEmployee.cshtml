@@ -112,12 +112,12 @@
             <th>
                 <p>Remain</p>
             </th>
-         
+
 
             <th>
                 <p>IsApprove</p>
             </th>
-         
+
 
         </tr>
     </thead>
@@ -148,7 +148,7 @@
                     @Html.DisplayFor(modelItem => item.Remain) $
                 </td>
                 <td>
-                    @if (item.IsApproveByManager==true)
+                    @if (item.IsApproveByManager == true)
                     {
                         <input type="checkbox" name="isapprove" onclick="return false;" checked="checked"> <br>
 
@@ -159,7 +159,7 @@
 
                     }
                 </td>
- 
+
             </tr>
         }
     </tbody>
@@ -167,17 +167,17 @@
 
 </table>
 
-<div> 
+<div>
     <h3>Total Payment</h3>
     <p>
         @{
             var totalPricePayment = 0.0;
         }
-        
-        
+
+
 
         @*show salary only for finanical which is approve by manager*@
-        @foreach (var item in Model.Financialstatus.Where(f => f.IsApproveByManager==true).ToList())
+        @foreach (var item in Model.Financialstatus.Where(f => f.IsApproveByManager == true).ToList())
         {
             totalPricePayment = totalPricePayment + item.Payment;
         }
@@ -205,4 +205,13 @@
 
 
 
+@section scripts
+{
 
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#listFinancial").dataTable();
+        });
+    </script>
+}

@@ -46,7 +46,7 @@ namespace MyTaskManagement.Controllers
         public ActionResult ShowTaskForEmployee( )
         {
             var currentUserID = User.Identity.GetUserId();
-            var tasks = _unitOfWork.TTaskRepositry.GetAllTasksWithUserAndUserAndProject().Where(task1 => task1.ApplicationUser.Id== currentUserID);
+            var tasks = _unitOfWork.TTaskRepositry.GetAllTasksWithUserAndUserAndProject( ) .Where(task => task.ApplicationUser.Id== currentUserID) ;
 
             return View(tasks);
         }
@@ -469,8 +469,8 @@ namespace MyTaskManagement.Controllers
         public ActionResult Edit(int id, TTask task)
         {
 
-            var ApplicationUserId = Request.Form["ApplicationUserId"];
-            var ProjectId = Request.Form["ProjectId"];
+            //var ApplicationUserId = Request.Form["ApplicationUserId"];
+            //var ProjectId = Request.Form["ProjectId"];
             var  reviewerId  = Request.Form["__ReviewerId__"];
             try
             {
@@ -478,8 +478,7 @@ namespace MyTaskManagement.Controllers
                 var newReviewer =
                    _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFiles(
                         reviewerId);
-
-                // TODO: Add update logic here
+                 
                 var oldTask = _unitOfWork.TTaskRepositry.GetTasksWithUserAndUserAndProject(id);
                 //very important
                 /*
@@ -517,12 +516,32 @@ namespace MyTaskManagement.Controllers
                 oldTask.ReviewerName = newReviewer.FirstName;
                 oldTask.ReviewerId = newReviewer.Id;
 
+                 //check if task after update complete and if task has a reviewer , then make clone
+                if (oldTask.Status.Equals(StatusEnum.Ended) && !oldTask.ReviewerId.IsNullOrWhiteSpace())
+                {
+                    var newTaskToClone = new TTask();
 
-              
+                    newTaskToClone.Title = oldTask.Title;
+                    newTaskToClone.Priority = oldTask.Priority;
+                    newTaskToClone.Status = StatusEnum.Not_Start;//this will be begin from not start
+                    newTaskToClone.TypeTask =TypeTaskEnum.Review; //now this task is review 
+                    newTaskToClone.StartTime = DateTime.Now;//date now
+                    newTaskToClone.Description = oldTask.Description;
+                    newTaskToClone.EstimatedTime = 0; //0 because this is new task
+
+                    newTaskToClone.EffortHours = 0;//0 because this is new task
+                    newTaskToClone.Ticket = oldTask.Ticket;
+                    newTaskToClone.Notes = oldTask.Notes;
+                    newTaskToClone.Owner = oldTask.Owner;
+                    newTaskToClone.Creator = oldTask.Creator;
+                    newTaskToClone.ProjectId = oldTask.ProjectId;
+                    newTaskToClone.ReviewerId = oldTask.ReviewerId;
 
 
-                var user = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFiles(ApplicationUserId);
-   
+
+                    _unitOfWork.TTaskRepositry.Add(newTaskToClone);
+
+                }
                 _unitOfWork.Complete();
 
                 if (User.IsInRole("Admin"))
