@@ -199,8 +199,9 @@
         
     <div class="form-group">
         <label class="control-label col-md-2  " for="__ReviewerId__">Reviewer</label>
-        <select name="__ReviewerId__" class="col-md-10 form-control " >
+        <select name="__ReviewerId__" class="col-md-10 form-control ">
             <option value="" disabled selected>Choose your Reviewer</option>
+            <option value="0" > </option>
 
             @foreach (var u in Model.Users)
             {

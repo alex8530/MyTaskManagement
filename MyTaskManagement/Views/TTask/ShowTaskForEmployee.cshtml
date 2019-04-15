@@ -141,11 +141,17 @@
                 </td>
                 
                 <td>
-                    @Html.ActionLink("Edit", "Edit", "TTask", new { id = item.Id }, new { @class = "btn btn-success" })  
-                    @*@if (!item.TypeTask.Equals(TypeTaskEnum.Review))
+                  
+                   
+                    @Html.ActionLink("Edit", "Edit", "TTask", new {id = item.Id}, new {@class = "btn btn-success"})
+                    @if (item.ComeFromClone == true)
                     {
-                        @Html.ActionLink("Clone", "CloneToReviewer", "TTask", new { id = item.Id }, new { @class = "btn btn-info"})  
-                    }*@
+                        @Html.ActionLink("Return " , "ReturnToAssigne", "TTask", new {id = item.Id , fromuser= item.FromUser}, new {@class = "btn btn-danger"})
+
+                    }
+                 
+             
+
                 </td>
             </tr>
         }

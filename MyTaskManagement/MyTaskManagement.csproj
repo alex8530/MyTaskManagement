@@ -376,6 +376,14 @@
     <Compile Include="Migrations\201903211101533_addIsApproveByManagerToTask.Designer.cs">
       <DependentUpon>201903211101533_addIsApproveByManagerToTask.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201904031104081_addComeFromCloneandFromUserToTaskTable.cs" />
+    <Compile Include="Migrations\201904031104081_addComeFromCloneandFromUserToTaskTable.Designer.cs">
+      <DependentUpon>201904031104081_addComeFromCloneandFromUserToTaskTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904031154470_addfromtaskid.cs" />
+    <Compile Include="Migrations\201904031154470_addfromtaskid.Designer.cs">
+      <DependentUpon>201904031154470_addfromtaskid.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Core\Domain\Client.cs" />
@@ -2470,6 +2478,7 @@
     <Content Include="Views\TTask\Approve.cshtml" />
     <Content Include="Views\TTask\ApproveByManager.cshtml" />
     <Content Include="Views\Project\EditByManager.cshtml" />
+    <Content Include="Views\TTask\ReturnToAssigne.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2593,6 +2602,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903211101533_addIsApproveByManagerToTask.resx">
       <DependentUpon>201903211101533_addIsApproveByManagerToTask.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904031104081_addComeFromCloneandFromUserToTaskTable.resx">
+      <DependentUpon>201904031104081_addComeFromCloneandFromUserToTaskTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904031154470_addfromtaskid.resx">
+      <DependentUpon>201904031154470_addfromtaskid.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

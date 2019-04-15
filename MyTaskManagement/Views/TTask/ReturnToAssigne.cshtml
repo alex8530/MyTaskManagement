@@ -1,0 +1,36 @@
+﻿@using MyTaskManagement.Models
+@model MyTaskManagement.Models.TTask
+
+@{
+    ViewBag.Title = "ReturnToAssigne";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ReturnToAssigne</h2>
+@if (Model.Status.Equals(StatusEnum.Ended))
+{
+    <h3>Are you sure you want to Return this task?</h3>
+    <div>
+
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(m => m.Id)
+            @Html.HiddenFor(m => m.fromtaskid)
+            @Html.HiddenFor(m => m.ApplicationUser.Id)
+            <div class="form-actions no-color">
+                <input type="submit" value="Return" class="btn btn-default"/> |
+                @*@Html.ActionLink("Back to List", "Index")*@
+            </div>
+        }
+    </div>
+}
+
+else
+    {
+
+    <h3>The Task should be complete status before Return </h3>
+
+
+    }

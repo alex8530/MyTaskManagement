@@ -125,7 +125,7 @@
             <div class="form-group">
                 <label class="control-label col-md-2">Reviewer</label>
                 <select name="__ReviewerId__" class="col-md-10 form-control" required>
-     
+                    <option value="0" > </option>
                     @foreach (var c in Model.Users.ToList())
                     {
                         if (c.Id == Model.Task.ReviewerId)

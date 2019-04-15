@@ -77,8 +77,15 @@ namespace MyTaskManagement.Models
         [NotMapped]
         public bool IsUpdate { get; set; }
 
-       
+        public bool? ComeFromClone { get; set; }
 
-         
+        public string FromUser { get; set; }
+        public string fromtaskid { get; set; }
+
+
+
+
+
+
     }
 }   
