@@ -13,8 +13,8 @@
                 
                     <div class="profile-image">
                         <img class="img-xs rounded-circle" src="~/images/faces/face1.jpg" alt="profile image">
-                        @Html.ActionLink("   Hello " + User.Identity.GetUserName() + "!   ", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = "profile-name" })
-
+                     @*   @Html.ActionLink("   Hello " + User.Identity.GetUserName() + "!   ", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = "profile-name" })*@
+                    <a class="profile-name" style="color:aliceblue" href="/Manage" title="Manage">   Hello  @User.Identity.GetUserName() !    </a>
                         <a class=" btn btn-danger" href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
                 </div>
                 
