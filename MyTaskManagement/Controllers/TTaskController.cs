@@ -108,7 +108,7 @@ namespace MyTaskManagement.Controllers
 					Task = new TTask()
 					{
 						ProjectId = id_current_project,//this is must neot change !!!
-						StartTime = DateTime.Now,//this is defult time,
+						//StartTime = DateTime.Now,//this is defult time,
 						
 
 					},
@@ -242,14 +242,14 @@ namespace MyTaskManagement.Controllers
 						EffortHours = task.EffortHours,
 						Ticket = task.Ticket,
 						Notes = task.Notes,
-						ComeFromClone = false
-						//Owner = task.Owner,
-						//ReviewerName = reviewer.FirstName,
-						//ReviewerId = reviewer.Id
-						//Project =new Project() // here no need to add project object , just add his forign key
-						//, but if you need to add project object , you must init it
+						ComeFromClone = false,
+						 Owner = task.Owner,
+					 
+                        
+                        //Project =new Project() // here no need to add project object , just add his forign key
+                        //, but if you need to add project object , you must init it
 
-					};
+                    };
 
 
 					var pro = _unitOfWork.ProjectRepositry.SingleOrDefault(p => p.Id == id_current_project);
