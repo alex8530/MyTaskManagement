@@ -2,11 +2,13 @@
 @model  MyTaskManagement.Core.ViewModel.IndexAdminViewModel
 @{
     ViewBag.Title = "Index";
+     ViewBag.imgPat = ViewBag.imgPath;
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
-}
 
+}
+ 
 <div class="content-wrapper">
-    
+
     <div class="row">
         <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
             <div class="card card-statistics">
@@ -78,8 +80,8 @@
                         <div class="float-right">
                             <p class="mb-0 text-right">Tasks Completed</p>
                             <div class="fluid-container">
-                               
-                                <h3 class="font-weight-medium text-right mb-0">@Model.Tasks.Where(task =>   task.Status==StatusEnum.Ended).Count()</h3>
+
+                                <h3 class="font-weight-medium text-right mb-0">@Model.Tasks.Where(task => task.Status == StatusEnum.Ended).Count()</h3>
                             </div>
                         </div>
                     </div>
@@ -99,8 +101,8 @@
                         <div class="float-right">
                             <p class="mb-0 text-right">Tasks Not Completed</p>
                             <div class="fluid-container">
-                               
-                                <h3 class="font-weight-medium text-right mb-0">@Model.Tasks.Where(task =>   task.Status!=StatusEnum.Ended).Count()</h3>
+
+                                <h3 class="font-weight-medium text-right mb-0">@Model.Tasks.Where(task => task.Status != StatusEnum.Ended).Count()</h3>
                             </div>
                         </div>
                     </div>
@@ -110,7 +112,7 @@
                 </div>
             </div>
         </div>
-      
+
         <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
             <div class="card card-statistics">
                 <div class="card-body">
@@ -132,7 +134,7 @@
             </div>
         </div>
     </div>
-    
- 
-  
+
+
+
 </div>

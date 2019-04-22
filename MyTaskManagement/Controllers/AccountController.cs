@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using MyTaskManagement.Core.Domain;
 using MyTaskManagement.Models;
+using MyTaskManagement.Persistence;
 
 namespace MyTaskManagement.Controllers
 {
@@ -493,13 +494,31 @@ namespace MyTaskManagement.Controllers
             }
              
             ApplicationUser user = await UserManager.FindAsync(model.UserName, model.Password);
+
+            //get imagepath from the user..
+          UnitOfWork _unitOfWork = new UnitOfWork(new ApplicationDbContext());
+
+            var fullUserData = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFiles(user.Id);
+         
+
             // Redirect to User landing page on SignIn, according to Role
             if ((UserManager.IsInRole(user.Id, "Admin")))
             {
+                //send image user to put it in loagin partial 
+                if (fullUserData.MyFiles.LastOrDefault(f => f.MyFileType == MyFileType.Photo).FileName!=null)
+                {
+                     Session["imgPath"] = fullUserData.MyFiles.LastOrDefault(f => f.MyFileType == MyFileType.Photo).FileName;
+                }
                 return RedirectToAction("Index", "Admin");
             }
             else
             {
+                if (fullUserData.MyFiles.LastOrDefault(f => f.MyFileType == MyFileType.Photo).FileName != null)
+                {
+ 
+                    Session["imgPath"] = fullUserData.MyFiles.LastOrDefault(f => f.MyFileType == MyFileType.Photo).FileName;
+
+                }
                 return RedirectToAction("ShowTaskForEmployee", "TTask");
 
             }
