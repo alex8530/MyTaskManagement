@@ -173,23 +173,54 @@
                 <ul class="nav">
                     <li class="nav-item nav-profile">
                         <div class="nav-link">
-                            <div class="user-wrapper">
-                                <div class="profile-image">
-                                    <img src="~/images/faces/face1.jpg" alt="profile image">
-                                </div>
-                                <div class="text-wrapper">
-                                    <p class="profile-name">@User.Identity.Name</p>
-                                    <div>
-                                        <small class="designation text-muted">Manager</small>
-                                        <span class="status-indicator online"></span>
+
+
+                            @{
+                                if (Session["imgPath"] != null)
+                                {
+                                    var imgPat = Session["imgPath"].ToString();
+                                    if (imgPat != null)
+                                    {
+                                        <div class="user-wrapper">
+                                            <div class="profile-image">
+                                                <img  class="img-xs rounded-circle"    src="~/images/@imgPat" alt="profile image">
+                                            </div>
+                                            <div class="text-wrapper">
+                                                <p class="profile-name">@User.Identity.Name</p>
+                                                <div>
+                                                    <small class="designation text-muted">Manager</small>
+                                                    <span class="status-indicator online"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <p>
+                                            @Html.ActionLink("Create New Project +", "Create", "Project", "", new { @class = "btn btn-success" })
+
+                                        </p>
+                                    }
+                                }
+                                else
+                                {
+                                    <div class="user-wrapper">
+                                        <div class="profile-image">
+                                            <img  class="img-xs rounded-circle"  src="~/images/Av.png" alt="profile image">
+                                        </div>
+                                        <div class="text-wrapper">
+                                            <p class="profile-name">@User.Identity.Name</p>
+                                            <div>
+                                                <small class="designation text-muted">Manager</small>
+                                                <span class="status-indicator online"></span>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            
-                            <p>
-                                @Html.ActionLink("Create New Project +", "Create", "Project", "", new { @class = "btn btn-success" })
-                               
-                            </p>
+
+                                    <p>
+                                        @Html.ActionLink("Create New Project +", "Create", "Project", "", new { @class = "btn btn-success" })
+
+                                    </p>
+                                }
+                            }
                         </div>
                     </li>
                     <li class="nav-item">

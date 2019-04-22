@@ -5,31 +5,32 @@
     {
         @Html.AntiForgeryToken()
 
+         
 
-        @*<img src="~/images/@imgPath" alt=""
-             style="  max-width: 100%;
-                          max-height: 100%;" />*@
+    <li class="nav-item nav-profile">
+        @{
+            if (Session["imgPath"] != null)
+            {
+                var imgPat = Session["imgPath"].ToString();
+                if (imgPat != null)
+                {
+                    <div class="profile-image">
+                        <img class="img-xs rounded-circle" src="~/images/@imgPat" alt="profile image">
+                        <a class="profile-name" style="color:aliceblue" href="/Manage" title="Manage">   Hello  @User.Identity.GetUserName() !    </a>
+                        <a class=" btn btn-danger" href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
+                    </div>
+                }
+             
 
-
-        <li class="nav-item nav-profile">
-            @{ 
-                 var imgPat = Session["imgPath"].ToString();
             }
 
-            <div class="profile-image">
-                <img class="img-xs rounded-circle" src="~/images/@imgPat" alt="profile image">
-                 <a class="profile-name" style="color:aliceblue" href="/Manage" title="Manage">   Hello  @User.Identity.GetUserName() !    </a>
-                <a class=" btn btn-danger" href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
-            </div>
-
-
-        </li>
+        }
 
 
 
+    </li>
 
-
-
+     
     }
 }
 else

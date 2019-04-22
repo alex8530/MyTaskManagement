@@ -417,6 +417,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="images\auth\login_1.jpg" />
     <Content Include="images\auth\register.jpg" />
+    <Content Include="images\Av.png" />
     <Content Include="images\faces-clipart\pic-1.png" />
     <Content Include="images\faces-clipart\pic-2.png" />
     <Content Include="images\faces-clipart\pic-3.png" />
@@ -2317,8 +2318,6 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Views\Shared\_SideName.cshtml" />
-    <Content Include="Views\Shared\_TopNav.cshtml" />
     <Content Include="Views\TTask\Index.cshtml" />
     <Content Include="Views\User\ListUser.cshtml" />
     <Content Include="Views\Project\Create.cshtml" />

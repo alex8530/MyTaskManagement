@@ -166,43 +166,60 @@
             </div>
         </nav>
   
-    
+     
     
     <div class="container-fluid page-body-wrapper">
             <!--  _sidebar.html -->
             <nav class="sidebar sidebar-offcanvas" id="sidebar">
                 <ul class="nav">
-                    <li class="nav-item nav-profile">
-                        <div class="nav-link">
-                            <div class="user-wrapper">
-                                <div class="profile-image">
-                                    <img src="~/images/faces/face1.jpg" alt="profile image">
-                                </div>
-                                <div class="text-wrapper">
-                                    <p class="profile-name">@User.Identity.Name</p>
-                                    <div>
-                                        <small class="designation text-muted">Online</small>
-                                        <span class="status-indicator online"></span>
+                    @{
+                        if (Session["imgPath"] != null)
+                        {
+                            var imgPat = Session["imgPath"].ToString();
+                            if (imgPat != null)
+                            {
+                                <li class="nav-item nav-profile">
+                                    <div class="nav-link">
+                                        <div class="user-wrapper">
+                                            <div class="profile-image">
+                                                <img  class="img-xs rounded-circle"   src="~/images/@imgPat" alt="profile image">
+                                            </div>
+                                            <div class="text-wrapper">
+                                                <p class="profile-name">@User.Identity.Name</p>
+                                                <div>
+                                                    <small class="designation text-muted">Online</small>
+                                                    <span class="status-indicator online"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+
+
+                        }
+                        else
+                        {
+                            <li class="nav-item nav-profile">
+                                <div class="nav-link">
+                                    <div class="user-wrapper">
+                                        <div class="profile-image">
+                                            <img  class="img-xs rounded-circle"  src="~/images/Av.png" alt="profile image">
+                                        </div>
+                                        <div class="text-wrapper">
+                                            <p class="profile-name">@User.Identity.Name</p>
+                                            <div>
+                                                <small class="designation text-muted">Online</small>
+                                                <span class="status-indicator online"></span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                         
-                         @*   @Html.ActionLink("Create Task", "CreateTaskFromEmployee", "TTask",null, new {@class = "btn btn-success"})*@  
+                            </li>
+                        }
 
-                        </div>
-                    </li>
-                    
-                    @* show this if admin *@ 
-                    @if (User.IsInRole("Admin"))
-                    {
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="/admin/index">
-                                <i class="menu-icon mdi mdi-television"></i>
-                                <span class="menu-title">Admin </span>
-                            </a>
-                        </li>
                     }
+
 
                     <li class="nav-item">
                         <a class="nav-link" href="/Project/ShowProjectsForEmployee">
