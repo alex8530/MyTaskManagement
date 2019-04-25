@@ -421,6 +421,7 @@
     <Content Include="Content\bootstrap.min.d.css" />
     <Content Include="Content\bootstrap.min.luman.css" />
     <Content Include="Content\bootstrapl.css" />
+    <Content Include="Content\iconn.png" />
     <Content Include="css\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />

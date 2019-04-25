@@ -90,6 +90,16 @@ namespace MyTaskManagement.Controllers
 
             return View(employee);
         }
+        public ActionResult DeletePaymentsEmployee(int id)
+        {
+            var pay = _unitOfWork.paymentRepositry.Get(id);
+            var idd = pay.ApplicationUserId;
+              _unitOfWork.paymentRepositry.Remove(pay);
+              _unitOfWork.Complete();
+
+
+            return RedirectToAction("ShowPaymentsEmployee", new {id=  idd });
+        }
 
         public ActionResult CreatePayment(string id)
         {
@@ -121,7 +131,7 @@ namespace MyTaskManagement.Controllers
             _unitOfWork.paymentRepositry.Add(newPayment);
             _unitOfWork.Complete();
 
-            return RedirectToAction("ShowAllUsersWithPayments");
+            return RedirectToAction("ShowPaymentsEmployee" , new {id = ui });
         }
         // GET: FinancialStatus/Details/5
         public ActionResult Details(int id)

@@ -26,12 +26,19 @@
             <td>
                 @Html.DisplayFor(modelItem => item.FirstName)
             </td>
-
+           
             <td>
-                @item.Payments.Count()
+                @{
+                    var sum = 0;
+                    foreach (var i in item.Payments)
+                    {
+                        sum += i.AmountOfMoney;
+                    }
+                }
+                @sum$
             </td>
             <td>
-                @Html.ActionLink("Show All Payments ", "ShowPaymentsEmployee", new { id = item.Id }, new { @class = "btn btn-danger" })
+                @Html.ActionLink("Show All Payments ", "ShowPaymentsEmployee", new { id = item.Id }, new { @class = "btn btn-success" })
             </td>
         </tr>
         }
