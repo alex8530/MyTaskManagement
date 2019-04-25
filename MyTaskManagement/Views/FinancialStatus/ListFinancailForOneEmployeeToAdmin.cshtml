@@ -2,11 +2,10 @@
 
 @{
     ViewBag.Title = "ListFinancailForOneEmployee";
-    Layout = "~/Views/Shared/_Layout.cshtml";
- 
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>All   Financails </h2>
+<h2>All My Financails </h2>
 @using (Html.BeginForm("ListFinancailForOneEmployee", "FinancialStatus", FormMethod.Get, new { id = Model.User.Id }))
 {
 

@@ -23,13 +23,13 @@ namespace MyTaskManagement.Controllers
 
 
         // GET: FinancialStatus  return list of All  Employee Financial 
-        public ActionResult Index()
-        {
-            //so will pass list of users with thier financials 
+        //public ActionResult Index()
+        //{
+        //    //so will pass list of users with thier financials 
 
-            var listEmployeeFinanical = _unitOfWork.UserRepositry.GetAllUsersWithProjectsAndTasksAndRolesAndFinanicalWithFilesWithPayments();
-            return View(listEmployeeFinanical);
-        }
+        //    var listEmployeeFinanical = _unitOfWork.UserRepositry.GetAllUsersWithProjectsAndTasksAndRolesAndFinanicalWithFilesWithPayments();
+        //    return View(listEmployeeFinanical);
+        //}
 
 
          
@@ -69,9 +69,18 @@ namespace MyTaskManagement.Controllers
             ViewBag.m = month;
             ViewBag.y = year;
 
-            return View(vm);
 
+            if (User.IsInRole("Admin"))
+            {
+                return View("ListFinancailForOneEmployeeToAdmin", vm);
+ 
+            }
+            else
+            {
+                return View(vm);
 
+            }
+         
         }
 
         // GET: FinancialStatus  return list of   AllPayments  for all employee

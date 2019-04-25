@@ -2494,6 +2494,7 @@
     <Content Include="Views\FinancialStatus\ShowAllUsersWithPayments.cshtml" />
     <Content Include="Views\FinancialStatus\CreatePayment.cshtml" />
     <Content Include="Views\FinancialStatus\ShowPaymentsEmployee.cshtml" />
+    <Content Include="Views\FinancialStatus\ListFinancailForOneEmployeeToAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
