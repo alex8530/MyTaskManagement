@@ -2486,6 +2486,7 @@
     <Content Include="Views\Project\EditByManager.cshtml" />
     <Content Include="Views\TTask\ReturnToAssigne.cshtml" />
     <Content Include="Views\FinancialStatus\ShowAllPayments.cshtml" />
+    <Content Include="Views\FinancialStatus\CreatePayment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -13,6 +13,7 @@ using System.Web.Mvc;
 using System.Xml.Linq;
 using iTextSharp.tool.xml;
 using MyTaskManagement.Core.ViewModel;
+using MyTaskManagement.Core.Domain;
 
 namespace MyTaskManagement.Controllers
 {
@@ -76,12 +77,41 @@ namespace MyTaskManagement.Controllers
         // GET: FinancialStatus  return list of   AllPayments  for all employee
         public ActionResult ShowAllPayments()
         {
-            var listpayments = _unitOfWork.paymentRepositry.GetAll();
+            var listpayments = _unitOfWork.paymentRepositry.GetAllPayments();
           
             return View(listpayments);
         }
-        
+        public ActionResult CreatePayment()
+        {
+            var newPayment = new Payment()
+            {
+                DateTime = DateTime.Now //set default date time...
+            };
+            ViewBag.allusers = _unitOfWork.UserRepositry.GetAll();
+            return View(newPayment);
+        }
 
+        [HttpPost]
+        public ActionResult CreatePayment(Payment payment, string __UserId__)
+        {
+
+            var user = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFiles(__UserId__);
+
+
+            var newPayment = new Payment()
+            {
+                ApplicaionUser= new ApplicationUser(),
+                DateTime = payment.DateTime,
+                Note = payment.Note
+            };
+
+            newPayment.ApplicaionUser = user;
+
+            _unitOfWork.paymentRepositry.Add(newPayment);
+            _unitOfWork.Complete();
+
+            return RedirectToAction("ShowAllPayments");
+        }
         // GET: FinancialStatus/Details/5
         public ActionResult Details(int id)
         {
