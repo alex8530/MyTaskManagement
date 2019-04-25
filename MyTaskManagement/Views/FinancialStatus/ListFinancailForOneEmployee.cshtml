@@ -1,0 +1,217 @@
+﻿@model MyTaskManagement.Core.ViewModel.FinanicalstatusViewModel
+
+@{
+    ViewBag.Title = "ListFinancailForOneEmployee";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>All My Financails </h2>
+@using (Html.BeginForm("ListFinancailForOneEmployee", "FinancialStatus", FormMethod.Get, new { id = Model.User.Id }))
+{
+
+    <select name="month">
+
+        @{
+            Dictionary<int, string> Months = Enumerable.Range(1, 12).Select(i => new KeyValuePair<int, string>(i, System.Globalization.DateTimeFormatInfo.CurrentInfo.GetMonthName(i))).ToDictionary(x => x.Key, x => x.Value);
+
+
+            if ((int)ViewBag.m == 0)
+            {
+                <option value="0" selected="selected"> </option>
+
+            }
+            else
+            {
+                <option value="0"> </option>
+
+            }
+
+            foreach (var key in Months.Keys)
+            {
+                if ((int)ViewBag.m == key)
+                {//select it
+                    <option value="@key" selected="selected"> @Months[key]</option>
+
+                }
+                else
+                {
+                    <option value="@key"> @Months[key]</option>
+
+                }
+            }
+
+        }
+
+
+    </select>
+
+    <select name="year">
+        @{
+            var listYears = Enumerable.Range(2016, 81).ToList();
+
+            if ((int)ViewBag.y == 0)
+            {
+                <option value="0" selected="selected"> </option>
+
+            }
+            else
+            {
+                <option value="0"> </option>
+
+            }
+
+
+            foreach (var i in listYears)
+            {
+                if ((int)ViewBag.y == i)
+                {//select it
+                    <option value="@i" selected="selected"> @i</option>
+
+                }
+                else
+                {
+                    <option value="@i"> @i</option>
+
+
+                }
+            }
+
+
+        }
+
+
+    </select>
+    <input type="submit" value="Search" class="btn btn-default" />
+
+}
+<table class="table" id="listFinancial">
+    <thead>
+        <tr>
+            <th>
+                <p>Date</p>
+            </th>
+            <th>
+                <p>Proj Id</p>
+            </th>
+            <th>
+                <p>TaskId</p>
+
+            </th>
+
+            <th>
+                <p>EffortHours</p>
+
+            </th>
+
+            <th>
+                <p>Payment</p>
+
+            </th>
+
+
+            <th>
+                <p>Remain</p>
+            </th>
+
+
+            <th>
+                <p>IsApprove</p>
+            </th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Financialstatus.ToList())
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Pro__id)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Task__id)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.EffortHours)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Payment) $
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Remain) $
+                </td>
+                <td>
+                    @if (item.IsApproveByManager == true)
+                    {
+                        <input type="checkbox" name="isapprove" onclick="return false;" checked="checked"> <br>
+
+                    }
+                    else
+                    {
+                        <input type="checkbox" name="isapprove" onclick="return false;"> <br>
+
+                    }
+                </td>
+
+            </tr>
+        }
+    </tbody>
+
+
+</table>
+
+<div>
+    <h3>Total Payment</h3>
+    <p>
+        @{
+            var totalPricePayment = 0.0;
+        }
+
+
+
+        @*show salary only for finanical which is approve by manager*@
+        @foreach (var item in Model.Financialstatus.Where(f => f.IsApproveByManager == true).ToList())
+        {
+            totalPricePayment = totalPricePayment + item.Payment;
+        }
+
+        @totalPricePayment $
+    </p>
+</div>
+
+<div>
+    <h3>
+        Total Remain
+    </h3>
+    <p>
+        @{
+            var totalRemain = 0.0;
+        }
+        @foreach (var item in Model.Financialstatus.Where(f => f.IsApproveByManager == true).ToList())
+        {
+            totalRemain = totalRemain + item.Remain;
+        }
+
+        @totalRemain $
+    </p>
+</div>
+
+
+
+@section scripts
+{
+
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#listFinancial").dataTable();
+        });
+    </script>
+}

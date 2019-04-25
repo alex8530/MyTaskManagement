@@ -1,45 +1,283 @@
 ﻿@using System.Web.UI.HtmlControls
+@using Microsoft.AspNet.Identity
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.css"/>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.css" />
 
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-
+    <link rel="stylesheet" href="~/vendors/iconfonts/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="~/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="~/vendors/css/vendor.bundle.addons.css">
+     
+    <link rel="stylesheet" href="~/css/style.css">
+   
+    <link rel="shortcut icon" href="~/images/favicon.png" />
 </head>
 <body>
+
+    <div class="container-scroller">
+        <!--  _navbar.html -->
+    
+    <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+            <div class=" ">
+                
+            </div>
+            <div class="navbar-menu-wrapper d-flex align-items-center ">
+                <ul class="navbar-nav navbar-nav-left header-links d-none d-md-flex">
+                    <li class="nav-item">
+                        <a href="/Project/ShowProjectsForEmployee" class="nav-link" >
+                          
+                            <span class="badge badge-primary ml-1"> Home </span>
+                        </a>
+                    </li>
+                     
+                    <li class="nav-item active">
+                        <a href="#" class="nav-link">
+                            <i class="mdi mdi-elevation-rise"></i>Reports
+                        </a>
+                    </li>
+              
+                </ul>
+                <ul class="navbar-nav navbar-nav-right">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+                            <i class="mdi mdi-file-document-box"></i>
+                            <span class="count">0</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="messageDropdown">
+                            <div class="dropdown-item">
+                                <p class="mb-0 font-weight-normal float-left">
+                                    You have 7 unread mails
+                                </p>
+                                <span class="badge badge-info badge-pill float-right">View all</span>
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item preview-item">
+                                <div class="preview-thumbnail">
+                                    <img src="~/images/faces/face4.jpg" alt="image" class="profile-pic">
+                                </div>
+                                <div class="preview-item-content flex-grow">
+                                    <h6 class="preview-subject ellipsis font-weight-medium text-dark">
+                                        David Grey
+                                        <span class="float-right font-weight-light small-text">1 Minutes ago</span>
+                                    </h6>
+                                    <p class="font-weight-light small-text">
+                                        The meeting is cancelled
+                                    </p>
+                                </div>
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item preview-item">
+                                <div class="preview-thumbnail">
+                                    <img src="~/images/faces/face2.jpg" alt="image" class="profile-pic">
+                                </div>
+                                <div class="preview-item-content flex-grow">
+                                    <h6 class="preview-subject ellipsis font-weight-medium text-dark">
+                                        Tim Cook
+                                        <span class="float-right font-weight-light small-text">15 Minutes ago</span>
+                                    </h6>
+                                    <p class="font-weight-light small-text">
+                                        New product launch
+                                    </p>
+                                </div>
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item preview-item">
+                                <div class="preview-thumbnail">
+                                    <img src="~/images/faces/face3.jpg" alt="image" class="profile-pic">
+                                </div>
+                                <div class="preview-item-content flex-grow">
+                                    <h6 class="preview-subject ellipsis font-weight-medium text-dark">
+                                        Johnson
+                                        <span class="float-right font-weight-light small-text">18 Minutes ago</span>
+                                    </h6>
+                                    <p class="font-weight-light small-text">
+                                        Upcoming board meeting
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
+                            <i class="mdi mdi-bell"></i>
+                            <span class="count">0</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
+                            <a class="dropdown-item">
+                                <p class="mb-0 font-weight-normal float-left">
+                                    You have 4 new notifications
+                                </p>
+                                <span class="badge badge-pill badge-warning float-right">View all</span>
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item preview-item">
+                                <div class="preview-thumbnail">
+                                    <div class="preview-icon bg-success">
+                                        <i class="mdi mdi-alert-circle-outline mx-0"></i>
+                                    </div>
+                                </div>
+                                <div class="preview-item-content">
+                                    <h6 class="preview-subject font-weight-medium text-dark">Application Error</h6>
+                                    <p class="font-weight-light small-text">
+                                        Just now
+                                    </p>
+                                </div>
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item preview-item">
+                                <div class="preview-thumbnail">
+                                    <div class="preview-icon bg-warning">
+                                        <i class="mdi mdi-comment-text-outline mx-0"></i>
+                                    </div>
+                                </div>
+                                <div class="preview-item-content">
+                                    <h6 class="preview-subject font-weight-medium text-dark">Settings</h6>
+                                    <p class="font-weight-light small-text">
+                                        Private message
+                                    </p>
+                                </div>
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item preview-item">
+                                <div class="preview-thumbnail">
+                                    <div class="preview-icon bg-info">
+                                        <i class="mdi mdi-email-outline mx-0"></i>
+                                    </div>
+                                </div>
+                                <div class="preview-item-content">
+                                    <h6 class="preview-subject font-weight-medium text-dark">New user registration</h6>
+                                    <p class="font-weight-light small-text">
+                                        2 days ago
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                    @Html.Partial("_LoginPartial")
+             
+                </ul>
+                <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+                    <span class="mdi mdi-menu"></span>
+                </button>
+            </div>
+        </nav>
+  
      
-<div   class="container-fluid">
-    <div class="row content  "  >
-
-
-
-        @*top nav*@
-      @RenderPage("~/Views/Shared/_TopNav.cshtml")
+    
+    <div class="container-fluid page-body-wrapper">
+            <!--  _sidebar.html -->
+            <nav class="sidebar sidebar-offcanvas" id="sidebar">
+                <ul class="nav">
+                    @{
+                        if (Session["imgPath"] != null)
+                        {
+                            var imgPat = Session["imgPath"].ToString();
+                            if (imgPat != null)
+                            {
+                                <li class="nav-item nav-profile">
+                                    <div class="nav-link">
+                                        <div class="user-wrapper">
+                                            <div class="profile-image">
+                                                <img  class="img-xs rounded-circle"   src="~/images/@imgPat" alt="profile image">
+                                            </div>
+                                            <div class="text-wrapper">
+                                                <p class="profile-name">@User.Identity.Name</p>
+                                                <div>
+                                                    <small class="designation text-muted">Online</small>
+                                                    <span class="status-indicator online"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
  
+                        }
+                        else
+                        {
+                            <li class="nav-item nav-profile">
+                                <div class="nav-link">
+                                    <div class="user-wrapper">
+                                        <div class="profile-image">
+                                            <img  class="img-xs rounded-circle"  src="~/images/Av.png" alt="profile image">
+                                        </div>
+                                        <div class="text-wrapper">
+                                            <p class="profile-name">@User.Identity.Name</p>
+                                            <div>
+                                                <small class="designation text-muted">Online</small>
+                                                <span class="status-indicator online"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        }
 
-        @*side Nave*@
-        <div class="col-sm-2 sidenav  ">
-            @RenderPage("~/Views/Shared/_SideName.cshtml")
+                    }
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Project/ShowProjectsForEmployee">
+                            <i class="menu-icon mdi mdi-television"></i>
+                            <span class="menu-title">Projects That I Work ON</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Project/ShowProjectsForManager">
+                            <i class="menu-icon mdi mdi-television"></i>
+                            <span class="menu-title">Projects That I Manage</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/FinancialStatus/ListFinancailForOneEmployee/@User.Identity.GetUserId()">
+                            <i class="menu-icon mdi mdi-television"></i>
+                            <span class="menu-title">FinancialSstatus/TimeSheet</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/ttask/ShowTaskForEmployee">
+                            <i class="menu-icon mdi mdi-television"></i>
+                            <span class="menu-title">My Tasks / Scrum</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/User/SettingEmployee">
+                            <i class="menu-icon mdi mdi-television"></i>
+                            <span class="menu-title">Setting</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </nav>
+
+            <div class="main-panel">
+                <div class="content-wrapper">
+                    @RenderBody()
+                </div>
+
+
+            </div>
+
         </div>
-        
 
-        @*body*@
-        <div class="col-sm-10">
-            @RenderBody()
-
-        </div>
     </div>
-</div>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@RenderSection("scripts", required: false)
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
-
+<script src="~/vendors/js/vendor.bundle.base.js"></script>
+<script src="~/vendors/js/vendor.bundle.addons.js"></script> 
+<script src="~/js/off-canvas.js"></script>
+<script src="~/js/misc.js"></script> 
+<script src="~/js/dashboard.js"></script>
 
 </body>
 </html>

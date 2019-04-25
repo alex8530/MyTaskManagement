@@ -14,7 +14,7 @@ namespace MyTaskManagement.Models
 
         [Required]
         [StringLength(255)]
-        public string Name { get; set; }
+        public string Title { get; set; }
 
         [Required]
         public PriorityEnum Priority { get; set; }
@@ -22,13 +22,16 @@ namespace MyTaskManagement.Models
         [Required]
         public StatusEnum Status { get; set; }
 
+        [Required]
+        public TypeTaskEnum TypeTask { get; set; }
+
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime StartTime { get; set; } 
 
         public string Description { get; set; }
 
-
+        public bool IsApproveByManager { get; set; }
 
         [Required]
         public long EstimatedTime { get; set; }
@@ -51,8 +54,15 @@ namespace MyTaskManagement.Models
         public string Ticket { get; set; }
 
         public string Notes { get; set; }
+        public string Creator { get; set; }
         public string Owner { get; set; }
 
+
+
+        public string ReviewerId { get; set; }
+        [DisplayName("Reviewer")]
+        public string ReviewerName{ get; set; }
+         
 
         //[Required]
         public ApplicationUser ApplicationUser { get; set; }
@@ -60,14 +70,22 @@ namespace MyTaskManagement.Models
         //[Required]
         [ForeignKey("ProjectId")]
         public Project Project { get; set; }
-
-
-       
         public string ProjectId { get; set; }
 
 
-       
+        //this is not for database
+        [NotMapped]
+        public bool IsUpdate { get; set; }
 
-         
+        public bool? ComeFromClone { get; set; }
+
+        public string FromUser { get; set; }
+        public string fromtaskid { get; set; }
+
+
+
+
+
+
     }
 }   

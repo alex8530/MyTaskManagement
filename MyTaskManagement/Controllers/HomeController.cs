@@ -12,7 +12,7 @@ namespace MyTaskManagement.Controllers
         public ActionResult Index()
         {
             //there will be theme here...
-         return   Redirect("~/webhome/index.html");
+         return  View();
         }
 
         // GET: Home/Details/5

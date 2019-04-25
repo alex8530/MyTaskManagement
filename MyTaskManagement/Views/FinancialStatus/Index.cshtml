@@ -20,42 +20,17 @@
                     <p>Rate Details</p>
                 </th>
                 <th>
-                    <p>WH/month</p>
+                    <p>EffortHours/month</p>
+                </th>
+                 
+                <th>
+                    <p>Total Payment</p>
                 </th>
 
                 <th>
-                    <p>O.T.H/month</p>
+                    <p>Total Remain</p>
                 </th>
-
-
-                <th>
-                    <p>WH Rate</p>
-                </th>
-
-
-                <th>
-                    <p>O.T.H Rate</p>
-                </th>
-
-
-                <th>
-                    <p>Total</p>
-                </th>
-
-                <th>
-                    <p>Deffered</p>
-                </th>
-
-
-                <th>
-                    <p>Bonus</p>
-                </th>
-
-
-                <th>
-                    <p>Payment</p>
-                </th>
-
+                 
             </tr>
 
 
@@ -75,83 +50,41 @@
                     <td>
                         <div>
                             <p> R/H  @item.HourlyRate$</p>
-                            <p>R/O.T.H @item.O_T_H_Rate$ </p>
+                           
                         </div>
                     </td>
 
                     <td>
                         @{
                             var listFin = item.FinancialstatusList;
-                            <p>@listFin.Sum(f => f.W_Hours)</p>
+                            <p>@listFin.Sum(f => f.EffortHours)</p>
                         }
 
 
                     </td>
+
+                  
 
                     <td>
                         @{
 
-                            <p>@listFin.Sum(f => f.OTHours)</p>
+                            <p>@listFin.Sum(f => f.Payment)$</p>
                         }
 
 
                     </td>
+
 
                     <td>
                         @{
 
-                            <p>@listFin.Sum(f => f.Wh_Rate)$</p>
+                            <p>@listFin.Sum(f => f.Remain)$</p>
                         }
 
 
                     </td>
 
-                    <td>
-                        @{
-
-                            <p>@listFin.Sum(f => f.OTH_Rate)$ </p>
-                        }
-
-
-                    </td>
-
-                    <td>
-                        @{
-                            var total = listFin.Sum(f => f.Total);
-                            <p>@total$ </p>
-                        }
-
-
-                    </td>
-                    <td>
-                        @{
-
-                            var defferd = (total * 0.2);
-                            <p>@defferd $ </p>
-
-                        }
-
-
-                    </td>
-                    <td>
-                        @{
-                            var bounes = listFin.Sum(f => f.Bonus);
-
-                            <p>@bounes$ </p>
-
-                        }
-
-                    </td>
-                    <td>
-                        @{
-                            var payment = total - defferd + bounes;
-                            <p>@payment$ </p>
-
-                        }
-
-
-
-                    </td>
+               
 
 
                 </tr>
@@ -172,7 +105,7 @@
 
 
 @*----------------------------------------------------------------*@
-    <div id="hiddenTableForPdf" hidden="" >
+    @*<div id="hiddenTableForPdf" hidden="" >
         <table class="table table-bordered"  id="pdfTable" border="1" >
             <thead>
                 <tr>
@@ -328,7 +261,7 @@
 
         </table>
 
-    </div>
+    </div>*@
 
 
 

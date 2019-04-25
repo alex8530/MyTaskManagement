@@ -1,0 +1,169 @@
+﻿@using MyTaskManagement.Core.Domain
+@using MyTaskManagement.Models
+@model  MyTaskManagement.Core.ViewModel.IndexProjectViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    int i = 0;
+    ViewBag.Title = "Projects";
+}
+
+<h2>All Projects </h2>
+
+@*<p>
+    @Html.ActionLink("Create New", "Create", "Project", "", new { @class = "btn btn-success" })
+</p>*@
+<table class="table table-responsive" id="listProject2">
+
+    <thead>
+        <tr>
+            <th>
+
+                <p>Name</p>
+            </th>
+            <th>
+                <p>Id</p>
+            </th>
+
+            <th>
+                <p> Manager </p>
+            </th>
+
+            <th>
+                <p>StartTime</p>
+            </th>
+
+            <th>
+                <p>DeadTime</p>
+            </th>
+            <th>
+                <p>Description</p>
+            </th>
+            <th>
+                <p>Status</p>
+            </th>
+
+            <th>
+                <p> Users</p>
+            </th>
+            <th>
+                <p> Tasks </p>
+            </th>
+            <th>
+                <p>In Progress</p>
+            </th>
+            <th>
+                <p>Done</p>
+            </th>
+            <th></th>
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        @foreach (var item in Model.Projects.ToList())
+        {
+            <tr>
+
+                <td>
+                    <div>
+
+                        @if (item.ProjectFiles.Any(f => f.MyFileType == MyFileType.Photo))
+                        {
+                            var imgPath = item.ProjectFiles.LastOrDefault(f => f.MyFileType == MyFileType.Photo).FileName;
+
+                            <img src="~/images/@imgPath" alt="" width="50" height="50" />
+
+                        }
+                    </div>
+                    <br />
+
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    <p>
+                        @{
+                            @Model.Managers[i].FirstName
+                            i++;
+                        }
+                    </p>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DeadTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+
+                <th>
+                    @foreach (var u in item.Users)
+                    {
+                        @Html.DisplayFor(modelItem => u.FirstName)
+                        <br />
+
+
+                    }
+
+                </th>
+                <td>
+                    <p>@item.Tasks.Count</p>
+                </td>
+
+
+
+
+                <td>
+                    @{
+                        var numberOfTaskInProgress = item.Tasks.Where(task => task.Status == StatusEnum.InProgress).ToList().Count();
+
+
+                    }
+                    <p> @numberOfTaskInProgress </p>
+                </td>
+
+
+                <td>
+                    @{
+                        var numberOfTaskInDoneCount = item.Tasks.Where(task => task.Status == StatusEnum.Ended).ToList().Count();
+
+
+                    }
+                    <p> @numberOfTaskInDoneCount </p>
+                </td>
+
+
+
+
+                @*<td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-success" }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-info" }) |
+                    @Html.ActionLink("Delete", "DeleteProject", new { id = item.Id }, new { @class = "btn btn-danger" })
+                </td>*@
+            </tr>
+        }
+
+
+    </tbody>
+
+</table>
+@section scripts
+{
+
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#listProject2").dataTable();
+        });
+    </script>
+}

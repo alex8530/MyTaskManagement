@@ -19,18 +19,22 @@ namespace MyTaskManagement.Core.Domain
         public DateTime Date { get; set; }
 
 
-        public long EstimatedHours { get; set; }
-        public long EffortHours { get; set; }
+        public double EstimatedHours { get; set; }
+        public double EffortHours { get; set; }
         
     
-        public long Total { get; set; }
-        
-        public string pro__id { get; set; }
+        public double Payment { get; set; }
 
-        public string task__id { get; set; }
+        public double Remain { get; set; }
+
+        public bool IsApproveByManager { get; set; }
+        
+        public string Pro__id { get; set; }
+
+        public string Task__id { get; set; }
 
         [ForeignKey("User")]
-        public string user__id { get; set; }
+        public string User__id { get; set; }
 
          
         

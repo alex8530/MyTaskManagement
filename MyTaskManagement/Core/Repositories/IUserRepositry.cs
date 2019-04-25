@@ -9,8 +9,8 @@ namespace MyTaskManagement.Core.Repositories
 {
     public interface IUserRepositry : IRepository<ApplicationUser>
     {
-         ApplicationUser GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFiles(string id);
-        IEnumerable<ApplicationUser> GetAllUsersWithProjectsAndTasksAndRolesAndFinanicalWithFiles();
+         ApplicationUser GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFilesWithPayments(string id);
+        IEnumerable<ApplicationUser> GetAllUsersWithProjectsAndTasksAndRolesAndFinanicalWithFilesWithPayments();
 
         void AddUser(ApplicationUser user,string pass);
         void UpdateRolesToUser(string idUser , string newRole);

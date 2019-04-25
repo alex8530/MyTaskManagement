@@ -13,6 +13,7 @@ namespace MyTaskManagement.Core
         IUserRepositry   UserRepositry { get; }
         IClientRepositry  ClientRepositry { get; }
         IFinancialRepositry   FinancialRepositry { get; }
-         int Complete();
+        IPaymentRepositry  paymentRepositry{ get; }
+        int Complete();
     }
 }

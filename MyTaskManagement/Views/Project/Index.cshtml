@@ -2,17 +2,19 @@
 @using MyTaskManagement.Models
 @model   MyTaskManagement.Core.ViewModel.IndexProjectViewModel 
 
-@{ 
+@{
+     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+
     int i = 0;
     ViewBag.Title = "Projects";
 }
 
-<h2>Projects</h2>
+<h2>All Projects </h2>
 
-<p>
+ <p>
     @Html.ActionLink("Create New", "Create", "Project","", new { @class = "btn btn-success" })
-</p>
-<table class="table" id="listProject">
+</p> 
+<table class="table  table-responsive" id="listProject">
     
     <thead>
         <tr>
@@ -54,7 +56,7 @@
             <th>
                 <p>Done</p>
             </th>
-            <th></th>
+          <th></th> 
         </tr>
 
     </thead>
@@ -72,7 +74,7 @@
                         {  
                             var imgPath = item.ProjectFiles.LastOrDefault(f => f.MyFileType == MyFileType.Photo).FileName;
                        
-                            <img src="~/images/@imgPath" alt="" width="50px" height="50px"/>
+                            <img src="~/images/@imgPath" alt="" width="50" height="50"/>
                     
                         }
                     </div>
@@ -144,9 +146,9 @@
 
                 <td>
                     @Html.ActionLink("Edit", "Edit", new {id = item.Id}, new {@class = "btn btn-success"}) |
-                    @Html.ActionLink("Details", "Details", new {id = item.Id}, new {@class = "btn btn-info"}) |
+                    @Html.ActionLink("Show Tasks", "TaskOfProject", new {id = item.Id}, new {@class = "btn btn-info"}) |
                     @Html.ActionLink("Delete", "DeleteProject", new {id = item.Id}, new {@class = "btn btn-danger"})
-                </td>
+                </td> 
             </tr>
         }
 

@@ -12,6 +12,8 @@ using System.Web;
 using System.Web.Mvc;
 using System.Xml.Linq;
 using iTextSharp.tool.xml;
+using MyTaskManagement.Core.ViewModel;
+using MyTaskManagement.Core.Domain;
 
 namespace MyTaskManagement.Controllers
 {
@@ -25,10 +27,112 @@ namespace MyTaskManagement.Controllers
         {
             //so will pass list of users with thier financials 
 
-            var listEmployeeFinanical = _unitOfWork.UserRepositry.GetAllUsersWithProjectsAndTasksAndRolesAndFinanicalWithFiles();
+            var listEmployeeFinanical = _unitOfWork.UserRepositry.GetAllUsersWithProjectsAndTasksAndRolesAndFinanicalWithFilesWithPayments();
             return View(listEmployeeFinanical);
         }
 
+
+         
+
+        // GET: FinancialStatus  return list of  Financial  for one employee
+        public ActionResult ListFinancailForOneEmployee(string id, int month = 0, int year = 0)
+        {
+            //so will pass user  with thier financials 
+
+            var UserWithlistFinanical = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFilesWithPayments(id);
+            //return View(UserWithlistFinanical);
+
+             var listOwnFinancial = UserWithlistFinanical.FinancialstatusList;
+
+            if (month == 0 && year != 0)
+            { //No sorting  for month
+                listOwnFinancial = listOwnFinancial.Where( financialstatus => financialstatus.Date.Year == year).ToList();
+
+            }
+            else if (month != 0 && year == 0)
+            {//No sorting  for year
+                listOwnFinancial = listOwnFinancial.Where(financialstatus => financialstatus.Date.Month == month).ToList();
+
+            }
+            else if (month != 0 && year != 0)
+            {//No sorting  for year nor month
+                listOwnFinancial = listOwnFinancial.Where(financialstatus => financialstatus.Date.Month == month && financialstatus.Date.Year == year).ToList();
+
+            }
+
+            var vm = new FinanicalstatusViewModel()
+            {
+                 User = UserWithlistFinanical,
+                Financialstatus = listOwnFinancial
+            };
+           
+            ViewBag.m = month;
+            ViewBag.y = year;
+
+            return View(vm);
+
+
+        }
+
+        // GET: FinancialStatus  return list of   AllPayments  for all employee
+        public ActionResult ShowAllUsersWithPayments()
+        {
+            var listusers = _unitOfWork.UserRepositry.GetAllUsersWithProjectsAndTasksAndRolesAndFinanicalWithFilesWithPayments();
+          
+            return View(listusers);
+        }
+
+
+        //Get
+        public ActionResult ShowPaymentsEmployee(string id)
+        {
+            var employee = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFilesWithPayments(id);
+
+            return View(employee);
+        }
+        public ActionResult DeletePaymentsEmployee(int id)
+        {
+            var pay = _unitOfWork.paymentRepositry.Get(id);
+            var idd = pay.ApplicationUserId;
+              _unitOfWork.paymentRepositry.Remove(pay);
+              _unitOfWork.Complete();
+
+
+            return RedirectToAction("ShowPaymentsEmployee", new {id=  idd });
+        }
+
+        public ActionResult CreatePayment(string id)
+        {
+            var newPayment = new Payment()
+            {ApplicationUserId = id,
+                DateTime = DateTime.Now //set default date time...
+            };
+            ViewBag.allusers = _unitOfWork.UserRepositry.GetAll();
+            return View(newPayment);
+        }
+
+        [HttpPost]
+        public ActionResult CreatePayment(Payment payment )
+        {
+            var ui = Request.Form["__UserId__"];
+            var user = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFilesWithPayments(ui);
+
+
+            var newPayment = new Payment()
+            {
+                ApplicaionUser= new ApplicationUser(),
+                DateTime = payment.DateTime,
+                Note = payment.Note,
+                AmountOfMoney=payment.AmountOfMoney
+            };
+
+            newPayment.ApplicaionUser = user;
+
+            _unitOfWork.paymentRepositry.Add(newPayment);
+            _unitOfWork.Complete();
+
+            return RedirectToAction("ShowPaymentsEmployee" , new {id = ui });
+        }
         // GET: FinancialStatus/Details/5
         public ActionResult Details(int id)
         {

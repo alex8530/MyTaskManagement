@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using System.Web.WebPages;
 using MyTaskManagement.Core.ViewModel;
 using System.Data.Entity;
+using Microsoft.AspNet.Identity;
 using MyTaskManagement.Core.Domain;
 using Project = MyTaskManagement.Models.Project;
 
@@ -19,9 +20,9 @@ namespace MyTaskManagement.Controllers
     public class ProjectController : Controller
     {
         private UnitOfWork _unitOfWork = new UnitOfWork(new ApplicationDbContext());
-       
 
 
+        [Authorize(Roles = "Admin")]
         // GET: Project
         public ActionResult Index()
         {
@@ -48,14 +49,99 @@ namespace MyTaskManagement.Controllers
 
         }
 
+
+        public ActionResult TaskOfProject(string id)
+        {
+            var pro = _unitOfWork.ProjectRepositry.GetProjectsWithClientAndUsersAndTasksWithFiles(id);
+
+
+            return View(pro);
+        }
+
+        public ActionResult TaskOfProjectManager(string id)
+        {
+            var pro = _unitOfWork.ProjectRepositry.GetProjectsWithClientAndUsersAndTasksWithFiles(id);
+
+
+            return View(pro);
+        }
+
         // GET: Project/Details/5
         public ActionResult Details(string id)
         {
-           
-
             return View(_unitOfWork.ProjectRepositry.GetProjectsWithClientAndUsersAndTasksWithFiles(id));
+        } 
+        
+        // GET: Project/ShowProjectsForEmployee 
+
+        public ActionResult ShowProjectsForEmployee( )
+        {
+            //get all projects
+            var ProjectsWithClientAndUsers = _unitOfWork.ProjectRepositry.GetAllProjectsWithClientAndUsersAndTasksWithFiles() ;
+
+            var vm = new IndexProjectViewModel();
+            vm.Projects = new List<Project>();
+            vm.Managers = new List<ApplicationUser>();
+
+
+            foreach (var project in ProjectsWithClientAndUsers)
+            {
+                foreach (var user in project.Users)
+                {
+                    if (user.Id == User.Identity.GetUserId())
+                    {
+                        //add project to list
+                        vm.Projects.Add(project);   
+                        //then add thier manager
+
+                        vm.Managers.Add(GetManagerForProject(project.Id));
+                    }
+
+                }
+              
+
+            }
+            return View(vm);
+        }
+        // GET: Project/ShowProjectsForManager 
+        public ActionResult ShowProjectsForManager( )
+        {
+            //get all projects
+            var ProjectsWithClientAndUsers = _unitOfWork.ProjectRepositry.GetAllProjectsWithClientAndUsersAndTasksWithFiles() ;
+
+            var vm = new IndexProjectViewModel
+            {
+                Projects = new List<Project>(),
+                Managers = new List<ApplicationUser>()
+            };
+
+
+            foreach (var project in ProjectsWithClientAndUsers)
+            {
+                 
+                    //then check if this user is manager
+                var i = User.Identity.GetUserId();
+                var e = GetManagerForProject(project.Id).Id;
+                    if ( User.Identity.GetUserId()  == GetManagerForProject(project.Id).Id)
+                    {
+                        //add project to list
+                        vm.Projects.Add(project);   
+                        //then add thier manager
+
+                        vm.Managers.Add(GetManagerForProject(project.Id));
+                
+
+                    }
+              
+
+            }
+            return View(vm);
         }
 
+
+
+
+        [Authorize(Roles = "Admin")]
         // GET: Project/Create
         public ActionResult Create()
         {
@@ -200,9 +286,20 @@ namespace MyTaskManagement.Controllers
 
             };
 
-         
 
-            return View(viewmodel);
+            if (User.IsInRole("Admin"))
+            {
+
+                return View(viewmodel);
+
+            }
+            else
+            {
+
+                return View("EditByManager", viewmodel);
+
+
+            }
         }
 
         // POST: Project/Edit/5
@@ -255,9 +352,21 @@ namespace MyTaskManagement.Controllers
                     _unitOfWork.Complete();
 
                 }
-               
 
-                return RedirectToAction("Index");
+                if (User.IsInRole("Admin"))
+                {
+
+                    return RedirectToAction("Index");
+
+
+                }
+                else
+                {
+
+                    return RedirectToAction("ShowProjectsForManager");
+
+
+                }
             }
             catch (Exception exception)
             {
@@ -265,6 +374,8 @@ namespace MyTaskManagement.Controllers
             }
         }
 
+
+        
         // GET: Project/DeleteUser/idUser/idProject
         public ActionResult DeleteUser(string idUser)
         {
@@ -288,12 +399,14 @@ namespace MyTaskManagement.Controllers
                 _unitOfWork.Complete();
                 return RedirectToAction("Edit" , new {id= idProject });
             }
-            catch (Exception exception)
+            catch (Exception ex)
             {
                 return View();
             }
         }
 
+
+        [Authorize(Roles = "Admin")]
         // GET: Project/DeleteProject/asdasd
         public ActionResult DeleteProject(string id)
         {

@@ -32,7 +32,7 @@ namespace MyTaskManagement.Controllers
         // GET: Employee
         public ActionResult ListUser()
         {
-            var listUser = _unitOfWork.UserRepositry.GetAllUsersWithProjectsAndTasksAndRolesAndFinanicalWithFiles();
+            var listUser = _unitOfWork.UserRepositry.GetAllUsersWithProjectsAndTasksAndRolesAndFinanicalWithFilesWithPayments();
             var roles = new List<string>();
             // get all names of role for user ...
             //i use this method because there is a role id inside user , not role name
@@ -64,7 +64,7 @@ namespace MyTaskManagement.Controllers
                 return HttpNotFound();
             }
 
-            return View(_unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFiles(id));
+            return View(_unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFilesWithPayments(id));
         }
 
         // GET: Employee/Create
@@ -132,7 +132,7 @@ namespace MyTaskManagement.Controllers
 
         public ActionResult Edit(string id ,int month =0 , int year = 0 )
         {
-            var editUser = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFiles(id);
+            var editUser = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFilesWithPayments(id);
             var listOwnFinan = editUser.FinancialstatusList ;
 
             if (month == 0 && year != 0)
@@ -168,21 +168,21 @@ namespace MyTaskManagement.Controllers
 
         // POST: Employee/Edit/5
         [HttpPost]
-        public ActionResult Edit(string id, ApplicationUser model)
+        public ActionResult Edit(string id, EditUserViewModel model)
         {
             try
             {
-                if (ModelState.IsValid)
-                {
+                 if (ModelState.IsValid)
+                 {
 
                     var oldUser = _unitOfWork.UserRepositry.SingleOrDefault(user => user.Id== id);
-                    oldUser.FirstName =model.FirstName ;
-                    oldUser.LastName = model.LastName;
-                    oldUser.JopTitle = model.JopTitle;
-                    oldUser.HourlyRate = model.HourlyRate;
-                    oldUser.O_T_H_Rate = model.O_T_H_Rate;
-                    oldUser.UserName = model.UserName;
-                    oldUser.Email = model.Email;
+                    oldUser.FirstName =model.User.FirstName ;
+                    oldUser.LastName = model.User.LastName;
+                    oldUser.JopTitle = model.User.JopTitle;
+                    oldUser.HourlyRate = model.User.HourlyRate;
+                    oldUser.O_T_H_Rate = model.User.O_T_H_Rate;
+                    oldUser.UserName = model.User.UserName;
+                    oldUser.Email = model.User.Email;
 
 
                 string newRole = Request.Form["CurrenrRole"];
@@ -218,12 +218,140 @@ namespace MyTaskManagement.Controllers
         {
             try
             {
-                var deleteUser = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFiles(id);
+                var deleteUser = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFilesWithPayments(id);
                 _unitOfWork.UserRepositry.Remove(deleteUser);
                 _unitOfWork.Complete();
                 return RedirectToAction("ListUser");
             }
             catch 
+            {
+                return View();
+            }
+        }
+
+
+        [Authorize]
+        public ActionResult Setting()
+        {
+            var currentUserId = User.Identity.GetUserId();
+            var currentUser =
+                _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFilesWithPayments(
+                    currentUserId);
+
+            return View(currentUser);
+        }
+       
+        [HttpPost]
+        public ActionResult Setting (ApplicationUser applicationUser, HttpPostedFileBase upload)
+        {
+            try 
+            {
+
+               
+                var currentUser =
+                    _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFilesWithPayments(
+                        applicationUser.Id);
+
+
+                //update the new data
+                currentUser.Email = applicationUser.Email;
+                currentUser.FirstName = applicationUser.FirstName;
+                currentUser.LastName = applicationUser.LastName;
+                currentUser.JopTitle = applicationUser.JopTitle;
+                currentUser.HourlyRate = applicationUser.HourlyRate;
+
+                //update image// create new one and show the last one in the view
+                //Guid is used as a file name on the basis that it can pretty much guarantee uniqueness
+                if (upload != null && upload.ContentLength > 0)
+                {
+                    var photo = new MyUserFile()
+                    {
+                        FileName = Guid.NewGuid().ToString() + System.IO.Path.GetExtension(upload.FileName),
+                        MyFileType = MyFileType.Photo
+                    };
+
+
+                    string physicalPath = Server.MapPath("~/images/" + photo.FileName);
+
+                    // save image in folder
+                    upload.SaveAs(physicalPath);
+                    currentUser.MyFiles = new List<MyUserFile>();
+
+
+                    currentUser.MyFiles.Add(photo);
+
+                    
+                }
+                _unitOfWork.UserRepositry.Add(currentUser); //this is for add or update
+
+                _unitOfWork.Complete();
+                return RedirectToAction("Setting");
+            }
+            catch (Exception exception)
+            {
+                return View();
+            }
+        }
+
+
+        [Authorize]
+        public ActionResult SettingEmployee()
+        {
+            var currentUserId = User.Identity.GetUserId();
+            var currentUser =
+                _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFilesWithPayments(
+                    currentUserId);
+
+            return View(currentUser);
+        }
+
+        [HttpPost]
+        public ActionResult SettingEmployee(ApplicationUser applicationUser, HttpPostedFileBase upload)
+        {
+            try
+            {
+
+
+                var currentUser =
+                    _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFilesWithPayments(
+                        applicationUser.Id);
+
+
+                //update the new data
+                currentUser.Email = applicationUser.Email;
+                currentUser.FirstName = applicationUser.FirstName;
+                currentUser.LastName = applicationUser.LastName;
+                currentUser.JopTitle = applicationUser.JopTitle;
+                currentUser.HourlyRate = applicationUser.HourlyRate;
+
+                //update image// create new one and show the last one in the view
+                //Guid is used as a file name on the basis that it can pretty much guarantee uniqueness
+                if (upload != null && upload.ContentLength > 0)
+                {
+                    var photo = new MyUserFile()
+                    {
+                        FileName = Guid.NewGuid().ToString() + System.IO.Path.GetExtension(upload.FileName),
+                        MyFileType = MyFileType.Photo
+                    };
+
+
+                    string physicalPath = Server.MapPath("~/images/" + photo.FileName);
+
+                    // save image in folder
+                    upload.SaveAs(physicalPath);
+                    currentUser.MyFiles = new List<MyUserFile>();
+
+
+                    currentUser.MyFiles.Add(photo);
+
+
+                }
+                _unitOfWork.UserRepositry.Add(currentUser); //this is for add or update
+
+                _unitOfWork.Complete();
+                return RedirectToAction("SettingEmployee");
+            }
+            catch (Exception exception)
             {
                 return View();
             }

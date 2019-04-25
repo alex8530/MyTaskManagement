@@ -1,0 +1,99 @@
+﻿@using MyTaskManagement.Core.Domain
+@model MyTaskManagement.Models.ApplicationUser
+
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+ 
+     ViewBag.Title = "Setting";
+}
+
+<h2>Setting</h2>
+
+@using (Html.BeginForm("Setting", "User", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.HiddenFor( user => user.Id)
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>ApplicationUser</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.JopTitle, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.JopTitle, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.JopTitle, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.HourlyRate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.HourlyRate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.HourlyRate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                @if (Model.MyFiles.Any(f => f.MyFileType == MyFileType.Photo))
+                {
+                    var imgPath = @Model.MyFiles.LastOrDefault(f => f.MyFileType == MyFileType.Photo).FileName;
+
+                    <img src="~/images/@imgPath" alt="" 
+                         style="  max-width: 100%;
+                          max-height: 100%;"
+                         />
+
+                }
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Update Your Avatar ", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="file" id="Photo" name="upload" accept="image/*" />
+            </div>
+        </div>
+
+
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

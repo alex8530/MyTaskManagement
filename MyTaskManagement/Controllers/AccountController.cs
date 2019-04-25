@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using MyTaskManagement.Core.Domain;
 using MyTaskManagement.Models;
+using MyTaskManagement.Persistence;
 
 namespace MyTaskManagement.Controllers
 {
@@ -82,7 +83,9 @@ namespace MyTaskManagement.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+
+                    
+                    return await RedirectToLocalAsync(returnUrl, model);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -233,8 +236,8 @@ namespace MyTaskManagement.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindByNameAsync(model.Email);
-                if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
+                var user =  await UserManager.FindByEmailAsync (model.Email);
+                if (user == null /*|| !(await UserManager.IsEmailConfirmedAsync(user.Id))*/)
                 {
                     // Don't reveal that the user does not exist or is not confirmed
                     return View("ForgotPasswordConfirmation");
@@ -242,10 +245,10 @@ namespace MyTaskManagement.Controllers
 
                 // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
-                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-                // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 
             // If we got this far, something failed, redisplay form
@@ -279,7 +282,7 @@ namespace MyTaskManagement.Controllers
             {
                 return View(model);
             }
-            var user = await UserManager.FindByNameAsync(model.Email);
+            var user = await UserManager.FindByEmailAsync (model.Email);
             if (user == null)
             {
                 // Don't reveal that the user does not exist
@@ -480,7 +483,53 @@ namespace MyTaskManagement.Controllers
             {
                 return Redirect(returnUrl);
             }
+ 
             return RedirectToAction("Index", "Home");
+        }
+        private async Task<ActionResult> RedirectToLocalAsync(string returnUrl, LoginViewModel model)
+        {
+            if (Url.IsLocalUrl(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+             
+            ApplicationUser user = await UserManager.FindAsync(model.UserName, model.Password);
+
+            //get imagepath from the user..
+          UnitOfWork _unitOfWork = new UnitOfWork(new ApplicationDbContext());
+
+            var fullUserData = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFilesWithPayments(user.Id);
+            fullUserData.MyFiles = new List <MyUserFile>();
+
+            // Redirect to User landing page on SignIn, according to Role
+            if ((UserManager.IsInRole(user.Id, "Admin")))
+            {
+                //send image user to put it in loagin partial 
+                if (fullUserData.MyFiles.Count!=0)
+                {
+                    if (fullUserData.MyFiles.LastOrDefault(f => f.MyFileType == MyFileType.Photo).FileName != null)
+                    {
+                        Session["imgPath"] = fullUserData.MyFiles.LastOrDefault(f => f.MyFileType == MyFileType.Photo).FileName;
+                    }
+                }
+               
+                return RedirectToAction("Index", "Admin");
+            }
+            else
+            {
+                if (fullUserData.MyFiles.Count != 0)
+                {
+                    if (fullUserData.MyFiles.LastOrDefault(f => f.MyFileType == MyFileType.Photo).FileName != null)
+                    {
+
+                        Session["imgPath"] = fullUserData.MyFiles.LastOrDefault(f => f.MyFileType == MyFileType.Photo).FileName;
+
+                    }
+                }
+       
+                return RedirectToAction("ShowTaskForEmployee", "TTask");
+
+            }
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult

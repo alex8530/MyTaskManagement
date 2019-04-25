@@ -1,0 +1,20 @@
+﻿@model MyTaskManagement.Models.Project
+
+@{
+    ViewBag.Title = "TaskOfProject";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h3>Project : @Model.Name</h3>
+<div>
+    @Html.ActionLink("Add Task", "Create", "TTask", new { id_current_project = Model.Id }, htmlAttributes: new { @class = "btn btn-warning" })
+</div>
+
+
+@{
+    var tasksForCurrentProject = Model.Tasks.ToList();
+
+}
+@Html.Partial("_AllTaskPartial", tasksForCurrentProject)
+
+
+
