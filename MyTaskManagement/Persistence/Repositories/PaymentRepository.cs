@@ -29,6 +29,11 @@ namespace MyTaskManagement.Persistence.Repositories
             return CuurentContext.Payments.Include(u => u.ApplicaionUser).ToList();
         }
 
+        public IEnumerable<Payment> GetAllPaymentsForEmployee(string id)
+        {
+            return CuurentContext.Payments.Include(u => u.ApplicaionUser).Where(u=>u.ApplicationUserId==id).ToList();
+        }
+
         public Payment GetPayment(string userid)
         {
             return CuurentContext.Payments.Include(u => u.ApplicaionUser).Where(p=>p.ApplicationUserId ==userid).SingleOrDefault();

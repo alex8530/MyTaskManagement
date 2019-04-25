@@ -19,7 +19,7 @@ namespace MyTaskManagement.Controllers
         public ActionResult Index()
         {
             var allProjects = _unitOfWork.ProjectRepositry.GetAllProjectsWithClientAndUsersAndTasksWithFiles().ToList();
-            var allEmployees = _unitOfWork.UserRepositry.GetAllUsersWithProjectsAndTasksAndRolesAndFinanicalWithFiles().ToList();
+            var allEmployees = _unitOfWork.UserRepositry.GetAllUsersWithProjectsAndTasksAndRolesAndFinanicalWithFilesWithPayments().ToList();
             var allTasks = _unitOfWork.TTaskRepositry.GetAllTasksWithUserAndUserAndProject().ToList();
 
             var vm = new IndexAdminViewModel()

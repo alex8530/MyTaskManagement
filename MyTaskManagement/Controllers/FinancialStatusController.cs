@@ -27,7 +27,7 @@ namespace MyTaskManagement.Controllers
         {
             //so will pass list of users with thier financials 
 
-            var listEmployeeFinanical = _unitOfWork.UserRepositry.GetAllUsersWithProjectsAndTasksAndRolesAndFinanicalWithFiles();
+            var listEmployeeFinanical = _unitOfWork.UserRepositry.GetAllUsersWithProjectsAndTasksAndRolesAndFinanicalWithFilesWithPayments();
             return View(listEmployeeFinanical);
         }
 
@@ -39,7 +39,7 @@ namespace MyTaskManagement.Controllers
         {
             //so will pass user  with thier financials 
 
-            var UserWithlistFinanical = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFiles(id);
+            var UserWithlistFinanical = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFilesWithPayments(id);
             //return View(UserWithlistFinanical);
 
              var listOwnFinancial = UserWithlistFinanical.FinancialstatusList;
@@ -75,16 +75,26 @@ namespace MyTaskManagement.Controllers
         }
 
         // GET: FinancialStatus  return list of   AllPayments  for all employee
-        public ActionResult ShowAllPayments()
+        public ActionResult ShowAllUsersWithPayments()
         {
-            var listpayments = _unitOfWork.paymentRepositry.GetAllPayments();
+            var listusers = _unitOfWork.UserRepositry.GetAllUsersWithProjectsAndTasksAndRolesAndFinanicalWithFilesWithPayments();
           
-            return View(listpayments);
+            return View(listusers);
         }
-        public ActionResult CreatePayment()
+
+
+        //Get
+        public ActionResult ShowPaymentsEmployee(string id)
+        {
+            var employee = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFilesWithPayments(id);
+
+            return View(employee);
+        }
+
+        public ActionResult CreatePayment(string id)
         {
             var newPayment = new Payment()
-            {
+            {ApplicationUserId = id,
                 DateTime = DateTime.Now //set default date time...
             };
             ViewBag.allusers = _unitOfWork.UserRepositry.GetAll();
@@ -92,17 +102,18 @@ namespace MyTaskManagement.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreatePayment(Payment payment, string __UserId__)
+        public ActionResult CreatePayment(Payment payment )
         {
-
-            var user = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFiles(__UserId__);
+            var ui = Request.Form["__UserId__"];
+            var user = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFilesWithPayments(ui);
 
 
             var newPayment = new Payment()
             {
                 ApplicaionUser= new ApplicationUser(),
                 DateTime = payment.DateTime,
-                Note = payment.Note
+                Note = payment.Note,
+                AmountOfMoney=payment.AmountOfMoney
             };
 
             newPayment.ApplicaionUser = user;
@@ -110,7 +121,7 @@ namespace MyTaskManagement.Controllers
             _unitOfWork.paymentRepositry.Add(newPayment);
             _unitOfWork.Complete();
 
-            return RedirectToAction("ShowAllPayments");
+            return RedirectToAction("ShowAllUsersWithPayments");
         }
         // GET: FinancialStatus/Details/5
         public ActionResult Details(int id)

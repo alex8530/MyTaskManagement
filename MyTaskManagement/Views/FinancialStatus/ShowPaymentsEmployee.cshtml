@@ -1,0 +1,64 @@
+﻿@model MyTaskManagement.Models.ApplicationUser
+
+
+@{
+    ViewBag.Title = "ShowAllPayments";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2> @Model.FirstName Payments  </h2>
+
+
+<p>
+    @Html.ActionLink("Create New", "CreatePayment" ,"FinancialStatus", new { id = Model.Id }, new { @class = "btn btn-success" })
+</p>
+<table class="table" id="listPayments">
+    <thead>
+        <tr>
+            <th>
+               Date
+            </th>
+
+            <th>
+                AmountOfMoney
+            </th>
+
+            <th>
+                Note
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model.Payments.ToList())
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AmountOfMoney)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Note)
+            </td>
+
+            <td>
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+        }
+    </tbody>
+
+</table>
+@section scripts
+{
+
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#listPayments").dataTable();
+        });
+    </script>
+}

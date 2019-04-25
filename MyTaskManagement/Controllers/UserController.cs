@@ -32,7 +32,7 @@ namespace MyTaskManagement.Controllers
         // GET: Employee
         public ActionResult ListUser()
         {
-            var listUser = _unitOfWork.UserRepositry.GetAllUsersWithProjectsAndTasksAndRolesAndFinanicalWithFiles();
+            var listUser = _unitOfWork.UserRepositry.GetAllUsersWithProjectsAndTasksAndRolesAndFinanicalWithFilesWithPayments();
             var roles = new List<string>();
             // get all names of role for user ...
             //i use this method because there is a role id inside user , not role name
@@ -64,7 +64,7 @@ namespace MyTaskManagement.Controllers
                 return HttpNotFound();
             }
 
-            return View(_unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFiles(id));
+            return View(_unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFilesWithPayments(id));
         }
 
         // GET: Employee/Create
@@ -132,7 +132,7 @@ namespace MyTaskManagement.Controllers
 
         public ActionResult Edit(string id ,int month =0 , int year = 0 )
         {
-            var editUser = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFiles(id);
+            var editUser = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFilesWithPayments(id);
             var listOwnFinan = editUser.FinancialstatusList ;
 
             if (month == 0 && year != 0)
@@ -218,7 +218,7 @@ namespace MyTaskManagement.Controllers
         {
             try
             {
-                var deleteUser = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFiles(id);
+                var deleteUser = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFilesWithPayments(id);
                 _unitOfWork.UserRepositry.Remove(deleteUser);
                 _unitOfWork.Complete();
                 return RedirectToAction("ListUser");
@@ -235,7 +235,7 @@ namespace MyTaskManagement.Controllers
         {
             var currentUserId = User.Identity.GetUserId();
             var currentUser =
-                _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFiles(
+                _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFilesWithPayments(
                     currentUserId);
 
             return View(currentUser);
@@ -249,7 +249,7 @@ namespace MyTaskManagement.Controllers
 
                
                 var currentUser =
-                    _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFiles(
+                    _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFilesWithPayments(
                         applicationUser.Id);
 
 
@@ -299,7 +299,7 @@ namespace MyTaskManagement.Controllers
         {
             var currentUserId = User.Identity.GetUserId();
             var currentUser =
-                _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFiles(
+                _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFilesWithPayments(
                     currentUserId);
 
             return View(currentUser);
@@ -313,7 +313,7 @@ namespace MyTaskManagement.Controllers
 
 
                 var currentUser =
-                    _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFiles(
+                    _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFilesWithPayments(
                         applicationUser.Id);
 
 

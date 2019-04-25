@@ -498,7 +498,7 @@ namespace MyTaskManagement.Controllers
             //get imagepath from the user..
           UnitOfWork _unitOfWork = new UnitOfWork(new ApplicationDbContext());
 
-            var fullUserData = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFiles(user.Id);
+            var fullUserData = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFilesWithPayments(user.Id);
             fullUserData.MyFiles = new List <MyUserFile>();
 
             // Redirect to User landing page on SignIn, according to Role

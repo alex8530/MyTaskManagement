@@ -11,8 +11,11 @@ namespace MyTaskManagement.Core.Repositories
     public interface IPaymentRepositry : IRepository<Payment>
     {
          Payment GetPayment(string userid);
-        IEnumerable<Payment> GetAllPayments();
- 
+        IEnumerable<Payment> GetAllPayments( );
+
+        IEnumerable<Payment> GetAllPaymentsForEmployee(string id);
+
+
 
     }
 }

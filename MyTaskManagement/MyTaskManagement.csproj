@@ -390,6 +390,10 @@
     <Compile Include="Migrations\201904251101211_addPaymentModel.Designer.cs">
       <DependentUpon>201904251101211_addPaymentModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201904251328444_addAmountofmoneyToPaymentTable.cs" />
+    <Compile Include="Migrations\201904251328444_addAmountofmoneyToPaymentTable.Designer.cs">
+      <DependentUpon>201904251328444_addAmountofmoneyToPaymentTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Core\Domain\Client.cs" />
@@ -2485,8 +2489,9 @@
     <Content Include="Views\TTask\ApproveByManager.cshtml" />
     <Content Include="Views\Project\EditByManager.cshtml" />
     <Content Include="Views\TTask\ReturnToAssigne.cshtml" />
-    <Content Include="Views\FinancialStatus\ShowAllPayments.cshtml" />
+    <Content Include="Views\FinancialStatus\ShowAllUsersWithPayments.cshtml" />
     <Content Include="Views\FinancialStatus\CreatePayment.cshtml" />
+    <Content Include="Views\FinancialStatus\ShowPaymentsEmployee.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2619,6 +2624,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201904251101211_addPaymentModel.resx">
       <DependentUpon>201904251101211_addPaymentModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904251328444_addAmountofmoneyToPaymentTable.resx">
+      <DependentUpon>201904251328444_addAmountofmoneyToPaymentTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

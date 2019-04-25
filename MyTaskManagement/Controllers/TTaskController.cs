@@ -147,14 +147,14 @@ namespace MyTaskManagement.Controllers
 				 //var id_current_project = Request.Form["id_current_project"];
 
 				
-				var user = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFiles( ui);
+				var user = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFilesWithPayments( ui);
 
 
 				ApplicationUser reviewer =null  ;
 				if (!ri.Equals("0"))
 				{
 					//that means the reviewer is not empty
-					  reviewer = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFiles(ri);
+					  reviewer = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFilesWithPayments(ri);
 
 				}
 			  
@@ -503,7 +503,7 @@ namespace MyTaskManagement.Controllers
 				{
 					 //get new reviewer 
 					reviewer =
-						_unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFiles(
+						_unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFilesWithPayments(
 							reviewerId);
 
 				}
@@ -558,7 +558,7 @@ namespace MyTaskManagement.Controllers
 				 //check if task after update complete and if task has a reviewer , then make clone
 				if (oldTask.Status.Equals(StatusEnum.Ended) && !oldTask.ReviewerId.IsNullOrWhiteSpace())
 				{
-					var user = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFiles(oldTask.ReviewerId);
+					var user = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFilesWithPayments(oldTask.ReviewerId);
 
 
 
@@ -757,7 +757,7 @@ namespace MyTaskManagement.Controllers
 				var ApplicationUserId = Request.Form["ApplicationUserId"];
 				var ProjectId = Request.Form["ProjectId"];
 				var task = _unitOfWork.TTaskRepositry.GetTasksWithUserAndUserAndProject(id);
-				var user = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFiles(ApplicationUserId);
+				var user = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFilesWithPayments(ApplicationUserId);
 
 
 				//update task to approve 
