@@ -513,12 +513,12 @@ namespace MyTaskManagement.Controllers
             }
             else
             {
-                if (fullUserData.MyFiles.LastOrDefault(f => f.MyFileType == MyFileType.Photo).FileName != null)
-                {
+                //if (fullUserData.MyFiles.LastOrDefault(f => f.MyFileType == MyFileType.Photo).FileName != null)
+                //{
  
-                    Session["imgPath"] = fullUserData.MyFiles.LastOrDefault(f => f.MyFileType == MyFileType.Photo).FileName;
+                //    Session["imgPath"] = fullUserData.MyFiles.LastOrDefault(f => f.MyFileType == MyFileType.Photo).FileName;
 
-                }
+                //}
                 return RedirectToAction("ShowTaskForEmployee", "TTask");
 
             }

@@ -210,6 +210,7 @@
     <Compile Include="Core\Constants\Constants.cs" />
     <Compile Include="Core\Domain\Financialstatus.cs" />
     <Compile Include="Core\Domain\MyProjectFile.cs" />
+    <Compile Include="Core\Domain\Payment.cs" />
     <Compile Include="Core\Domain\ProjectManagerTable.cs" />
     <Compile Include="Core\Domain\MyUserFile.cs" />
     <Compile Include="Core\Domain\MyFileType.cs" />
@@ -383,6 +384,10 @@
     <Compile Include="Migrations\201904031154470_addfromtaskid.cs" />
     <Compile Include="Migrations\201904031154470_addfromtaskid.Designer.cs">
       <DependentUpon>201904031154470_addfromtaskid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904251101211_addPaymentModel.cs" />
+    <Compile Include="Migrations\201904251101211_addPaymentModel.Designer.cs">
+      <DependentUpon>201904251101211_addPaymentModel.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -2607,6 +2612,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201904031154470_addfromtaskid.resx">
       <DependentUpon>201904031154470_addfromtaskid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904251101211_addPaymentModel.resx">
+      <DependentUpon>201904251101211_addPaymentModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
