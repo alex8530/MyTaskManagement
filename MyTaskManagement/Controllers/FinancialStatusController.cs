@@ -73,6 +73,14 @@ namespace MyTaskManagement.Controllers
 
         }
 
+        // GET: FinancialStatus  return list of   AllPayments  for all employee
+        public ActionResult ShowAllPayments()
+        {
+            var listpayments = _unitOfWork.paymentRepositry.GetAll();
+          
+            return View(listpayments);
+        }
+        
 
         // GET: FinancialStatus/Details/5
         public ActionResult Details(int id)

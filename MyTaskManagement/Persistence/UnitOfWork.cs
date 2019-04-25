@@ -23,9 +23,11 @@ namespace MyTaskManagement.Persistence
             UserRepositry = new  UserRepository(_context);
             ClientRepositry = new   ClientRepository(_context);
             FinancialRepositry = new    FinancialRepositry(_context);
-            ProjectMangerRepositry = new     ProjectManagerRepositry(_context);  
-        }
+            ProjectMangerRepositry = new     ProjectManagerRepositry(_context);
+            paymentRepositry = new PaymentRepository(_context);
 
+        }
+       
         public IProjectRepositry ProjectRepositry { get; private set; }
         public IProjectMangerRepositry ProjectMangerRepositry{ get; private set; }
 
@@ -35,6 +37,9 @@ namespace MyTaskManagement.Persistence
 
         public IClientRepositry ClientRepositry { get; private set; }
         public IFinancialRepositry  FinancialRepositry { get; private set; }
+ 
+
+        public IPaymentRepositry paymentRepositry { get; private set; }
 
         public int Complete()
         {
