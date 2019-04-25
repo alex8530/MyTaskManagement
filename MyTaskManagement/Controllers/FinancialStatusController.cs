@@ -84,11 +84,36 @@ namespace MyTaskManagement.Controllers
 
 
         //Get
-        public ActionResult ShowPaymentsEmployee(string id)
+        public ActionResult ShowPaymentsEmployee(string id, int month = 0, int year = 0)
         {
             var employee = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFilesWithPayments(id);
+            var listOwnPayments = employee. Payments;
 
-            return View(employee);
+            if (month == 0 && year != 0)
+            { //No sorting  for month
+                listOwnPayments = listOwnPayments.Where(l => l.DateTime.Year == year).ToList();
+
+            }
+            else if (month != 0 && year == 0)
+            {//No sorting  for year
+                listOwnPayments = listOwnPayments.Where(l => l.DateTime.Date.Month == month).ToList();
+
+            }
+            else if (month != 0 && year != 0)
+            {//No sorting  for year nor month
+                listOwnPayments = listOwnPayments.Where(l => l.DateTime.Month == month && l.DateTime.Year == year).ToList();
+
+            }
+
+            var vm = new PaymentViewModel()
+            {
+                User = employee,
+                 Payments = listOwnPayments
+            };
+
+            ViewBag.m = month;
+            ViewBag.y = year;
+            return View(vm);
         }
         public ActionResult DeletePaymentsEmployee(int id)
         {

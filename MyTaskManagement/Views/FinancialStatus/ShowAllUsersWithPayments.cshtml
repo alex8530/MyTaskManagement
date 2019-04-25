@@ -9,11 +9,14 @@
     <thead>
         <tr>
             <th>
-               Name
+                Name
             </th>
-
             <th>
-              Total payments
+                Rate Details
+            </th>
+            
+            <th>
+                Total payments
             </th>
             <th></th>
         </tr>
@@ -26,7 +29,11 @@
             <td>
                 @Html.DisplayFor(modelItem => item.FirstName)
             </td>
-           
+
+            <td>
+                R/H   @Html.DisplayFor(modelItem => item.HourlyRate)$
+            </td>
+
             <td>
                 @{
                     var sum = 0;
@@ -39,6 +46,8 @@
             </td>
             <td>
                 @Html.ActionLink("Show All Payments ", "ShowPaymentsEmployee", new { id = item.Id }, new { @class = "btn btn-success" })
+                @Html.ActionLink("Show Financials ", "ShowPaymentsEmployee", new { id = item.Id }, new { @class = "btn btn-primary" })
+
             </td>
         </tr>
         }
