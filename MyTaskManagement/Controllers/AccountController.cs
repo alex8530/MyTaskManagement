@@ -499,26 +499,34 @@ namespace MyTaskManagement.Controllers
           UnitOfWork _unitOfWork = new UnitOfWork(new ApplicationDbContext());
 
             var fullUserData = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFiles(user.Id);
-         
+            fullUserData.MyFiles = new List <MyUserFile>();
 
             // Redirect to User landing page on SignIn, according to Role
             if ((UserManager.IsInRole(user.Id, "Admin")))
             {
                 //send image user to put it in loagin partial 
-                if (fullUserData.MyFiles.LastOrDefault(f => f.MyFileType == MyFileType.Photo).FileName!=null)
+                if (fullUserData.MyFiles.Count!=0)
                 {
-                     Session["imgPath"] = fullUserData.MyFiles.LastOrDefault(f => f.MyFileType == MyFileType.Photo).FileName;
+                    if (fullUserData.MyFiles.LastOrDefault(f => f.MyFileType == MyFileType.Photo).FileName != null)
+                    {
+                        Session["imgPath"] = fullUserData.MyFiles.LastOrDefault(f => f.MyFileType == MyFileType.Photo).FileName;
+                    }
                 }
+               
                 return RedirectToAction("Index", "Admin");
             }
             else
             {
-                //if (fullUserData.MyFiles.LastOrDefault(f => f.MyFileType == MyFileType.Photo).FileName != null)
-                //{
- 
-                //    Session["imgPath"] = fullUserData.MyFiles.LastOrDefault(f => f.MyFileType == MyFileType.Photo).FileName;
+                if (fullUserData.MyFiles.Count != 0)
+                {
+                    if (fullUserData.MyFiles.LastOrDefault(f => f.MyFileType == MyFileType.Photo).FileName != null)
+                    {
 
-                //}
+                        Session["imgPath"] = fullUserData.MyFiles.LastOrDefault(f => f.MyFileType == MyFileType.Photo).FileName;
+
+                    }
+                }
+       
                 return RedirectToAction("ShowTaskForEmployee", "TTask");
 
             }
