@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "ListFinancailForOneEmployee";
     Layout = "~/Views/Shared/_Layout.cshtml";
- 
+
 }
 
 <h2>All   Financails </h2>
@@ -204,7 +204,135 @@
     </p>
 </div>
 
+@*------------------------ PDF PRINT----------------------------------------*@
 
+@using (Html.BeginForm("Export", "FinancialStatus", FormMethod.Post))
+{
+    <input type="hidden" name="GridHtml" />
+    <input type="submit" id="btnSubmit" value="Export To PDF" class="btn btn-danger" />
+}
+
+<div id="hiddenTableForPdf" hidden="">
+    <table class="table" id="listFinancial">
+        <thead>
+            <tr>
+                <th>
+                    <p>Date</p>
+                </th>
+                <th>
+                    <p>Proj Id</p>
+                </th>
+                <th>
+                    <p>TaskId</p>
+
+                </th>
+
+                <th>
+                    <p>EffortHours</p>
+
+                </th>
+
+                <th>
+                    <p>Payment</p>
+
+                </th>
+
+
+                <th>
+                    <p>Remain</p>
+                </th>
+
+
+                <th>
+                    <p>IsApprove</p>
+                </th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Financialstatus.ToList())
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Pro__id)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Task__id)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EffortHours)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Payment) $
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Remain) $
+                    </td>
+                    <td>
+                        @if (item.IsApproveByManager == true)
+                        {
+                            <input type="checkbox" name="isapprove" onclick="return false;" checked="checked"> <br>
+
+                        }
+                        else
+                        {
+                            <input type="checkbox" name="isapprove" onclick="return false;"> <br>
+
+                        }
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+
+
+    </table>
+
+    <div>
+        <h3>Total Payment</h3>
+        <p>
+            @{
+                var totalPricePayment2 = 0.0;
+            }
+
+
+
+            @*show salary only for finanical which is approve by manager*@
+            @foreach (var item in Model.Financialstatus.Where(f => f.IsApproveByManager == true).ToList())
+            {
+                totalPricePayment2 = totalPricePayment2 + item.Payment;
+            }
+
+            @totalPricePayment2 $
+        </p>
+    </div>
+
+    <div>
+        <h3>
+            Total Remain
+        </h3>
+        <p>
+            @{
+                var totalRemain2 = 0.0;
+            }
+            @foreach (var item in Model.Financialstatus.Where(f => f.IsApproveByManager == true).ToList())
+            {
+                totalRemain2 = totalRemain2 + item.Remain;
+            }
+
+            @totalRemain2$
+        </p>
+    </div>
+
+</div>
 
 @section scripts
 {
@@ -213,6 +341,14 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $("#listFinancial").dataTable();
+        });
+    </script>
+    @*for pdf*@
+    <script type="text/javascript">
+        $(function () {
+            $("#btnSubmit").click(function () {
+                $("input[name='GridHtml']").val($("#hiddenTableForPdf").html());
+            });
         });
     </script>
 }
