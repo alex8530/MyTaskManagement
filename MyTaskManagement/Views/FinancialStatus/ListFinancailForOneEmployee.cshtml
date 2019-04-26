@@ -103,7 +103,9 @@
                 <p>EffortHours</p>
 
             </th>
-
+            <th>
+                Approved H 
+            </th>
             <th>
                 <p>Payment</p>
 
@@ -125,43 +127,47 @@
     <tbody>
         @foreach (var item in Model.Financialstatus.ToList())
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Date)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Pro__id)
-                </td>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pro__id)
+            </td>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.Task__id)
-                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Task__id)
+            </td>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.EffortHours)
-                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EffortHours)
+            </td>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.Payment) $
-                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ApproveHourByManager)
+            </td>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.Remain) $
-                </td>
-                <td>
-                    @if (item.IsApproveByManager == true)
-                    {
-                        <input type="checkbox" name="isapprove" onclick="return false;" checked="checked"> <br>
+            <td>
+                @Html.DisplayFor(modelItem => item.Payment) $
+            </td>
 
-                    }
-                    else
-                    {
-                        <input type="checkbox" name="isapprove" onclick="return false;"> <br>
+            <td>
+                @Html.DisplayFor(modelItem => item.Remain) $
+            </td>
+            <td>
+                @if (item.IsApproveByManager == true)
+                {
+                    <input type="checkbox" name="isapprove" onclick="return false;" checked="checked"> <br>
 
-                    }
-                </td>
+                }
+                else
+                {
+                    <input type="checkbox" name="isapprove" onclick="return false;"> <br>
 
-            </tr>
+                }
+            </td>
+
+        </tr>
         }
     </tbody>
 

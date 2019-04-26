@@ -36,6 +36,9 @@
                 @Html.DisplayNameFor(model => model.RemainingHours)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model. ApproveHourByManager)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Priority)
             </th>
             <th>
@@ -63,90 +66,89 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.Creator)
-                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Creator)
+            </td>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.Owner)
-                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Owner)
+            </td>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.Project.Id)
-                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Project.Id)
+            </td>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.StartTime)
-                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartTime)
+            </td>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EstimatedTime)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EffortHours)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.RemainingHours)
-                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EstimatedTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EffortHours)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RemainingHours)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.ApproveHourByManager)
+            </td>
 
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.Priority)
-                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Priority)
+            </td>
 
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.Status)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TypeTask)
-                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TypeTask)
+            </td>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.Ticket)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Notes)
-                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ticket)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Notes)
+            </td>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.ReviewerName)
-                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReviewerName)
+            </td>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.ApplicationUser.FirstName)
-                </td>
-                <td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ApplicationUser.FirstName)
+            </td>
+            <td>
 
-                    @*@if (!item.TypeTask.Equals(TypeTaskEnum.Review))
-                    {
-                        @Html.ActionLink("Clone", "CloneToReviewer", "TTask", new { id = item.Id }, new { @class = "btn btn-info" })
-                    }*@
 
-                    
-                    @if(item.IsApproveByManager.Equals(false))
-                    {
-                       @Html.ActionLink("Edit", "Edit", "TTask", new { id = item.Id }, new { @class = "btn btn-success" })
-                        @Html.ActionLink("Delete", "Delete", "TTask", new { id = item.Id }, new { @class = "btn btn-danger" })
+                @if (item.IsApproveByManager.Equals(false))
+                {
+                    @Html.ActionLink("Edit", "Edit", "TTask", new { id = item.Id }, new { @class = "btn btn-success" })
+                    @Html.ActionLink("Delete", "Delete", "TTask", new { id = item.Id }, new { @class = "btn btn-danger" })
 
-                        @Html.ActionLink("Approve", "Approve", "TTask", new { id = item.Id }, new { @class = "btn btn-dark" })
+                    @Html.ActionLink("Approve", "Approve", "TTask", new { id = item.Id }, new { @class = "btn btn-dark" })
 
-                    }
-                    else
-                    {
-                        <input type="button" class="btn btn-dark"  value="Approved" disabled="disabled"/>
-                     }
-                </td>
-               
-            </tr>
+                }
+                else
+                {
+                    <input type="button" class="btn btn-dark" value="Approved" disabled="disabled" />
+                }
+            </td>
+
+        </tr>
         }
     </tbody>
 

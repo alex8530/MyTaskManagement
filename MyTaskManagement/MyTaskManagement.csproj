@@ -395,6 +395,14 @@
     <Compile Include="Migrations\201904251328444_addAmountofmoneyToPaymentTable.Designer.cs">
       <DependentUpon>201904251328444_addAmountofmoneyToPaymentTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201904261916422_AddApproveHourByManagerToTaskTable.cs" />
+    <Compile Include="Migrations\201904261916422_AddApproveHourByManagerToTaskTable.Designer.cs">
+      <DependentUpon>201904261916422_AddApproveHourByManagerToTaskTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201904262017114_AddApproveHourByManagerToFinanicalTable.cs" />
+    <Compile Include="Migrations\201904262017114_AddApproveHourByManagerToFinanicalTable.Designer.cs">
+      <DependentUpon>201904262017114_AddApproveHourByManagerToFinanicalTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Core\Domain\Client.cs" />
@@ -2630,6 +2638,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201904251328444_addAmountofmoneyToPaymentTable.resx">
       <DependentUpon>201904251328444_addAmountofmoneyToPaymentTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904261916422_AddApproveHourByManagerToTaskTable.resx">
+      <DependentUpon>201904261916422_AddApproveHourByManagerToTaskTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201904262017114_AddApproveHourByManagerToFinanicalTable.resx">
+      <DependentUpon>201904262017114_AddApproveHourByManagerToFinanicalTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
