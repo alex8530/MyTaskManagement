@@ -141,16 +141,23 @@
                 </td>
                 
                 <td>
-                  
-                   
-                    @Html.ActionLink("Edit", "Edit", "TTask", new {id = item.Id}, new {@class = "btn btn-success"})
-                    @if (item.ComeFromClone == true)
+                    @*  if manager approve to task , no need to show edit button for uesr *@
+                    @if (!item.IsApproveByManager)
                     {
-                        @Html.ActionLink("Return " , "ReturnToAssigne", "TTask", new {id = item.Id , fromuser= item.FromUser}, new {@class = "btn btn-danger"})
+                        @Html.ActionLink("Edit", "Edit", "TTask", new { id = item.Id }, new { @class = "btn btn-success" })
 
                     }
-                 
-             
+                    else
+                    {
+                        <input type="button" class="btn btn-dark" value="Edit" disabled="disabled" />
+                    }
+                    @if (item.ComeFromClone == true)
+                    {
+                        @Html.ActionLink("Return ", "ReturnToAssigne", "TTask", new { id = item.Id, fromuser = item.FromUser }, new { @class = "btn btn-danger" })
+
+                    }
+
+
 
                 </td>
             </tr>

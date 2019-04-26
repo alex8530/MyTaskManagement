@@ -683,7 +683,7 @@ namespace MyTaskManagement.Controllers
 
 		// POST: TTask/ReturnToAssigne/5
 		[HttpPost]  
-        public ActionResult ReturnToAssigne(int Id, string FromUser, string fromtaskid)
+        public ActionResult ReturnToAssigne(int Id,  string fromtaskid)
 		{
 		
 			try
