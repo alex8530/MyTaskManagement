@@ -33,13 +33,17 @@ namespace MyTaskManagement.Models
 
         public bool IsApproveByManager { get; set; }
 
+        [DisplayName("Estimated H")]
         [Required]
         public long EstimatedTime { get; set; }
 
+        [DisplayName("Effort H")]
         [Required]
         public long EffortHours { get; set; }
 
        [Required]
+        [DisplayName("Remaining H")]
+
         public long RemainingHours {
            get
            {
@@ -49,8 +53,10 @@ namespace MyTaskManagement.Models
 
        }
 
+        [Required]
+        [DisplayName("Approved H")]
+        public int ApproveHourByManager { get; set; }
 
-         
         public string Ticket { get; set; }
 
         public string Notes { get; set; }

@@ -683,7 +683,7 @@ namespace MyTaskManagement.Controllers
 
 		// POST: TTask/ReturnToAssigne/5
 		[HttpPost]  
-        public ActionResult ReturnToAssigne(int Id, string FromUser, string fromtaskid)
+        public ActionResult ReturnToAssigne(int Id,  string fromtaskid)
 		{
 		
 			try
@@ -756,23 +756,29 @@ namespace MyTaskManagement.Controllers
 				// TODO: Add delete logic here
 				var ApplicationUserId = Request.Form["ApplicationUserId"];
 				var ProjectId = Request.Form["ProjectId"];
-				var task = _unitOfWork.TTaskRepositry.GetTasksWithUserAndUserAndProject(id);
+                var approveH = Request.Form["approveH"];
+
+                
+                var task = _unitOfWork.TTaskRepositry.GetTasksWithUserAndUserAndProject(id);
 				var user = _unitOfWork.UserRepositry.GetUserWithProjectsAndTasksAndRolesAndFilesAndFinanicalWithFilesWithPayments(ApplicationUserId);
 
 
-				//update task to approve 
-				task.IsApproveByManager = true;
-
-				_unitOfWork.TTaskRepositry.Add(task);
 
 				//now copy it to finanical status
 				////check if status change to end
 				if (task.Status == StatusEnum.Ended)
-				{
-					//add this  to financail status ,ok now do the real code !!
+                {
+                    //update task to approve 
+                    task.IsApproveByManager = true;
+                    task.ApproveHourByManager = Convert.ToInt32(approveH);//also update this value
 
-					double payment = Math.Round(user.HourlyRate * task.EffortHours * .80, 2);
-					double totalEquation = user.HourlyRate * task.EffortHours;
+                    _unitOfWork.TTaskRepositry.Add(task);
+
+
+                    //add this  to financail status ,ok now do the real code !!
+
+                    double payment = Math.Round(user.HourlyRate * task. ApproveHourByManager * .80, 2);
+					double totalEquation = user.HourlyRate * task. ApproveHourByManager;
 
 					var financial = new Financialstatus()
 					{
@@ -786,7 +792,9 @@ namespace MyTaskManagement.Controllers
 						User__id = ApplicationUserId,
 						Payment = payment,
 						Remain = Math.Round(totalEquation - payment, 2),
-						IsApproveByManager = true
+                        ApproveHourByManager= Convert.ToInt32(approveH),
+
+                        IsApproveByManager = true
 					};
 					try
 					{

@@ -16,7 +16,7 @@ using Project = MyTaskManagement.Models.Project;
 
 namespace MyTaskManagement.Controllers
 {
-   
+   [Authorize]
     public class ProjectController : Controller
     {
         private UnitOfWork _unitOfWork = new UnitOfWork(new ApplicationDbContext());

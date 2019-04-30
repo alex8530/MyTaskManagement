@@ -2,11 +2,10 @@
 
 @{
     ViewBag.Title = "ListFinancailForOneEmployee";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>All   Financails </h2>
+<h2>All My Financails </h2>
 @using (Html.BeginForm("ListFinancailForOneEmployee", "FinancialStatus", FormMethod.Get, new { id = Model.User.Id }))
 {
 
@@ -103,9 +102,7 @@
                 <p>EffortHours</p>
 
             </th>
-            <th>
-                Approved H 
-            </th>
+
             <th>
                 <p>Payment</p>
 
@@ -127,47 +124,43 @@
     <tbody>
         @foreach (var item in Model.Financialstatus.ToList())
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Pro__id)
-            </td>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Pro__id)
+                </td>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.Task__id)
-            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Task__id)
+                </td>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.EffortHours)
-            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EffortHours)
+                </td>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.ApproveHourByManager)
-            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Payment) $
+                </td>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.Payment) $
-            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Remain) $
+                </td>
+                <td>
+                    @if (item.IsApproveByManager == true)
+                    {
+                        <input type="checkbox" name="isapprove" onclick="return false;" checked="checked">  
 
-            <td>
-                @Html.DisplayFor(modelItem => item.Remain) $
-            </td>
-            <td>
-                @if (item.IsApproveByManager == true)
-                {
-                    <input type="checkbox" name="isapprove" onclick="return false;" checked="checked"> <br>
+                    }
+                    else
+                    {
+                        <input type="checkbox" name="isapprove" onclick="return false;">  
 
-                }
-                else
-                {
-                    <input type="checkbox" name="isapprove" onclick="return false;"> <br>
+                    }
+                </td>
 
-                }
-            </td>
-
-        </tr>
+            </tr>
         }
     </tbody>
 
@@ -209,7 +202,6 @@
         @totalRemain $
     </p>
 </div>
-
 @*------------------------ PDF PRINT----------------------------------------*@
 
 @using (Html.BeginForm("Export", "FinancialStatus", FormMethod.Post))
@@ -219,7 +211,7 @@
 }
 
 <div id="hiddenTableForPdf" hidden="">
-    <table class="table" id="listFinancial">
+    <table class="table" id="listFinancialhidden" border="1">
         <thead>
             <tr>
                 <th>
@@ -247,13 +239,7 @@
                 <th>
                     <p>Remain</p>
                 </th>
-
-
-                <th>
-                    <p>IsApprove</p>
-                </th>
-
-
+ 
             </tr>
         </thead>
         <tbody>
@@ -282,18 +268,7 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.Remain) $
                     </td>
-                    <td>
-                        @if (item.IsApproveByManager == true)
-                        {
-                            <input type="checkbox" name="isapprove" onclick="return false;" checked="checked"> <br>
-
-                        }
-                        else
-                        {
-                            <input type="checkbox" name="isapprove" onclick="return false;"> <br>
-
-                        }
-                    </td>
+             
 
                 </tr>
             }
@@ -301,6 +276,7 @@
 
 
     </table>
+
 
     <div>
         <h3>Total Payment</h3>
@@ -334,11 +310,11 @@
                 totalRemain2 = totalRemain2 + item.Remain;
             }
 
-            @totalRemain2$
+            @totalRemain2 $
         </p>
     </div>
-
 </div>
+
 
 @section scripts
 {
@@ -349,6 +325,7 @@
             $("#listFinancial").dataTable();
         });
     </script>
+
     @*for pdf*@
     <script type="text/javascript">
         $(function () {

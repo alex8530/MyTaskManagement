@@ -9,21 +9,29 @@
 
     <li class="nav-item nav-profile">
         @{
-            if (Session["imgPath"] != null)
-            {
-                var imgPat = Session["imgPath"].ToString();
-                if (imgPat != null)
-                {
-                    <div class="profile-image">
+           
+              
+                <div class="profile-image">
+
+
+                    @if (Session["imgPath"] != null)
+                    {
+                        var imgPat = Session["imgPath"].ToString();
+
                         <img class="img-xs rounded-circle" src="~/images/@imgPat" alt="profile image">
-                        <a class="profile-name" style="color:aliceblue" href="/Manage" title="Manage">   Hello  @User.Identity.GetUserName() !    </a>
-                        <a class=" btn btn-danger" href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
-                    </div>
-                }
+                    }
+                    else
+                    {
+                        <img class="img-xs rounded-circle" src="~/images/Av.png" alt="profile image">
+
+                    }
+
+
+                    <a class="profile-name" style="color:aliceblue" href="/Manage" title="Manage">   Hello  @User.Identity.GetUserName() !    </a>
+                    <a class=" btn btn-danger" href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
+                </div>
+               
              
-
-            }
-
         }
 
 
